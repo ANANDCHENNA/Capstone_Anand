@@ -1,31 +1,20 @@
-
 package com.wecp.insurance_claims_processing_system.entity;
 
 
 import javax.persistence.*;
-import java.util.Set;
-@Table(name = "users") // do not change table name
+
 @Entity
+@Table(name = "users") 
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
+
     @Id
-    @GeneratedValue(strategy =GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;
     private String email;
     private String role;
-    @OneToOne(cascade=CascadeType.REMOVE )
-    @JoinColumn(name = "policy_holder")
-    private User user;
-    @OneToOne(cascade=CascadeType.REMOVE )
-    @JoinColumn(name = "adjuster")
-    private Adjuster adjuster;
-    @OneToOne(cascade=CascadeType.REMOVE )
-    @JoinColumn(name = "investigator")
-    private Investigator investigator;
-    @OneToOne(cascade=CascadeType.REMOVE )
-    @JoinColumn(name = "underwriter")
-    private Underwriter underwriter;
     public User() {
     }
     public User(Long id, String username, String password, String email, String role) {
@@ -66,4 +55,8 @@ public class User {
         this.role = role;
     }
     
+    
+
+
+    // implement entity
 }
