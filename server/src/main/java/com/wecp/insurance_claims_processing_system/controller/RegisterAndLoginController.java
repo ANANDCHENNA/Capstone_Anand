@@ -19,20 +19,49 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 
+
+@RestController
 public class RegisterAndLoginController {
+
+    
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JwtUtil jwtUtil;
 
 
     @PostMapping("/api/user/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-        // register user
-        // save the user based on the role and return the user
-        // make sure data is saved in User table as well as in the respective role table
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
+        try{
+            return ResponseEntity.ok(userService.registerUser(user));
+        } catch(Exception ex) {
+            return new ResponseEntity<>(ex.getMessage() , HttpStatus.CONFLICT);
+        }
     }
 
+    
+
     @PostMapping("/api/user/login")
-    public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest loginRequest) {
-        // login user
-        // return jwt token in LoginResponse object
-        // if authentication fails,response with 401 status code
-    }
+     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+            try{
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+            } catch(AuthenticationException e) {
+                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED , "Invalid username or password" ,e);
+            }
+            final UserDetails userDetails = userService.loadUserByUsername(loginRequest.getUsername());
+            User foundUser = userService.getUserByUsername(loginRequest.getUsername());
+            final String token = jwtUtil.generateToken(loginRequest.getUsername());
+            String role = foundUser.getRole();
+            Long userId = foundUser.getId();
+            String username=foundUser.getUsername();
+            String email=foundUser.getEmail();
+            System.out.println("User Roles: " + role);
+            return ResponseEntity.ok(new LoginResponse(userId, token, username, email, role));
+        }
+    
+     
 }
