@@ -12,8 +12,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ClaimRepository extends JpaRepository<Claim, Long>{
 
+public interface ClaimRepository extends JpaRepository<Claim, Long>{
+  
     List<Claim> findByPolicyholder(Policyholder policyholder);
     List<Claim> findByUnderwriter(Underwriter underwriter);
 
