@@ -14,6 +14,4 @@ import io.jsonwebtoken.Claims;
 public class Policyholder extends User {
 @OneToMany(mappedBy = "policyholder")
 private Claim claim;
-   
-
 }
