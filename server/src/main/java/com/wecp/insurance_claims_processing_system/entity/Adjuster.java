@@ -5,10 +5,6 @@ import javax.persistence.Entity;
 
 @Entity
 public class Adjuster extends User {
-
     public Adjuster() {
     }
-
-    
-    // Implement entity and extends User
 }
