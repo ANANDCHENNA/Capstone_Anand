@@ -10,17 +10,17 @@ public class Claim {
     private String description;
     private Date date;
     private String status;
-     @ManyToOne
-     @JoinColumn(name = "adjuster_id")
+    @ManyToOne
+    @JoinColumn(name = "adjuster_id")
     private Adjuster adjuster;
-     @ManyToOne
-     @JoinColumn(name = "underwriter_id")
+    @ManyToOne
+    @JoinColumn(name = "underwriter_id")
     private Underwriter underwriter;
     //each investigation is relate to one claim.
     @OneToOne(mappedBy = "claim",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Investigation investigation;
-     @ManyToOne
-     @JoinColumn(name="policyholder_id")
+    @ManyToOne
+    @JoinColumn(name="policyholder_id")
     private Policyholder policyholder;
     public Claim() {
     }

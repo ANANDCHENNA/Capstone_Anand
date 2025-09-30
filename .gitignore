@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 
 ### Files ###
-.systemfiles
+.systemfiles/
 
 ### STS ###
 .apt_generated
