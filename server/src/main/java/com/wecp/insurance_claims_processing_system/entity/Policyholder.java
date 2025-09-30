@@ -12,10 +12,8 @@ import io.jsonwebtoken.Claims;
 @Table(name = "policyholder") 
 @Entity
 public class Policyholder extends User {
-    //one policy holder have many claims
-@OneToMany
-@JoinColumn(name = "policyholder_id")
-private Claims claims;
+@OneToMany(mappedBy = "policyholder")
+private Claim claim;
    
 
 }
