@@ -20,7 +20,7 @@ public class Claim {
     @OneToOne(mappedBy = "claim",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Investigation investigation;
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name="policyholder_id")
     private Policyholder policyholder;
     public Claim() {
     }
