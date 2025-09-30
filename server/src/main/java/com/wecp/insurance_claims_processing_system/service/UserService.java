@@ -1,106 +1,110 @@
 package com.wecp.insurance_claims_processing_system.service;
+ 
+ import com.wecp.insurance_claims_processing_system.entity.*;
+ import com.wecp.insurance_claims_processing_system.repository.*;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.security.core.authority.SimpleGrantedAuthority;
+ import org.springframework.security.core.userdetails.UserDetails;
+ import org.springframework.security.core.userdetails.UserDetailsService;
+ import org.springframework.security.core.userdetails.UsernameNotFoundException;
+ import org.springframework.security.crypto.password.PasswordEncoder;
+ import org.springframework.stereotype.Service;
+ 
 
-import com.wecp.insurance_claims_processing_system.entity.*;
-import com.wecp.insurance_claims_processing_system.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import java.util.Collections;
 
-import java.util.ArrayList;
+ 
+ 
+ @Service
+ public class UserService implements UserDetailsService {
+     @Autowired
+     private UserRepository userRepository;
+ 
+     @Autowired
+     private InvestigatorRepository investigatorRepository;
+ 
+     @Autowired
+     private PolicyholderRepository policyholderRepository;
+ 
+     @Autowired
+     private AdjusterRepository adjusterRepository;
+ 
+     @Autowired
+     private UnderwriterRepository underwriterRepository;
+ 
+     @Autowired
+     private PasswordEncoder passwordEncoder;
+   
 
-public class UserService {
+     public User registerUser(User user) throws Exception{
+        User newUser;
 
-    private final UserRepository userRepository;
+        User oldUser = userRepository.findByUsername(user.getUsername());
+            User emailExists = userRepository.findByEmail(user.getEmail());
+                if(oldUser != null){
+                    throw new Exception("Username is duplicated: " + user.getUsername());
+                         }
+                if(emailExists != null){
+                 throw new Exception("User already exists with the given email: "+user.getEmail());
+                         }
 
-    private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public UserLoginServiceImpl(UserRepository userRepository,
-                                StudentRepository studentRepository,
-                                TeacherRepository teacherRepository,
-                                PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.studentRepository = studentRepository;
-        this.teacherRepository = teacherRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    public void registerUser(UserRegistrationDTO userRegistrationDTO) throws Exception {
-        String role = userRegistrationDTO.getRole();
-        String email = userRegistrationDTO.getEmail();
-        String username = userRegistrationDTO.getUsername();
-
-        if (!role.equalsIgnoreCase("STUDENT") && !role.equalsIgnoreCase("TEACHER")) {
-            throw new Exception("Invalid role. Only 'STUDENT' or 'TEACHER' allowed.");
+        switch(user.getRole()){
+         case "ADJUSTER" :
+             newUser = new Adjuster();
+             copyProperties(user, newUser);
+             adjusterRepository.save((Adjuster) newUser);
+             break;
+       
+         case "INVESTIGATOR" :
+             newUser = new Investigator();
+             copyProperties(user, newUser);
+             investigatorRepository.save((Investigator) newUser);
+             break;
+ 
+             case "POLICYHOLDER":
+                 newUser = new Policyholder();
+                 copyProperties(user, newUser);
+                 policyholderRepository.save((Policyholder) newUser);
+                 break;
+ 
+             case "UNDERWRITER" :
+                 newUser =  new Underwriter();
+                 copyProperties(user, newUser);
+                 underwriterRepository.save((Underwriter) newUser);
+                 break;
+             default:
+                 throw new IllegalArgumentException("Invalid User try again");
+               
         }
+        return userRepository.save(newUser);
+     }
+ 
 
-        if (userRepository.findByUsername(username) != null) {
-            throw new Exception("Username '" + username + "' already exists.");
-        }
+     public User getUserByUsername(String username) {
+         return userRepository.findByUsername(username);
+     }
 
-        if (studentRepository.findByEmail(email) != null || teacherRepository.findByEmail(email) != null) {
-            throw new Exception("Email '" + email + "' already exists.");
-        }
-
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
-        user.setRole(role.toUpperCase());
-
-        if (role.equalsIgnoreCase("STUDENT")) {
-            Student student = new Student();
-            student.setFullName(userRegistrationDTO.getFullName());
-            student.setDateOfBirth(userRegistrationDTO.getDateOfBirth());
-            student.setEmail(userRegistrationDTO.getEmail());
-            student.setContactNumber(userRegistrationDTO.getContactNumber());
-            student.setAddress(userRegistrationDTO.getAddress());
-
-            Student savedStudent = studentRepository.save(student);
-            user.setStudent(savedStudent);
-
-        } else if (role.equalsIgnoreCase("TEACHER")) {
-            Teacher teacher = new Teacher();
-            teacher.setEmail(userRegistrationDTO.getEmail());
-            teacher.setFullName(userRegistrationDTO.getFullName());
-            teacher.setSubject(userRegistrationDTO.getSubject());
-            teacher.setContactNumber(userRegistrationDTO.getContactNumber());
-            teacher.setYearsOfExperience(userRegistrationDTO.getYearsOfExperience());
-
-            Teacher savedTeacher = teacherRepository.save(teacher);
-            user.setTeacher(savedTeacher);
-        }
-
-        userRepository.save(user);
-    }
-
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    public User getUserDetails(int userId) {
-        return userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String identifier) throws UsernameNotFoundException {
-        User user;
-        if (identifier.matches("\\d+")) {
-            user = userRepository.findById(Integer.parseInt(identifier))
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found with ID: " + identifier));
-        } else {
-            user = userRepository.findByUsername(identifier);
-            if (user == null) {
-                throw new UsernameNotFoundException("User not found with username: " + identifier);
-            }
-        }
-
+     
+ 
+ @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+ 
         return new org.springframework.security.core.userdetails.User(
-                String.valueOf(user.getUserId()),
+                user.getUsername(),
                 user.getPassword(),
-                Collections.emptyList());
+                Collections.singletonList(new SimpleGrantedAuthority(user.getRole()))
+        );
     }
-}
+ 
+     
+     private void copyProperties(User source, User target){
+         target.setUsername(source.getUsername());
+         target.setEmail((source.getEmail()));
+         target.setPassword(passwordEncoder.encode(source.getPassword()));
+         target.setRole(source.getRole());
+     }
+ 
+   
+ }
+ 
