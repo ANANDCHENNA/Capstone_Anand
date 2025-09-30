@@ -33,8 +33,6 @@ public class Claim {
     @JsonIgnore
     private Investigation investigation;
 
-
-
     public Claim() {
     }
 
@@ -114,9 +112,4 @@ public class Claim {
         this.investigation = investigation;
     }
 
-
-    
- 
-  
-    // implement entity
 }
