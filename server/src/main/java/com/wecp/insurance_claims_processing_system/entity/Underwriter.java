@@ -1,8 +1,14 @@
 package com.wecp.insurance_claims_processing_system.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-
-public class Underwriter {
-    // implement entity and extend user
+@Table(name="underwriter")
+@Entity
+public class Underwriter extends User {
+    // implement entity and exte
+ @OneToMany(mappedBy = "underwriter")
+        private Claim claim;
+    
 }
