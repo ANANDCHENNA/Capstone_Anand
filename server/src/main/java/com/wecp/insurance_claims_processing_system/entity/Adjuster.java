@@ -6,6 +6,7 @@ import javax.persistence.Table;
 
 @Table(name = "adjuster") 
 @Entity
-public class Adjuster extends User {
+public class Adjuster extends User
+ {
 
 }
