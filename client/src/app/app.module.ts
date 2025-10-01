@@ -13,8 +13,8 @@ import { CreateClaimComponent } from './create-claim/create-claim.component';
 
 import { UpdateClaimComponent } from './update-claim/update-claim.component';
 import { AssignClaimComponent } from './assign-claim/assign-claim.component';
-import { CreateInvestigatorComponent } from './create-investigator/create-investigator.component';
-import { UpdateClaimInvestigatorComponent } from './update-claim-investigator/update-claim-investigator.component';
+import { CreateInvestigationComponent } from './create-investigator/create-investigator.component';
+import { UpdateClaimInvestigationComponent } from './update-claim-investigation/update-claim-investigation.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +25,8 @@ import { UpdateClaimInvestigatorComponent } from './update-claim-investigator/up
     CreateClaimComponent,
      UpdateClaimComponent,
       AssignClaimComponent,
-      CreateInvestigatorComponent,
-      UpdateClaimInvestigatorComponent,
+      CreateInvestigationComponent,
+      UpdateClaimInvestigationComponent,
   ],
   imports: [
     BrowserModule,
