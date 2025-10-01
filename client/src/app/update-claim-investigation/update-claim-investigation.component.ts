@@ -27,7 +27,7 @@ export class UpdateInvestigationComponent implements OnInit {
 
   ngOnInit(): void {
       this.investigationId = this.route.snapshot.params['id']
-      this.httpService.getInvestigationById(this.investigationId).subscribe((data) => {
+      this.httpService.getInvestigationById(this.investigationId).subscribe((data:any) => {
         this.itemForm.patchValue(data)
       })
   }
@@ -38,7 +38,7 @@ export class UpdateInvestigationComponent implements OnInit {
         next: () => {
           this.router.navigate(['/dashboard']); 
         },
-        error: (error) => {
+        error: (error:any) => {
           console.error('Error Updating investigation:', error);
         }
       });
