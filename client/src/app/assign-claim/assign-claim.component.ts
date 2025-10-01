@@ -1,5 +1,5 @@
 import { Underwriter } from '../model/Underwriter';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 import { AuthService } from '../../services/auth.service';
@@ -18,16 +18,15 @@ export class AssignClaimComponent implements OnInit {
   underwriters: Underwriter[] = []
   id: number | undefined
 
-
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    @Optional() private route: ActivatedRoute
   ) {
     this.itemForm = this.formBuilder.group({
-      claimId: [null],
+      claimId: [null, Validators.required],
       underwriterId: [null, Validators.required]
     });
   }
@@ -36,7 +35,7 @@ export class AssignClaimComponent implements OnInit {
     this.httpService.GetAllUnderwriter().subscribe((data) => {
       this.underwriters = data
     })
-    this.id = this.route.snapshot.params['id']
+    this.id = this.route?.snapshot?.params?.['id'] ?? null;
   }
 
   onSubmit() {
