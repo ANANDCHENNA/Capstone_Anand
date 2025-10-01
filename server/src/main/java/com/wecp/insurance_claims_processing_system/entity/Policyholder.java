@@ -5,10 +5,6 @@ import javax.persistence.Entity;
 
 @Entity
 public class Policyholder  extends User{
-
     public Policyholder() {
     }
-
-    
-    // Implement entity and extend user
 }

@@ -4,11 +4,6 @@ import javax.persistence.Entity;
 
 @Entity
 public class Underwriter extends User {
-
     public Underwriter() {
     }
-
-
-    
-    // implement entity and extend user
 }
