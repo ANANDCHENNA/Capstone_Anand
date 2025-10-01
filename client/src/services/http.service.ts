@@ -1,20 +1,17 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InteropObservable, Observable } from 'rxjs';
 import { environment } from '../environments/environment.development';
 import { AuthService } from './auth.service';
-
+ 
 @Injectable({
   providedIn: 'root'
 })
+
 export class HttpService {
   public serverName = environment.apiUrl;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
-
-  }
-
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getInvestigations(): Observable<any> {
     const authToken = this.authService.getToken();
@@ -149,5 +146,4 @@ export class HttpService {
     headers = headers.set('Content-Type', 'application/json');
     return this.http.post(this.serverName + '/api/user/register', details, { headers: headers });
   }
-
 }
