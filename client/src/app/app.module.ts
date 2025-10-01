@@ -14,7 +14,7 @@ import { CreateClaimComponent } from './create-claim/create-claim.component';
 import { UpdateClaimComponent } from './update-claim/update-claim.component';
 import { AssignClaimComponent } from './assign-claim/assign-claim.component';
 import { CreateInvestigationComponent } from './create-investigator/create-investigator.component';
-import { UpdateClaimInvestigationComponent } from './update-claim-investigation/update-claim-investigation.component';
+import { UpdateInvestigationComponent } from './update-claim-investigation/update-claim-investigation.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +23,10 @@ import { UpdateClaimInvestigationComponent } from './update-claim-investigation/
     RegistrationComponent,
     DashbaordComponent,
     CreateClaimComponent,
-     UpdateClaimComponent,
-      AssignClaimComponent,
-      CreateInvestigationComponent,
-      UpdateClaimInvestigationComponent,
+    UpdateClaimComponent,
+    AssignClaimComponent,
+    CreateInvestigationComponent,
+    UpdateInvestigationComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,4 +38,4 @@ import { UpdateClaimInvestigationComponent } from './update-claim-investigation/
   providers: [HttpService, HttpClientModule],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

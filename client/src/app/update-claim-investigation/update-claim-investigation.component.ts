@@ -3,15 +3,15 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
-import { HttpService } from '../../../services/http.service';
-import { Investigation } from '../../model/Investigation';
+import { HttpService } from '../../services/http.service';
+
 
 @Component({
   selector: 'app-update-investigation',
-  templateUrl: './update-investigation.component.html',
-  styleUrls: ['./update-investigation.component.scss']
+  templateUrl: './update-claim-investigation.component.html',
+  styleUrls: ['./update-claim-investigation.component.scss']
 })
+
 export class UpdateInvestigationComponent implements OnInit {
 
 

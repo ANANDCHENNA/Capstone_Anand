@@ -7,8 +7,8 @@ import { Claim } from '../model/Claim';
  
  @Component({
    selector: 'app-create-investigation',
-   templateUrl: './create-investigation.component.html',
-   styleUrls: ['./create-investigation.component.scss']
+   templateUrl: './create-investigator.component.html',
+   styleUrls: ['./create-investigator.component.scss']
  })
 
  export class CreateInvestigationComponent implements OnInit {
