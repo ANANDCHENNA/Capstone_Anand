@@ -44,6 +44,9 @@ export class AuthService {
      this.token=null;
      this.isLoggedIn=false
    }
+   getUserId():string|null{
+    return localStorage.getItem('userId');
+   }
    saveUserId(userid: string) {
   
     localStorage.setItem('userId',userid);

@@ -13,13 +13,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-
-// public class JwtUtil {
-//     // implement jwt utility
-// }
-
-
-
 @Component
 public class JwtUtil {
  
@@ -88,4 +81,3 @@ public class JwtUtil {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 }
- 

@@ -1,1 +1,41 @@
-//todo: complete missing code..
+ <div class="container">
+   <h2>Create New Claim</h2>
+   <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+     <div class="form-group">
+       <label for="description">Description</label>
+       <textarea
+         id="description"
+         formControlName="description"
+         class="form-control"
+         rows="2"
+         placeholder="Enter claim description"
+       ></textarea>
+       <div *ngIf="itemForm.get('description')?.touched && itemForm.get('description')?.invalid" class="error-message">
+         Description is required
+       </div>
+     </div>
+     <div class="form-group">
+       <label for="date">Date</label>
+       <input
+         type="date"
+         id="date"
+         formControlName="date"
+         class="form-control"
+         [min]="currentDate"
+         [max]="currentDate"
+         [value]="currentDate"
+       />
+       <div *ngIf="itemForm.get('date')?.touched && itemForm.get('date')?.invalid" class="error-message">
+         Date is required
+       </div>
+     </div>
+     <div class="form-group">
+       <label for="status">Status</label>
+       <input id="status" [disabled]="statusDisable" formContrlName="status"  value="Started"  class="form-control">
+     </div>
+     <button type="submit" [disabled]="!itemForm.valid" class="submit-button">
+       Create Claim
+     </button>
+   </form>
+ </div>
+ 
