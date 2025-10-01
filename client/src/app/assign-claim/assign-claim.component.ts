@@ -11,4 +11,3 @@ import { HttpService } from '../../services/http.service';
 })
 export class AssignClaimComponent 
 //todo: complete missing code..
-
