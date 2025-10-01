@@ -11,7 +11,7 @@ import { Claim } from '../model/Claim';
    styleUrls: ['./create-investigator.component.scss']
  })
 
- export class CreateInvestigationComponent implements OnInit {
+ export class CreateInvestigatorComponent implements OnInit {
    itemForm: FormGroup;
    claimList: Claim[] = [];
  

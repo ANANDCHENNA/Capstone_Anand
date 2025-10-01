@@ -31,7 +31,7 @@ export class HttpService {
   }
 
 
-  getAllUnderwriter(): Observable<any> {
+  GetAllUnderwriter(): Observable<any> {
 
     const authToken = this.authService.getToken();
     let headers = new HttpHeaders();
