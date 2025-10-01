@@ -1,1 +1,26 @@
-//todo: complete missing code..
+  <div class="container">
+   <h2>Assign Claim to Underwriter</h2>
+  
+   <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+  
+     <div class="form-group">
+       <label for="underwriterId">Select Underwriter</label>
+       <select id="underwriterId" formControlName="underwriterId" class="form-control">
+         <option value="">Select an underwriter</option>
+         <option *ngFor="let underwriter of underwriters" [value]="underwriter.id">
+           {{underwriter.username}} 
+         </option>
+       </select>
+       <div *ngIf="itemForm.get('underwriterId')?.touched && itemForm.get('underwriterId')?.invalid" class="error-message">
+         Please select an underwriter
+       </div>
+     </div>
+  
+     <button type="submit" [disabled]="itemForm.invalid" class="submit-button">
+       Assign Claim
+     </button>
+   </form>
+ </div>
+
+
+
