@@ -26,7 +26,7 @@ export class AssignClaimComponent implements OnInit {
     @Optional() private route: ActivatedRoute
   ) {
     this.itemForm = this.formBuilder.group({
-      claimId: [null, Validators.required],
+      // claimId: [null, Validators.required],
       underwriterId: [null, Validators.required]
     });
   }

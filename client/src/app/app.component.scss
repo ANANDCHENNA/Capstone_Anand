@@ -1,0 +1,52 @@
+/* Navbar container */
+.navbar {
+  background-color: #4B0082; /* Indigo to match dashboard header */
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Brand title */
+.navbar-brand {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Nav links */
+.navbar-nav .nav-link {
+  color: #ffffff;
+  margin-right: 15px;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #dcdcdc;
+}
+
+/* Active link styling (optional) */
+.navbar-nav .nav-link.active {
+  font-weight: bold;
+  color: #FFD700; /* Gold highlight */
+}
+
+/* Toggler icon */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Responsive collapse */
+@media (max-width: 991px) {
+  .navbar-nav {
+    background-color: #4B0082;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .navbar-nav .nav-link {
+    margin: 5px 0;
+  }
+}

@@ -27,6 +27,8 @@ export class DashbaordComponent implements OnInit {
   policyholderId: string | null = ''
   claimByPolicyholder: Claim[] = [] //Role = Policyholder
 
+  underWriter: string = 'Assign Underwriter';
+
   constructor(
     private httpService: HttpService,
     private authService: AuthService,
@@ -74,8 +76,9 @@ export class DashbaordComponent implements OnInit {
     }
   }
 
-  onAdjusterAssignClaim(id: number) {
+  onAdjusterAssignClaim(id: number): Boolean {
     this.router.navigate([`/assign-claim/${id}`])
+    return true;
   }
 
   onUnderwriterUpdateClaim(id: number) {
