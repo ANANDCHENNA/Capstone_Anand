@@ -1,57 +1,58 @@
  .dashboard-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f4f4f9;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 20px;
+   background-color: #f4f4f9;
+   border-radius: 10px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ }
 
-.dashboard-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
+ .dashboard-header {
+   text-align: center;
+   margin-bottom: 20px;
+ }
 
-h1 {
-  font-size: 2em;
-  color: #333;
-}
+ h1 {
+   font-size: 2em;
+   color: #333;
+ }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
+ table {
+   width: 100%;
+   border-collapse: collapse;
+   margin-bottom: 20px;
+ }
 
-th, td {
-  padding: 10px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-}
+ th,
+ td {
+   padding: 10px;
+   text-align: center;
+   border-bottom: 1px solid #ddd;
+ }
 
-th {
-  background-color: #4B0082;
-  color: white;
-}
+ th {
+   background-color: #4B0082;
+   color: white;
+ }
 
-tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
+ tbody tr:nth-child(even) {
+   background-color: #f9f9f9;
+ }
 
-button {
-  padding: 8px 12px;
-  background-color: #9370DB;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-}
+ button {
+   padding: 8px 12px;
+   background-color: #9370DB;
+   border: none;
+   border-radius: 5px;
+   color: white;
+   cursor: pointer;
+ }
 
-button:hover {
-  background-color: #9370DB;
-}
+ button:hover {
+   background-color: #9370DB;
+ }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
+ button:disabled {
+   background-color: #ccc;
+   cursor: not-allowed;
+ }

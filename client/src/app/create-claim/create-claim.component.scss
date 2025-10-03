@@ -1,8 +1,9 @@
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   margin: 0;
-  background-color: #E6E6FA; 
+  background-color: #E6E6FA;
   font-family: Arial, sans-serif;
 }
 
@@ -10,37 +11,45 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #E6E6FA; 
+  background-color: #E6E6FA;
 }
 
-.container, .dashboard-container {
+.container,
+.dashboard-container {
   max-width: 800px;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.5); 
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
 
-h2, .dashboard-header h1 {
+h2,
+.dashboard-header h1 {
   text-align: center;
-  color: #4B0082; 
+  color: #4B0082;
 }
 
 .dashboard-header {
-  background-color: #4B0082; 
+  background-color: #4B0082;
   color: white;
   padding: 10px;
   border-radius: 10px 10px 0 0;
 }
 
-.form-group, .dashboard-container table, .container table {
+.form-group,
+.dashboard-container table,
+.container table {
   margin-bottom: 15px;
   width: 100%;
   border-collapse: collapse;
 }
 
-.form-control, .dashboard-container table th, .dashboard-container table td, .container table th, .container table td {
+.form-control,
+.dashboard-container table th,
+.dashboard-container table td,
+.container table th,
+.container table td {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -52,10 +61,13 @@ h2, .dashboard-header h1 {
   font-size: 0.9em;
 }
 
-.submit-button, button[type="button"], .dashboard-container button, .container button {
+.submit-button,
+button[type="button"],
+.dashboard-container button,
+.container button {
   width: 100%;
   padding: 10px;
-  background-color: #4B0082; 
+  background-color: #4B0082;
   color: white;
   border: none;
   border-radius: 5px;
@@ -65,15 +77,22 @@ h2, .dashboard-header h1 {
   overflow: hidden;
 }
 
-.submit-button:disabled, .dashboard-container button:disabled, .container button:disabled {
+.submit-button:disabled,
+.dashboard-container button:disabled,
+.container button:disabled {
   background-color: #ccc;
 }
 
-button[type="button"], .dashboard-container button, .container button {
-  background-color: #9370DB; 
+button[type="button"],
+.dashboard-container button,
+.container button {
+  background-color: #9370DB;
 }
 
-.submit-button::before, button[type="button"]::before, .dashboard-container button::before, .container button::before {
+.submit-button::before,
+button[type="button"]::before,
+.dashboard-container button::before,
+.container button::before {
   content: '';
   position: absolute;
   top: 0;
@@ -84,19 +103,27 @@ button[type="button"], .dashboard-container button, .container button {
   transition: 0.5s;
 }
 
-.submit-button:hover::before, button[type="button"]:hover::before, .dashboard-container button:hover::before, .container button:hover::before {
+.submit-button:hover::before,
+button[type="button"]:hover::before,
+.dashboard-container button:hover::before,
+.container button:hover::before {
   left: 100%;
 }
 
-.dashboard-container table th, .dashboard-container table td, .container table th, .container table td {
+.dashboard-container table th,
+.dashboard-container table td,
+.container table th,
+.container table td {
   text-align: left;
 }
 
-.dashboard-container table th, .container table th {
-  background-color: #4B0082; 
+.dashboard-container table th,
+.container table th {
+  background-color: #4B0082;
   color: white;
 }
 
-.dashboard-container table tbody tr:nth-child(even), .container table tbody tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.7); 
+.dashboard-container table tbody tr:nth-child(even),
+.container table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.7);
 }

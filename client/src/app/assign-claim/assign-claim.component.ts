@@ -26,7 +26,9 @@ export class AssignClaimComponent implements OnInit {
     @Optional() private route: ActivatedRoute
   ) {
     this.itemForm = this.formBuilder.group({
-      // claimId: [null, Validators.required],
+      claimId: [this.id],
+      description: [{ value: "", disabled: true }, Validators.required],
+      status: [{ value: "Started", disabled: true }, Validators.required],
       underwriterId: [null, Validators.required]
     });
   }
@@ -36,6 +38,12 @@ export class AssignClaimComponent implements OnInit {
       this.underwriters = data
     })
     this.id = this.route?.snapshot?.params?.['id'] ?? null;
+    if (this.id) {
+      this.httpService.getClaimById(this.id).subscribe((data) => {
+        console.log(data);
+        this.itemForm.patchValue(data);
+      })
+    }
   }
 
   onSubmit() {

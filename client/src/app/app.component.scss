@@ -1,6 +1,7 @@
 /* Navbar container */
 .navbar {
-  background-color: #4B0082; /* Indigo to match dashboard header */
+  background-color: #4B0082;
+  /* Indigo to match dashboard header */
   border-radius: 0 0 10px 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -26,7 +27,8 @@
 /* Active link styling (optional) */
 .navbar-nav .nav-link.active {
   font-weight: bold;
-  color: #FFD700; /* Gold highlight */
+  color: #FFD700;
+  /* Gold highlight */
 }
 
 /* Toggler icon */

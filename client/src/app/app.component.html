@@ -1,7 +1,7 @@
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+<nav *ngIf="IsLoggin" class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
   <a class="navbar-brand" href="#">Insurance Claims & Resource Management Platform</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
@@ -15,27 +15,29 @@
       <!-- <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'ADJUSTER'" [routerLink]="['/assign-claim']">Assign Claim</a>
       </li> -->
-      
+
       <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'INVESTIGATOR'" [routerLink]="['/create-investigator']">Investigator</a>
-      </li> 
-
-      <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'UNDERWRITER'" [routerLink]="['/update-claim-investigator']">Update Claim</a>
-      </li> 
-
-      <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'POLICYHOLDER'" [routerLink]="['/view-claim-status']">View Claim Status</a>
       </li>
-     
+
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="roleName === 'UNDERWRITER'" [routerLink]="['/update-claim-investigator']">Update
+          Claim</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="roleName === 'POLICYHOLDER'" [routerLink]="['/view-claim-status']">View Claim
+          Status</a>
+      </li>
+
     </ul>
-   
- 
+
+
     <!-- Login/Logout buttons -->
     <ul class="navbar-nav">
-      <li *ngIf="!IsLoggin" class="nav-item">
+      <!-- <li *ngIf="!IsLoggin" class="nav-item">
         <a class="nav-link" [routerLink]="['/login']">Login</a>
-      </li>
+      </li> -->
       <li *ngIf="IsLoggin" class="nav-item">
         <a class="nav-link" (click)="logout()" [routerLink]="['/login']">Logout</a>
       </li>
@@ -43,10 +45,9 @@
   </div>
 </nav>
 
-<body  >
+<body>
   <div class="container mt-4 mx-5">
-    <router-outlet>    
+    <router-outlet>
     </router-outlet>
   </div>
 </body>
-
