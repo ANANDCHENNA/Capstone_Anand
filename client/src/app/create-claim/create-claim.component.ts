@@ -27,9 +27,9 @@ export class CreateClaimComponent implements OnInit {
 
     this.currentDate = new Date().toLocaleDateString('en-CA')
     this.itemForm = this.formBuilder.group({
-      description: [null, Validators.required],
-      date: [null, Validators.required],
-      status: [null, Validators.required]
+      description: ["", Validators.required],
+      date: [this.currentDate, Validators.required],
+      status: ["Started", Validators.required]
     });
   }
 
