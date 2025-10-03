@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'dashboard', component: DashbaordComponent },
   { path: 'create-claim', component: CreateClaimComponent },  
-  { path: 'update-claim', component: UpdateClaimComponent },  
+  { path: 'update-claim/:id', component: UpdateClaimComponent },  
   { path: 'assign-claim', component: AssignClaimComponent },  
   { path: 'assign-claim/:id', component: AssignClaimComponent },  
   { path: 'create-investigator', component: CreateInvestigatorComponent },  

@@ -36,7 +36,8 @@ export class UpdateClaimComponent implements OnInit {
 
   onSubmit() {
     if (this.itemForm.valid) {
-      this.httpService.updateClaims(this.itemForm.value, this.claimId).subscribe({
+      console.log(this.itemForm.status)
+      this.httpService.updateClaimsStatus(this.itemForm.value, this.claimId).subscribe({
         next: () => {
           this.router.navigate(['/dashboard']);
         },

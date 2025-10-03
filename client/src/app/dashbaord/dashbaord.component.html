@@ -25,7 +25,7 @@
           <td>{{claim.date | date : 'dd-MM-yyyy'}}</td>
           <td>{{claim.status}}</td>
           <td>
-            <button type="button" (click)="onAdjusterAssignClaim(claim.id)">Assign Underwriter</button>
+            <button type="button" (click)="onAdjusterAssignClaim(claim.id)">{{claim.underwriter ? "Assigned Underwriter" : "Assign Underwriter"}}</button>
           </td>
         </tr>
       </tbody>

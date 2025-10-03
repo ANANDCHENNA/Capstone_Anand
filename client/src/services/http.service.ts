@@ -104,23 +104,23 @@ export class HttpService {
 
 
 
-  updateClaims(details: any, claimId: any): Observable<any> {
+  // updateClaims(details: any, claimId: any): Observable<any> {
+  //   const authToken = this.authService.getToken();
+  //   let headers = new HttpHeaders();
+  //   headers = headers.set('Content-Type', 'application/json');
+  //   headers = headers.set('Authorization', `Bearer ${authToken}`);
+  //   return this.http.put(this.serverName + '/api/adjuster/claim/' + claimId, details, { headers: headers });
+  // }
+
+
+  updateClaimsStatus(OBJ: any, claimId: any): Observable<any> {
     const authToken = this.authService.getToken();
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('Authorization', `Bearer ${authToken}`);
-    return this.http.put(this.serverName + '/api/adjuster/claim/' + claimId, details, { headers: headers });
-  }
+    console.log(OBJ.status)
 
-
-  updateClaimsStatus(status: any, claimId: any): Observable<any> {
-    const authToken = this.authService.getToken();
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Authorization', `Bearer ${authToken}`);
-    return this.http.put(this.serverName + '/api/underwriter/claim/' + claimId + '/review?status=' + status, {}, {
-      headers: headers
-    });
+    return this.http.put(this.serverName + '/api/underwriter/claim/' + claimId + '/review?status=' + OBJ.status, {} , {headers: headers});
   }
 
   assignClaim(details: any): Observable<any> {
