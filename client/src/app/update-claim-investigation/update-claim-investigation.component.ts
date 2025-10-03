@@ -16,9 +16,9 @@ export class UpdateInvestigationComponent implements OnInit {
 
 
   itemForm: FormGroup
-  investigationId : number | undefined
+  investigationId: number | undefined
 
-  constructor(private httpService: HttpService, private router: Router, private route :  ActivatedRoute, private formBuilder: FormBuilder) { 
+  constructor(private httpService: HttpService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
     this.itemForm = this.formBuilder.group({
       report: ['', Validators.required],
       status: ['', Validators.required]
@@ -26,19 +26,19 @@ export class UpdateInvestigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.investigationId = this.route.snapshot.params['id']
-      this.httpService.getInvestigationById(this.investigationId).subscribe((data:any) => {
-        this.itemForm.patchValue(data)
-      })
+    this.investigationId = this.route.snapshot.params['id']
+    this.httpService.getInvestigationById(this.investigationId).subscribe((data: any) => {
+      this.itemForm.patchValue(data)
+    })
   }
 
   onSubmit() {
     if (this.itemForm.valid) {
       this.httpService.updateInvestigation(this.itemForm.value, this.investigationId).subscribe({
         next: () => {
-          this.router.navigate(['/dashboard']); 
+          this.router.navigate(['/dashboard']);
         },
-        error: (error:any) => {
+        error: (error: any) => {
           console.error('Error Updating investigation:', error);
         }
       });
