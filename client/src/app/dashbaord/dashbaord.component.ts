@@ -89,7 +89,7 @@ onUpdateClaimAdjuster(id:number)
   }
 
   onInvestigatorUpdateInvestigation(id: number) {
-    this.router.navigate([`/update-investigation/${id}`])
+    this.router.navigate([`/update-claim-investigation/${id}`])
   }
 
 }

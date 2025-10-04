@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'assign-claim', component: AssignClaimComponent },  
   { path: 'assign-claim/:id', component: AssignClaimComponent },  
   { path: 'create-investigator', component: CreateInvestigatorComponent },  
-  { path: 'update-claim-investigation', component: UpdateInvestigationComponent },  
+  { path: 'update-claim-investigation/:id', component: UpdateInvestigationComponent },  
   { path: 'update-claim-underwriter/:id', component: UpdateClaimComponent },  
 
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
