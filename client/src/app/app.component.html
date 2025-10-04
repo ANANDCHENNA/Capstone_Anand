@@ -9,26 +9,26 @@
       <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'POLICYHOLDER'" [routerLink]="['/create-claim']">Create claim</a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'ADJUSTER'" [routerLink]="['/dashboard']">Get Claims</a>
-      </li> -->
-      <!-- <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'ADJUSTER'" [routerLink]="['/assign-claim']">Assign Claim</a>
-      </li> -->
-
       <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'INVESTIGATOR'" [routerLink]="['/create-investigator']">Investigator</a>
+        <a class="nav-link" *ngIf="roleName === 'ADJUSTER'" [routerLink]="['/dashboard']">Get Claims</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="roleName === 'ADJUSTER'" [routerLink]="['/view-underwriters']">View Underwriters</a>
       </li>
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
+        <a class="nav-link" *ngIf="roleName === 'INVESTIGATOR'" [routerLink]="['/create-investigator']">Investigator</a>
+      </li> -->
+
+      <!-- <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'UNDERWRITER'" [routerLink]="['/update-claim-investigator']">Update
           Claim</a>
-      </li>
+      </li> -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'POLICYHOLDER'" [routerLink]="['/view-claim-status']">View Claim
           Status</a>
-      </li>
+      </li> -->
 
     </ul>
 
