@@ -11,13 +11,14 @@ import { HttpService } from '../../services/http.service';
 })
 export class UpdateClaimComponent implements OnInit {
   itemForm: FormGroup;
-  claimId: number | undefined
-
+  claimId: number | undefined;
+  userRole:string | null | undefined
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpService,
     private authService: AuthService,
     private router: Router,
+    
     @Optional() private route: ActivatedRoute
   ) {
     this.itemForm = this.formBuilder.group({
@@ -35,7 +36,10 @@ export class UpdateClaimComponent implements OnInit {
   }
 
   onSubmit() {
+    this.userRole=this.authService.getRole;
     if (this.itemForm.valid) {
+      if(this.userRole=='UNDERWRITER')
+      {
       console.log(this.itemForm.status)
       this.httpService.updateClaimsStatus(this.itemForm.value, this.claimId).subscribe({
         next: () => {
@@ -46,5 +50,17 @@ export class UpdateClaimComponent implements OnInit {
         }
       });
     }
+    else if(this.userRole=='ADJUSTER')
+    {
+       this.httpService.updateClaims(this.itemForm.value, this.claimId).subscribe({
+        next: () => {
+          this.router.navigate(['/dashboard']);
+        },
+        error: (error) => {
+          console.error('Error updating claim:', error);
+        }
+      });
+    }
+  }
   }
 }

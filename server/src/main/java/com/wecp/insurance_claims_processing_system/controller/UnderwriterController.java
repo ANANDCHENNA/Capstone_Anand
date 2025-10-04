@@ -27,5 +27,9 @@ public class UnderwriterController {
     public ResponseEntity<Claim> reviewClaim(@PathVariable Long id, @RequestParam String status) {
         return new ResponseEntity<>(claimService.reviewClaim(id, status), HttpStatus.CREATED);
     }
+    @PutMapping("/api/underwriter/claim/{id}")
+    public ResponseEntity<Claim> updateClaim(@PathVariable Long id, @RequestBody Claim claimDetails) {
+        return new ResponseEntity<Claim>(claimService.updateClaim(id, claimDetails), HttpStatus.CREATED);
+    }
 
 }

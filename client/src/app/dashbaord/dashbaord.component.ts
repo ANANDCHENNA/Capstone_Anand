@@ -80,7 +80,10 @@ export class DashbaordComponent implements OnInit {
     this.router.navigate([`/assign-claim/${id}`])
     return true;
   }
-
+onUpdateClaimAdjuster(id:number)
+{
+  this.router.navigate([`/update-claim/${id}`])
+}
   onUnderwriterUpdateClaim(id: number) {
     this.router.navigate([`/update-claim-underwriter/${id}`])
   }
