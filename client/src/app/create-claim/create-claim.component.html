@@ -17,10 +17,25 @@
         Date is required
       </div>
     </div>
+
+    <div class="form-group">
+      <label for="claimType">Domain</label>
+      <select id="claimType" formControlName="claimType"  class="form-control">
+        <option value="">Select domain</option>
+        <option value="Vehicle">Vehicle</option>
+        <option value="Health">Health</option>
+        <option value="Life">Life</option>
+        <option value="Home">Home</option>
+      </select>
+    </div>
+
+
     <div class="form-group">
       <label for="status">Status</label>
       <input id="status" [disabled]="statusDisable" formContrlName="status" value="Started" class="form-control">
     </div>
+    
+    
     <button type="submit" [disabled]="!itemForm.valid" class="submit-button">
       Create Claim
     </button>

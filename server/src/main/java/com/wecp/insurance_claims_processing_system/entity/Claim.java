@@ -16,6 +16,7 @@ public class Claim {
     private String description;
     private Date date;
     private String status;
+    private String claimType;
 
     @ManyToOne
     @JoinColumn(name = "policyholder_id")
@@ -35,12 +36,13 @@ public class Claim {
     public Claim() {
     }
 
-    public Claim(Long id, String description, Date date, String status, Policyholder policyholder, Adjuster adjuster,
+    public Claim(Long id, String description, Date date, String status,String claimType, Policyholder policyholder, Adjuster adjuster,
             Underwriter underwriter, Investigation investigation) {
         this.id = id;
         this.description = description;
         this.date = date;
         this.status = status;
+        this.claimType=claimType;
         this.policyholder = policyholder;
         this.adjuster = adjuster;
         this.underwriter = underwriter;
@@ -109,6 +111,14 @@ public class Claim {
 
     public void setInvestigation(Investigation investigation) {
         this.investigation = investigation;
+    }
+
+    public String getClaimType() {
+        return claimType;
+    }
+
+    public void setClaimType(String claimType) {
+        this.claimType = claimType;
     }
 
 }

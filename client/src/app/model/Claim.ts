@@ -6,6 +6,7 @@ export interface Claim {
     description : string
     date : Date
     status: string
+    claimType:string
     investigation : Investigation   
     underwriter: Underwriter
 }

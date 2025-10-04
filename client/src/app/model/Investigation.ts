@@ -4,5 +4,6 @@ export interface Investigation{
     id : number;
     report : string;
     status: string;
+    claimType:string
     claim: Claim
 }
