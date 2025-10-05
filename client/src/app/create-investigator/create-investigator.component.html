@@ -12,16 +12,18 @@
     </div>
 
     <div class="form-group">
-      <label for="status">Status</label>
-      <select id="status" formControlName="status" class="form-control">
-        <option value="">Select status</option>
-        <option value="Pending">Pending</option>
-        <option value="In Progress">In Progress</option>
-        <option value="Completed">Completed</option>
+      <label for="claimId">Select Claim</label>
+      <select id="claimId" formControlName="claimId" class="form-control">
+        <option value="">Select a Claim</option>
+        <option *ngFor="let claim of claimList" [value]="claim.id">
+          {{claim.description}}
+        </option>
       </select>
-      <div *ngIf="itemForm.get('status')?.touched && itemForm.get('status')?.invalid" class="error-message">
-        Please select a status
-      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="status" class="form-label">Status</label>
+      <input type="text" id="status" formControlName="status" class="form-control"/>
     </div>
 
     <button type="submit" [disabled]="!itemForm.valid" class="submit-button">

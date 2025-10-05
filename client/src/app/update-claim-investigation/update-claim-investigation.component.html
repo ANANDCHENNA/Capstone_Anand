@@ -11,12 +11,21 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <label for="claimId">Select Claim</label>
+      <select id="claimId" formControlName="claimId" class="form-control">
+        <option value="">Select a Claim</option>
+        <option *ngFor="let claim of claimList" [value]="claim.id">
+          {{claim.description}}
+        </option>
+      </select>
+    </div>
 
     <div class="form-group">
       <label for="status">Status</label>
       <select id="status" formControlName="status" class="form-control">
         <option value="">Select status</option>
-        <option value="Pending">Pending</option>
+        <option value="Started">Completed</option>
         <option value="In Progress">In Progress</option>
         <option value="Completed">Completed</option>
         <option value="Rejected">Rejected</option>

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
+import { Claim } from '../model/Claim';
 
 
 @Component({
@@ -14,14 +15,15 @@ import { HttpService } from '../../services/http.service';
 
 export class UpdateInvestigationComponent implements OnInit {
 
-
   itemForm: FormGroup
   investigationId: number | undefined
+  claimList: Claim[] = []
 
   constructor(private httpService: HttpService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
     this.itemForm = this.formBuilder.group({
       report: ['', Validators.required],
-      status: ['', Validators.required]
+      status: ['', Validators.required],
+      claim: [{value: '', disabled: true}, Validators.required]
     })
   }
 
@@ -34,6 +36,7 @@ export class UpdateInvestigationComponent implements OnInit {
 
   onSubmit() {
     if (this.itemForm.valid) {
+      console.log(this.itemForm.value)
       this.httpService.updateInvestigation(this.itemForm.value, this.investigationId).subscribe({
         next: () => {
           this.router.navigate(['/dashboard']);
@@ -44,5 +47,4 @@ export class UpdateInvestigationComponent implements OnInit {
       });
     }
   }
-
 }

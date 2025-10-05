@@ -1,16 +1,33 @@
-<table>
-    <thead>
-        <tr>
-            <th>Underwriter ID</th>
-            <th>Username</th>
-        </tr>
-    </thead>
+<div class="container mt-4">
+  <div class="card underwriter-card mb-4">
+    <!-- Gradient Header -->
+    <div class="underwriter-header d-flex justify-content-between align-items-center" style="background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);">
+      <h5 class="mb-0">Underwriters</h5>
+      <input
+        type="text"
+        class="form-control form-control-sm underwriter-search w-25"
+        placeholder="Search..."
+        [(ngModel)]="searchText" />
+    </div>
 
-    <tbody>
-        <tr *ngFor="let underwriter of underwriters">
-            <td>{{underwriter.id}}</td>
-            <td>{{underwriter.username}}</td>
-        </tr>
-    </tbody>
-</table>
-
+    <!-- Table -->
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle underwriter-table">
+          <thead>
+            <tr>
+              <th>Underwriter ID </th>
+              <th>Username ></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let underwriter of filteredUnderwriters()">
+              <td>{{ underwriter.id }}</td>
+              <td>{{ underwriter.username }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

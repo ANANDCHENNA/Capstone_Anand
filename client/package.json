@@ -20,7 +20,7 @@
     "@ngrx/effects": "^14.2.0",
     "@ngrx/store": "^14.2.0",
     "@ngrx/store-devtools": "^14.2.0",
-    "bootstrap": "^5.2.3",
+    "bootstrap": "^5.3.8",
     "jquery": "^3.7.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

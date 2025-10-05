@@ -1,10 +1,11 @@
-import { Claim } from '../model/Claim';
-import { IfStmt, ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { Claim } from '../model/Claim';
+import { Investigation } from '../model/Investigation';
 import { AuthService } from '../../services/auth.service';
 import { HttpService } from '../../services/http.service';
-import { Investigation } from '../model/Investigation';
+declare var bootstrap: any; // Bootstrap Toast API
+
 @Component({
   selector: 'app-dashbaord',
   templateUrl: './dashbaord.component.html',
@@ -12,84 +13,214 @@ import { Investigation } from '../model/Investigation';
 })
 export class DashbaordComponent implements OnInit {
 
-  role: string | null = ''
+  role: string | null = '';
 
-  claimList: Claim[] = []
-  filteredClaimList: Claim[] = []   //Role = Adjuster 
+  // Search + Sort
+  searchText: string = '';
+  sortKey: string = '';
+  sortOrder: 'asc' | 'desc' = 'asc';
+  snackbarMessage: string = '';
 
-  underWriterId: string | null = ''
-  claimByUnderwriter: Claim[] = []
-  filteredClaimsByUnderwriter: Claim[] = []  //Role = Underwriter
+  // Adjuster
+  claimList: Claim[] = [];
 
+  // Underwriter
+  underWriterId: string | null = '';
+  claimByUnderwriter: Claim[] = [];
 
-  investigations: Investigation[] = [] //Role = Investigator
+  // Investigator
+  investigations: Investigation[] = [];
 
-  policyholderId: string | null = ''
-  claimByPolicyholder: Claim[] = [] //Role = Policyholder
-
-  underWriter: string = 'Assign Underwriter';
+  // Policyholder
+  policyholderId: string | null = '';
+  claimByPolicyholder: Claim[] = [];
 
   constructor(
     private httpService: HttpService,
     private authService: AuthService,
     private router: Router
   ) {
-
     this.role = this.authService.getRole;
-
   }
+
   ngOnInit(): void {
-
-    this.underWriterId = this.authService.getUserId()
-    this.policyholderId = this.authService.getUserId()
-
+    this.underWriterId = this.authService.getUserId();
+    this.policyholderId = this.authService.getUserId();
 
     if (this.role === 'ADJUSTER') {
-      this.httpService.getAllClaims().subscribe((data) => {
-        this.claimList = data
-        this.filteredClaimList = this.claimList.filter((claim) =>
-          claim.status !== 'Approved By Underwriter')
-      })
+      this.httpService.getAllClaims().subscribe(data => this.claimList = data);
     }
-
 
     if (this.role === 'UNDERWRITER') {
-      this.httpService.getClaimsByUnderwriter(this.underWriterId).subscribe((data) => {
-        this.claimByUnderwriter = data
-        this.filteredClaimsByUnderwriter = this.claimByUnderwriter.filter((claim) =>
-          claim.status !== 'Approved By Underwriter' && claim.status !== 'Rejected By Underwriter')
-      })
-
+      this.httpService.getClaimsByUnderwriter(this.underWriterId).subscribe(data => this.claimByUnderwriter = data);
     }
 
-
     if (this.role === 'INVESTIGATOR') {
-      this.httpService.getInvestigations().subscribe((data) => {
-        this.investigations = data
-      })
+      this.httpService.getInvestigations().subscribe(data => this.investigations = data);
     }
 
     if (this.role === 'POLICYHOLDER') {
-      this.httpService.getClaimsByPolicyholder(this.policyholderId).subscribe((data) => {
-        this.claimByPolicyholder = data
-      })
+      this.httpService.getClaimsByPolicyholder(this.policyholderId).subscribe(data => this.claimByPolicyholder = data);
     }
   }
 
-  onAdjusterAssignClaim(id: number): Boolean {
-    this.router.navigate([`/assign-claim/${id}`])
-    return true;
+  // ---------------- Toast / Snackbar ----------------
+  showSnackbar(message: string, type: 'success' | 'info' | 'danger' = 'success') {
+    const toastEl = document.getElementById('snackbarToast');
+    if (toastEl) {
+      toastEl.innerText = message;
+      toastEl.classList.remove('text-bg-success', 'text-bg-info', 'text-bg-danger');
+      toastEl.classList.add(`text-bg-${type}`);
+      const toast = new bootstrap.Toast(toastEl);
+      toast.show();
+    }
   }
-onUpdateClaimAdjuster(id:number)
-{
-  this.router.navigate([`/update-claim/${id}`])
-}
+
+  // ---------------- Actions ----------------
+  onAdjusterAssignClaim(id: number) {
+    this.router.navigate([`/assign-claim/${id}`]);
+    this.showSnackbar(`Claim #${id} assigned successfully!`, 'success');
+  }
+
+  onUpdateClaimAdjuster(id: number) {
+    this.router.navigate([`/update-claim/${id}`]);
+    this.showSnackbar(`Claim #${id} updated!`, 'info');
+  }
+
   onUnderwriterUpdateClaim(id: number) {
-    this.router.navigate([`/update-claim-underwriter/${id}`])
+    this.router.navigate([`/update-claim-underwriter/${id}`]);
+    this.showSnackbar(`Underwriter updated claim #${id}`, 'info');
   }
 
   onInvestigatorUpdateInvestigation(id: number) {
-    this.router.navigate([`/update-claim-investigation/${id}`])
+    this.router.navigate([`/update-claim-investigation/${id}`]);
+    this.showSnackbar(`Investigation #${id} updated!`, 'info');
   }
 
+  // ---------------- Filter + Sort ----------------
+  filteredAdjusterClaims(): Claim[] {
+    let result = [...this.claimList];
+
+    // Search
+    if (this.searchText) {
+      result = result.filter(claim =>
+        claim.id.toString().includes(this.searchText) ||
+        claim.description.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        claim.status.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    }
+
+    // Sort
+    if (this.sortKey) {
+      result.sort((a, b) => {
+        let valA: any = a[this.sortKey as keyof Claim];
+        let valB: any = b[this.sortKey as keyof Claim];
+
+        if (typeof valA === 'string') valA = valA.toLowerCase();
+        if (typeof valB === 'string') valB = valB.toLowerCase();
+
+        if (valA < valB) return this.sortOrder === 'asc' ? -1 : 1;
+        if (valA > valB) return this.sortOrder === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+
+    return result;
+  }
+
+  filteredUnderwriterClaims(): Claim[] {
+    let result = [...this.claimByUnderwriter];
+
+    if (this.searchText) {
+      result = result.filter(claim =>
+        claim.id.toString().includes(this.searchText) ||
+        claim.description.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        claim.status.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    }
+
+    if (this.sortKey) {
+      result.sort((a, b) => {
+        let valA: any = a[this.sortKey as keyof Claim];
+        let valB: any = b[this.sortKey as keyof Claim];
+
+        if (typeof valA === 'string') valA = valA.toLowerCase();
+        if (typeof valB === 'string') valB = valB.toLowerCase();
+
+        if (valA < valB) return this.sortOrder === 'asc' ? -1 : 1;
+        if (valA > valB) return this.sortOrder === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+
+    return result;
+  }
+
+  filteredInvestigatorRecords(): Investigation[] {
+    let result = [...this.investigations];
+
+    if (this.searchText) {
+      result = result.filter(inv =>
+        inv.id.toString().includes(this.searchText) ||
+        inv.report.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        inv.status.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    }
+
+    if (this.sortKey) {
+      result.sort((a, b) => {
+        let valA: any = (a as any)[this.sortKey];
+        let valB: any = (b as any)[this.sortKey];
+
+        if (typeof valA === 'string') valA = valA.toLowerCase();
+        if (typeof valB === 'string') valB = valB.toLowerCase();
+
+        if (valA < valB) return this.sortOrder === 'asc' ? -1 : 1;
+        if (valA > valB) return this.sortOrder === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+
+    return result;
+  }
+
+  filteredPolicyholderClaims(): Claim[] {
+    let result = [...this.claimByPolicyholder];
+
+    if (this.searchText) {
+      result = result.filter(claim =>
+        claim.id.toString().includes(this.searchText) ||
+        claim.description.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        claim.status.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    }
+
+    if (this.sortKey) {
+      result.sort((a, b) => {
+        let valA: any = a[this.sortKey as keyof Claim];
+        let valB: any = b[this.sortKey as keyof Claim];
+
+        if (typeof valA === 'string') valA = valA.toLowerCase();
+        if (typeof valB === 'string') valB = valB.toLowerCase();
+
+        if (valA < valB) return this.sortOrder === 'asc' ? -1 : 1;
+        if (valA > valB) return this.sortOrder === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+
+    return result;
+  }
+
+  // ---------------- Status Colour ----------------
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'Started': return 'bg-primary';
+      case 'In Progress': return 'bg-info';
+      case 'Completed': return 'bg-success';
+      case 'Rejected': return 'bg-danger';
+      default: return 'bg-secondary';
+    }
+  }
 }
+

@@ -35,7 +35,9 @@ export class UpdateClaimComponent implements OnInit {
     this.httpService.GetAllUnderwriter().subscribe((data) => {
       this.underwriters = data
     })
+    
     this.claimId = this.route?.snapshot?.params?.['id'] ?? null;
+
     this.httpService.getClaimById?.(this.claimId).subscribe((data) => {
       if (data.date) {
         const formattedDate = new Date(data.date).toISOString().split('T')[0]; // "YYYY-MM-DD"

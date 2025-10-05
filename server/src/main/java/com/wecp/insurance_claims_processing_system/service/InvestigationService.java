@@ -23,9 +23,11 @@ public class InvestigationService {
 
     public Investigation createInvestigation(Investigation investigation) {
         if (investigation.getClaim() != null) {
-            Optional<Claim> claimOptional = claimRepository.findById(investigation.getClaim().getId());
-            if (claimOptional.isPresent()) {
-                investigation.setClaim(claimOptional.get());
+            Claim claim = claimRepository.findById(investigation.getClaim().getId()).get();
+            if (claim != null) {
+                investigation.setClaim(claim);
+                claim.setInvestigation(investigation);
+                claimRepository.save(claim);
             }
         }
         return investigationRepository.save(investigation);

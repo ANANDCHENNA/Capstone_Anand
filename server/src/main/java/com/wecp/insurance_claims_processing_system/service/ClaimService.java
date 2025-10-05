@@ -9,7 +9,6 @@ import com.wecp.insurance_claims_processing_system.repository.UnderwriterReposit
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.Console;
 import java.util.List;
 
 @Service
