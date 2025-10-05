@@ -1,21 +1,134 @@
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
- 
-  th,
-  td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-  }
- 
-  th {
-    background-color: #4B0082;
-    color: white;
-  }
+/* Background consistent with other pages */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  font-family: 'Inter', sans-serif;
+}
 
-  tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(135deg, rgba(15,23,42,0.65), rgba(37,99,235,0.35)),
+    url('/assets/background.jpg') center/cover no-repeat;
+}
+
+/* 65% centered stage with outer padding (same as auth pages) */
+.uw-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 65vw;
+  margin: 0 auto;
+  padding: 15vh 5vw;      /* top/right/bottom/left */
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Soft glass halo around the stage */
+.uw-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -24px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px) saturate(110%);
+  -webkit-backdrop-filter: blur(10px) saturate(110%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Glass card */
+.uw-card {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  background: rgba(247,250,255,0.18);
+  border: 1px solid rgba(230,238,252,0.45);
+  border-radius: 16px;
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  box-shadow:
+    0 16px 40px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.35);
+  padding: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 22px 60px rgba(0,0,0,0.26),
+      inset 0 1px 0 rgba(255,255,255,0.35);
   }
+}
+
+.title {
+  margin: 0 0 16px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: center;
+}
+
+/* Table styling aligned with theme */
+.uw-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(229,231,235,0.75);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(15,23,42,0.06);
+}
+
+.uw-table thead th {
+  background: rgba(238,244,255,0.85);
+  color: #0f172a;
+  font-weight: 700;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(229,231,235,0.75);
+}
+
+.uw-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(241,245,249,0.85);
+  color: #0f172a;
+}
+
+.uw-table tbody tr:last-child td { border-bottom: none; }
+.uw-table tbody tr:hover { background: rgba(248,251,255,0.85); }
+
+/* Empty state */
+.empty {
+  margin-top: 16px;
+  text-align: center;
+  color: #334155;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(229,231,235,0.6);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+/* Fallback if blur unsupported */
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+  .uw-card { background: rgba(255,255,255,0.96); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .uw-wrapper { width: 80vw; padding: 12vh 4vw; }
+  .uw-card { max-width: 1000px; }
+}
+
+@media (max-width: 992px) {
+  .uw-wrapper { width: 94vw; padding: 10vh 3vw; }
+  .uw-card { padding: 20px; }
+  .uw-table { display: block; overflow-x: auto; white-space: nowrap; }
+}

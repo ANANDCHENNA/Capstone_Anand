@@ -1,58 +1,81 @@
- .dashboard-container {
-   max-width: 1200px;
-   margin: 0 auto;
-   padding: 20px;
-   background-color: #f4f4f9;
-   border-radius: 10px;
-   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
- }
+/* Global page background (same as auth pages) */
+html, body {
+  height: 100%; margin: 0; padding: 0; width: 100vw; overflow-x: hidden;
+  font-family: 'Inter', sans-serif; position: relative;
+}
+html::before {
+  content: ""; position: fixed; inset: 0; z-index: -1;
+  background:
+    linear-gradient(135deg, rgba(15,23,42,0.65), rgba(37,99,235,0.35)),
+    url('/assets/background.jpg') center/cover no-repeat;
+}
 
- .dashboard-header {
-   text-align: center;
-   margin-bottom: 20px;
- }
+/* Centered dashboard container with glass effect */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 24px 20px;
+  min-height: calc(100vh - 96px);
 
- h1 {
-   font-size: 2em;
-   color: #333;
- }
+  background: rgba(247,250,255,0.14);
+  border: 1px solid rgba(230,238,252,0.35);
+  border-radius: 18px;
+  backdrop-filter: blur(18px) saturate(115%);
+  -webkit-backdrop-filter: blur(18px) saturate(115%);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+}
 
- table {
-   width: 100%;
-   border-collapse: collapse;
-   margin-bottom: 20px;
- }
+.dashboard-header {
+  margin-bottom: 20px; text-align: center;
+  h1 { margin: 0; font-size: 2rem; font-weight: 700; color: #0f172a; }
+}
 
- th,
- td {
-   padding: 10px;
-   text-align: center;
-   border-bottom: 1px solid #ddd;
- }
+/* Inner cards (for each role block) */
+.dashboard-card {
+  background: rgba(247,250,255,0.18);
+  border: 1px solid rgba(230,238,252,0.45);
+  border-radius: 16px;
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.35);
+  padding: 20px;
+  margin-bottom: 20px;
+}
 
- th {
-   background-color: #4B0082;
-   color: white;
- }
+/* Table visuals */
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(229,231,235,0.75);
+  border-radius: 12px; overflow: hidden;
+  box-shadow: 0 2px 10px rgba(15,23,42,0.06);
+}
 
- tbody tr:nth-child(even) {
-   background-color: #f9f9f9;
- }
+thead th {
+  background: rgba(238,244,255,0.85);
+  color: #0f172a; font-weight: 700; text-align: left;
+  padding: 12px 14px; border-bottom: 1px solid rgba(229,231,235,0.75);
+}
+tbody td {
+  padding: 12px 14px; border-bottom: 1px solid rgba(241,245,249,0.85); color: #0f172a;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: rgba(248,251,255,0.85); }
 
- button {
-   padding: 8px 12px;
-   background-color: #9370DB;
-   border: none;
-   border-radius: 5px;
-   color: white;
-   cursor: pointer;
- }
+/* Buttons */
+button {
+  border-radius: 10px; padding: 10px 14px; font-weight: 600;
+  border: 1px solid #2563eb; background: #2563eb; color: #fff;
+  cursor: pointer; transition: filter 0.2s ease;
+  &:hover { filter: brightness(1.05); }
+}
 
- button:hover {
-   background-color: #9370DB;
- }
-
- button:disabled {
-   background-color: #ccc;
-   cursor: not-allowed;
- }
+/* Responsive */
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+  .dashboard-container { background: rgba(255,255,255,0.94); }
+  .dashboard-card { background: rgba(255,255,255,0.96); }
+}
+@media (max-width: 992px) {
+  .dashboard-container { padding: 16px; margin: 16px auto; }
+  table { display: block; overflow-x: auto; white-space: nowrap; }
+}

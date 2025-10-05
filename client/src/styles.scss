@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+/* Bootstrap core */
+@import "~bootstrap/scss/bootstrap";
+/* Bootstrap Icons */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+/* Keep global minimal to avoid overriding component pages */
+body {
+  font-family: 'Inter', 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  margin: 0;
+  /* Do NOT set a global background here to avoid conflicts with page-specific backdrops */
+}

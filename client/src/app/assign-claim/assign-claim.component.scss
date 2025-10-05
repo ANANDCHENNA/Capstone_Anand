@@ -1,80 +1,141 @@
+/* Background consistent with other pages */
 html, body {
   height: 100%;
-  width: 100%;
   margin: 0;
-  background-color: #E6E6FA; /* Lavender color */
-  font-family: Arial, sans-serif;
+  padding: 0;
+  width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  font-family: 'Inter', sans-serif;
 }
 
-body {
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(135deg, rgba(15,23,42,0.65), rgba(37,99,235,0.35)),
+    url('/assets/background.jpg') center/cover no-repeat;
+}
+
+/* 65% centered stage with outer padding */
+.assign-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #E6E6FA; 
+  min-height: 100vh;
+  width: 65vw;
+  margin: 0 auto;
+  padding: 15vh 5vw;   /* top/right/bottom/left */
+  box-sizing: border-box;
+  position: relative;
 }
 
-.container {
-  max-width: 800px;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.5); 
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+/* Soft glass halo around the stage */
+.assign-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -24px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px) saturate(110%);
+  -webkit-backdrop-filter: blur(10px) saturate(110%);
+  z-index: -1;
+  pointer-events: none;
 }
 
-h2 {
+/* Glassmorphism form card */
+.assign-card {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  background: rgba(247,250,255,0.18);
+  border: 1px solid rgba(230,238,252,0.45);
+  border-radius: 16px;
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  box-shadow:
+    0 16px 40px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.35);
+  padding: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 22px 60px rgba(0,0,0,0.26),
+      inset 0 1px 0 rgba(255,255,255,0.35);
+  }
+}
+
+.title {
+  margin: 0 0 16px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
   text-align: center;
-  color: #4B0082; 
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
+/* Form groups */
+.form-group { margin-bottom: 16px; }
 
+label { display: block; margin-bottom: 6px; font-weight: 600; color: #0f172a; }
+
+/* Inputs and selects */
 .form-control {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
+  border: 1.5px solid #e5e7eb;
+  padding: 12px 14px;
+  background: #ffffff;
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+
+  &:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37,99,235,0.18);
+    outline: none;
+  }
 }
 
+/* Error message consistent with theme */
 .error-message {
-  color: red;
-  font-size: 0.9em;
+  color: #d93025;
+  background: #fde8e7;
+  border: 1px solid rgba(217,48,37,0.25);
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin-top: 6px;
+  text-align: center;
+  font-size: 0.95rem;
 }
 
-.submit-button, button[type="button"] {
+/* Submit button */
+.submit-button {
   width: 100%;
-  padding: 10px;
-  background-color: #4B0082; 
-  color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 12px 14px;
+  font-weight: 700;
+  border-radius: 10px;
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #fff;
   cursor: pointer;
-  margin-top: 10px;
-  position: relative;
-  overflow: hidden;
+  transition: filter 0.2s ease;
+
+  &:hover { filter: brightness(1.05); }
+  &:disabled { background: #b8c7f0; border-color: #b8c7f0; cursor: not-allowed; }
 }
 
-.submit-button:disabled {
-  background-color: #ccc;
+/* Fallback if blur unsupported */
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+  .assign-card { background: rgba(255,255,255,0.96); }
 }
 
-button[type="button"] {
-  background-color: #9370DB; 
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .assign-wrapper { width: 80vw; padding: 12vh 4vw; }
+  .assign-card { max-width: 840px; }
 }
 
-.submit-button::before, button[type="button"]::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-  transition: 0.5s
-}
-
-.submit-button:hover::before, button[type="button"]:hover::before {
-  left: 100%;
+@media (max-width: 992px) {
+  .assign-wrapper { width: 94vw; padding: 10vh 3vw; }
+  .assign-card { padding: 20px; }
 }

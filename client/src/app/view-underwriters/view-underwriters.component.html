@@ -1,16 +1,27 @@
-<table>
-    <thead>
-        <tr>
+<div class="uw-stage">
+  <div class="uw-wrapper">
+    <div class="uw-card">
+      <h2 class="title">Underwriters</h2>
+
+      <table class="uw-table">
+        <thead>
+          <tr>
             <th>Underwriter ID</th>
             <th>Username</th>
-        </tr>
-    </thead>
+          </tr>
+        </thead>
 
-    <tbody>
-        <tr *ngFor="let underwriter of underwriters">
-            <td>{{underwriter.id}}</td>
-            <td>{{underwriter.username}}</td>
-        </tr>
-    </tbody>
-</table>
+        <tbody>
+          <tr *ngFor="let underwriter of underwriters">
+            <td>{{ underwriter.id }}</td>
+            <td>{{ underwriter.username }}</td>
+          </tr>
+        </tbody>
+      </table>
 
+      <div class="empty" *ngIf="!underwriters?.length">
+        No underwriters found.
+      </div>
+    </div>
+  </div>
+</div>

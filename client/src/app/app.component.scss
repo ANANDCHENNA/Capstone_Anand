@@ -1,54 +1,108 @@
-/* Navbar container */
-.navbar {
-  background-color: #4B0082;
-  /* Indigo to match dashboard header */
-  border-radius: 0 0 10px 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+:host {
+  display: block;
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Brand title */
-.navbar-brand {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #ffffff;
+/* Background for the whole app */
+:host::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(135deg, rgba(15,23,42,0.65), rgba(37,99,235,0.35)),
+    url('/assets/background.jpg') center/cover no-repeat;
 }
 
-/* Nav links */
-.navbar-nav .nav-link {
-  color: #ffffff;
-  margin-right: 15px;
-  transition: color 0.3s ease;
-}
+/* Apple-like compact, floating, rounded navbar */
+:host ::ng-deep .navbar {
+  position: fixed;
+  top: 24px;                 /* increased top gap above navbar */
+  left: 16px;
+  right: 16px;
+  z-index: 1030;
 
-.navbar-nav .nav-link:hover {
-  color: #dcdcdc;
-}
+  height: 52px;              /* compact height */
+  padding: 0 16px;           /* inner horizontal padding */
+  border-radius: 14px;       /* rounded like Apple site headers */
 
-/* Active link styling (optional) */
-.navbar-nav .nav-link.active {
-  font-weight: bold;
-  color: #FFD700;
-  /* Gold highlight */
-}
+  background: rgba(17, 24, 39, 0.72) !important;
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
 
-/* Toggler icon */
-.navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.3);
-}
+  display: flex !important;
+  align-items: center;
 
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
-
-/* Responsive collapse */
-@media (max-width: 991px) {
-  .navbar-nav {
-    background-color: #4B0082;
-    padding: 10px;
-    border-radius: 0 0 10px 10px;
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
   }
 
-  .navbar-nav .nav-link {
-    margin: 5px 0;
+  .logo-img { width: 110px; height: auto; display: block; }
+
+  .nav-link {
+    font-weight: 600;
+    padding: 8px 10px !important; /* tighter hit area */
+    border-radius: 8px;
+
+    &:hover { color: #dbeafe; background: rgba(255,255,255,0.06); }
+  }
+
+  .navbar-toggler {
+    border-color: rgba(255,255,255,0.28);
+    padding: 6px 8px;
+
+    .navbar-toggler-icon { filter: invert(1) brightness(1.2); }
+  }
+}
+
+/* Ensure content never hides beneath the floating header */
+.app-shell {
+  display: grid;
+  place-items: start center;
+  padding: 24px;
+  /* navbar height (52) + top gap (24) + extra breathing space (8) */
+  padding-top: calc(52px + 24px + 8px);
+}
+
+.app-container {
+  width: min(1200px, 92vw);
+}
+
+/* Optional: add subtle separators for nav items like Apple’s */
+:host ::ng-deep .navbar .navbar-nav .nav-link + .nav-link {
+  margin-left: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  :host ::ng-deep .navbar {
+    top: 16px;               /* slightly smaller top gap on mobile */
+    left: 10px;
+    right: 10px;
+    height: 50px;
+    padding: 0 12px;
+    border-radius: 12px;
+
+    .logo-img { width: 96px; }
+  }
+
+  .app-shell {
+    padding: 16px;
+    /* navbar height (50) + top gap (16) + extra 8 */
+    padding-top: calc(50px + 16px + 8px);
+  }
+
+  .app-container {
+    width: min(100%, 96vw);
   }
 }

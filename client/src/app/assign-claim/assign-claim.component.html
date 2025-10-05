@@ -1,32 +1,48 @@
-<div class="container">
-  <h2>Assign Claim to Underwriter</h2>
+<div class="assign-stage">
+  <div class="assign-wrapper">
+    <div class="assign-card">
+      <h2 class="title">Assign Claim to Underwriter</h2>
 
-  <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="description">Description</label>
-      <textarea id="description" formControlName="description" class="form-control" rows="2"
-        placeholder="Enter claim description"></textarea>
-    </div>
-    <div class="form-group">
-      <label for="status">Status</label>
-      <input id="status" formControlName="status" value="Started" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="underwriterId">Select Underwriter</label>
-      <select id="underwriterId" formControlName="underwriterId" class="form-control">
-        <option value="">Select an underwriter</option>
-        <option *ngFor="let underwriter of underwriters" [value]="underwriter.id">
-          {{underwriter.username}}
-        </option>
-      </select>
-      <div *ngIf="itemForm.get('underwriterId')?.touched && itemForm.get('underwriterId')?.invalid"
-        class="error-message">
-        Please select an underwriter
-      </div>
-    </div>
+      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+        <!-- Description -->
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            formControlName="description"
+            class="form-control"
+            rows="2"
+            placeholder="Enter claim description"></textarea>
+        </div>
 
-    <button type="submit" [disabled]="itemForm.invalid" class="submit-button">
-      Assign Claim
-    </button>
-  </form>
+        <!-- Status -->
+        <div class="form-group">
+          <label for="status">Status</label>
+          <input id="status" formControlName="status" value="Started" class="form-control" />
+        </div>
+
+        <!-- Underwriter -->
+        <div class="form-group">
+          <label for="underwriterId">Select Underwriter</label>
+          <select id="underwriterId" formControlName="underwriterId" class="form-control">
+            <option value="">Select an underwriter</option>
+            <option *ngFor="let underwriter of underwriters" [value]="underwriter.id">
+              {{ underwriter.username }}
+            </option>
+          </select>
+
+          <div
+            *ngIf="itemForm.get('underwriterId')?.touched && itemForm.get('underwriterId')?.invalid"
+            class="error-message">
+            Please select an underwriter
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" [disabled]="itemForm.invalid" class="submit-button">
+          Assign Claim
+        </button>
+      </form>
+    </div>
+  </div>
 </div>

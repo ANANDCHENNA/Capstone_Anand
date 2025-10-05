@@ -1,66 +1,115 @@
-<div class="container">
-  <h2>Registration</h2>
-
-  <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="email">Email<span class="required">*</span></label>
-      <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email" />
-      <div *ngIf="itemForm.get('email')?.touched && itemForm.get('email')?.invalid" class="error-message">
-        <div *ngIf="itemForm.get('email')?.errors?.['required']">Email is required</div>
-        <div *ngIf="itemForm.get('email')?.errors?.['email']">Please enter a valid email</div>
-      </div>
+<div class="login-wrapper d-flex">
+  <!-- Left section -->
+  <div class="login-left d-flex flex-column justify-content-center align-items-start p-5 text-white">
+    <div class="mb-4">
+      <img src="assets/logo.png" alt="App Logo" class="logo-img" />
     </div>
-
-    <div class="form-group">
-      <label for="username">Username<span class="required">*</span></label>
-      <input type="text" id="username" formControlName="username" class="form-control"
-        placeholder="Enter your username" />
-      <div *ngIf="itemForm.get('username')?.touched && itemForm.get('username')?.invalid" class="error-message">
-        Username is required
-      </div>
+    <h1 class="fw-bold">Create Account</h1>
+    <p class="lead">Register to manage insurance claims, roles, and secure access seamlessly.</p>
+    <div class="social-icons mt-auto">
+      <span>FOLLOW</span>
+      <a href="#"><i class="bi bi-facebook"></i></a>
+      <a href="#"><i class="bi bi-twitter"></i></a>
+      <a href="#"><i class="bi bi-instagram"></i></a>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="password">Password<span class="required">*</span></label>
-      <input type="password" id="password" formControlName="password" class="form-control"
-        placeholder="Enter your password" />
-      <div *ngIf="itemForm.get('password')?.touched && itemForm.get('password')?.invalid" class="error-message">
-        <div *ngIf="itemForm.get('password')?.hasError('required')" class="error-message">
-          Password should be of minimum 8 characters
+  <!-- Right section -->
+  <div class="login-right d-flex justify-content-center align-items-center">
+    <div class="login-box p-5 shadow-sm">
+      <h3 class="text-center mb-4 fw-semibold">Registration</h3>
+
+      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+        <!-- Email -->
+        <div class="form-group mb-3">
+          <label for="email" class="form-label">
+            <i class="bi bi-envelope"></i> Email <span class="required">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="form-control form-control-lg"
+            placeholder="Enter your email"
+          />
+          <div *ngIf="itemForm.get('email')?.touched && itemForm.get('email')?.invalid" class="error-message">
+            <div *ngIf="itemForm.get('email')?.errors?.['required']">Email is required</div>
+            <div *ngIf="itemForm.get('email')?.errors?.['email']">Please enter a valid email</div>
+          </div>
         </div>
-        <div *ngIf="itemForm.get('password')?.hasError('pattern')" class="error-message">
-          Password Should be alphanumeric
+
+        <!-- Username -->
+        <div class="form-group mb-3">
+          <label for="username" class="form-label">
+            <i class="bi bi-person"></i> Username <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            class="form-control form-control-lg"
+            placeholder="Enter your username"
+          />
+          <div *ngIf="itemForm.get('username')?.touched && itemForm.get('username')?.invalid" class="error-message">
+            Username is required
+          </div>
         </div>
-      </div>
 
+        <!-- Password -->
+        <div class="form-group mb-3">
+          <label for="password" class="form-label">
+            <i class="bi bi-lock"></i> Password <span class="required">*</span>
+          </label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-control form-control-lg"
+            placeholder="Enter your password"
+          />
+          <div *ngIf="itemForm.get('password')?.touched && itemForm.get('password')?.invalid" class="error-message">
+            <div *ngIf="itemForm.get('password')?.hasError('required')">
+              Password should be of minimum 8 characters
+            </div>
+            <div *ngIf="itemForm.get('password')?.hasError('pattern')">
+              Password should be alphanumeric
+            </div>
+          </div>
+        </div>
 
+        <!-- Role -->
+        <div class="form-group mb-3">
+          <label for="role" class="form-label">
+            <i class="bi bi-briefcase"></i> Role <span class="required">*</span>
+          </label>
+          <select id="role" formControlName="role" class="form-control form-control-lg">
+            <option value="">Select a role</option>
+            <option value="POLICYHOLDER">POLICYHOLDER</option>
+            <option value="ADJUSTER">ADJUSTER</option>
+            <option value="UNDERWRITER">UNDERWRITER</option>
+            <option value="INVESTIGATOR">INVESTIGATOR</option>
+          </select>
+          <div *ngIf="itemForm.get('role')?.touched && itemForm.get('role')?.invalid" class="error-message">
+            Please select a role
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" [disabled]="itemForm.invalid" class="btn btn-primary w-100 submit-button">
+          Register
+        </button>
+
+        <!-- Sign in -->
+        <div class="sign mt-3 text-center">
+          <p class="mb-0">
+            Already have an account?
+            <a routerLink="/login"> Login</a>
+          </p>
+        </div>
+
+        <!-- Server error -->
+        <div *ngIf="errorMessage" class="error-message text-center mt-3">{{ errorMessage }}</div>
+      </form>
     </div>
-
-    <div class="form-group">
-      <label for="role">Role<span class="required">*</span></label>
-      <select id="role" formControlName="role" class="form-control">
-        <option value="">Select a role</option>
-        <option value="POLICYHOLDER">POLICYHOLDER</option>
-        <option value="ADJUSTER">ADJUSTER</option>
-        <option value="UNDERWRITER">UNDERWRITER</option>
-        <option value="INVESTIGATOR">INVESTIGATOR</option>
-      </select>
-      <div *ngIf="itemForm.get('role')?.touched && itemForm.get('role')?.invalid" class="error-message">
-        Please select a role
-      </div>
-    </div>
-
-    <button type="submit" [disabled]="itemForm.invalid" class="submit-button">
-      Register
-    </button><br><br>
-
-    <div class="sign">
-      <p>
-        Already have an account
-        <a routerLink="/login"> Login</a>
-      </p>
-    </div>
-
-  </form>
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </div>
 </div>

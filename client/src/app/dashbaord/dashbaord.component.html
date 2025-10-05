@@ -6,8 +6,8 @@
     <h1 *ngIf="role === 'INVESTIGATOR'">WELCOME INVESTIGATOR</h1>
   </header>
 
-
-  <div *ngIf="role === 'ADJUSTER'">
+  <!-- Adjuster View -->
+  <div *ngIf="role === 'ADJUSTER'" class="dashboard-card">
     <table>
       <thead>
         <tr>
@@ -20,12 +20,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let claim of filteredClaimList">
-          <td>{{claim.id}}</td>
-          <td>{{claim.description}}</td>
-          <td>{{claim.date | date : 'dd-MM-yyyy'}}</td>
-          <td>{{claim.status}}</td>
+          <td>{{ claim.id }}</td>
+          <td>{{ claim.description }}</td>
+          <td>{{ claim.date | date : 'dd-MM-yyyy' }}</td>
+          <td>{{ claim.status }}</td>
           <td>
-            <button type="button" (click)="onAdjusterAssignClaim(claim.id)">{{claim.underwriter ? "Assigned Underwriter" : "Assign Underwriter"}}</button>
+            <button type="button" (click)="onAdjusterAssignClaim(claim.id)">
+              {{ claim.underwriter ? "Assigned Underwriter" : "Assign Underwriter" }}
+            </button>
           </td>
           <td>
             <button type="button" (click)="onUpdateClaimAdjuster(claim.id)">Update</button>
@@ -35,7 +37,8 @@
     </table>
   </div>
 
-  <div *ngIf="role === 'UNDERWRITER'">
+  <!-- Underwriter View -->
+  <div *ngIf="role === 'UNDERWRITER'" class="dashboard-card">
     <table>
       <thead>
         <tr>
@@ -48,10 +51,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let claim of filteredClaimsByUnderwriter">
-          <td>{{claim.id}}</td>
-          <td>{{claim.description}}</td>
-          <td>{{claim.date | date: 'dd-MM-yyyy'}}</td>
-          <td>{{claim.status}}</td>
+          <td>{{ claim.id }}</td>
+          <td>{{ claim.description }}</td>
+          <td>{{ claim.date | date : 'dd-MM-yyyy' }}</td>
+          <td>{{ claim.status }}</td>
           <td>
             <button type="button" (click)="onUnderwriterUpdateClaim(claim.id)">Update Claim</button>
           </td>
@@ -60,8 +63,8 @@
     </table>
   </div>
 
-
-  <div *ngIf="role === 'INVESTIGATOR'">
+  <!-- Investigator View -->
+  <div *ngIf="role === 'INVESTIGATOR'" class="dashboard-card">
     <table>
       <thead>
         <tr>
@@ -73,9 +76,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let investigation of investigations">
-          <td>{{investigation.id}}</td>
-          <td>{{investigation.report}}</td>
-          <td>{{investigation.status}}</td>
+          <td>{{ investigation.id }}</td>
+          <td>{{ investigation.report }}</td>
+          <td>{{ investigation.status }}</td>
           <td>
             <button type="button" (click)="onInvestigatorUpdateInvestigation(investigation.id)">Update</button>
           </td>
@@ -84,27 +87,25 @@
     </table>
   </div>
 
-
-  <div *ngIf="role === 'POLICYHOLDER'">
-
-    <div class="container">
-      <table>
-        <thead>
-          <tr>
-            <th>Claim ID</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let claim of claimByPolicyholder">
-            <td>{{claim.id}}</td>
-            <td>{{claim.description}}</td>
-            <td>{{claim.date | date: 'dd-MM-yyyy'}}</td>
-            <td>{{claim.status}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <!-- Policyholder View -->
+  <div *ngIf="role === 'POLICYHOLDER'" class="dashboard-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Claim ID</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let claim of claimByPolicyholder">
+          <td>{{ claim.id }}</td>
+          <td>{{ claim.description }}</td>
+          <td>{{ claim.date | date : 'dd-MM-yyyy' }}</td>
+          <td>{{ claim.status }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
