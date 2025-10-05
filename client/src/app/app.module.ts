@@ -15,6 +15,7 @@ import { UpdateClaimComponent } from './update-claim/update-claim.component';
 import { AssignClaimComponent } from './assign-claim/assign-claim.component';
 import { CreateInvestigatorComponent } from './create-investigator/create-investigator.component';
 import { UpdateInvestigationComponent } from './update-claim-investigation/update-claim-investigation.component';
+import { HomeComponent } from './home/home.component';
 import { ViewUnderwritersComponent } from './view-underwriters/view-underwriters.component';
 import { UpdateClaimUnderwriterComponent } from './update-claim-underwriter/update-claim-underwriter.component';
 
@@ -22,6 +23,7 @@ import { UpdateClaimUnderwriterComponent } from './update-claim-underwriter/upda
   declarations: [
     AppComponent,
     LoginComponent,
+    HomeComponent,
     RegistrationComponent,
     DashbaordComponent,
     CreateClaimComponent,
