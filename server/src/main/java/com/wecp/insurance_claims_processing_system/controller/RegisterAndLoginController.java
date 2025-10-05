@@ -59,7 +59,6 @@ public class RegisterAndLoginController {
             Long userId = foundUser.getId();
             String username=foundUser.getUsername();
             String email=foundUser.getEmail();
-            System.out.println("User Roles: " + role);
             return ResponseEntity.ok(new LoginResponse(userId, token, username, email, role));
         }
     
