@@ -23,6 +23,9 @@
 
     <!-- Right side: Logout -->
     <ul class="navbar-nav">
+      <li *ngIf="!IsLoggin" class="nav-item">
+        <a class="nav-link" [routerLink]="['/login']">Login</a>
+      </li>
       <li *ngIf="IsLoggin" class="nav-item">
         <a class="nav-link logout-btn" (click)="logout()" [routerLink]="['/login']">Logout</a>
       </li>
