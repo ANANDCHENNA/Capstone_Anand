@@ -35,9 +35,9 @@
 
     <!-- Login/Logout buttons -->
     <ul class="navbar-nav">
-      <!-- <li *ngIf="!IsLoggin" class="nav-item">
+      <li *ngIf="!IsLoggin" class="nav-item">
         <a class="nav-link" [routerLink]="['/login']">Login</a>
-      </li> -->
+      </li>
       <li *ngIf="IsLoggin" class="nav-item">
         <a class="nav-link" (click)="logout()" [routerLink]="['/login']">Logout</a>
       </li>

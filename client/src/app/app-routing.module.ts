@@ -12,10 +12,12 @@ import { UpdateClaimComponent } from './update-claim/update-claim.component';
 import { AssignClaimComponent } from './assign-claim/assign-claim.component';
 import { CreateInvestigatorComponent } from './create-investigator/create-investigator.component';
 import { UpdateInvestigationComponent } from './update-claim-investigation/update-claim-investigation.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashbaordComponent },
   { path: 'create-claim', component: CreateClaimComponent },  
   { path: 'update-claim/:id', component: UpdateClaimComponent },  
