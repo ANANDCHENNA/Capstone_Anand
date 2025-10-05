@@ -16,12 +16,11 @@ export class AppComponent {
     this.roleName = authService.getRole;
     if (this.IsLoggin == false) {
       this.router.navigateByUrl('/login');
-
     }
   }
+
   logout() {
     this.authService.logout();
     window.location.reload();
   }
-
 }

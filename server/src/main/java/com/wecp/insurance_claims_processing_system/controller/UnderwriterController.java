@@ -1,6 +1,5 @@
 package com.wecp.insurance_claims_processing_system.controller;
 
-
 import com.wecp.insurance_claims_processing_system.entity.Claim;
 import com.wecp.insurance_claims_processing_system.service.ClaimService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +24,14 @@ public class UnderwriterController {
     public ResponseEntity<Claim> reviewClaim(@PathVariable Long id, @RequestParam String status) {
         return new ResponseEntity<>(claimService.reviewClaim(id, status), HttpStatus.CREATED);
     }
+
     @PutMapping("/api/underwriter/claim/{id}")
     public ResponseEntity<Claim> updateClaim(@PathVariable Long id, @RequestBody Claim claimDetails) {
         return new ResponseEntity<Claim>(claimService.updateClaim(id, claimDetails), HttpStatus.CREATED);
     }
 
+    @GetMapping("/api/underwriter/claim/{id}")
+    public ResponseEntity<Claim> getClaim(@PathVariable Long id) {
+        return new ResponseEntity<Claim>(claimService.getClaimById(id), HttpStatus.OK);
+    }
 }

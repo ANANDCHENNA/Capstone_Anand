@@ -29,7 +29,7 @@ export class CreateClaimComponent implements OnInit {
     this.itemForm = this.formBuilder.group({
       description: ["", Validators.required],
       date: [this.currentDate, Validators.required],
-      status: [{value: "Started", disabled: true}, Validators.required]
+      status: [{ value: "Started", disabled: true }, Validators.required]
     });
   }
 
@@ -39,12 +39,12 @@ export class CreateClaimComponent implements OnInit {
   }
   onSubmit() {
     if (this.itemForm.valid) {
-      this.httpService.createClaims(this.itemForm.value, this.policyholderId).subscribe({
-
+      const payload = this.itemForm.getRawValue();
+      console.log(this.itemForm.value)
+      this.httpService.createClaims(payload, this.policyholderId).subscribe({
         next: () => {
           this.router.navigate(['/dashboard'])
         },
-
         error: (error) => {
           console.error('Error creating claim:', error);
         }

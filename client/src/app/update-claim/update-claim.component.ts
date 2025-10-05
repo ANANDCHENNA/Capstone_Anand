@@ -63,7 +63,6 @@ export class UpdateClaimComponent implements OnInit {
           }
         });
       } else if (this.userRole == 'ADJUSTER') {
-        console.log(this.itemForm)
         this.httpService.updateClaims(this.itemForm.value, this.claimId).subscribe({
           next: () => {
             this.router.navigate(['/dashboard']);

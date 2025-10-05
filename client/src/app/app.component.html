@@ -11,13 +11,16 @@
         <a class="nav-link" *ngIf="roleName === 'POLICYHOLDER'" [routerLink]="['/create-claim']">Create Claim</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'ADJUSTER'" [routerLink]="['/dashboard']">Get Claims</a>
+        <a class="nav-link" *ngIf="roleName === 'ADJUSTER'" [routerLink]="['/dashboard']">View Claims</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'ADJUSTER'" [routerLink]="['/view-underwriters']">View Underwriters</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'INVESTIGATOR'" [routerLink]="['/create-investigator']">Create Investigation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="roleName === 'UNDERWRITER'" [routerLink]="['/dashboard']">View Claims</a>
       </li>
     </ul>
 
