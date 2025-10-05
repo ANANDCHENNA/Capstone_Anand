@@ -1,0 +1,23 @@
+<div class="buy-policy-container">
+  <h2>Buy a Policy</h2>
+
+  <form [formGroup]="buyForm"  (ngSubmit)="buyPolicy()">
+    <div class="form-group">
+      <label for="policySelect">Select Policy:</label>
+      <select id="policySelect" formControlName="policy_id" class="form-control">
+        <option value="">-- Select Policy --</option>
+        <option *ngFor="let policy of policies" [value]="policy.id">
+          {{ policy.name }} - {{ policy.coverage }} - {{ policy.tenure }} months
+        </option>
+      </select>
+
+      <div *ngIf="buyForm.get('policyId')?.touched && buyForm.get('policyId')?.invalid" class="error-message">
+        Please select a policy
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="buyForm.invalid" class="btn btn-primary">
+      Buy Policy
+    </button>
+  </form>
+</div>

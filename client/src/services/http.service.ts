@@ -29,7 +29,14 @@ export class HttpService {
     return this.http.get(this.serverName + `/api/adjuster/claims`, { headers: headers });
 
   }
-
+// getAllpolicies()
+// {
+//   const authToken = this.authService.getToken();
+//   let headers = new HttpHeaders();
+//   headers = headers.set('Content-Type', 'application/json');
+//   headers = headers.set('Authorization', `Bearer ${authToken}`)
+//   return this.http.get(this.serverName + `/api/policies`, { headers: headers });
+// }
 
   GetAllUnderwriter(): Observable<any> {
 
@@ -149,4 +156,39 @@ export class HttpService {
     headers = headers.set('Content-Type', 'application/json');
     return this.http.post(this.serverName + '/api/user/register', details, { headers: headers });
   }
+
+
+// Fetch all policies
+getAllPolicies(): Observable<any> {
+  const authToken = this.authService.getToken();
+  let headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Authorization', `Bearer ${authToken}`);
+  return this.http.get(this.serverName + `/api/policies`, { headers: headers });
+}
+
+// Fetch policies owned by a specific policyholder
+getPoliciesByOwnedUser(policyholderId: any): Observable<any> {
+  const authToken = this.authService.getToken();
+  let headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Authorization', `Bearer ${authToken}`);
+  return this.http.get(this.serverName + `/api/policies/${policyholderId}`, { headers: headers });
+}
+
+// Purchase a policy for the logged-in policyholder
+purchasePolicy(policyId: any, policyholderId: any): Observable<any> {
+  const authToken = this.authService.getToken();
+  let headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Authorization', `Bearer ${authToken}`);
+  return this.http.post(
+    this.serverName + `/api/policyholder/purchase?policyId=${policyId}&policyholderId=${policyholderId}`,
+    {},
+    { headers: headers }
+  );
+}
+
+
+  
 }

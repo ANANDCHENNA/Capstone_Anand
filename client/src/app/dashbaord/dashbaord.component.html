@@ -14,7 +14,9 @@
           <th>Claim ID</th>
           <th>Description</th>
           <th>Date</th>
-          <th>Domain</th>
+          <th>Policyname</th>
+            <th>Policy Coverage</th>
+          <th>Policy Tenure</th>
           <th>Status</th>
           <th colspan="2">Action</th>
         </tr>
@@ -24,7 +26,9 @@
           <td>{{claim.id}}</td>
           <td>{{claim.description}}</td>
           <td>{{claim.date | date : 'dd-MM-yyyy'}}</td>
-          <td>{{claim.claimType}}</td>
+          <td>{{ claim.selectedPolicy?.name }}</td>
+          <td> {{ claim.selectedPolicy?.coverage }}</td>
+          <td>{{ claim.selectedPolicy?.tenure }}</td>
           <td>{{claim.status}}</td>
           <td>
             <button type="button" (click)="onAdjusterAssignClaim(claim.id)">{{claim.underwriter ? "Assigned Underwriter" : "Assign Underwriter"}}</button>
@@ -44,7 +48,9 @@
           <th>Claim ID</th>
           <th>Description</th>
           <th>Date</th>
-          <th>Domain</th>
+          <th>Policyname</th>
+          <th>Policy Coverage</th>
+        <th>Policy Tenure</th>
           <th>Status</th>
           <th colspan="1">Action</th>
         </tr>
@@ -54,7 +60,9 @@
           <td>{{claim.id}}</td>
           <td>{{claim.description}}</td>
           <td>{{claim.date | date: 'dd-MM-yyyy'}}</td>
-          <td>{{claim.claimType}}</td>
+          <td>{{ claim.selectedPolicy?.name }}</td>
+          <td> {{ claim.selectedPolicy?.coverage }}</td>
+          <td>{{ claim.selectedPolicy?.tenure }}</td>
           <td>{{claim.status}}</td>
           <td>
             <button type="button" (click)="onUnderwriterUpdateClaim(claim.id)">Update Claim</button>
@@ -100,7 +108,9 @@
             <th>Claim ID</th>
             <th>Description</th>
             <th>Date</th>
-            <th>Domain</th>
+            <th>Policyname</th>
+            <th>Policy Coverage</th>
+          <th>Policy Tenure</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -109,7 +119,9 @@
             <td>{{claim.id}}</td>
             <td>{{claim.description}}</td>
             <td>{{claim.date | date: 'dd-MM-yyyy'}}</td>
-            <td>{{claim.claimType}}</td>
+            <td>{{ claim.selectedPolicy?.name }}</td>
+            <td> {{ claim.selectedPolicy?.coverage }}</td>
+            <td>{{ claim.selectedPolicy?.tenure }}</td>
             <td>{{claim.status}}</td>
           </tr>
         </tbody>

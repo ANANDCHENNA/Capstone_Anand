@@ -1,6 +1,5 @@
 package com.wecp.insurance_claims_processing_system.entity;
 
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,8 +15,11 @@ public class Claim {
     private String description;
     private Date date;
     private String status;
-    private String claimType;
-
+    // private String claimType;
+    private Long policy_id;
+    // @ManyToOne
+    // @JoinColumn(name = "policy_id")
+    // private Policy policy;
     @ManyToOne
     @JoinColumn(name = "policyholder_id")
     private Policyholder policyholder;
@@ -33,20 +35,25 @@ public class Claim {
     @OneToOne(mappedBy = "claim")
     @JsonIgnore
     private Investigation investigation;
+
     public Claim() {
     }
 
-    public Claim(Long id, String description, Date date, String status,String claimType, Policyholder policyholder, Adjuster adjuster,
-            Underwriter underwriter, Investigation investigation) {
-        this.id = id;
+    public Claim(Long id, String description, Date date, String status,  Policyholder policyholder,
+            Adjuster adjuster,
+           
+            Underwriter underwriter, Investigation investigation, Long policy_id,Policy policy) {
         this.description = description;
+        this.id = id;
         this.date = date;
         this.status = status;
-        this.claimType=claimType;
+        // this.claimType = claimType;
         this.policyholder = policyholder;
         this.adjuster = adjuster;
         this.underwriter = underwriter;
         this.investigation = investigation;
+        this.policy_id = policy_id;
+        //this.policy=policy;
     }
 
     public Long getId() {
@@ -113,12 +120,28 @@ public class Claim {
         this.investigation = investigation;
     }
 
-    public String getClaimType() {
-        return claimType;
+    // public String getClaimType() {
+    //     return claimType;
+    // }
+
+    // public void setClaimType(String claimType) {
+    //     this.claimType = claimType;
+    // }
+
+    public Long getPolicy_id() {
+        return policy_id;
     }
 
-    public void setClaimType(String claimType) {
-        this.claimType = claimType;
+    public void setPolicy_id(Long policy_id) {
+        this.policy_id = policy_id;
     }
 
+    // public Policy getPolicy() {
+    //     return policy;
+    // }
+
+    // public void setPolicy(Policy policy) {
+    //     this.policy = policy;
+    // }
+    
 }

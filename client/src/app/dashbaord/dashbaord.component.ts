@@ -1,9 +1,9 @@
-import { Claim } from '../model/Claim';
 import { IfStmt, ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { HttpService } from '../../services/http.service';
+import { Claim } from '../model/Claim';
 import { Investigation } from '../model/Investigation';
 @Component({
   selector: 'app-dashbaord',
@@ -43,36 +43,56 @@ export class DashbaordComponent implements OnInit {
     this.underWriterId = this.authService.getUserId()
     this.policyholderId = this.authService.getUserId()
 
+if (this.role === 'ADJUSTER') {
+  this.httpService.getAllPolicies().subscribe((policies: any) => {
+    this.httpService.getAllClaims().subscribe((data: any) => {
+      // Merge policy details into each claim
+      const mergedClaims = data.map((claim: any) => {
+        const selectedPolicy = policies.find((p: any) => p.id == claim.policy_id);
+        return { ...claim, selectedPolicy };
+      });
 
-    if (this.role === 'ADJUSTER') {
-      this.httpService.getAllClaims().subscribe((data) => {
-        this.claimList = data
-        this.filteredClaimList = this.claimList.filter((claim) =>
-          claim.status !== 'Approved By Underwriter')
-      })
-    }
-
+      // Filter only pending claims
+      this.filteredClaimList = mergedClaims.filter((claim: any) =>
+        claim.status !== 'Approved By Underwriter'
+      );
+    });
+  });
+}
 
     if (this.role === 'UNDERWRITER') {
-      this.httpService.getClaimsByUnderwriter(this.underWriterId).subscribe((data) => {
-        this.claimByUnderwriter = data
-        this.filteredClaimsByUnderwriter = this.claimByUnderwriter.filter((claim) =>
-          claim.status !== 'Approved By Underwriter' && claim.status !== 'Rejected By Underwriter')
-      })
-
+      this.httpService.getAllPolicies().subscribe((policies: any) => {
+        this.httpService.getClaimsByUnderwriter(this.underWriterId).subscribe((data: any) => {
+          
+          // Merge related policy info into each claim
+          const mergedClaims = data.map((claim: any) => {
+            const selectedPolicy = policies.find((p: any) => p.id == claim.policy_id);
+            return { ...claim, selectedPolicy };
+          });
+    
+          // Filter out claims already approved or rejected
+          this.filteredClaimsByUnderwriter = mergedClaims.filter((claim: any) =>
+            claim.status !== 'Approved By Underwriter' && claim.status !== 'Rejected By Underwriter'
+          );
+    
+        });
+      });
     }
-
-
     if (this.role === 'INVESTIGATOR') {
       this.httpService.getInvestigations().subscribe((data) => {
         this.investigations = data
+
       })
     }
-
     if (this.role === 'POLICYHOLDER') {
-      this.httpService.getClaimsByPolicyholder(this.policyholderId).subscribe((data) => {
-        this.claimByPolicyholder = data
-      })
+      this.httpService.getAllPolicies().subscribe((policies: any) => {
+        this.httpService.getClaimsByPolicyholder(this.policyholderId).subscribe((claims: Claim[]) => {
+          this.claimByPolicyholder = claims.map(claim => {
+            const selectedPolicy = policies.find((p: any) => p.id == claim.policy_id);
+            return { ...claim, selectedPolicy };
+          });
+        });
+      });
     }
   }
 
@@ -80,10 +100,9 @@ export class DashbaordComponent implements OnInit {
     this.router.navigate([`/assign-claim/${id}`])
     return true;
   }
-onUpdateClaimAdjuster(id:number)
-{
-  this.router.navigate([`/update-claim/${id}`])
-}
+  onUpdateClaimAdjuster(id: number) {
+    this.router.navigate([`/update-claim/${id}`])
+  }
   onUnderwriterUpdateClaim(id: number) {
     this.router.navigate([`/update-claim-underwriter/${id}`])
   }

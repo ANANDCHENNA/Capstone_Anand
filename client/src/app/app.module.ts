@@ -16,11 +16,13 @@ import { AssignClaimComponent } from './assign-claim/assign-claim.component';
 import { CreateInvestigatorComponent } from './create-investigator/create-investigator.component';
 import { UpdateInvestigationComponent } from './update-claim-investigation/update-claim-investigation.component';
 import { ViewUnderwritersComponent } from './view-underwriters/view-underwriters.component';
+import { BuyPolicyComponent } from './buy-policy/buy-policy.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    BuyPolicyComponent,
     RegistrationComponent,
     DashbaordComponent,
     CreateClaimComponent,
