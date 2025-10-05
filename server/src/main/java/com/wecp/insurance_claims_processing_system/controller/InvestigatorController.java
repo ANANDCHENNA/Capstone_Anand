@@ -1,5 +1,8 @@
 package com.wecp.insurance_claims_processing_system.controller;
+import com.wecp.insurance_claims_processing_system.entity.Claim;
 import com.wecp.insurance_claims_processing_system.entity.Investigation;
+import com.wecp.insurance_claims_processing_system.repository.ClaimRepository;
+import com.wecp.insurance_claims_processing_system.service.ClaimService;
 import com.wecp.insurance_claims_processing_system.service.InvestigationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,9 @@ public class InvestigatorController {
 
     @Autowired
     private InvestigationService investigationService;
+
+    @Autowired
+    private ClaimService claimService;
 
     @GetMapping("/investigations/{id}")
     public Investigation getdInvestigationById(@PathVariable Long id) {
@@ -40,7 +46,9 @@ public class InvestigatorController {
     }
 
     
-    
-
-
+    @GetMapping("/claims")
+    public ResponseEntity<List<Claim>> getAllClaims(){
+        List<Claim> claims = claimService.getAllClaims();
+        return ResponseEntity.ok(claims);
+    }
 }

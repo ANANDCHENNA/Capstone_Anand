@@ -1,95 +1,118 @@
-<div class="dashboard-container">
-  <header class="dashboard-header">
-    <h1 *ngIf="role === 'POLICYHOLDER'">WELCOME POLICYHOLDER</h1>
-    <h1 *ngIf="role === 'ADJUSTER'">WELCOME ADJUSTER</h1>
-    <h1 *ngIf="role === 'UNDERWRITER'">WELCOME UNDERWRITER</h1>
-    <h1 *ngIf="role === 'INVESTIGATOR'">WELCOME INVESTIGATOR</h1>
-  </header>
+<div class="container my-4">
 
-
-  <div *ngIf="role === 'ADJUSTER'">
-    <table>
-      <thead>
-        <tr>
-          <th>Claim ID</th>
-          <th>Description</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th colspan="2">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let claim of filteredClaimList">
-          <td>{{claim.id}}</td>
-          <td>{{claim.description}}</td>
-          <td>{{claim.date | date : 'dd-MM-yyyy'}}</td>
-          <td>{{claim.status}}</td>
-          <td>
-            <button type="button" (click)="onAdjusterAssignClaim(claim.id)">{{claim.underwriter ? "Assigned Underwriter" : "Assign Underwriter"}}</button>
-          </td>
-          <td>
-            <button type="button" (click)="onUpdateClaimAdjuster(claim.id)">Update</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Search + Sort Controls -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText" />
+    </div>
+    <div class="col-md-4">
+      <select class="form-select" [(ngModel)]="sortKey">
+        <option value="">Sort By</option>
+        <option value="id">ID</option>
+        <option value="status">Status</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <select class="form-select" [(ngModel)]="sortOrder">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
   </div>
 
-  <div *ngIf="role === 'UNDERWRITER'">
-    <table>
-      <thead>
-        <tr>
-          <th>Claim ID</th>
-          <th>Description</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th colspan="1">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let claim of filteredClaimsByUnderwriter">
-          <td>{{claim.id}}</td>
-          <td>{{claim.description}}</td>
-          <td>{{claim.date | date: 'dd-MM-yyyy'}}</td>
-          <td>{{claim.status}}</td>
-          <td>
-            <button type="button" (click)="onUnderwriterUpdateClaim(claim.id)">Update Claim</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-
-  <div *ngIf="role === 'INVESTIGATOR'">
-    <table>
-      <thead>
-        <tr>
-          <th>Investigation ID</th>
-          <th>Report</th>
-          <th>Status</th>
-          <th colspan="1">Update</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let investigation of investigations">
-          <td>{{investigation.id}}</td>
-          <td>{{investigation.report}}</td>
-          <td>{{investigation.status}}</td>
-          <td>
-            <button type="button" (click)="onInvestigatorUpdateInvestigation(investigation.id)">Update</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-
-  <div *ngIf="role === 'POLICYHOLDER'">
-
-    <div class="container">
-      <table>
+  <!-- ADJUSTER -->
+  <div *ngIf="role === 'ADJUSTER'" class="card shadow-sm mb-4 border-0">
+    <div class="card-header text-white fw-bold" style="background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);">Adjuster Claims</div>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
         <thead>
+          <tr class="table-light">
+            <th>Claim ID</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th colspan="2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let claim of filteredAdjusterClaims()">
+            <td>{{claim.id}}</td>
+            <td>{{claim.description}}</td>
+            <td>{{claim.date | date:'dd-MM-yyyy'}}</td>
+            <td><span class="badge" [ngClass]="getStatusClass(claim.status)">{{claim.status}}</span></td>
+            <td><button class="btn btn-outline-primary btn-sm"
+                (click)="onAdjusterAssignClaim(claim.id)">{{claim.underwriter ? "Assigned" : "Assign
+                Underwriter"}}</button></td>
+            <td><button class="btn btn-info btn-sm text-white" (click)="onUpdateClaimAdjuster(claim.id)">Update</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- UNDERWRITER -->
+  <div *ngIf="role === 'UNDERWRITER'" class="card shadow-sm mb-4 border-0">
+    <div class="card-header text-white fw-bold" style="background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);">Underwriter Claims</div>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Claim ID</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let claim of filteredUnderwriterClaims()">
+            <td>{{claim.id}}</td>
+            <td>{{claim.description}}</td>
+            <td>{{claim.date | date:'dd-MM-yyyy'}}</td>
+            <td><span class="badge" [ngClass]="getStatusClass(claim.status)">{{claim.status}}</span></td>
+            <td><button class="btn btn-info btn-sm text-white" (click)="onUnderwriterUpdateClaim(claim.id)">Update</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- INVESTIGATOR -->
+  <div *ngIf="role === 'INVESTIGATOR'" class="card shadow-sm mb-4 border-0">
+    <div class="card-header text-white fw-bold" style="background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);">Investigator Reports</div>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Investigation ID</th>
+            <th>Claim</th>
+            <th>Report</th>
+            <th>Status</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let investigation of filteredInvestigatorRecords()">
+            <td>{{investigation.id}}</td>
+            <td>{{investigation.claim.description}}</td>
+            <td>{{investigation.report}}</td>
+            <td><span class="badge" [ngClass]="getStatusClass(investigation.status)">{{investigation.status}}</span></td>
+            <td><button class="btn btn-info btn-sm text-white"
+                (click)="onInvestigatorUpdateInvestigation(investigation.id)">Update</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- POLICYHOLDER -->
+  <div *ngIf="role === 'POLICYHOLDER'" class="card shadow-sm mb-4 border-0">
+    <div class="card-header text-white fw-bold" style="background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);">My
+      Claims</div>
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered align-middle">
+        <thead class="table-light">
           <tr>
             <th>Claim ID</th>
             <th>Description</th>
@@ -98,13 +121,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let claim of claimByPolicyholder">
+          <tr *ngFor="let claim of filteredPolicyholderClaims()">
             <td>{{claim.id}}</td>
             <td>{{claim.description}}</td>
-            <td>{{claim.date | date: 'dd-MM-yyyy'}}</td>
-            <td>{{claim.status}}</td>
+            <td>{{claim.date | date:'dd-MM-yyyy'}}</td>
+            <td><span class="badge" [ngClass]="getStatusClass(claim.status)">{{claim.status}}</span></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+
+  <!-- Toast / Snackbar -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="snackbarToast" class="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">{{snackbarMessage}}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+</div>

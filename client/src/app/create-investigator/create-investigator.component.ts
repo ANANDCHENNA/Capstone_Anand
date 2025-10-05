@@ -14,6 +14,8 @@ import { Claim } from '../model/Claim';
 export class CreateInvestigatorComponent implements OnInit {
   itemForm: FormGroup;
   claimList: Claim[] = [];
+  filteredClaimList: Claim[] = [];
+  statusDisable: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,18 +25,29 @@ export class CreateInvestigatorComponent implements OnInit {
   ) {
     this.itemForm = this.formBuilder.group({
       report: ['', Validators.required],
-      status: ['', Validators.required]
+      status: [{value: 'Started', disabled: true}, Validators.required],
+      claimId: ['', Validators.required]
     });
   }
 
   ngOnInit() {
+    this.httpService.getAllClaimsForInvestigation().subscribe((data) => {
+      this.claimList = data;
+    })
   }
 
   onSubmit() {
     if (this.itemForm.valid) {
-      this.httpService.createInvestigation(this.itemForm.value).subscribe({
-        next: () => {
+      const formvalue = this.itemForm.getRawValue();
 
+      const payload = {
+        report : formvalue.report,
+        status: formvalue.status,
+        claim: {id: formvalue.claimId}
+      }
+      
+      this.httpService.createInvestigation(payload).subscribe({
+        next: () => {
           this.router.navigate(['/dashboard']);
         },
         error: (error) => {

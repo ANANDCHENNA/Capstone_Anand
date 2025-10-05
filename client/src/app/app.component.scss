@@ -1,54 +1,39 @@
-/* Navbar container */
-.navbar {
-  background-color: #4B0082;
-  /* Indigo to match dashboard header */
-  border-radius: 0 0 10px 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+/* Gradient Navbar */
+.custom-navbar {
+  background: linear-gradient(90deg, #2b5876, #4e4376); /* Blue-Purple Gradient */
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Brand title */
-.navbar-brand {
+/* Brand styling */
+.custom-navbar .navbar-brand {
+  color: #fff !important;
   font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+/* Links */
+.custom-navbar .nav-link {
+  color: #f8f9fa !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.custom-navbar .nav-link:hover {
+  color: #bdaca5 !important; /* Gold hover */
+  text-shadow: 0px 0px 6px rgba(241, 239, 226, 0.835);
+}
+
+/* Logout button */
+.logout-btn {
   font-weight: bold;
-  color: #ffffff;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  border-radius: 20px;
+  padding: 6px 15px;
+  color: white !important;
+  transition: transform 0.2s ease;
 }
 
-/* Nav links */
-.navbar-nav .nav-link {
-  color: #ffffff;
-  margin-right: 15px;
-  transition: color 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover {
-  color: #dcdcdc;
-}
-
-/* Active link styling (optional) */
-.navbar-nav .nav-link.active {
-  font-weight: bold;
-  color: #FFD700;
-  /* Gold highlight */
-}
-
-/* Toggler icon */
-.navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
-
-/* Responsive collapse */
-@media (max-width: 991px) {
-  .navbar-nav {
-    background-color: #4B0082;
-    padding: 10px;
-    border-radius: 0 0 10px 10px;
-  }
-
-  .navbar-nav .nav-link {
-    margin: 5px 0;
-  }
+.logout-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 3px 8px rgba(255, 64, 43, 0.5);
 }

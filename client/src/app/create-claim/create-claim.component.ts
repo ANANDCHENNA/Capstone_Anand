@@ -29,7 +29,7 @@ export class CreateClaimComponent implements OnInit {
     this.itemForm = this.formBuilder.group({
       description: ["", Validators.required],
       date: [this.currentDate, Validators.required],
-      status: ["Started", Validators.required]
+      status: [{value: "Started", disabled: true}, Validators.required]
     });
   }
 

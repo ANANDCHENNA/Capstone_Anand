@@ -1,13 +1,14 @@
-<nav *ngIf="IsLoggin" class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-  <a class="navbar-brand" href="#">Insurance Claims & Resource Management Platform</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-    aria-expanded="false" aria-label="Toggle navigation">
+<nav *ngIf="IsLoggin" class="navbar navbar-expand-lg navbar-dark custom-navbar px-3 shadow-lg">
+  <a class="navbar-brand fw-bold text-uppercase" href="#">Insurance Claims & Resource Management</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav me-auto">
       <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'POLICYHOLDER'" [routerLink]="['/create-claim']">Create claim</a>
+        <a class="nav-link" *ngIf="roleName === 'POLICYHOLDER'" [routerLink]="['/create-claim']">Create Claim</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'ADJUSTER'" [routerLink]="['/dashboard']">Get Claims</a>
@@ -15,39 +16,23 @@
       <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'ADJUSTER'" [routerLink]="['/view-underwriters']">View Underwriters</a>
       </li>
-
-      <!-- <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'INVESTIGATOR'" [routerLink]="['/create-investigator']">Investigator</a>
-      </li> -->
-
-      <!-- <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'UNDERWRITER'" [routerLink]="['/update-claim-investigator']">Update
-          Claim</a>
-      </li> -->
-
-      <!-- <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'POLICYHOLDER'" [routerLink]="['/view-claim-status']">View Claim
-          Status</a>
-      </li> -->
-
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="roleName === 'INVESTIGATOR'" [routerLink]="['/create-investigator']">Create Investigation</a>
+      </li>
     </ul>
 
-
-    <!-- Login/Logout buttons -->
+    <!-- Right side: Logout -->
     <ul class="navbar-nav">
       <li *ngIf="!IsLoggin" class="nav-item">
         <a class="nav-link" [routerLink]="['/login']">Login</a>
       </li>
       <li *ngIf="IsLoggin" class="nav-item">
-        <a class="nav-link" (click)="logout()" [routerLink]="['/login']">Logout</a>
+        <a class="nav-link logout-btn" (click)="logout()" [routerLink]="['/login']">Logout</a>
       </li>
     </ul>
   </div>
 </nav>
 
-<body>
-  <div class="container mt-4 mx-5">
-    <router-outlet>
-    </router-outlet>
-  </div>
-</body>
+<div class="container mt-4 mx-5">
+  <router-outlet></router-outlet>
+</div>

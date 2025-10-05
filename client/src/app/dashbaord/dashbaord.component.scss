@@ -1,58 +1,45 @@
- .dashboard-container {
-   max-width: 1200px;
-   margin: 0 auto;
-   padding: 20px;
-   background-color: #f4f4f9;
-   border-radius: 10px;
-   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
- }
+/* Gradient Card Theme */
+.gradient-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+}
 
- .dashboard-header {
-   text-align: center;
-   margin-bottom: 20px;
- }
+.gradient-header {
+  background: linear-gradient(90deg, #2b5876, #4e4376);
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
 
- h1 {
-   font-size: 2em;
-   color: #333;
- }
+/* Buttons inside gradient cards */
+.gradient-card .btn-outline-light {
+  border: 1px solid white;
+  color: white;
+}
 
- table {
-   width: 100%;
-   border-collapse: collapse;
-   margin-bottom: 20px;
- }
+.gradient-card .btn-outline-light:hover {
+  background: white;
+  color: #4e4376;
+  font-weight: bold;
+}
 
- th,
- td {
-   padding: 10px;
-   text-align: center;
-   border-bottom: 1px solid #ddd;
- }
+.gradient-card .btn-light:hover {
+  background: #ffd700;
+  color: black;
+}
 
- th {
-   background-color: #4B0082;
-   color: white;
- }
+/* Toast / Snackbar */
+.toast-container {
+  z-index: 2000;
+}
 
- tbody tr:nth-child(even) {
-   background-color: #f9f9f9;
- }
+.toast {
+  border-radius: 10px;
+  font-size: 0.9rem;
+  animation: fadeInUp 0.5s ease-in-out;
+}
 
- button {
-   padding: 8px 12px;
-   background-color: #9370DB;
-   border: none;
-   border-radius: 5px;
-   color: white;
-   cursor: pointer;
- }
-
- button:hover {
-   background-color: #9370DB;
- }
-
- button:disabled {
-   background-color: #ccc;
-   cursor: not-allowed;
- }
+@keyframes fadeInUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
