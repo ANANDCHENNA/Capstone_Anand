@@ -16,6 +16,7 @@ import { AssignClaimComponent } from './assign-claim/assign-claim.component';
 import { CreateInvestigatorComponent } from './create-investigator/create-investigator.component';
 import { UpdateInvestigationComponent } from './update-claim-investigation/update-claim-investigation.component';
 import { HomeComponent } from './home/home.component';
+import { ViewUnderwritersComponent } from './view-underwriters/view-underwriters.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HomeComponent } from './home/home.component';
     AssignClaimComponent,
     CreateInvestigatorComponent,
     UpdateInvestigationComponent,
+    ViewUnderwritersComponent
   ],
   imports: [
     BrowserModule,

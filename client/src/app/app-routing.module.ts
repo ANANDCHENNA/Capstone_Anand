@@ -13,6 +13,7 @@ import { AssignClaimComponent } from './assign-claim/assign-claim.component';
 import { CreateInvestigatorComponent } from './create-investigator/create-investigator.component';
 import { UpdateInvestigationComponent } from './update-claim-investigation/update-claim-investigation.component';
 import { HomeComponent } from './home/home.component';
+import { ViewUnderwritersComponent } from './view-underwriters/view-underwriters.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashbaordComponent },
   { path: 'create-claim', component: CreateClaimComponent },  
+  { path: 'view-underwriters', component: ViewUnderwritersComponent },  
   { path: 'update-claim/:id', component: UpdateClaimComponent },  
   { path: 'assign-claim', component: AssignClaimComponent },  
   { path: 'assign-claim/:id', component: AssignClaimComponent },  
