@@ -18,9 +18,19 @@
   transition: all 0.3s ease;
 }
 
-.custom-navbar .nav-link:hover {
-  color: #bdaca5 !important; /* Gold hover */
-  text-shadow: 0px 0px 6px rgba(241, 239, 226, 0.835);
+/* Logout button */
+.login-btn {
+  font-weight: bold;
+  background: linear-gradient(45deg, #41b0ff, #2b2bff);
+  border-radius: 20px;
+  padding: 6px 15px;
+  color: white !important;
+  transition: transform 0.2s ease;
+}
+
+.login-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 3px 8px rgba(8, 19, 53, 0.5);
 }
 
 /* Logout button */
