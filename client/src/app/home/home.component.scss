@@ -3,16 +3,16 @@
   min-height: 100vh;
 }
 
-// .hero-section {
-//   background: linear-gradient(135deg, #1e7237 0%, #2a5298 100%);
-//   padding: 20px 40px;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   position: fixed;
-//   width: 100%;
-//   z-index: 1000;
-// }
+.hero-section {
+  background: linear-gradient(135deg, #1e7237 0%, #2a5298 100%);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
 
 .logo-area {
   display: flex;
@@ -154,14 +154,14 @@
   
 }
 
-// .promo-banner {
-//   background: linear-gradient(45deg, #bc0101b7, #d58a61);
-//   color: white;
-//   padding: 40px;
-//   margin: 50px 20px;
-//   border-radius: 15px;
-//   text-align: center;
-// }
+.promo-banner {
+  background: linear-gradient(45deg, #bc0101b7, #d58a61);
+  color: white;
+  padding: 40px;
+  margin: 50px 20px;
+  border-radius: 15px;
+  text-align: center;
+}
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }

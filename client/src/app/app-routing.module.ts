@@ -17,6 +17,7 @@ import { ViewUnderwritersComponent } from './view-underwriters/view-underwriters
 import { UpdateClaimUnderwriterComponent } from './update-claim-underwriter/update-claim-underwriter.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'home', component: HomeComponent },
@@ -29,10 +30,6 @@ const routes: Routes = [
   { path: 'create-investigator', component: CreateInvestigatorComponent },  
   { path: 'update-claim-investigation/:id', component: UpdateInvestigationComponent },  
   { path: 'update-claim-underwriter/:id', component: UpdateClaimUnderwriterComponent },  
-
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-
-  { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({
