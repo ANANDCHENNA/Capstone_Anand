@@ -47,7 +47,7 @@ export class BuyPolicyComponent implements OnInit {
     this.httpService.purchasePolicy(selectedPolicyId, this.policyholderId).subscribe({
       next: () => {
         alert('Policy purchased successfully!');
-        this.router.navigate(['/view-claims']); // Redirect to view all claims
+        this.router.navigate(['/create-claim']); // Redirect to view all claims
       },
       error: (err) => {
         console.error(err);
