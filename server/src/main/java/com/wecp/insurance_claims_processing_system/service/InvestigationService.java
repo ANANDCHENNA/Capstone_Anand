@@ -26,8 +26,8 @@ public class InvestigationService {
             Claim claim = claimRepository.findById(investigation.getClaim().getId()).get();
             if (claim != null) {
                 investigation.setClaim(claim);
-                claim.setInvestigation(investigation);
-                claimRepository.save(claim);
+                // claim.setInvestigation(investigation);
+                // claimRepository.save(claim);
             }
         }
         return investigationRepository.save(investigation);
