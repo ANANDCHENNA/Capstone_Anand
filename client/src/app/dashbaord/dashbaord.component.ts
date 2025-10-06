@@ -34,6 +34,7 @@ export class DashbaordComponent implements OnInit {
   // Policyholder
   policyholderId: string | null = '';
   claimByPolicyholder: Claim[] = [];
+  selectedClaim!: Claim;
 
   constructor(
     private httpService: HttpService,
@@ -221,6 +222,12 @@ export class DashbaordComponent implements OnInit {
       case 'Rejected': return 'bg-danger';
       default: return 'bg-secondary';
     }
+  }
+
+  openClaimModal(claim: Claim) {
+    this.selectedClaim = claim;
+    const modal = new bootstrap.Modal(document.getElementById('claimModal'));
+    modal.show();
   }
 }
 

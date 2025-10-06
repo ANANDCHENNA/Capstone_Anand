@@ -21,7 +21,7 @@
   </div>
 
   <!-- ADJUSTER -->
-  <div *ngIf="role === 'ADJUSTER'" class="card shadow-sm mb-4 border-0">
+  <!-- <div *ngIf="role === 'ADJUSTER'" class="card shadow-sm mb-4 border-0">
     <div class="card-header text-white fw-bold" style="background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);">Adjuster Claims</div>
     <div class="table-responsive">
       <table class="table table-hover align-middle">
@@ -48,6 +48,24 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div> -->
+  <div *ngIf="role === 'ADJUSTER'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let claim of filteredAdjusterClaims()">
+      <div class="card gradient-card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Claim #{{ claim.id }}</h5>
+          <p class="card-text text-truncate">{{ claim.description }}</p>
+          <p class="mb-1"><strong>Date:</strong> {{ claim.date | date:'dd-MM-yyyy' }}</p>
+          <span class="badge" [ngClass]="getStatusClass(claim.status)">{{ claim.status }}</span>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <button class="btn btn-outline-light btn-sm" (click)="onAdjusterAssignClaim(claim.id)">
+            {{ claim.underwriter ? 'Assigned' : 'Assign' }}
+          </button>
+          <button class="btn btn-light btn-sm" (click)="openClaimModal(claim)">Details</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -131,6 +149,29 @@
       </table>
     </div>
   </div>
+
+  <!-- Claim Details Modal -->
+  <div class="modal fade" id="claimModal" tabindex="-1" aria-labelledby="claimModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="claimModalLabel">Claim #{{ selectedClaim?.id }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Description:</strong> {{ selectedClaim?.description }}</p>
+          <p><strong>Date:</strong> {{ selectedClaim?.date | date:'dd-MM-yyyy' }}</p>
+          <p><strong>Status:</strong> {{ selectedClaim?.status}} <strong>Underwriter:</strong> {{ selectedClaim?.underwriter?.username || 'Not Assigned' }}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary" (click)="onUpdateClaimAdjuster(selectedClaim.id)">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
 
   <!-- Toast / Snackbar -->
   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">

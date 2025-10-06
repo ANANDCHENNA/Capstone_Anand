@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark custom-navbar px-3 shadow-lg">
-  <a class="navbar-brand fw-bold text-uppercase" href="#">Insurance Claims & Resource Management</a>
+  <a class="navbar-brand fw-bold text-uppercase" routerLink="/">Insure</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,33 +7,34 @@
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav me-auto">
-      <!-- Home always visible -->
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/home']">Home</a>
+      <li *ngIf="!IsLoggin" class="nav-item">
+        <a class="nav-link" (click)="navigateToHome()">Home</a>
       </li>
 
       <!-- Role-based links -->
-      <li class="nav-item" *ngIf="roleName === 'POLICYHOLDER' && IsLoggin">
-        <a class="nav-link" [routerLink]="['/create-claim']">Create Claim</a>
+      <li *ngIf="IsLoggin && roleName === 'POLICYHOLDER'" class="nav-item">
+        <a class="nav-link" routerLink="/create-claim">Create Claim</a>
       </li>
-      <li class="nav-item" *ngIf="roleName === 'ADJUSTER' && IsLoggin">
-        <a class="nav-link" [routerLink]="['/dashboard']">View Claims</a>
+      <li *ngIf="IsLoggin && roleName === 'ADJUSTER'" class="nav-item">
+        <a class="nav-link" routerLink="/dashboard">View Claims</a>
       </li>
-      <li class="nav-item" *ngIf="roleName === 'ADJUSTER' && IsLoggin">
-        <a class="nav-link" [routerLink]="['/view-underwriters']">View Underwriters</a>
+      <li *ngIf="IsLoggin && roleName === 'ADJUSTER'" class="nav-item">
+        <a class="nav-link" routerLink="/view-underwriters">View Underwriters</a>
       </li>
-      <li class="nav-item" *ngIf="roleName === 'INVESTIGATOR' && IsLoggin">
-        <a class="nav-link" [routerLink]="['/create-investigator']">Create Investigation</a>
+      <li *ngIf="IsLoggin && roleName === 'INVESTIGATOR'" class="nav-item">
+        <a class="nav-link" routerLink="/create-investigator">Create Investigation</a>
       </li>
-      <li class="nav-item" *ngIf="roleName === 'UNDERWRITER' && IsLoggin">
-        <a class="nav-link" [routerLink]="['/dashboard']">View Claims</a>
+      <li *ngIf="IsLoggin && roleName === 'INVESTIGATOR'" class="nav-item">
+        <a class="nav-link" routerLink="/dashboard">View Investigations</a>
+      </li>
+      <li *ngIf="IsLoggin && roleName === 'UNDERWRITER'" class="nav-item">
+        <a class="nav-link" routerLink="/dashboard">View Claims</a>
       </li>
     </ul>
 
-    <!-- Right side -->
     <ul class="navbar-nav">
       <li *ngIf="!IsLoggin" class="nav-item">
-        <a class="nav-link login-btn" [routerLink]="['/login']">Login</a>
+        <a class="nav-link login-btn" routerLink="/login">Login</a>
       </li>
       <li *ngIf="IsLoggin" class="nav-item">
         <a class="nav-link logout-btn" (click)="logout()">Logout</a>
@@ -42,6 +43,4 @@
   </div>
 </nav>
 
-<div class="container mt-4 mx-5">
-  <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>
