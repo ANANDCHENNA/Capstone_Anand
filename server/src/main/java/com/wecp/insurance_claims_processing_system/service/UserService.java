@@ -96,15 +96,16 @@ import java.util.Collections;
                 Collections.singletonList(new SimpleGrantedAuthority(user.getRole()))
         );
     }
- 
-     
-     private void copyProperties(User source, User target){
-         target.setUsername(source.getUsername());
-         target.setEmail((source.getEmail()));
-         target.setPassword(passwordEncoder.encode(source.getPassword()));
-         target.setRole(source.getRole());
-     }
- 
-   
- }
- 
+
+    private void copyProperties(User source, User target) {
+        target.setUsername(source.getUsername());
+        target.setEmail((source.getEmail()));
+        target.setPassword(passwordEncoder.encode(source.getPassword()));
+        target.setRole(source.getRole());
+    }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
+    }
+
+}
