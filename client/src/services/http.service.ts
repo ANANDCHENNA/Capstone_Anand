@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InteropObservable, Observable } from 'rxjs';
 import { environment } from '../environments/environment.development';
 import { AuthService } from './auth.service';
+import { PurchaseRequest } from '../app/model/PurchaseRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -134,6 +135,22 @@ export class HttpService {
     headers = headers.set('Authorization', `Bearer ${authToken}`);
     return this.http.put(this.serverName + '/api/adjuster/claim/' + details.claimId + ' /assign?underwriterId=' +
       details.underwriterId, details, { headers: headers });
+  }
+
+  purchase(details: PurchaseRequest): Observable<any> {
+    const authToken = this.authService.getToken();
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Authorization', `Bearer ${authToken}`);
+    return this.http.post(this.serverName + '/api/policies/purchase', details, { headers: headers });
+  }
+
+  getMyPolicies(): Observable<any[]> {
+    const authToken = this.authService.getToken();
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Authorization', `Bearer ${authToken}`);
+    return this.http.get<any[]>(this.serverName + '/api/policies/me', { headers: headers });
   }
 
   Login(details: any): Observable<any> {
