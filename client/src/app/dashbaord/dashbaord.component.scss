@@ -1,45 +1,56 @@
-/* Gradient Card Theme */
+/* Existing gradient card styles */
 .gradient-card {
-  border: none;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.gradient-header {
-  background: linear-gradient(90deg, #2b5876, #4e4376);
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-}
-
-/* Buttons inside gradient cards */
-.gradient-card .btn-outline-light {
-  border: 1px solid white;
+  background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
   color: white;
+  border: none;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlideUp 0.6s ease forwards;
 }
 
-.gradient-card .btn-outline-light:hover {
-  background: white;
-  color: #4e4376;
-  font-weight: bold;
+/* Add a small delay for each card using nth-child for a cascading effect */
+.col:nth-child(1) .gradient-card { animation-delay: 0.1s; }
+.col:nth-child(2) .gradient-card { animation-delay: 0.2s; }
+.col:nth-child(3) .gradient-card { animation-delay: 0.3s; }
+.col:nth-child(4) .gradient-card { animation-delay: 0.4s; }
+.col:nth-child(5) .gradient-card { animation-delay: 0.5s; }
+
+/* Hover effect */
+.gradient-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 10px 20px rgba(0, 114, 255, 0.4);
 }
 
-.gradient-card .btn-light:hover {
-  background: #ffd700;
-  color: black;
+/* Footer styling */
+.gradient-card .card-footer {
+  background: rgba(255, 255, 255, 0.15);
+  border-top: none;
 }
 
-/* Toast / Snackbar */
-.toast-container {
-  z-index: 2000;
-}
-
-.toast {
-  border-radius: 10px;
+/* Badge styling */
+.badge {
   font-size: 0.9rem;
-  animation: fadeInUp 0.5s ease-in-out;
+  padding: 6px 10px;
+  border-radius: 8px;
 }
 
-@keyframes fadeInUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+/* Light button styling */
+.btn-light {
+  color: #0072ff;
+  font-weight: 500;
+  border: none;
+}
+
+/* ✨ Animation Keyframes */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

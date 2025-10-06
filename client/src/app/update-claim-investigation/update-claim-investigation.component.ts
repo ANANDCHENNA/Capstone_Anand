@@ -23,13 +23,19 @@ export class UpdateInvestigationComponent implements OnInit {
     this.itemForm = this.formBuilder.group({
       report: ['', Validators.required],
       status: ['', Validators.required],
-      claim: [{value: '', disabled: true}, Validators.required]
+      claimId: [{value: '', disabled: true}, Validators.required]
     })
   }
 
   ngOnInit(): void {
+    this.httpService.getAllClaimsForInvestigation().subscribe((data)=>{
+      this.claimList = data;
+    })
     this.investigationId = this.route.snapshot.params['id']
     this.httpService.getInvestigationById(this.investigationId).subscribe((data: any) => {
+      if(data.claim){
+        data.claimId = data.claim.id;
+      }
       this.itemForm.patchValue(data)
     })
   }
