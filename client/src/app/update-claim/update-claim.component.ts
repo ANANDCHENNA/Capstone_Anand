@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { HttpService } from '../../services/http.service';
+import { Investigator } from '../model/Investigator';
 import { Underwriter } from '../model/Underwriter';
 
 @Component({
@@ -14,6 +15,7 @@ export class UpdateClaimComponent implements OnInit {
   itemForm: FormGroup;
   claimId: number | undefined;
   underwriters: Underwriter[] = []
+  investigators:Investigator[]=[]
   userRole: string | null | undefined
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +29,8 @@ export class UpdateClaimComponent implements OnInit {
       description: ['', Validators.required],
       date: ['', Validators.required],
       status: ['', Validators.required],
-      underwriterId: ['', Validators.required]
+      underwriterId: ['', Validators.required],
+      investigatorId: ['', Validators.required],
     });
   }
 
@@ -35,7 +38,9 @@ export class UpdateClaimComponent implements OnInit {
     this.httpService.GetAllUnderwriter().subscribe((data) => {
       this.underwriters = data
     })
-    
+    this.httpService.GetAllInvestigator().subscribe((data) => {
+      this.investigators = data
+    })
     this.claimId = this.route?.snapshot?.params?.['id'] ?? null;
 
     this.httpService.getClaimById?.(this.claimId).subscribe((data) => {
@@ -45,6 +50,9 @@ export class UpdateClaimComponent implements OnInit {
       }
       if(data.underwriter.id){
         data.underwriterId = data.underwriter.id;
+      }
+      if(data.investigator.id){
+        data.investigatorId = data.investigator.id;
       }
       this.itemForm.patchValue(data);
     })

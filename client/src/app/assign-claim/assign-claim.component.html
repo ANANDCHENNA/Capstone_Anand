@@ -28,7 +28,19 @@
           Please select an underwriter
         </div>
       </div>
-
+      <div class="mb-3">
+        <label for="investigatorId" class="form-label">Select investigator</label>
+        <select id="investigatorId" formControlName="investigatorId" class="form-select">
+          <option value="">Select an investigator</option>
+          <option *ngFor="let investigator of investigators" [value]="investigator.id">
+            {{investigator.username}}
+          </option>
+        </select>
+        <div *ngIf="itemForm.get('investigatorId')?.touched && itemForm.get('investigatorId')?.invalid"
+             class="text-danger mt-1">
+          Please select an investigator
+        </div>
+      </div>
       <div class="text-center mt-4">
         <button type="submit" [disabled]="itemForm.invalid" class="btn btn-outline-primary px-5">
           Assign Claim

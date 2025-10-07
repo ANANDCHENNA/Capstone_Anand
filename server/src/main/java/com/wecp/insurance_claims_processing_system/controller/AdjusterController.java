@@ -1,6 +1,7 @@
 package com.wecp.insurance_claims_processing_system.controller;
 
 import com.wecp.insurance_claims_processing_system.entity.Claim;
+import com.wecp.insurance_claims_processing_system.entity.Investigator;
 import com.wecp.insurance_claims_processing_system.entity.Underwriter;
 import com.wecp.insurance_claims_processing_system.service.ClaimService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,15 @@ public class AdjusterController {
     public ResponseEntity<List<Underwriter>> getAllUnderwriters() {
         return new ResponseEntity<>(claimService.getAllUnderwriters(), HttpStatus.OK);
     }
+    @GetMapping("/api/investigators")
+    public ResponseEntity<List<Investigator>> getAllInvestigators() {
+        return new ResponseEntity<>(claimService.getAllInvestigators(), HttpStatus.OK);
+    }
 
     @PutMapping("/api/adjuster/claim/{claimId}/assign")
     public ResponseEntity<Claim> assignClaimToUnderwriter(@PathVariable Long claimId,
-            @RequestParam Long underwriterId) {
-        Claim updatedClaim = claimService.assignClaimToUnderwriter(claimId, underwriterId);
+            @RequestParam Long underwriterId,@RequestParam Long investigatorId) {
+        Claim updatedClaim = claimService.assignClaimToUnderwriter(claimId, underwriterId,investigatorId);
         return ResponseEntity.ok(updatedClaim);
     }
 

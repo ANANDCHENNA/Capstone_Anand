@@ -42,7 +42,6 @@ export class UpdateClaimUnderwriterComponent implements OnInit {
             this.itemForm.patchValue(data);
         })
     }
-
     onSubmit() {
         this.userRole = this.authService.getRole;
         if (this.itemForm.valid) {

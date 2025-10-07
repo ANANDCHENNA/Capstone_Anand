@@ -32,12 +32,20 @@ public class Claim {
     @JoinColumn(name = "underwriter_id")
     private Underwriter underwriter;
 
+    @ManyToOne
+    @JoinColumn(name = "investigator_id")
+    private Investigator investigator;
+
     @OneToOne(mappedBy = "claim")
     @JsonIgnore
     private Investigation investigation;
-
+  
     public Claim() {
     }
+
+    public Claim(Long id, String description, Date date, String status, Policyholder policyholder, Adjuster adjuster,
+            Underwriter underwriter, Investigation investigation,Investigator investigator) {
+        this.id = id;
 
     public Claim(Long id, String description, Date date, String status,  Policyholder policyholder,
             Adjuster adjuster,
@@ -52,6 +60,7 @@ public class Claim {
         this.adjuster = adjuster;
         this.underwriter = underwriter;
         this.investigation = investigation;
+        this.investigator=investigator;
         this.policy_id = policy_id;
         //this.policy=policy;
     }
@@ -119,6 +128,15 @@ public class Claim {
     public void setInvestigation(Investigation investigation) {
         this.investigation = investigation;
     }
+
+    public Investigator getInvestigator() {
+        return investigator;
+    }
+
+    public void setInvestigator(Investigator investigator) {
+        this.investigator = investigator;
+    }
+    
 
     // public String getClaimType() {
     //     return claimType;

@@ -2,6 +2,7 @@ package com.wecp.insurance_claims_processing_system.repository;
 
 import com.wecp.insurance_claims_processing_system.entity.Adjuster;
 import com.wecp.insurance_claims_processing_system.entity.Claim;
+import com.wecp.insurance_claims_processing_system.entity.Investigator;
 import com.wecp.insurance_claims_processing_system.entity.Policyholder;
 import com.wecp.insurance_claims_processing_system.entity.Underwriter;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,7 +18,7 @@ public interface ClaimRepository extends JpaRepository<Claim, Long>{
   
     List<Claim> findByPolicyholder(Policyholder policyholder);
     List<Claim> findByUnderwriter(Underwriter underwriter);
-
+    List<Claim> findByInvestigator(Investigator investigator);
     @Query("SELECT c FROM Claim c WHERE c.policyholder.id = :policyholderId")
     List<Claim> getClaimsByPolicyholder(@Param("policyholderId") Long policyholderId);
 }

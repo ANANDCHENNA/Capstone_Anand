@@ -145,8 +145,9 @@
         <div class="modal-body">
           <p><strong>Description:</strong> {{ selectedClaim?.description }}</p>
           <p><strong>Date:</strong> {{ selectedClaim?.date | date:'dd-MM-yyyy' }}</p>
-          <p><strong>Status:</strong> {{ selectedClaim?.status }}</p>
-          <p><strong>Underwriter:</strong> {{ selectedClaim?.underwriter?.username || 'Not Assigned' }}</p>
+          <p><strong>Status:</strong> {{ selectedClaim?.status}}</p>
+            <p> <strong>Underwriter:</strong> {{ selectedClaim?.underwriter?.username || 'Not Assigned' }}</p>
+            <p> <strong>Investigator:</strong> {{ selectedClaim?.investigator?.username || 'Not Assigned' }}</p>
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

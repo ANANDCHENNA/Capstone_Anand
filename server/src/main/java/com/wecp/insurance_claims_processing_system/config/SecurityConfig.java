@@ -62,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/adjuster/claims").hasAuthority("ADJUSTER")
                 .antMatchers(HttpMethod.GET, "/api/adjuster/claim/{claimId}").hasAuthority("ADJUSTER")
                 .antMatchers(HttpMethod.GET, "/api/adjuster/underwriters").hasAuthority("ADJUSTER")
+                .antMatchers(HttpMethod.GET, "/api/investigators").hasAuthority("ADJUSTER")
                 .antMatchers(HttpMethod.PUT, "/api/adjuster/claim/{claimId}/assign").hasAuthority("ADJUSTER")
 
                 // Policyholder claim endpoints
