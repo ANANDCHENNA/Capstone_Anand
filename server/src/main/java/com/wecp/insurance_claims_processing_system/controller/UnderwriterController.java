@@ -34,4 +34,5 @@ public class UnderwriterController {
     public ResponseEntity<Claim> getClaim(@PathVariable Long id) {
         return new ResponseEntity<Claim>(claimService.getClaimById(id), HttpStatus.OK);
     }
+    
 }

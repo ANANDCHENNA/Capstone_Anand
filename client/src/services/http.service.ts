@@ -46,6 +46,14 @@ export class HttpService {
     return this.http.get(this.serverName + `/api/adjuster/underwriters`, { headers: headers })
 
   }
+  GetAllInvestigator(): Observable<any> {
+    const authToken = this.authService.getToken();
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Authorization', `Bearer ${authToken}`)
+    return this.http.get(this.serverName + `/api/investigators`, { headers: headers })
+
+  }
 
   getClaimsByUnderwriter(id: any): Observable<any> {
     const authToken = this.authService.getToken();
@@ -54,6 +62,8 @@ export class HttpService {
     headers = headers.set('Authorization', `Bearer ${authToken}`)
     return this.http.get(this.serverName + `/api/underwriter/claims?underwriterId=` + id, { headers: headers });
   }
+  //new for investigator
+  
 
   getClaimsByPolicyholder(policyholderId: any): Observable<any> {
     const authToken = this.authService.getToken();
@@ -133,7 +143,7 @@ export class HttpService {
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('Authorization', `Bearer ${authToken}`);
     return this.http.put(this.serverName + '/api/adjuster/claim/' + details.claimId + ' /assign?underwriterId=' +
-      details.underwriterId, details, { headers: headers });
+      details.underwriterId+'&investigatorId='+details.investigatorId, details, { headers: headers });
   }
 
   Login(details: any): Observable<any> {

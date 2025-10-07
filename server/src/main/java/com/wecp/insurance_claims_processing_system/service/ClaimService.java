@@ -1,9 +1,11 @@
 package com.wecp.insurance_claims_processing_system.service;
 
 import com.wecp.insurance_claims_processing_system.entity.Claim;
+import com.wecp.insurance_claims_processing_system.entity.Investigator;
 import com.wecp.insurance_claims_processing_system.entity.Policyholder;
 import com.wecp.insurance_claims_processing_system.entity.Underwriter;
 import com.wecp.insurance_claims_processing_system.repository.ClaimRepository;
+import com.wecp.insurance_claims_processing_system.repository.InvestigatorRepository;
 import com.wecp.insurance_claims_processing_system.repository.PolicyholderRepository;
 import com.wecp.insurance_claims_processing_system.repository.UnderwriterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class ClaimService {
 
     @Autowired
     private UnderwriterRepository underwriterRepository;
+
+    @Autowired
+    private InvestigatorRepository investigatorRepository;
 
     @Autowired
     private ClaimRepository claimRepository;
@@ -65,15 +70,22 @@ public class ClaimService {
 
         return underwriterRepository.findAll();
     }
+     // Adjuster Assigning Claim
+     public List<Investigator> getAllInvestigators() {
+
+        return investigatorRepository.findAll();
+    }
 
     // Adjuster Assigning Claim
-    public Claim assignClaimToUnderwriter(Long claimId, Long underwriterId) {
+    public Claim assignClaimToUnderwriter(Long claimId, Long underwriterId,Long investigatorId) {
 
         Claim claim = claimRepository.findById(claimId).get();
         Underwriter underwriter = underwriterRepository.findById(underwriterId).get();
+        Investigator investigator=investigatorRepository.findById(investigatorId).get();
 
-        if (claim != null && underwriter != null) {
+        if ((claim != null && underwriter != null)&& (investigator!=null)) {
             claim.setUnderwriter(underwriter);
+            claim.setInvestigator(investigator);
             return claimRepository.save(claim);
         } else {
             throw new IllegalArgumentException("Claim or Underwriter not found");
@@ -88,7 +100,14 @@ public class ClaimService {
         return claims;
 
     }
+    //dashboard component for Investigator
+    public List<Claim> getAllClaimsForReviewInvestigator(Long investigatorId) {
 
+        Investigator uw = investigatorRepository.findById(investigatorId).get();
+        List<Claim> claims = claimRepository.findByInvestigator(uw);
+        return claims;
+
+    }
     // Underwriter update claim
     public Claim reviewClaim(Long id, String status) {
 

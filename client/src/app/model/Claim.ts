@@ -1,4 +1,6 @@
+import { CreateInvestigatorComponent } from "../create-investigator/create-investigator.component"
 import { Investigation } from "./Investigation"
+import { Investigator } from "./Investigator"
 import { Underwriter } from "./Underwriter"
 
 export interface Claim {
@@ -8,6 +10,7 @@ export interface Claim {
     status: string
     investigation : Investigation   
     underwriter: Underwriter
+    investigator:Investigator
 }
 export { Investigation, Underwriter }
 

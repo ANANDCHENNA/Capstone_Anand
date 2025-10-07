@@ -5,6 +5,7 @@ import { HttpService } from '../../services/http.service';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Investigator } from '../model/Investigator';
 
 @Component({
   selector: 'app-assign-claim',
@@ -16,6 +17,7 @@ export class AssignClaimComponent implements OnInit {
   itemForm: FormGroup;
 
   underwriters: Underwriter[] = []
+  investigators:Investigator[]=[]
   id: number | undefined
 
   constructor(
@@ -29,13 +31,17 @@ export class AssignClaimComponent implements OnInit {
       claimId: [this.id],
       description: [{ value: "", disabled: true }, Validators.required],
       status: [{ value: "Started", disabled: true }, Validators.required],
-      underwriterId: [null, Validators.required]
+      underwriterId: [null, Validators.required],
+      investigatorId: [null, Validators.required]
     });
   }
 
   ngOnInit(): void {
     this.httpService.GetAllUnderwriter().subscribe((data) => {
       this.underwriters = data
+    })
+    this.httpService.GetAllInvestigator().subscribe((data) => {
+      this.investigators = data
     })
     this.id = this.route?.snapshot?.params?.['id'] ?? null;
     if (this.id) {
