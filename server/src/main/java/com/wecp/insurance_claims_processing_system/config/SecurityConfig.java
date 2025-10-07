@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Policyholder endpoints
                 .antMatchers(HttpMethod.POST, "/api/policy/purchase/**").hasAuthority("POLICYHOLDER")
                 .antMatchers(HttpMethod.GET, "/policy/policyholder/**").hasAuthority("POLICYHOLDER")
+                .antMatchers(HttpMethod.GET, "/policies").hasAuthority("POLICYHOLDER")
 
                 // Admin endpoints
                 .antMatchers(HttpMethod.GET, "/api/policy/all").hasAuthority("ADMIN")
@@ -79,6 +80,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Underwriter endpoints
                 .antMatchers(HttpMethod.GET, "/api/underwriter/claims").hasAuthority("UNDERWRITER")
                 .antMatchers(HttpMethod.PUT, "/api/underwriter/claim/{id}/review").hasAuthority("UNDERWRITER")
+                
+                // Admin endpoints
+                .antMatchers(HttpMethod.POST, "/api/policies").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/policies").hasAuthority("ADMIN")
 
                 // Everything else requires authentication
                 .anyRequest().authenticated()

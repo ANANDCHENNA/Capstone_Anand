@@ -43,11 +43,13 @@ public class Claim {
     public Claim() {
     }
 
-    public Claim(Long id, String description, Date date, String status, Policyholder policyholder, Adjuster adjuster,Underwriter underwriter, Investigation investigation, Investigator investigator) {
+    public Claim(Long id, String description, Date date, String status, Policyholder policyholder, Adjuster adjuster,
+            Underwriter underwriter, Investigator investigator, Investigation investigation) {
         this.id = id;
-    }
+            }
 
-    public Claim(Long id, String description, Date date, String status, Policyholder policyholder, Adjuster adjuster,Underwriter underwriter, Investigation investigation, Long policy_id, Policy policy) {
+    public Claim(Long id, String description, Date date, String status, Policyholder policyholder, Adjuster adjuster,
+            Underwriter underwriter, Investigation investigation, Long policy_id, Policy policy) {
         this.description = description;
         this.id = id;
         this.date = date;

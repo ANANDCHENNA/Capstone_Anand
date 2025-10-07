@@ -24,10 +24,10 @@ public class Policy {
 
     @Column(unique = true)
     private String policyNumber;
-
-    private String policyType;      // e.g., "Health", "Vehicle", "Life"
-    private Double premium;         // amount to pay
-    private int termMonths;         // duration in months
+    private String name;
+    private String policyType;   
+    private Double premium;        
+    private int termMonths;         
 
     @Enumerated(EnumType.STRING)
     private PolicyStatus status;    // e.g., ACTIVE, PENDING, CANCELLED
@@ -39,9 +39,10 @@ public class Policy {
 
     public Policy() {}
 
-    public Policy(Long id, String policyNumber, String policyType, Double premium, int termMonths, PolicyStatus status, Policyholder policyholder) {
+    public Policy(Long id, String policyNumber, String name, String policyType, Double premium, int termMonths, PolicyStatus status, Policyholder policyholder) {
         this.id = id;
         this.policyNumber = policyNumber;
+        this.name = name;
         this.policyType = policyType;
         this.premium = premium;
         this.termMonths = termMonths;
@@ -59,6 +60,10 @@ public class Policy {
 
     public String getPolicyNumber() {
         return policyNumber;
+    }
+
+    public Policy(String name) {
+        this.name = name;
     }
 
     public void setPolicyNumber(String policyNumber) {

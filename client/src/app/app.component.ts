@@ -14,14 +14,18 @@ export class AppComponent {
   constructor(private authService: AuthService, private router: Router) {
     this.IsLoggin = authService.getLoginStatus;
     this.roleName = authService.getRole;
-  
-    // if (!this.IsLoggin && this.router.url === '/') {
-    //   this.router.navigateByUrl('/home');
-    // }
-    this.checkAuthStatus()
+
+    if (!this.IsLoggin && this.router.url === '/') {
+      this.router.navigateByUrl('/home');
+    }
   }
+
+
+
+
+
   
-  navigateToHome(){
+  navigateToHome() {
     this.router.navigate(['/home']);
   }
 
