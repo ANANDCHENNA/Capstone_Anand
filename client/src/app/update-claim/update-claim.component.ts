@@ -39,7 +39,7 @@ export class UpdateClaimComponent implements OnInit {
       this.underwriters = data
     })
     this.httpService.GetAllInvestigator().subscribe((data) => {
-      this.underwriters = data
+      this.investigators = data
     })
     this.claimId = this.route?.snapshot?.params?.['id'] ?? null;
 
