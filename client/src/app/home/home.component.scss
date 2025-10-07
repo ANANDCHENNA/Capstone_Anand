@@ -6,9 +6,12 @@
   --aqua-accent: #00c6ff;
   --white-light: #ffffff;
   --off-white: #f0f8ff;
-  --text-dark: #333d47; /* Dark blue-grey for text */
-  --glass-dark-bg: rgba(0, 77, 122, 0.8); /* Darker semi-transparent blue */
-  --glass-light-bg: rgba(255, 255, 255, 0.75); /* Lighter semi-transparent white */
+  --text-dark: #333d47;
+  /* Dark blue-grey for text */
+  --glass-dark-bg: rgba(0, 77, 122, 0.8);
+  /* Darker semi-transparent blue */
+  --glass-light-bg: rgba(255, 255, 255, 0.75);
+  /* Lighter semi-transparent white */
   --glass-border: rgba(255, 255, 255, 0.4);
   --shadow-light: rgba(0, 0, 0, 0.15);
   --shadow-dark: rgba(0, 0, 0, 0.35);
@@ -20,9 +23,12 @@ body {
   background: linear-gradient(135deg, #f0f8ff 0%, #66b3e0 100%);
   color: #333d47;
   line-height: 1.6;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  scroll-behavior: smooth; /* Smooth scroll behavior for anchors */
-  perspective: 1500px; /* Needed for global 3D context, especially for cards */
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
+  scroll-behavior: smooth;
+  /* Smooth scroll behavior for anchors */
+  perspective: 1500px;
+  /* Needed for global 3D context, especially for cards */
   margin: 0;
   padding: 0;
 }
@@ -48,9 +54,9 @@ button {
 
 /* --- Utility Classes --- */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 /* --- Hero Section (Navigation/Header) --- */
@@ -93,8 +99,8 @@ button {
 }
 
 .nav-links {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .nav-links a {
@@ -129,7 +135,8 @@ button {
 .dropdown {
   position: relative;
   display: inline-block;
-  margin-left: 25px; /* Adjust spacing with nav links */
+  margin-left: 25px;
+  /* Adjust spacing with nav links */
 }
 
 .login-dropdown-btn {
@@ -163,9 +170,12 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 8px;
   z-index: 1;
-  right: 0; /* Align dropdown to the right of the button */
-  top: 100%; /* Position below the button */
-  margin-top: 10px; /* Space between button and dropdown */
+  right: 0;
+  /* Align dropdown to the right of the button */
+  top: 100%;
+  /* Position below the button */
+  margin-top: 10px;
+  /* Space between button and dropdown */
   animation: fadeIn 0.3s ease-out;
 }
 
@@ -175,7 +185,8 @@ button {
   text-decoration: none;
   display: block;
   text-align: left;
-  margin-left: 0; /* Override nav-links margin */
+  margin-left: 0;
+  /* Override nav-links margin */
   position: relative;
 }
 
@@ -191,8 +202,15 @@ button {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Hamburger menu for mobile */
@@ -293,7 +311,7 @@ button {
     margin: 0 auto 30px;
     opacity: 0.9;
 }
-  
+
 .banner-btn {
   background: linear-gradient(45deg, #00c6ff, #66b3e0);
   border: none;
@@ -399,7 +417,9 @@ button {
   margin: 0 auto;
 }
 
-.grid-cols-1, .grid-cols-2, .grid-cols-3 {
+.grid-cols-1,
+.grid-cols-2,
+.grid-cols-3 {
   display: grid;
   gap: 30px;
 }
@@ -409,9 +429,12 @@ button {
 }
 
 .insurance-card-container {
-    perspective: 1000px; /* Crucial for 3D effect of child */
-    height: 350px; /* Fixed height for consistent cards */
-    margin-bottom: 30px; /* Spacing between cards */
+  perspective: 1000px;
+  /* Crucial for 3D effect of child */
+  height: 350px;
+  /* Fixed height for consistent cards */
+  margin-bottom: 30px;
+  /* Spacing between cards */
 }
 
 .insurance-card {
@@ -432,7 +455,8 @@ button {
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden; /* Hides the reverse side of the element */
+  backface-visibility: hidden;
+  /* Hides the reverse side of the element */
   border-radius: 15px;
   padding: 30px;
   display: flex;
@@ -443,7 +467,8 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  overflow: hidden; /* Ensures content respects border-radius */
+  overflow: hidden;
+  /* Ensures content respects border-radius */
 }
 
 .card-front {
@@ -473,7 +498,8 @@ button {
   font-size: 40px;
   color: #007bb6;
   box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
-  flex-shrink: 0; /* Prevent shrinking if text is long */
+  flex-shrink: 0;
+  /* Prevent shrinking if text is long */
 }
 
 .card-front h3 {
@@ -498,13 +524,17 @@ button {
     align-self: center; /* Center heading */
     text-shadow: 0 0 10px rgba(0, 198, 255, 0.3);
 }
+
 .card-back ul {
-    list-style: none;
-    padding: 0 20px; /* Add padding for list items */
-    margin: 0;
-    width: 100%; /* Take full width */
-    font-size: 1rem;
+  list-style: none;
+  padding: 0 20px;
+  /* Add padding for list items */
+  margin: 0;
+  width: 100%;
+  /* Take full width */
+  font-size: 1rem;
 }
+
 .card-back ul li {
     margin-bottom: 12px;
     display: flex;
@@ -513,6 +543,7 @@ button {
     color: #f0f8ff;
     font-weight: 300;
 }
+
 .card-back ul li i {
     color: #00c6ff;
     font-size: 1.2rem;
@@ -555,16 +586,16 @@ button {
 }
 
 .promo-banner h3 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    font-weight: 800;
-    text-shadow: 0 0 15px rgba(0,0,0,0.5);
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: 800;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .promo-banner p {
-    font-size: 1.3rem;
-    margin-bottom: 40px;
-    opacity: 0.9;
+  font-size: 1.3rem;
+  margin-bottom: 40px;
+  opacity: 0.9;
 }
 
 .promo-banner .btn-light {
@@ -596,7 +627,8 @@ button {
   justify-content: space-around;
   max-width: 1200px;
   margin: 0 auto;
-  gap: 20px; /* Space between items */
+  gap: 20px;
+  /* Space between items */
 }
 
 .stat-item {
@@ -612,10 +644,10 @@ button {
 }
 
 .stat-item:hover {
-    transform: translateY(-8px);
-    background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.9);
 }
-  
+
 .counter {
   font-size: 4.5rem;
   font-weight: 800;
@@ -699,9 +731,12 @@ button {
 /* Basic styling for a simple carousel, if you're not using a library like Owl Carousel */
 .testimonials-carousel {
   display: flex;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  scroll-snap-type: x mandatory; /* Snap to items */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  overflow-x: auto;
+  /* Enable horizontal scrolling */
+  scroll-snap-type: x mandatory;
+  /* Snap to items */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling on iOS */
   padding-bottom: 20px;
   gap: 30px;
   max-width: 900px;
@@ -709,8 +744,10 @@ button {
 }
 
 .testimonial-item {
-  flex: 0 0 100%; /* Each item takes full width of carousel */
-  scroll-snap-align: start; /* Snap to start of item */
+  flex: 0 0 100%;
+  /* Each item takes full width of carousel */
+  scroll-snap-align: start;
+  /* Snap to start of item */
   text-align: center;
   padding: 50px;
   background: rgba(255, 255, 255, 0.75);
@@ -721,28 +758,30 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.4);
   position: relative;
   overflow: hidden;
-  min-height: 300px; /* Ensure a minimum height */
+  min-height: 300px;
+  /* Ensure a minimum height */
 }
 
 .testimonial-item::before {
-    content: "\201C";
-    font-size: 12rem;
-    color: rgba(0, 123, 255, 0.08);
-    position: absolute;
-    top: -40px;
-    left: 20px;
-    z-index: 1;
-    pointer-events: none;
+  content: "\201C";
+  font-size: 12rem;
+  color: rgba(0, 123, 255, 0.08);
+  position: absolute;
+  top: -40px;
+  left: 20px;
+  z-index: 1;
+  pointer-events: none;
 }
+
 .testimonial-item::after {
-    content: "\201D";
-    font-size: 12rem;
-    color: rgba(0, 123, 255, 0.08);
-    position: absolute;
-    bottom: -80px;
-    right: 20px;
-    z-index: 1;
-    pointer-events: none;
+  content: "\201D";
+  font-size: 12rem;
+  color: rgba(0, 123, 255, 0.08);
+  position: absolute;
+  bottom: -80px;
+  right: 20px;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .testimonial-item p {
@@ -828,8 +867,9 @@ button {
 }
 
 .accordion-header i {
-    transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
+
 .accordion-header.active i {
     transform: rotate(180deg);
     color: #00c6ff;
@@ -843,9 +883,11 @@ button {
   color: #333d47;
   font-size: 1.05rem;
 }
+
 .accordion-content.open {
-    max-height: 300px; /* Generous max-height, adjust if content is much longer */
-    padding-top: 15px;
+  max-height: 300px;
+  /* Generous max-height, adjust if content is much longer */
+  padding-top: 15px;
 }
 
 /* --- Contact Section --- */
@@ -865,6 +907,7 @@ button {
   font-weight: 800;
   text-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
+
 /* ... (your existing CSS code above this point) ... */
 
 /* --- Contact Section (Completion) --- */
@@ -877,8 +920,10 @@ button {
   font-size: 1.1rem;
   color: #333d47;
   transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-  width: 100%; /* Ensure full width */
-  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  width: 100%;
+  /* Ensure full width */
+  box-sizing: border-box;
+  /* Include padding and border in element's total width and height */
 }
 
 .contact-form input::placeholder,
@@ -892,11 +937,13 @@ button {
   border-color: #007bb6;
   background-color: #ffffff;
   box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
-  outline: none; /* Remove default outline */
+  outline: none;
+  /* Remove default outline */
 }
 
 .contact-form textarea {
-  resize: vertical; /* Allow vertical resizing only */
+  resize: vertical;
+  /* Allow vertical resizing only */
   min-height: 150px;
 }
 
@@ -911,9 +958,12 @@ button {
   cursor: pointer;
   transition: all 0.4s ease;
   box-shadow: 0 8px 30px rgba(0, 198, 255, 0.4);
-  align-self: center; /* Center the button in the form */
-  width: auto; /* Allow button to size naturally */
-  min-width: 200px; /* Ensure a decent button size */
+  align-self: center;
+  /* Center the button in the form */
+  width: auto;
+  /* Allow button to size naturally */
+  min-width: 200px;
+  /* Ensure a decent button size */
 }
 
 .contact-form .submit-btn:hover {
@@ -936,7 +986,8 @@ button {
   display: flex;
   justify-content: space-between;
   gap: 40px;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  flex-wrap: wrap;
+  /* Allow wrapping on smaller screens */
   margin-bottom: 40px;
 }
 
@@ -944,15 +995,18 @@ button {
 .footer-links,
 .footer-contact,
 .footer-social {
-  flex: 1; /* Distribute space evenly */
-  min-width: 200px; /* Prevent shrinking too much */
+  flex: 1;
+  /* Distribute space evenly */
+  min-width: 200px;
+  /* Prevent shrinking too much */
 }
 
 .footer-logo img {
   width: 40px;
   height: auto;
   margin-bottom: 10px;
-  filter: brightness(0) invert(1); /* Makes logo white if it's black */
+  filter: brightness(0) invert(1);
+  /* Makes logo white if it's black */
 }
 
 .footer-logo h3 {
@@ -991,8 +1045,10 @@ button {
   color: #f0f8ff;
   transition: color 0.3s ease;
   position: relative;
-  padding-left: 0; /* Reset */
+  padding-left: 0;
+  /* Reset */
 }
+
 .footer-links a::before {
     content: "•"; /* Bullet point */
     color: #00c6ff;
@@ -1004,8 +1060,9 @@ button {
 .footer-links a:hover {
   color: #00c6ff;
 }
+
 .footer-links a:hover::before {
-    opacity: 1;
+  opacity: 1;
 }
 
 
@@ -1054,13 +1111,16 @@ button {
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 1200px) {
-    .features-section {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on larger tablets */
-        padding: 80px 30px;
-    }
-    .insurance-grid .grid-cols-3 {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for insurance cards */
-    }
+  .features-section {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns on larger tablets */
+    padding: 80px 30px;
+  }
+
+  .insurance-grid .grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns for insurance cards */
+  }
 }
 
 @media (max-width: 992px) {

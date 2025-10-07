@@ -16,10 +16,13 @@
         <a class="nav-link" routerLink="/policies">View Policies</a>
       </li>
       <li *ngIf="IsLoggin && roleName === 'POLICYHOLDER'" class="nav-item">
-        <a class="nav-link" routerLink="/create-claim">My Claims</a>
+        <a class="nav-link" routerLink="/create-claim">Create Claims</a>
       </li>
       <li *ngIf="IsLoggin && roleName === 'POLICYHOLDER'" class="nav-item">
-        <a class="nav-link" routerLink="/my-claim">My Policies</a>
+        <a class="nav-link" routerLink="/my-policies">My Policies</a>
+      </li>
+      <li *ngIf="IsLoggin && roleName === 'POLICYHOLDER'" class="nav-item">
+        <a class="nav-link" routerLink="/dashboard">My Claims</a>
       </li>
       <li *ngIf="IsLoggin && roleName === 'ADJUSTER'" class="nav-item">
         <a class="nav-link" routerLink="/dashboard">View Claims</a>
@@ -37,13 +40,10 @@
         <a class="nav-link" routerLink="/dashboard">View Claims</a>
       </li>
       <li *ngIf="IsLoggin && roleName === 'ADMIN'" class="nav-item">
-        <a class="nav-link" routerLink="/dashboard">View Polciies</a>
+        <a class="nav-link" routerLink="/dashboard">View Policies</a>
       </li>
       <li *ngIf="IsLoggin && roleName === 'ADMIN'" class="nav-item">
         <a class="nav-link" routerLink="/create-policy">Create Policy</a>
-      </li>
-      <li *ngIf="IsLoggin && roleName === 'ADMIN'" class="nav-item">
-        <a class="nav-link" routerLink="/dashboard">View Claims</a>
       </li>
     </ul>
 

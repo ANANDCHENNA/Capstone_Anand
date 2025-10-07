@@ -39,19 +39,17 @@ public class Claim {
     @OneToOne(mappedBy = "claim")
     @JsonIgnore
     private Investigation investigation;
-  
+
     public Claim() {
     }
 
     public Claim(Long id, String description, Date date, String status, Policyholder policyholder, Adjuster adjuster,
-            Underwriter underwriter, Investigation investigation,Investigator investigator) {
+            Underwriter underwriter, Investigator investigator, Investigation investigation) {
         this.id = id;
             }
 
-    public Claim(Long id, String description, Date date, String status,  Policyholder policyholder,
-            Adjuster adjuster,
-           
-            Underwriter underwriter, Investigation investigation, Long policy_id,Policy policy) {
+    public Claim(Long id, String description, Date date, String status, Policyholder policyholder, Adjuster adjuster,
+            Underwriter underwriter, Investigation investigation, Long policy_id, Policy policy) {
         this.description = description;
         this.id = id;
         this.date = date;
@@ -61,9 +59,9 @@ public class Claim {
         this.adjuster = adjuster;
         this.underwriter = underwriter;
         this.investigation = investigation;
-        this.investigator=investigator;
+        this.investigator = investigator;
         this.policy_id = policy_id;
-        //this.policy=policy;
+        // this.policy=policy;
     }
 
     public Long getId() {
@@ -137,14 +135,13 @@ public class Claim {
     public void setInvestigator(Investigator investigator) {
         this.investigator = investigator;
     }
-    
 
     // public String getClaimType() {
-    //     return claimType;
+    // return claimType;
     // }
 
     // public void setClaimType(String claimType) {
-    //     this.claimType = claimType;
+    // this.claimType = claimType;
     // }
 
     public Long getPolicy_id() {
@@ -156,11 +153,11 @@ public class Claim {
     }
 
     // public Policy getPolicy() {
-    //     return policy;
+    // return policy;
     // }
 
     // public void setPolicy(Policy policy) {
-    //     this.policy = policy;
+    // this.policy = policy;
     // }
-    
+
 }

@@ -45,8 +45,16 @@ export class HttpService {
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('Authorization', `Bearer ${authToken}`)
     return this.http.get(this.serverName + `/api/adjuster/underwriters`, { headers: headers })
-
   }
+
+  createPolicy(policy: any): Observable<any> {
+    const authToken = this.authService.getToken();
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Authorization', `Bearer ${authToken}`)
+    return this.http.post(this.serverName + `/api/policies`, policy, { headers: headers });
+  }
+  
   GetAllInvestigator(): Observable<any> {
     const authToken = this.authService.getToken();
     let headers = new HttpHeaders();
@@ -169,7 +177,7 @@ export class HttpService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('Authorization', `Bearer ${authToken}`);
-    return this.http.get<any[]>(`${this.serverName}/api/policy/all`, { headers: headers });
+    return this.http.get<any[]>(`${this.serverName}/api/policies`, { headers: headers });
   }
   
   getPoliciesByHolder(holderId: string) {
