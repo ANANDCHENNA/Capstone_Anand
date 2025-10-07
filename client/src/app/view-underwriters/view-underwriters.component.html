@@ -1,32 +1,40 @@
 <div class="container mt-4">
-  <div class="card underwriter-card mb-4">
-    <!-- Gradient Header -->
-    <div class="underwriter-header d-flex justify-content-between align-items-center" style="background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);">
+  <!-- The main container for the Underwriter section -->
+  <div class="card underwriter-main-card mb-4">
+    <!-- Gradient Header for the entire section, now integrated with search -->
+    <div class="underwriter-header d-flex justify-content-between align-items-center">
       <h5 class="mb-0">Underwriters</h5>
       <input
         type="text"
         class="form-control form-control-sm underwriter-search w-25"
-        placeholder="Search..."
+        placeholder="🔍 Search..."
         [(ngModel)]="searchText" />
     </div>
 
-    <!-- Table -->
+    <!-- This card-body now acts as the container for the individual underwriter cards -->
     <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-hover align-middle underwriter-table">
-          <thead>
-            <tr>
-              <th>Underwriter ID </th>
-              <th>Username </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let underwriter of filteredUnderwriters()">
-              <td>{{ underwriter.id }}</td>
-              <td>{{ underwriter.username }}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <!-- Loop through filtered underwriters to create individual cards -->
+        <div class="col" *ngFor="let underwriter of filteredUnderwriters()">
+          <div class="card underwriter-gradient-card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="fas fa-user-tie me-2"></i> Underwriter #{{ underwriter.id }}
+              </h5>
+              <p class="card-text">
+                <i class="fas  me-2"></i> <strong>Username:</strong> {{ underwriter.username }}
+              </p>
+            </div>
+            <!-- If you want a footer per underwriter card, add it here.
+                 For now, keeping it simple as per original table, which didn't have per-row actions. -->
+            <!-- <div class="card-footer text-center">
+              <button class="btn btn-outline-light btn-sm">Details</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div *ngIf="filteredUnderwriters().length === 0" class="alert alert-info mt-3 text-center">
+        No underwriters found matching your search.
       </div>
     </div>
   </div>

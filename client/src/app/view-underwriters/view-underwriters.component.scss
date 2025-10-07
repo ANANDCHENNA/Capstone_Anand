@@ -1,47 +1,150 @@
-/* Reuse Gradient Card Look */
-.underwriter-card {
+/* Existing gradient card styles for reference (e.g., for ADJUSTER) */
+.gradient-card {
+  background: linear-gradient(90deg, #2b5876, #4e4376);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlideUp 0.6s ease forwards;
+}
+
+/* Add a small delay for each card using nth-child for a cascading effect */
+.col:nth-child(1) .gradient-card { animation-delay: 0.1s; }
+.col:nth-child(2) .gradient-card { animation-delay: 0.2s; }
+.col:nth-child(3) .gradient-card { animation-delay: 0.3s; }
+.col:nth-child(4) .gradient-card { animation-delay: 0.4s; }
+.col:nth-child(5) .gradient-card { animation-delay: 0.5s; }
+
+/* Hover effect */
+.gradient-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 10px 20px rgba(0, 114, 255, 0.4);
+}
+
+/* Footer styling */
+.gradient-card .card-footer {
+  background: rgba(255, 255, 255, 0.15);
+  border-top: none;
+}
+
+/* Badge styling */
+.badge {
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* Light button styling */
+.btn-light {
+  color: #0072ff;
+  font-weight: 500;
+  border: none;
+}
+
+.modal-gradient{
+  background: linear-gradient(90deg, #2b5876, #4e4376);
+}
+
+/* ✨ Animation Keyframes */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Styles for the main Underwriter section card */
+.underwriter-main-card {
   border: none;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-/* Header with gradient */
+/* Header for the Underwriter section (now contains search) */
 .underwriter-header {
-  background: linear-gradient(90deg, #11998e, #38ef7d); /* greenish gradient */
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); /* Original blue gradient */
   color: white;
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.5px;
   padding: 12px 16px;
+  border-top-left-radius: 12px; /* Match main card border-radius */
+  border-top-right-radius: 12px; /* Match main card border-radius */
 }
 
-/* Table */
-.underwriter-table thead {
-  background: linear-gradient(90deg, #d4fc79, #96e6a1); /* light green gradient */
-  color: #333;
-  font-weight: 600;
-}
-
-.underwriter-table th {
-  cursor: pointer;
-  user-select: none;
-}
-
-.underwriter-table tbody tr:hover {
-  background-color: rgba(0, 0, 0, 0.03);
-  transition: 0.2s;
-}
-
-/* Search Input */
+/* Search Input within the underwriter header */
 .underwriter-search {
   border-radius: 20px;
   font-size: 0.9rem;
   padding: 4px 10px;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Lighter border for contrast */
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  color: white;
+}
+
+.underwriter-search::placeholder {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .underwriter-search:focus {
-  border-color: #38ef7d;
-  box-shadow: 0 0 4px rgba(56, 239, 125, 0.5);
+  border-color: white;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
 }
+
+
+/* New styles for individual Underwriter Cards (similar to adjuster cards) */
+.underwriter-gradient-card {
+  background: linear-gradient(90deg, #0d466d,  #00f2fe); /* greenish gradient from your previous example */
+  color: white;
+  border: none;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlideUp 0.6s ease forwards; /* Reuse animation */
+}
+
+/* Apply staggered animation delay to individual underwriter cards */
+.underwriter-main-card .col:nth-child(1) .underwriter-gradient-card { animation-delay: 0.1s; }
+.underwriter-main-card .col:nth-child(2) .underwriter-gradient-card { animation-delay: 0.2s; }
+.underwriter-main-card .col:nth-child(3) .underwriter-gradient-card { animation-delay: 0.3s; }
+.underwriter-main-card .col:nth-child(4) .underwriter-gradient-card { animation-delay: 0.4s; }
+/* Add more as needed if you expect more than 3 cards per row */
+
+.underwriter-gradient-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 10px 20px rgba(17, 153, 142, 0.4); /* green shadow on hover */
+}
+
+.underwriter-gradient-card .card-title {
+  color: #e0ffe0; /* Lighter green for title */
+}
+
+.underwriter-gradient-card .card-text strong {
+  color: #c0f0c0; /* Slightly lighter for labels */
+}
+
+/* If you add a footer to individual underwriter cards */
+/*
+.underwriter-gradient-card .card-footer {
+  background: rgba(255, 255, 255, 0.15);
+  border-top: none;
+}
+.underwriter-gradient-card .btn-outline-light {
+  color: white;
+  border-color: white;
+}
+.underwriter-gradient-card .btn-outline-light:hover {
+  background-color: white;
+  color: #11998e;
+}
+*/

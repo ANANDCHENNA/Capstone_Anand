@@ -3,19 +3,19 @@
   <!-- Search + Sort Controls -->
   <div class="row g-3 mb-4">
     <div class="col-md-4">
-      <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText" />
+      <input type="text" class="form-control" placeholder="🔍 Search By Id..." [(ngModel)]="searchText" />
     </div>
     <div class="col-md-4">
       <select class="form-select" [(ngModel)]="sortKey">
-        <option value="">Sort By</option>
+        <option value="">🔃 Sort By</option>
         <option value="id">ID</option>
         <option value="status">Status</option>
       </select>
     </div>
     <div class="col-md-4">
       <select class="form-select" [(ngModel)]="sortOrder">
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
+        <option value="asc">📈 Ascending</option>
+        <option value="desc">📉 Descending</option>
       </select>
     </div>
   </div>
@@ -57,7 +57,7 @@
           </p>
           <p>
             <i class="fas fa-flag me-2 text-warning"></i>
-            <strong>Status:</strong>
+            <strong>Status: </strong>
             <span class="badge" [ngClass]="getStatusClass(claim.status)">
               {{ claim.status }}
             </span>
@@ -65,9 +65,9 @@
         </div>
         <div class="card-footer d-flex justify-content-between">
           <button class="btn btn-outline-light btn-sm" (click)="onAdjusterAssignClaim(claim.id)">
-            {{ claim.underwriter ? 'Assigned' : 'Assign' }}
+            {{ claim.underwriter ? '👤 Assigned' : '👤 Assign' }}
           </button>
-          <button class="btn btn-light btn-sm" (click)="openClaimModal(claim)">Details</button>
+          <button class="btn btn-outline-light btn-sm" (click)="openClaimModal(claim)">🗒️ Details</button>
         </div>
       </div>
     </div>
