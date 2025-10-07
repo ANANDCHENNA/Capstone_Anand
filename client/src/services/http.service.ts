@@ -89,12 +89,26 @@ export class HttpService {
     return this.http.post(this.serverName + '/api/investigator/investigation', details, { headers: headers });
   }
 
-  createClaims(details: any, policyholderId: any): Observable<any> {
+  // createClaims(details: any, policyholderId: any): Observable<any> {
+  //   const authToken = this.authService.getToken();
+  //   let headers = new HttpHeaders();
+  //   headers = headers.set('Content-Type', 'application/json');
+  //   headers = headers.set('Authorization', `Bearer ${authToken}`);
+  //   return this.http.post(this.serverName + '/api/policyholder/claim?policyholderId=' + policyholderId, details, { headers: headers });
+  // }
+  createClaims(details: any): Observable<any> {
     const authToken = this.authService.getToken();
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Authorization', `Bearer ${authToken}`);
-    return this.http.post(this.serverName + '/api/policyholder/claim?policyholderId=' + policyholderId, details, { headers: headers });
+  
+    // Do NOT set 'Content-Type' manually when sending FormData
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${authToken}`
+    });
+  
+    return this.http.post(
+      this.serverName + '/api/policyholder/claim'+
+      details, // this should be FormData from component
+      { headers: headers }
+    );
   }
 
   getClaimById(claimId: any): Observable<any> {

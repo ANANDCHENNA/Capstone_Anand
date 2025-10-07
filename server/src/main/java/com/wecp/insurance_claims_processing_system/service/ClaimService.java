@@ -10,7 +10,13 @@ import com.wecp.insurance_claims_processing_system.repository.PolicyholderReposi
 import com.wecp.insurance_claims_processing_system.repository.UnderwriterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Service
@@ -28,14 +34,43 @@ public class ClaimService {
     @Autowired
     private PolicyholderRepository policyholderRepository;
 
-    // Create Claim Component
-    public Claim submitClaim(Long policyholderId, Claim claim) {
+    // // Create Claim Component
+    // public Claim submitClaim(Long policyholderId, Claim claim) {
 
-        Policyholder ph = policyholderRepository.findById(policyholderId).get();
-        claim.setPolicyholder(ph);
-        return claimRepository.save(claim);
+    //     Policyholder ph = policyholderRepository.findById(policyholderId).get();
+    //     claim.setPolicyholder(ph);
+    //     return claimRepository.save(claim);
+    // }
+
+public Claim submitClaim(Long policyholderId, Claim claim, MultipartFile photo) {
+    // 1️⃣ Get the policyholder
+    Policyholder ph = policyholderRepository.findById(policyholderId)
+            .orElseThrow(() -> new RuntimeException("Policyholder not found"));
+    claim.setPolicyholder(ph);
+
+    // 2️⃣ Handle photo upload if present
+    if (photo != null && !photo.isEmpty()) {
+        try {
+            // Create unique filename
+            String filename = System.currentTimeMillis() + "_" + photo.getOriginalFilename();
+            Path filePath = Paths.get("uploads/claims/" + filename);
+
+            // Ensure directory exists
+            Files.createDirectories(filePath.getParent());
+
+            // Save the file
+            Files.copy(photo.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            // Store filename in Claim entity
+            claim.setPhotoFilename(filename);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to save photo", e);
+        }
     }
 
+    // 3️⃣ Save Claim in database
+    return claimRepository.save(claim);
+}
     // Dashboard Component for role: Policyholder
     public List<Claim> getClaimsByPolicyholder(Long policyholderId) {
 
