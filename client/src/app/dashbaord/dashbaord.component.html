@@ -21,42 +21,13 @@
   </div>
 
   <!-- ADJUSTER -->
-  <!-- <div *ngIf="role === 'ADJUSTER'" class="card shadow-sm mb-4 border-0">
-    <div class="card-header text-white fw-bold" style="background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);">Adjuster Claims</div>
-    <div class="table-responsive">
-      <table class="table table-hover align-middle">
-        <thead>
-          <tr class="table-light">
-            <th>Claim ID</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th colspan="2">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let claim of filteredAdjusterClaims()">
-            <td>{{claim.id}}</td>
-            <td>{{claim.description}}</td>
-            <td>{{claim.date | date:'dd-MM-yyyy'}}</td>
-            <td><span class="badge" [ngClass]="getStatusClass(claim.status)">{{claim.status}}</span></td>
-            <td><button class="btn btn-outline-primary btn-sm"
-                (click)="onAdjusterAssignClaim(claim.id)">{{claim.underwriter ? "Assigned" : "Assign
-                Underwriter"}}</button></td>
-            <td><button class="btn btn-info btn-sm text-white" (click)="onUpdateClaimAdjuster(claim.id)">Update</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div> -->
   <div *ngIf="role === 'ADJUSTER'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <div class="col" *ngFor="let claim of filteredAdjusterClaims()">
       <div class="card gradient-card h-100 shadow-sm">
         <div class="card-body">
           <h5 class="card-title">Claim #{{ claim.id }}</h5>
           <p class="card-text text-truncate">{{ claim.description }}</p>
-          <p class="mb-1"><strong>Date:</strong> {{ claim.date | date:'dd-MM-yyyy' }}</p>
+          <p><strong>Date:</strong> {{ claim.date | date:'dd-MM-yyyy' }}</p>
           <span class="badge" [ngClass]="getStatusClass(claim.status)">{{ claim.status }}</span>
         </div>
         <div class="card-footer d-flex justify-content-between">
@@ -73,83 +44,57 @@
   </div>
 
   <!-- UNDERWRITER -->
-  <div *ngIf="role === 'UNDERWRITER'" class="card shadow-sm mb-4 border-0">
-    <div class="card-header text-white fw-bold" style="background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);">Underwriter Claims</div>
-    <div class="table-responsive">
-      <table class="table table-striped table-hover align-middle">
-        <thead class="table-light">
-          <tr>
-            <th>Claim ID</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let claim of filteredUnderwriterClaims()">
-            <td>{{claim.id}}</td>
-            <td>{{claim.description}}</td>
-            <td>{{claim.date | date:'dd-MM-yyyy'}}</td>
-            <td><span class="badge" [ngClass]="getStatusClass(claim.status)">{{claim.status}}</span></td>
-            <td><button class="btn btn-info btn-sm text-white" (click)="onUnderwriterUpdateClaim(claim.id)">Update</button></td>
-          </tr>
-        </tbody>
-      </table>
+  <div *ngIf="role === 'UNDERWRITER'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let claim of filteredUnderwriterClaims()">
+      <div class="card gradient-card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Claim #{{ claim.id }}</h5>
+          <p class="card-text text-truncate">{{ claim.description }}</p>
+          <p><strong>Date:</strong> {{ claim.date | date:'dd-MM-yyyy' }}</p>
+          <span class="badge" [ngClass]="getStatusClass(claim.status)">{{ claim.status }}</span>
+        </div>
+        <div class="card-footer text-center">
+          <button class="btn btn-light btn-sm w-100" (click)="onUnderwriterUpdateClaim(claim.id)">
+            Update
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- INVESTIGATOR -->
-  <div *ngIf="role === 'INVESTIGATOR'" class="card shadow-sm mb-4 border-0">
-    <div class="card-header text-white fw-bold" style="background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);">Investigator Reports</div>
-    <div class="table-responsive">
-      <table class="table table-hover align-middle">
-        <thead class="table-light">
-          <tr>
-            <th>Investigation ID</th>
-            <th>Claim</th>
-            <th>Report</th>
-            <th>Status</th>
-            <th>Update</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let investigation of filteredInvestigatorRecords()">
-            <td>{{investigation.id}}</td>
-            <td>{{investigation.claim.description}}</td>
-            <td>{{investigation.report}}</td>
-            <td><span class="badge" [ngClass]="getStatusClass(investigation.status)">{{investigation.status}}</span></td>
-            <td><button class="btn btn-info btn-sm text-white"
-                (click)="onInvestigatorUpdateInvestigation(investigation.id)">Update</button></td>
-          </tr>
-        </tbody>
-      </table>
+  <div *ngIf="role === 'INVESTIGATOR'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let investigation of filteredInvestigatorRecords()">
+      <div class="card gradient-card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Investigation #{{ investigation.id }}</h5>
+          <p class="card-text text-truncate">{{ investigation.report }}</p>
+          <p><strong>Claim:</strong> {{ investigation.claim.description }}</p>
+          <span class="badge" [ngClass]="getStatusClass(investigation.status)">{{ investigation.status }}</span>
+        </div>
+        <div class="card-footer text-center">
+          <button class="btn btn-light btn-sm w-100" (click)="onInvestigatorUpdateInvestigation(investigation.id)">
+            Update
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- POLICYHOLDER -->
-  <div *ngIf="role === 'POLICYHOLDER'" class="card shadow-sm mb-4 border-0">
-    <div class="card-header text-white fw-bold" style="background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);">My
-      Claims</div>
-    <div class="table-responsive">
-      <table class="table table-hover table-bordered align-middle">
-        <thead class="table-light">
-          <tr>
-            <th>Claim ID</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let claim of filteredPolicyholderClaims()">
-            <td>{{claim.id}}</td>
-            <td>{{claim.description}}</td>
-            <td>{{claim.date | date:'dd-MM-yyyy'}}</td>
-            <td><span class="badge" [ngClass]="getStatusClass(claim.status)">{{claim.status}}</span></td>
-          </tr>
-        </tbody>
-      </table>
+  <div *ngIf="role === 'POLICYHOLDER'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let claim of filteredPolicyholderClaims()">
+      <div class="card gradient-card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Claim #{{ claim.id }}</h5>
+          <p class="card-text text-truncate">{{ claim.description }}</p>
+          <p><strong>Date:</strong> {{ claim.date | date:'dd-MM-yyyy' }}</p>
+          <span class="badge" [ngClass]="getStatusClass(claim.status)">{{ claim.status }}</span>
+        </div>
+        <div class="card-footer text-center">
+          <button class="btn btn-light btn-sm w-100" (click)="openClaimModal(claim)">View Details</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -175,14 +120,12 @@
       </div>
     </div>
   </div>
-  
-  
 
-  <!-- Toast / Snackbar -->
+  <!-- Toast -->
   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
     <div id="snackbarToast" class="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex">
-        <div class="toast-body">{{snackbarMessage}}</div>
+        <div class="toast-body">{{ snackbarMessage }}</div>
         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
           aria-label="Close"></button>
       </div>
