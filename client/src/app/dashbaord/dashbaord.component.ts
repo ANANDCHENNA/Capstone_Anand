@@ -36,6 +36,9 @@ export class DashbaordComponent implements OnInit {
   claimByPolicyholder: Claim[] = [];
   selectedClaim!: Claim;
 
+  // Policies
+  policies: any[] = [];
+
   constructor(
     private httpService: HttpService,
     private authService: AuthService,
@@ -59,9 +62,11 @@ export class DashbaordComponent implements OnInit {
     if (this.role === 'INVESTIGATOR') {
       this.httpService.getInvestigations().subscribe(data => this.investigations = data);
     }
-
     if (this.role === 'POLICYHOLDER') {
       this.httpService.getClaimsByPolicyholder(this.policyholderId).subscribe(data => this.claimByPolicyholder = data);
+    }
+    if (this.role === 'ADMIN') {
+      this.httpService.getAllPolicies().subscribe(data => this.policies = data);
     }
   }
 
@@ -84,15 +89,29 @@ export class DashbaordComponent implements OnInit {
   }
 
   onUpdateClaimAdjuster(id: number) {
-    this.router.navigate([`/update-claim/${id}`]);
-    this.showSnackbar(`Claim #${id} updated!`, 'info');
+    if (id !== undefined) {
+      // Hide the modal manually
+      const modalEl = document.getElementById('claimModal');
+      if (modalEl) {
+        const modalInstance = bootstrap.Modal.getInstance(modalEl);
+        if (modalInstance) {
+          modalInstance.hide();
+        }
+      }
+
+      // Navigate after modal is hidden
+      setTimeout(() => {
+        this.router.navigate([`/update-claim/${id}`]);
+        this.showSnackbar(`Claim #${id} updated!`, 'info');
+      }, 300); // slight delay to allow modal to close smoothly
+    }
   }
 
   onUnderwriterUpdateClaim(id: number) {
     this.router.navigate([`/update-claim-underwriter/${id}`]);
     this.showSnackbar(`Underwriter updated claim #${id}`, 'info');
   }
-
+  
   onInvestigatorUpdateInvestigation(id: number) {
     this.router.navigate([`/update-claim-investigation/${id}`]);
     this.showSnackbar(`Investigation #${id} updated!`, 'info');
@@ -213,6 +232,17 @@ export class DashbaordComponent implements OnInit {
     return result;
   }
 
+  filteredPolicies(): any[] {
+    let result = [...this.policies];
+    if (this.searchText) {
+      result = result.filter(policy =>
+        policy.policyNumber.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        policy.policyType.toLowerCase().includes(this.searchText.toLowerCase()));
+    }
+    return result;
+  }
+
+
   // ---------------- Status Colour ----------------
   getStatusClass(status: string): string {
     switch (status) {
@@ -229,5 +259,21 @@ export class DashbaordComponent implements OnInit {
     const modal = new bootstrap.Modal(document.getElementById('claimModal'));
     modal.show();
   }
+
+  editPolicy(policy: any) {
+    this.router.navigate([`/update-policy/${policy.id}`]);
+    this.showSnackbar(`Editing Policy #${policy.policyNumber}`, 'info');
+  }
+
+  deletePolicy(id: number) {
+    if (confirm('Are you sure you want to delete this policy?')) {
+      this.httpService.deletePolicy(id).subscribe(() => {
+        this.policies = this.policies.filter(p => p.id !== id);
+        this.showSnackbar(`Policy deleted successfully!`, 'success');
+      });
+    }
+  }
+
+
 }
 

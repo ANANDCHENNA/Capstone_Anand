@@ -46,7 +46,6 @@ export class AssignClaimComponent implements OnInit {
     this.id = this.route?.snapshot?.params?.['id'] ?? null;
     if (this.id) {
       this.httpService.getClaimById(this.id).subscribe((data) => {
-        console.log(data);
         this.itemForm.patchValue(data);
       })
     }

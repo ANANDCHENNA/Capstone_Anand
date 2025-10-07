@@ -18,6 +18,8 @@ import { UpdateInvestigationComponent } from './update-claim-investigation/updat
 import { HomeComponent } from './home/home.component';
 import { ViewUnderwritersComponent } from './view-underwriters/view-underwriters.component';
 import { UpdateClaimUnderwriterComponent } from './update-claim-underwriter/update-claim-underwriter.component';
+import { PurchasePolicyComponent } from './purchase/purchase-policy.component';
+import { ViewPoliciessComponent } from './view-policies/view-policies.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { UpdateClaimUnderwriterComponent } from './update-claim-underwriter/upda
     CreateInvestigatorComponent,
     UpdateInvestigationComponent,
     ViewUnderwritersComponent,
-    UpdateClaimUnderwriterComponent
+    UpdateClaimUnderwriterComponent,
+    PurchasePolicyComponent,
+    ViewPoliciessComponent
   ],
   imports: [
     BrowserModule,

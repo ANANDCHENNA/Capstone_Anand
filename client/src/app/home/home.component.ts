@@ -16,12 +16,11 @@ export class HomeComponent implements OnInit {
     this.IsLoggin = authService.getLoginStatus;
     this.roleName = authService.getRole;
     if (this.IsLoggin == false) {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/home');
     }
   }
 
   ngOnInit(): void {
-    
   }
 
   onLogin(): void {

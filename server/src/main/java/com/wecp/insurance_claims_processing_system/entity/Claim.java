@@ -49,6 +49,18 @@ public class Claim {
             Underwriter underwriter, Investigation investigation, Investigator investigator, String photoFilename) {
         this.id = id;
         this.description = description;
+        this.date = date;
+        this.status = status;
+        this.policyholder = policyholder;
+        this.adjuster = adjuster;
+        this.underwriter = underwriter;
+        this.investigator = investigator;
+        this.investigation = investigation;
+    }
+
+    public Claim(Long id, String description, Date date, String status, Policyholder policyholder, Adjuster adjuster,
+            Underwriter underwriter, Investigation investigation, Long policy_id, Policy policy) {
+        this.description = description;
         this.id = id;
         this.date = date;
         this.status = status;
