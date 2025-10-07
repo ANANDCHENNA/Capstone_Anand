@@ -1,10 +1,13 @@
 package com.wecp.insurance_claims_processing_system.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import com.wecp.insurance_claims_processing_system.entity.Policy;
+import com.wecp.insurance_claims_processing_system.entity.Policyholder;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface PolicyRepository extends JpaRepository<Policy, Long>{
+import java.util.List;
+import java.util.Optional;
+
+public interface PolicyRepository extends JpaRepository<Policy, Long> {
+    List<Policy> findByPolicyholder(Policyholder policyholder);
+    Optional<Policy> findByPolicyNumber(String policyNumber);
 }

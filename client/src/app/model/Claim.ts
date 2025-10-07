@@ -1,6 +1,7 @@
 import { CreateInvestigatorComponent } from "../create-investigator/create-investigator.component"
 import { Investigation } from "./Investigation"
 import { Investigator } from "./Investigator"
+import { Policy } from "./Policy"
 import { Underwriter } from "./Underwriter"
 
 export interface Claim {
@@ -14,6 +15,8 @@ export interface Claim {
     investigation : Investigation   
     underwriter: Underwriter
     investigator:Investigator
+    selectedPolicy?:Policy
+    
 }
 export { Investigation, Underwriter }
 

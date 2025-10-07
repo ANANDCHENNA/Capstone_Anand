@@ -1,32 +1,54 @@
 package com.wecp.insurance_claims_processing_system.entity;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "policies")
 public class Policy {
 
     @Id
-    private Long id; // predefined, no @GeneratedValue
-    private String name;
-    private String coverage; // e.g., "Accident, Damage"
-    private String tenure; // months
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    
-    // @ManyToMany(mappedBy = "ownedPolicies")
-    // private List<Policyholder> owners;
+    @Column(unique = true)
+    private String policyNumber;
 
-    public Policy() {
-    }
+    private String policyType;      // e.g., "Health", "Vehicle", "Life"
+    private Double premium;         // amount to pay
+    private int termMonths;         // duration in months
 
-    public Policy(Long id, String name, String coverage, String tenure) {
+    @Enumerated(EnumType.STRING)
+    private PolicyStatus status;    // e.g., ACTIVE, PENDING, CANCELLED
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "policyholder_id")
+    @JsonIgnore
+    private Policyholder policyholder;
+
+    public Policy() {}
+
+    public Policy(Long id, String policyNumber, String policyType, Double premium, int termMonths, PolicyStatus status, Policyholder policyholder) {
         this.id = id;
-        this.name = name;
-        this.coverage = coverage;
-        this.tenure = tenure;
+        this.policyNumber = policyNumber;
+        this.policyType = policyType;
+        this.premium = premium;
+        this.termMonths = termMonths;
+        this.status = status;
+        this.policyholder = policyholder;
     }
 
-    // ✅ Getters and setters
     public Long getId() {
         return id;
     }
@@ -35,36 +57,51 @@ public class Policy {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPolicyNumber() {
+        return policyNumber;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
     }
 
-    public String getCoverage() {
-        return coverage;
+    public String getPolicyType() {
+        return policyType;
     }
 
-    public void setCoverage(String coverage) {
-        this.coverage = coverage;
+    public void setPolicyType(String policyType) {
+        this.policyType = policyType;
     }
 
-    public String getTenure() {
-        return tenure;
+    public Double getPremium() {
+        return premium;
     }
 
-    public void setTenure(String tenure) {
-        this.tenure = tenure;
+    public void setPremium(Double premium) {
+        this.premium = premium;
     }
 
-    // ✅ Newly added getters/setters for owners list
-    // public List<Policyholder> getOwners() {
-    //     return owners;
-    // }
+    public int getTermMonths() {
+        return termMonths;
+    }
 
-    // public void setOwners(List<Policyholder> owners) {
-    //     this.owners = owners;
-    // }
+    public void setTermMonths(int termMonths) {
+        this.termMonths = termMonths;
+    }
+
+    public PolicyStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PolicyStatus status) {
+        this.status = status;
+    }
+
+    public Policyholder getPolicyholder() {
+        return policyholder;
+    }
+
+    public void setPolicyholder(Policyholder policyholder) {
+        this.policyholder = policyholder;
+    }
 }

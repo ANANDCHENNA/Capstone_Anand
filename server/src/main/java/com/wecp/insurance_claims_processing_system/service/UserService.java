@@ -31,6 +31,9 @@ import java.util.Collections;
  
      @Autowired
      private UnderwriterRepository underwriterRepository;
+
+     @Autowired
+     private AdminRepository adminRepository;
  
      @Autowired
      private PasswordEncoder passwordEncoder;
@@ -72,6 +75,12 @@ import java.util.Collections;
                  copyProperties(user, newUser);
                  underwriterRepository.save((Underwriter) newUser);
                  break;
+
+             case "ADMIN" :
+                 newUser =  new Admin();
+                 copyProperties(user, newUser);
+                 adminRepository.save((Admin) newUser);
+                 break;
              default:
                  throw new IllegalArgumentException("Invalid User try again");
                
@@ -96,15 +105,16 @@ import java.util.Collections;
                 Collections.singletonList(new SimpleGrantedAuthority(user.getRole()))
         );
     }
- 
-     
-     private void copyProperties(User source, User target){
-         target.setUsername(source.getUsername());
-         target.setEmail((source.getEmail()));
-         target.setPassword(passwordEncoder.encode(source.getPassword()));
-         target.setRole(source.getRole());
-     }
- 
-   
- }
- 
+
+    private void copyProperties(User source, User target) {
+        target.setUsername(source.getUsername());
+        target.setEmail((source.getEmail()));
+        target.setPassword(passwordEncoder.encode(source.getPassword()));
+        target.setRole(source.getRole());
+    }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+}

@@ -15,6 +15,7 @@ import { UpdateInvestigationComponent } from './update-claim-investigation/updat
 import { HomeComponent } from './home/home.component';
 import { ViewUnderwritersComponent } from './view-underwriters/view-underwriters.component';
 import { UpdateClaimUnderwriterComponent } from './update-claim-underwriter/update-claim-underwriter.component';
+import { PurchasePolicyComponent } from './purchase/purchase-policy.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashbaordComponent },
+  { path: 'buy-policy', component: PurchasePolicyComponent },
   { path: 'create-claim', component: CreateClaimComponent },  
   { path: 'view-underwriters', component: ViewUnderwritersComponent },  
   { path: 'update-claim/:id', component: UpdateClaimComponent },  
