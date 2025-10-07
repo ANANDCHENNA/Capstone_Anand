@@ -20,10 +20,10 @@ import { ViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CreatePolicyComponent } from './create-policy/create-policy.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'dashboard', component: DashbaordComponent },
   { path: 'policies', component: ViewPoliciessComponent },
   { path: 'buy-policy', component: PurchasePolicyComponent },
