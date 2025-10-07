@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/policy")
+@RequestMapping("/api/policies")
 public class PolicyController {
 
     @Autowired

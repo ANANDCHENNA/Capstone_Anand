@@ -14,13 +14,21 @@
                     <thead>
                         <tr>
                             <th>Policy ID </th>
+                            <th>Policy Number </th>
                             <th>Policy Name </th>
+                            <th>Policy Type </th>
+                            <th>Policy Term Months </th>
+                            <th>Policy Premium </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let policy of filteredPolicies()">
                             <td>{{ policy.id }}</td>
+                            <td>{{ policy.policyNumber}}</td>
                             <td>{{ policy.name}}</td>
+                            <td>{{ policy.policyType}}</td>
+                            <td>{{ policy.termMonths}}</td>
+                            <td>{{ policy.premium}}</td>
                         </tr>
                     </tbody>
                 </table>
