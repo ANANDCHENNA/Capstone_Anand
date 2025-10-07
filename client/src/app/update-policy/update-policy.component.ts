@@ -11,7 +11,7 @@ import { Policy } from '../model/Policy';
 })
 export class UpdatePolicyComponent implements OnInit {
   policyForm: FormGroup;
-  policyId: number;
+  policyId!: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -73,6 +73,10 @@ export class UpdatePolicyComponent implements OnInit {
         }
       });
     }
+  }
+
+  cancel() {
+    this.router.navigate(['/policies'])
   }
 
   private showToast(message: string, type: 'success' | 'error') {

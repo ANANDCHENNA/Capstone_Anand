@@ -2,8 +2,6 @@ package com.wecp.insurance_claims_processing_system.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +22,7 @@ public class Policy {
 
     @Column(unique = true)
     private String policyNumber;
-
+    private String name;
     private String policyType; 
     private Double premium;     
     private int termMonths;       
@@ -37,15 +35,15 @@ public class Policy {
 
     public Policy() {}
 
-    public Policy(Long id, String policyNumber, String name, String policyType, Double premium, int termMonths, PolicyStatus status, Policyholder policyholder) {
+    public Policy(Long id, String policyNumber, String name, String policyType, Double premium, int termMonths, Policyholder policyholder, String status) {
         this.id = id;
         this.policyNumber = policyNumber;
         this.name = name;
         this.policyType = policyType;
         this.premium = premium;
         this.termMonths = termMonths;
-        this.status = status;
         this.policyholder = policyholder;
+        this.status = status;
     }
 
     public Long getId() {
@@ -60,8 +58,12 @@ public class Policy {
         return policyNumber;
     }
 
-    public Policy(String name) {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setPolicyNumber(String policyNumber) {
@@ -92,19 +94,19 @@ public class Policy {
         this.termMonths = termMonths;
     }
 
-    public PolicyStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(PolicyStatus status) {
-        this.status = status;
-    }
-
     public Policyholder getPolicyholder() {
         return policyholder;
     }
 
     public void setPolicyholder(Policyholder policyholder) {
         this.policyholder = policyholder;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

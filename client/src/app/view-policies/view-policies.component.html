@@ -29,12 +29,16 @@
                             <td>{{ policy.premium | currency }}</td>
                             <td>{{ policy.termMonths }}</td>
                             <td>
-                                <button class="btn btn-sm btn-primary me-2" (click)="router.navigate(['/update-policy', policy.id])">
+                                <button *ngIf="roleName === 'ADMIN'" class="btn btn-sm btn-primary me-2" (click)="router.navigate(['/update-policy', policy.id])">
                                     <i class="bi bi-pencil"></i> Edit
                                 </button>
-                                <button class="btn btn-sm btn-danger" (click)="deletePolicy(policy.id)">
+                                <button *ngIf="roleName === 'ADMIN'" class="btn btn-sm btn-danger" (click)="deletePolicy(policy.id)">
                                     <i class="bi bi-trash"></i> Delete
                                 </button>
+                                <button *ngIf="roleName === 'POLICYHOLDER'" class="btn btn-sm btn-success" (click)="purchase(policy.id)">
+                                    <i class="bi bi-trash"></i> Buy
+                                </button>
+
                             </td>
                         </tr>
                     </tbody>

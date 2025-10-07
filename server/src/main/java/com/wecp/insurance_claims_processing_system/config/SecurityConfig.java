@@ -84,6 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Admin endpoints
                 .antMatchers(HttpMethod.POST, "/api/policies").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/policies").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/policies").hasAuthority("POLICYHOLDER")
 
                 // Everything else requires authentication
                 .anyRequest().authenticated()

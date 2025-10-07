@@ -19,11 +19,6 @@ export class AppComponent {
       this.router.navigateByUrl('/home');
     }
   }
-
-
-
-
-
   
   navigateToHome() {
     this.router.navigate(['/home']);

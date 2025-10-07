@@ -7,7 +7,7 @@
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav me-auto">
-      <li *ngIf="!IsLoggin" class="nav-item">
+      <li *ngIf="IsLoggin" class="nav-item">
         <a class="nav-link" routerLink>Home</a>
       </li>
 
@@ -40,7 +40,7 @@
         <a class="nav-link" routerLink="/dashboard">View Claims</a>
       </li>
       <li *ngIf="IsLoggin && roleName === 'ADMIN'" class="nav-item">
-        <a class="nav-link" routerLink="/dashboard">View Policies</a>
+        <a class="nav-link" routerLink="/policies">View Policies</a>
       </li>
       <li *ngIf="IsLoggin && roleName === 'ADMIN'" class="nav-item">
         <a class="nav-link" routerLink="/create-policy">Create Policy</a>

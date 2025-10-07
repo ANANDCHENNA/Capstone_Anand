@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { AuthService } from "../../services/auth.service";
 import { HttpService } from "../../services/http.service";
 import { Policy } from "../model/Policy";
 
@@ -11,6 +12,7 @@ import { Policy } from "../model/Policy";
 export class ViewPoliciesComponent implements OnInit {
 
     policies: Policy[] = [];
+    roleName: string | null;
 
     // Search + Sort
     searchText: string = '';
@@ -19,8 +21,11 @@ export class ViewPoliciesComponent implements OnInit {
 
     constructor(
         private httpService: HttpService,
-        public router: Router
-    ) { }
+        public router: Router,
+        private authService: AuthService
+    ) {
+        this.roleName = authService.getRole;
+    }
 
     ngOnInit(): void {
         this.loadPolicies();
@@ -76,7 +81,7 @@ export class ViewPoliciesComponent implements OnInit {
         if (this.searchText) {
             result = result.filter(policy =>
                 policy.id.toString().includes(this.searchText) ||
-                policy.name.toLowerCase().includes(this.searchText.toLowerCase() 
+                policy.name.toLowerCase().includes(this.searchText.toLowerCase()
                 )
             );
         }

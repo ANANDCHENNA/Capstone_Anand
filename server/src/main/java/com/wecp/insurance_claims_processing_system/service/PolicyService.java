@@ -31,14 +31,14 @@ public class PolicyService {
     }
 
     @Transactional
-    public Policy purchasePolicy(Policyholder policyholder, String policyType, Double premium, int termMonths) {
+    public Policy purchasePolicy(Policyholder policyholder, String name, String policyType, Double premium, int termMonths, String status) {
         Policy policy = new Policy();
         policy.setPolicyNumber(generatePolicyNumber());
+        policy.setName(name);
         policy.setPolicyType(policyType);
         policy.setPremium(premium);
-        LocalDate start = LocalDate.now();
         policy.setTermMonths(termMonths);
-        policy.setStatus(com.wecp.insurance_claims_processing_system.entity.PolicyStatus.ACTIVE);
+        policy.setStatus(status);
         policy.setPolicyholder(policyholder);
         return policyRepository.save(policy);
     }
@@ -63,9 +63,10 @@ public class PolicyService {
     public Policy updatePolicy(Long id, Policy updatedPolicy) {
         return policyRepository.findById(id).map(existing -> {
             existing.setPolicyType(updatedPolicy.getPolicyType());
+            existing.setName(updatedPolicy.getName());
             existing.setPremium(updatedPolicy.getPremium());
             existing.setTermMonths(updatedPolicy.getTermMonths());
-            existing.setStatus(updatedPolicy.getStatus());
+            existing.setStatus(updatedPolicy.getName());
             return policyRepository.save(existing);
         }).orElse(null);
     }
