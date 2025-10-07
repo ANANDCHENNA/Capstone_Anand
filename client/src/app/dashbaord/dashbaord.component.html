@@ -167,7 +167,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button class="btn btn-primary" (click)="onUpdateClaimAdjuster(selectedClaim.id)">Update</button>
+          <button *ngIf="role==='ADMIN'" class="btn btn-primary" (click)="onUpdateClaimAdjuster(selectedClaim.id)">Update</button>
         </div>
       </div>
     </div>

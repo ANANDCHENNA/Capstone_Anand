@@ -18,6 +18,7 @@ import { UpdateClaimUnderwriterComponent } from './update-claim-underwriter/upda
 import { PurchasePolicyComponent } from './purchase/purchase-policy.component';
 import { ViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CreatePolicyComponent } from './create-policy/create-policy.component';
+import { UpdatePolicyComponent } from './update-policy/update-policy.component';
 
 const routes: Routes = [
   { path: '' ,redirectTo: '/home', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'policies', component: ViewPoliciesComponent },
   { path: 'buy-policy', component: PurchasePolicyComponent },
   { path: 'create-claim', component: CreateClaimComponent },  
+  { path: 'update-policy/:id', component: UpdatePolicyComponent },
   { path: 'create-policy', component: CreatePolicyComponent },  
   { path: 'view-underwriters', component: ViewUnderwritersComponent },  
   { path: 'update-claim/:id', component: UpdateClaimComponent },  
