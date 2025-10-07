@@ -20,12 +20,12 @@ import { ViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CreatePolicyComponent } from './create-policy/create-policy.component';
 
 const routes: Routes = [
-  { path: '**', redirectTo: '/', pathMatch: 'full' },
+  { path: '' ,redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashbaordComponent },
-  { path: 'policies', component: ViewPoliciessComponent },
+  { path: 'policies', component: ViewPoliciesComponent },
   { path: 'buy-policy', component: PurchasePolicyComponent },
   { path: 'create-claim', component: CreateClaimComponent },  
   { path: 'create-policy', component: CreatePolicyComponent },  

@@ -14,27 +14,18 @@ export class AppComponent {
   constructor(private authService: AuthService, private router: Router) {
     this.IsLoggin = authService.getLoginStatus;
     this.roleName = authService.getRole;
-  
-    // if (!this.IsLoggin && this.router.url === '/') {
-    //   this.router.navigateByUrl('/home');
-    // }
-    this.checkAuthStatus();
-  }
-  checkAuthStatus(): void {
-      this.IsLoggin = this.authService.getLoginStatus;
-      this.roleName = this.authService.getRole;
-    
-      // Don't redirect to login if user is on landing page, login page, or registration page
-      const publicRoutes = ['/', '/login', '/registration'];
-      const currentRoute = this.router.url;
-    
-      if (!this.IsLoggin && !publicRoutes.includes(currentRoute)) {
-        this.router.navigateByUrl('/login');
-      }
+
+    if (!this.IsLoggin && this.router.url === '/') {
+      this.router.navigateByUrl('/home');
     }
+  }
+
+
+
+
+
   
-  
-  navigateToHome(){
+  navigateToHome() {
     this.router.navigate(['/home']);
   }
 

@@ -62,14 +62,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private authService: AuthService, private router: Router) {
     this.IsLoggin = authService.getLoginStatus;
     this.roleName = authService.getRole;
-    // Your existing auth check - consider if this should be in a guard or resolver instead for better UX
-    if (this.IsLoggin === false) { // Use '===' for strict comparison
-      this.router.navigateByUrl('/login');
+
+    if (this.IsLoggin === false) {
+      this.router.navigateByUrl('/home');
     }
   }
 
   ngOnInit(): void {
-    // Start the hero slider and typing effect
     this.showSlide(0);
   }
 

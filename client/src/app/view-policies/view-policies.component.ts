@@ -7,7 +7,7 @@ import { Policy } from "../model/Policy";
     templateUrl: './view-policies.component.html',
     styleUrls: ['./view-policies.component.scss']
 })
-export class ViewPoliciessComponent implements OnInit {
+export class ViewPoliciesComponent implements OnInit {
 
     policies: Policy[] = [];
 
