@@ -25,12 +25,10 @@ public class Policy {
     @Column(unique = true)
     private String policyNumber;
 
-    private String policyType;      // e.g., "Health", "Vehicle", "Life"
-    private Double premium;         // amount to pay
-    private int termMonths;         // duration in months
-
-    @Enumerated(EnumType.STRING)
-    private PolicyStatus status;    // e.g., ACTIVE, PENDING, CANCELLED
+    private String policyType; 
+    private Double premium;     
+    private int termMonths;       
+    private String status;   
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "policyholder_id")
