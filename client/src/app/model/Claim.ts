@@ -8,6 +8,9 @@ export interface Claim {
     description : string
     date : Date
     status: string
+    // claimType:string
+    policy_id:number
+    policyholderId:number
     investigation : Investigation   
     underwriter: Underwriter
     investigator:Investigator

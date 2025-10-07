@@ -1,16 +1,14 @@
 import { Component, OnInit, Optional } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpService } from '../../services/http.service';
-import { AuthService } from '../../services/auth.service';
-import { DashbaordComponent } from '../dashbaord/dashbaord.component';
+ import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { ActivatedRoute, Router } from '@angular/router'; 
+import { HttpService } from '../../services/http.service'; 
+import { AuthService } from '../../services/auth.service'; 
+import { DashbaordComponent } from '../dashbaord/dashbaord.component'; 
 import { Claim } from '../model/Claim';
-
-@Component({
-  selector: 'app-create-claim',
-  templateUrl: './create-claim.component.html',
-  styleUrls: ['./create-claim.component.scss']
-})
+ @Component({ 
+selector: 'app-create-claim',
+ templateUrl: './create-claim.component.html', 
+styleUrls: ['./create-claim.component.scss'] }) 
 export class CreateClaimComponent implements OnInit {
   itemForm: FormGroup;
   policyholderId: string | null = ''

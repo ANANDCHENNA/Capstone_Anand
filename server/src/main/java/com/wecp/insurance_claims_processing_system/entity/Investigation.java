@@ -10,6 +10,7 @@ public class Investigation {
     private Long id;
     private String report;
     private String status;
+    private String claimType;
 
     @OneToOne
     @JoinColumn(name = "claim_id")
@@ -18,10 +19,11 @@ public class Investigation {
     public Investigation() {
     }
 
-    public Investigation(Long id, String report, String status, Claim claim) {
+    public Investigation(Long id, String report, String status, String claimType,Claim claim) {
         this.id = id;
         this.report = report;
         this.status = status;
+        this.claimType=claimType;
         this.claim = claim;
     }
 
@@ -57,8 +59,11 @@ public class Investigation {
         this.claim = claim;
     }
 
-    
-    // implement investigation entity
+    public String getClaimType() {
+        return claimType;
+    }
 
-    
+    public void setClaimType(String claimType) {
+        this.claimType = claimType;
+    }
 }

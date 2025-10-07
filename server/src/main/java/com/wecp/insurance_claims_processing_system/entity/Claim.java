@@ -1,6 +1,5 @@
 package com.wecp.insurance_claims_processing_system.entity;
 
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,7 +15,11 @@ public class Claim {
     private String description;
     private Date date;
     private String status;
-
+    // private String claimType;
+    private Long policy_id;
+    // @ManyToOne
+    // @JoinColumn(name = "policy_id")
+    // private Policy policy;
     @ManyToOne
     @JoinColumn(name = "policyholder_id")
     private Policyholder policyholder;
@@ -44,8 +47,10 @@ public class Claim {
             Underwriter underwriter, Investigation investigation,Investigator investigator) {
         this.id = id;
         this.description = description;
+        this.id = id;
         this.date = date;
         this.status = status;
+        // this.claimType = claimType;
         this.policyholder = policyholder;
         this.adjuster = adjuster;
         this.underwriter = underwriter;

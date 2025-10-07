@@ -8,8 +8,7 @@ public class Investigator  extends User{
 
     public Investigator() {
     }
-    // Implement entity and extend User class
-
+   
 
     
 }
