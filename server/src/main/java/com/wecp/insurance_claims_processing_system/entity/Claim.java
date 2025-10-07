@@ -46,6 +46,7 @@ public class Claim {
     public Claim(Long id, String description, Date date, String status, Policyholder policyholder, Adjuster adjuster,
             Underwriter underwriter, Investigation investigation,Investigator investigator) {
         this.id = id;
+            }
 
     public Claim(Long id, String description, Date date, String status,  Policyholder policyholder,
             Adjuster adjuster,

@@ -18,10 +18,10 @@ import { UpdateClaimUnderwriterComponent } from './update-claim-underwriter/upda
 import { PurchasePolicyComponent } from './purchase/purchase-policy.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'dashboard', component: DashbaordComponent },
   { path: 'buy-policy', component: PurchasePolicyComponent },
   { path: 'create-claim', component: CreateClaimComponent },  
