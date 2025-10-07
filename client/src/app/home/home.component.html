@@ -1,164 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Insurance Claim Policy - Stress-Free Claims, Fast Approvals</title>
+    <!-- Link to your completed CSS -->
+    <link rel="stylesheet" href="home.component.scss"> 
+    <!-- Font Awesome for Icons (Make sure to include this!) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Optional: Google Fonts if you choose different fonts -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"> -->
+</head>
+<body>
+    <div class="dashboard-container">
 
-<div class="dashboard-container">
-  <!-- Animated Banner -->
-  <div class="banner-section">
-    <div class="banner-content">
-      <h2 class="animate__animated animate__fadeIn">Protecting What Matters Most</h2>
-      <p class="animate__animated animate__fadeIn animate__delay-1s">Secure your future with our comprehensive insurance solutions</p>
-    </div>
-    <div class="floating-elements">
-      <div class="float-item shield"><i class="fas fa-shield-alt"></i></div>
-      <div class="float-item heart"><i class="fas fa-heart"></i></div>
-      <div class="float-item home"><i class="fas fa-home"></i></div>
-    </div>
-  </div>
+        <!-- --- Hero Section (Navigation/Header) --- -->
+        <header class="hero-section">
+            <div class="logo-area">
+                <!-- Replace with your logo image -->
+                <img src="path/to/your-logo.png" alt="Company Logo" class="main-logo">
+                <h1>ClaimSafe</h1>
+            </div>
+            <nav class="nav-links">
+                <a href="#insurance-grid">Policies</a>
+                <a href="#features">Benefits</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+                <div class="dropdown">
+                    <button class="login-dropdown-btn">Login / Register <i class="fas fa-caret-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#">Client Login</a>
+                        <a href="#">Agent Login</a>
+                        <a href="#">Register</a>
+                    </div>
+                </div>
+            </nav>
+            <button class="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            <!-- Mobile Navigation (hidden by default, revealed by JS) -->
+            <!-- <nav class="mobile-nav-links">...</nav> -->
+        </header>
 
-  <!-- Insurance Categories -->
-  <div class="insurance-grid">
-    <div class="row g-4">
-      <!-- Health Insurance -->
-      <div class="col-md-4 col-lg-3">
-        <div class="insurance-card" data-aos="fade-up">
-          <div class="card-icon health">
-            <i class="fas fa-heartbeat"></i>
-          </div>
-          <h3>Health Insurance</h3>
-          <p>Comprehensive medical coverage for you and your family</p>
-          <button class="btn btn-outline-primary">Learn More</button>
-        </div>
-      </div>
+        <!-- --- Banner Section --- -->
+        <section class="banner-section">
+            <!-- Uncomment and provide path if using video background -->
+            <!-- <video autoplay muted loop id="banner-video">
+                <source src="path/to/your-video.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+            </video> -->
+            <!-- <div class="banner-overlay"></div> -->
 
-      <!-- Vehicle Insurance -->
-      <div class="col-md-4 col-lg-3">
-        <div class="insurance-card" data-aos="fade-up" >
-          <div class="card-icon vehicle">
-            <!-- <img src="OIP (1).jpg" class=""> -->
-            <i class="fas fa-car"></i>
-          </div>
-          <h3>Vehicle Insurance</h3>
-          <p>Protection for your cars and two-wheelers</p>
-          <button class="btn btn-outline-primary">Learn More</button>
-        </div>
-      </div>
+            <div class="banner-content">
+                <h2>Your Peace of Mind, Our Priority</h2>
+                <p>Swift, simple, and secure insurance claim processing. Get the support you need, when you need it most, with ClaimSafe.</p>
+                <a href="#contact" class="banner-btn">File a Claim Now</a>
+            </div>
 
-      <!-- Travel Insurance -->
-      <div class="col-md-4 col-lg-3">
-        <div class="insurance-card" data-aos="fade-up" >
-          <div class="card-icon travel">
-            <i class="fas fa-plane"></i>
-          </div>
-          <h3>Travel Insurance</h3>
-          <p>Worldwide coverage for your journeys</p>
-          <button class="btn btn-outline-primary">Learn More</button>
-        </div>
-      </div>
+            <div class="floating-elements">
+                <i class="fas fa-shield-alt float-item shield" style="--parallax-x: 20px; --parallax-y: -10px;"></i>
+                <i class="fas fa-heartbeat float-item heart" style="--parallax-x: -15px; --parallax-y: 5px;"></i>
+                <i class="fas fa-home float-item home" style="--parallax-x: 10px; --parallax-y: 15px;"></i>
+                <i class="fas fa-star float-item star" style="--parallax-x: -25px; --parallax-y: -8px;"></i>
+                <i class="fas fa-bolt float-item bolt" style="--parallax-x: 5px; --parallax-y: 20px;"></i>
+            </div>
+        </section>
 
-      <!-- Life Insurance -->
-      <div class="col-md-4 col-lg-3">
-        <div class="insurance-card" data-aos="fade-up" >
-          <div class="card-icon life">
-            <i class="fas fa-user-shield"></i>
-          </div>
-          <h3>Life Insurance</h3>
-          <p>Safeguard your loved one's,Secure your family's future </p>
-          <button class="btn btn-outline-primary">Learn More</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+        <main>
+            <!-- --- Insurance Grid & Cards --- -->
+            <section id="insurance-grid" class="insurance-grid container">
+                <h2 class="section-title">Explore Our Insurance Solutions</h2>
+                <div class="grid-cols-3">
+                    <!-- Card 1: Home Insurance -->
+                    <div class="insurance-card-container">
+                        <div class="insurance-card">
+                            <div class="card-face card-front">
+                                <div class="card-icon"><i class="fas fa-home"></i></div>
+                                <h3>Home Insurance</h3>
+                                <p>Protect your most valuable asset against unexpected damages and perils. Comprehensive coverage for peace of mind.</p>
+                                <button class="btn-outline-primary">Learn More</button>
+                            </div>
+                            <div class="card-face card-back">
+                                <h4>Home Coverage</h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Fire & Theft Protection</li>
+                                    <li><i class="fas fa-check-circle"></i> Natural Disaster Cover</li>
+                                    <li><i class="fas fa-check-circle"></i> Personal Property</li>
+                                    <li><i class="fas fa-check-circle"></i> Liability Coverage</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
-  <!-- Promotional Banner -->
-  <div class="promo-banner" data-aos="zoom-in">
-    <div class="promo-content">
-      <h3>Special Offer!</h3>
-      <p>Get 20% off on new policy registrations</p>
-      <button class="btn btn-light">Claim Now</button>
-    </div>
-  </div>
-  <div class="stats-section" data-aos="fade-up">
-      <div class="stats-container">
-       <div class="stat-item">
-          <span class="counter" data-target="1000">100</span>%
-          <p>Happy Customers</p>
-        </div> 
-        
-        
-        <div class="stat-item">
-          <span class="counter" data-target="500">400000+</span>
-          <p>Claims Processed</p>
-        </div>
-        <div class="stat-item">
-          <span class="counter" data-target="95">100</span>%
-          <p>Customer Satisfaction</p>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Insurance Categories -->
-    <div class="insurance-grid">
-      <!-- [Existing insurance cards code] -->
-    </div>
-  
-    <!-- Scrolling Features Section -->
-    <div class="features-section">
-      <div class="feature-item" data-aos="fade-right">
-        <i class="fas fa-clock"></i>
-        <h3>24/7 Support</h3>
-        <p>Round-the-clock assistance for all your insurance needs</p>
-      </div>
-      <div class="feature-item" data-aos="fade-up">
-        <i class="fas fa-mobile-alt"></i>
-        <h3>Easy Claims</h3>
-        <p>File claims instantly through our mobile app</p>
-      </div>
-      <div class="feature-item" data-aos="fade-left">
-        <i class="fas fa-shield-check"></i>
-        <h3>Secure Coverage</h3>
-        <p>Best-in-class protection for your assets</p>
-      </div>
-    </div>
-  
-    <!-- Testimonials Carousel -->
-    <div class="testimonials-section" data-aos="fade-up">
-      <h2>What Our Customers Say</h2>
-      <div class="testimonials-carousel">
-        <div class="testimonial-item">
-          <p>"Excellent service and quick claim settlement"</p>
-          <div class="client-info">
-           
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <!-- FAQ Accordion -->
-    <div class="faq-section" data-aos="fade-up">
-      <h2>Frequently Asked Questions</h2>
-      <div class="accordion">
-        <div class="accordion-item">
-          <h3 class="accordion-header">How do I file a claim?</h3>
-          <div class="accordion-content">
-            <p>Filing a claim is easy! Simply log into your account and follow our step-by-step process.</p>
-          </div>
-        </div>
-        <!-- Add more FAQ items -->
-      </div>
-    </div>
-  
-    <!-- Contact Form -->
-    <div class="contact-section" data-aos="zoom-in">
-      <h2>Get in Touch</h2>
-      <div class="contact-form">
-        <input type="text" placeholder="Your Name">
-        <input type="email" placeholder="Your Email">
-        <textarea placeholder="Your Message"></textarea>
-        <button class="btn btn-primary">Send Message</button>
-      </div>
-    </div>
-  
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTop">
-      <i class="fas fa-arrow-up"></i>
-    </button>
-  </div>
+                    <!-- Card 2: Auto Insurance -->
+                    <div class="insurance-card-container">
+                        <div class="insurance-card">
+                            <div class="card-face card-front">
+                                <div class="card-icon"><i class="fas fa-car-crash"></i></div>
+                                <h3>Auto Insurance</h3>
+                                <p>Stay safe on the road with our tailored auto insurance policies. From minor dents to major accidents.</p>
+                                <button class="btn-outline-primary">Learn More</button>
+                            </div>
+                            <div class="card-face card-back">
+                                <h4>Auto Coverage</h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Collision Damage</li>
+                                    <li><i class="fas fa-check-circle"></i> Third-Party Liability</li>
+                                    <li><i class="fas fa-check-circle"></i> Personal Injury</li>
+                                    <li><i class="fas fa-check-circle"></i> Roadside Assistance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Health Insurance -->
+                    <div class="insurance-card-container">
+                        <div class="insurance-card">
+                            <div class="card-face card-front">
+                                <div class="card-icon"><i class="fas fa-heartbeat"></i></div>
+                                <h3>Health Insurance</h3>
+                                <p>Comprehensive health plans for you and your family. Access to quality healthcare without financial worries.</p>
+                                <button class="btn-outline-primary">Learn More</button>
+                            </div>
+                            <div class="card-face card-back">
+                                <h4>Health Coverage</h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Hospitalization</li>
+                                    <li><i class="fas fa-check-circle"></i> Doctor Visits</li>
+                                    <li><i class="fas fa-check-circle"></i> Prescription Drugs</li>
+                                    <li><i class="fas fa-check-circle"></i> Preventative Care</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Life Insurance -->
+                    <div class="insurance-card-container">
+                        <div class="insurance-card">
+                            <div class="card-face card-front">
+                                <div class="card-icon"><i class="fas fa-umbrella"></i></div>
+                                <h3>Life Insurance</h3>
+                                <p>Secure your family's future with our flexible life insurance policies. A safety net for those who matter most.</p>
+                                <button class="btn-outline-primary">Learn More</button>
+                            </div>
+                            <div class="card-face card-back">
+                                <h4>Life Coverage</h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Financial Security</li>
+                                    <li><i class="fas fa-check-circle"></i> Estate Planning</li>
+                                    <li><i class="fas fa-check-circle"></i> Debt Repayment</li>
+                                    <li><i class="fas fa-check-circle"></i> Child's Education</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Business Insurance -->
+                    <div class="insurance-card-container">
+                        <div class="insurance-card">
+                            <div class="card-face card-front">
+                                <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                                <h3>Business Insurance</h3>
+                                <p>Protect your enterprise from risks with tailored business insurance solutions. Keep your operations running smoothly.</p>
+                                <button class="btn-outline-primary">Learn More</button>
+                            </div>
+                            <div class="card-face card-back">
+                                <h4>Business Coverage</h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Property Damage</li>
+                                    <li><i class="fas fa-check-circle"></i> Liability Claims</li>
+                                    <li><i class="fas fa-check-circle"></i> Business Interruption</li>
+                                    <li><i class="fas fa-check-circle"></i> Cyber Security</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 6: Travel Insurance -->
+                    <div class="insurance-card-container">
+                        <div class="insurance-card">
+                            <div class="card-face card-front">
+                                <div class="card-icon"><i class="fas fa-plane-departure"></i></div>
+                                <h3>Travel Insurance</h3>
+                                <p>Adventure with confidence. Our travel insurance covers emergencies, cancellations, and lost luggage.</p>
+                                <button class="btn-outline-primary">Learn More</button>
+                            </div>
+                            <div class="card-face card-back">
+                                <h4>Travel Coverage</h4>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Medical Emergencies</li>
+                                    <li><i class="fas fa-check-circle"></i> Trip Cancellations</li>
+                                    <li><i class="fas fa-check-circle"></i> Lost Luggage</li>
+                                    <li><i class="fas fa-check-circle"></i> Travel Delays</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- --- Promo Banner --- -->
+            <section class="promo-banner container">
+                <h3>Ready to Experience Worry-Free Coverage?</h3>
+                <p>Join thousands of satisfied clients who trust us with their most important assets. Get a personalized quote today!</p>
+                <a href="#contact" class="btn-light">Get a Free Quote</a>
+            </section>
+
+            <!-- --- Statistics Section --- -->
+            <section class="stats-section">
+                <h2 class="section-title">Our Impact in Numbers</h2>
+                <div class="stats-container container">
+                    <div class="stat-item">
+                        <span class="counter" data-target="15000">0</span>
+                        <p>Happy Clients</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="counter" data-target="98">0</span><span class="counter-suffix">%</span>
+                        <p>Claims Approved</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="counter" data-target="24">0</span><span class="counter-suffix">/7</span>
+                        <p>Support Available</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="counter" data-target="10">0</span><span class="counter-suffix">+</span>
+                        <p>Years in Service</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- --- Features Section --- -->
+            <section id="features" class="features-section">
+                <h2 class="section-title full-width">Why Choose ClaimSafe?</h2>
+                <div class="feature-item">
+                    <i class="fas fa-user-shield"></i>
+                    <h3>Expert Support</h3>
+                    <p>Our team of dedicated professionals is here to guide you through every step of your claim, ensuring a smooth and clear process.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-money-check-alt"></i>
+                    <h3>Fast Payouts</h3>
+                    <p>We understand the urgency. Our streamlined process ensures quick claim approvals and fast payouts, getting you back on track sooner.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Trusted & Reliable</h3>
+                    <p>With years of experience and a commitment to transparency, we are a name you can trust for all your insurance needs.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Easy Online Claims</h3>
+                    <p>Submit and track your claims conveniently through our user-friendly online portal, available 24/7 from any device.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-headset"></i>
+                    <h3>Personalized Service</h3>
+                    <p>Every client is unique. We offer tailored advice and policies designed to fit your specific requirements and lifestyle.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-lock"></i>
+                    <h3>Secure & Confidential</h3>
+                    <p>Your data and claims are handled with the utmost security and privacy, adhering to the highest industry standards.</p>
+                </div>
+            </section>
+
+            <!-- --- Testimonials Section --- -->
+            <section id="testimonials" class="testimonials-section">
+                <h2 class="section-title">What Our Clients Say</h2>
+                <div class="testimonials-carousel">
+                    <!-- Testimonial Item 1 -->
+                    <div class="testimonial-item">
+                        <p>"ClaimSafe made a difficult time so much easier. The claim process for my home damage was incredibly smooth and the team was supportive throughout."</p>
+                        <div class="client-info">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client Sarah L.">
+                            <span>Sarah L., Homeowner</span>
+                        </div>
+                    </div>
+                    <!-- Testimonial Item 2 -->
+                    <div class="testimonial-item">
+                        <p>"I had an accident and was so worried, but ClaimSafe handled everything efficiently. I received my payout quickly and without any hassle. Highly recommend!"</p>
+                        <div class="client-info">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client Mark T.">
+                            <span>Mark T., Driver</span>
+                        </div>
+                    </div>
+                    <!-- Testimonial Item 3 -->
+                    <div class="testimonial-item">
+                        <p>"Their health insurance policies are transparent and their customer service is top-notch. It's reassuring to know I have such reliable coverage."</p>
+                        <div class="client-info">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client Emily R.">
+                            <span>Emily R., Family Lead</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- --- FAQ Section --- -->
+            <section id="faq" class="faq-section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            How do I file a claim? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>You can easily file a claim through our online portal by logging into your account. Alternatively, you can contact our claims department directly via phone or email, and our representatives will guide you through the process.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            What documents are required for a claim? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Required documents vary by claim type. Generally, you'll need your policy number, incident details, and supporting evidence such as photos, police reports, or medical records. Our online portal will specify exactly what's needed for your particular claim.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            How long does it take to process a claim? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>We pride ourselves on efficient claim processing. Most straightforward claims are processed within 5-7 business days once all required documentation is received. More complex cases may take longer, but we keep you informed every step of the way.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            Can I track the status of my claim online? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Yes! Once you've filed a claim, you can log into your ClaimSafe account and use our claim tracker to monitor its real-time status, view updates, and communicate with your claims adjuster.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- --- Contact Section --- -->
+            <section id="contact" class="contact-section">
+                <h2 class="section-title">Get in Touch With Us</h2>
+                <form class="contact-form">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    <input type="tel" id="phone" name="phone" placeholder="Your Phone Number (Optional)">
+                    <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </section>
+        </main>
+
+        <!-- --- Footer --- -->
+        <footer class="main-footer">
+            <div class="footer-content container">
+                <div class="footer-logo">
+                    <!-- Replace with your logo image -->
+                    <img src="path/to/your-logo-white.png" alt="Company Logo" class="main-logo">
+                    <h3>ClaimSafe</h3>
+                    <p>&copy; 2023 ClaimSafe. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#insurance-grid">Policies</a></li>
+                        <li><a href="#features">Benefits</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Insurance Blvd, Suite 100, City, Country</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@claimsafe.com</p>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </footer>
+
+    </div> <!-- End .dashboard-container -->
+
+    <!-- Optional JavaScript for interactivity (Accordion, Counters, Mobile Nav, Parallax) -->
+    <script>
+        // --- FAQ Accordion Functionality ---
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.closest('.accordion-item');
+                const content = item.querySelector('.accordion-content');
+
+                // Close other open items
+                document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.querySelector('.accordion-header').classList.remove('active');
+                        otherItem.querySelector('.accordion-content').classList.remove('open');
+                    }
+                });
+
+                // Toggle current item
+                header.classList.toggle('active');
+                content.classList.toggle('open');
+            });
+        });
+
+        // --- Simple Counter Animation (for stats) ---
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; // The lower the number, the faster the count
+
+        const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            let count = 0;
+            const updateCount = () => {
+                if (count < target) {
+                    count++;
+                    counter.innerText = count;
+                    setTimeout(updateCount, speed / target);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        };
+
+        const options = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.5 // Trigger when 50% of item is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    animateCounter(counter);
+                    observer.unobserve(counter); // Stop observing once animated
+                }
+            });
+        }, options);
+
+        counters.forEach(counter => {
+            observer.observe(counter);
+        });
+
+        // --- Parallax for Floating Elements (basic example, can be more complex) ---
+        const floatingElements = document.querySelector('.floating-elements');
+        if (floatingElements) {
+            document.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 50; // Adjust divisor for sensitivity
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+
+                floatingElements.querySelectorAll('.float-item').forEach(item => {
+                    const parallaxX = parseFloat(item.style.getPropertyValue('--parallax-x')) || 0;
+                    const parallaxY = parseFloat(item.style.getPropertyValue('--parallax-y')) || 0;
+                    item.style.transform = `translate(${xAxis + parallaxX}px, ${yAxis + parallaxY}px)`;
+                });
+            });
+        }
+
+        // --- Mobile Nav Toggle (Hamburger) ---
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links'); // This would typically be a separate mobile nav menu
+
+        hamburger.addEventListener('click', () => {
+            // For a simple toggle, you could just toggle a class on the nav-links
+            // For a full mobile menu, you'd toggle a class on a dedicated mobile menu element
+            navLinks.classList.toggle('nav-open'); 
+            // Also toggle hamburger icon
+            hamburger.querySelector('i').classList.toggle('fa-bars');
+            hamburger.querySelector('i').classList.toggle('fa-times'); // 'fa-times' for close icon
+        });
+
+    </script>
+</body>
+</html>
