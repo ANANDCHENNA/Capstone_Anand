@@ -1,4 +1,5 @@
 import { Investigation } from "./Investigation"
+import { Policy } from "./Policy"
 import { Underwriter } from "./Underwriter"
 
 export interface Claim {
@@ -6,8 +7,13 @@ export interface Claim {
     description : string
     date : Date
     status: string
+    // claimType:string
+    policy_id:number
+    policyholderId:number
     investigation : Investigation   
     underwriter: Underwriter
+    selectedPolicy?:Policy
+    
 }
 export { Investigation, Underwriter }
 

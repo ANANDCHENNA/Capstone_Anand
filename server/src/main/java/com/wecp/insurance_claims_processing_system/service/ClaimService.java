@@ -49,6 +49,7 @@ public class ClaimService {
         if(claimDetails.getUnderwriter() != null && claimDetails.getUnderwriter().getId() != null){
             Underwriter underwriter = underwriterRepository.findById(id).orElse(null);
             c.setUnderwriter(underwriter);
+            //c.setPolicy_id(id);
         }
         return claimRepository.save(c);
     }

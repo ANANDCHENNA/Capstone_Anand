@@ -62,7 +62,6 @@ export class DashbaordComponent implements OnInit {
     if (this.role === 'INVESTIGATOR') {
       this.httpService.getInvestigations().subscribe(data => this.investigations = data);
     }
-
     if (this.role === 'POLICYHOLDER') {
       this.httpService.getClaimsByPolicyholder(this.policyholderId).subscribe(data => this.claimByPolicyholder = data);
     }
