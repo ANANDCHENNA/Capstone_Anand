@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/policies")
+@RequestMapping("/api/policy")
 public class PolicyController {
 
     @Autowired
@@ -61,7 +61,8 @@ public class PolicyController {
             return ResponseEntity.badRequest().body("Invalid request");
         }
 
-        Policy saved = policyService.purchasePolicy(ph, req.getPolicyType(), req.getPremium(), req.getTermMonths());
+        Policy saved = policyService.purchasePolicy(ph, req.getPolicyType(), req.getName(), req.getPremium(),
+                req.getTermMonths(), req.getStatus());
         return ResponseEntity.ok(saved);
     }
 
@@ -72,7 +73,7 @@ public class PolicyController {
     }
 
     // READ ALL
-    @GetMapping
+    @GetMapping("/policies")
     public ResponseEntity<List<Policy>> getAllPolicies() {
         return ResponseEntity.ok(policyService.getAllPolicies());
     }
@@ -99,7 +100,6 @@ public class PolicyController {
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
-
     // Get policies for specific policyholder
     @GetMapping("/policyholder/{id}")
     public List<Policy> getPoliciesByPolicyholder(@PathVariable Long id) {
@@ -122,8 +122,10 @@ public class PolicyController {
         return policyService.purchasePolicy(
                 policyholder,
                 purchaseRequest.getPolicyType(),
+                purchaseRequest.getName(),
                 purchaseRequest.getPremium(),
-                purchaseRequest.getTermMonths());
+                purchaseRequest.getTermMonths(),
+                purchaseRequest.getStatus());
     }
 
 }
