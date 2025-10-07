@@ -21,6 +21,7 @@ import { UpdateClaimUnderwriterComponent } from './update-claim-underwriter/upda
 import { PurchasePolicyComponent } from './purchase/purchase-policy.component';
 import { ViewPoliciessComponent } from './view-policies/view-policies.component';
 import { CreatePolicyComponent } from './create-policy/create-policy.component';
+import { UpdatePolicyComponent } from './update-policy/update-policy.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CreatePolicyComponent } from './create-policy/create-policy.component';
     UpdateClaimUnderwriterComponent,
     PurchasePolicyComponent,
     ViewPoliciessComponent,
-    CreatePolicyComponent
+    CreatePolicyComponent,
+    UpdatePolicyComponent
   ],
   imports: [
     BrowserModule,
