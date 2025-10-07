@@ -80,6 +80,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Underwriter endpoints
                 .antMatchers(HttpMethod.GET, "/api/underwriter/claims").hasAuthority("UNDERWRITER")
                 .antMatchers(HttpMethod.PUT, "/api/underwriter/claim/{id}/review").hasAuthority("UNDERWRITER")
+                
+                // Admin endpoints
+                .antMatchers(HttpMethod.POST, "/api/policies").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/policies").hasAuthority("ADMIN")
 
                 // Everything else requires authentication
                 .anyRequest().authenticated()

@@ -13,6 +13,17 @@
       </div>
     </div>
 
+    <!-- Policy Name -->
+    <div class="mb-3">
+      <label for="name" class="form-label">Policy Name</label>
+      <input type="text" id="name" formControlName="name" 
+             class="form-control" placeholder="Enter policy number"/>
+      <div *ngIf="policyForm.get('name')?.touched && policyForm.get('name')?.invalid"
+           class="text-danger mt-1">
+        Policy Name is required
+      </div>
+    </div>
+
     <!-- Policy Type -->
     <div class="mb-3">
       <label for="policyType" class="form-label">Policy Type</label>
@@ -29,50 +40,27 @@
       </div>
     </div>
 
-    <!-- Start Date -->
-    <div class="mb-3">
-      <label for="startDate" class="form-label">Start Date</label>
-      <input type="date" id="startDate" formControlName="startDate" 
-             class="form-control"/>
-      <div *ngIf="policyForm.get('startDate')?.touched && policyForm.get('startDate')?.invalid"
-           class="text-danger mt-1">
-        Start date is required
-      </div>
-    </div>
-
-    <!-- End Date -->
-    <div class="mb-3">
-      <label for="endDate" class="form-label">End Date</label>
-      <input type="date" id="endDate" formControlName="endDate" 
-             class="form-control"/>
-      <div *ngIf="policyForm.get('endDate')?.touched && policyForm.get('endDate')?.invalid"
-           class="text-danger mt-1">
-        <span *ngIf="policyForm.get('endDate')?.errors?.['required']">End date is required</span>
-        <span *ngIf="policyForm.get('endDate')?.errors?.['endDateInvalid']">End date must be after start date</span>
-      </div>
-    </div>
-
     <!-- Coverage Amount -->
     <div class="mb-3">
-      <label for="coverageAmount" class="form-label">Coverage Amount</label>
-      <input type="number" id="coverageAmount" formControlName="coverageAmount" 
+      <label for="termMonths" class="form-label">Term Months</label>
+      <input type="number" id="termMonths" formControlName="termMonths" 
              class="form-control" placeholder="Enter coverage amount"/>
-      <div *ngIf="policyForm.get('coverageAmount')?.touched && policyForm.get('coverageAmount')?.invalid"
+      <div *ngIf="policyForm.get('termMonths')?.touched && policyForm.get('termMonths')?.invalid"
            class="text-danger mt-1">
-        <span *ngIf="policyForm.get('coverageAmount')?.errors?.['required']">Coverage amount is required</span>
-        <span *ngIf="policyForm.get('coverageAmount')?.errors?.['min']">Coverage amount must be greater than 0</span>
+        <span *ngIf="policyForm.get('termMonths')?.errors?.['required']">Term is required</span>
+        <span *ngIf="policyForm.get('termMonths')?.errors?.['min']">Term must be greater than 0</span>
       </div>
     </div>
 
     <!-- Premium Amount -->
     <div class="mb-3">
-      <label for="premiumAmount" class="form-label">Premium Amount</label>
-      <input type="number" id="premiumAmount" formControlName="premiumAmount" 
+      <label for="premium" class="form-label">Premium Amount</label>
+      <input type="number" id="premium" formControlName="premium" 
              class="form-control" placeholder="Enter premium amount"/>
-      <div *ngIf="policyForm.get('premiumAmount')?.touched && policyForm.get('premiumAmount')?.invalid"
+      <div *ngIf="policyForm.get('premium')?.touched && policyForm.get('premium')?.invalid"
            class="text-danger mt-1">
-        <span *ngIf="policyForm.get('premiumAmount')?.errors?.['required']">Premium amount is required</span>
-        <span *ngIf="policyForm.get('premiumAmount')?.errors?.['min']">Premium amount must be greater than 0</span>
+        <span *ngIf="policyForm.get('premium')?.errors?.['required']">Premium amount is required</span>
+        <span *ngIf="policyForm.get('premium')?.errors?.['min']">Premium amount must be greater than 0</span>
       </div>
     </div>
 

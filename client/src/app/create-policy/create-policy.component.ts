@@ -23,11 +23,10 @@ export class CreatePolicyComponent implements OnInit {
     this.currentDate = today.toISOString().split('T')[0];
     this.policyForm = this.formBuilder.group({
       policyNumber: ['', Validators.required],
+      name: ['', Validators.required],
       policyType: ['', Validators.required],
-      coverageAmount: ['', [Validators.required, Validators.min(1)]],
-      premiumAmount: ['', [Validators.required, Validators.min(1)]],
-      startDate: [this.currentDate, Validators.required],
-      endDate: ['', [Validators.required, this.endDateValidator.bind(this)]]
+      premium: ['', [Validators.required]],
+      termMonths: ['', Validators.required],
     });
   }
 
@@ -49,11 +48,7 @@ export class CreatePolicyComponent implements OnInit {
 
   onSubmit() {
     if (this.policyForm.valid) {
-      const payload = {
-        ...this.policyForm.value,
-        coverageAmount: parseFloat(this.policyForm.value.coverageAmount),
-        premiumAmount: parseFloat(this.policyForm.value.premiumAmount)
-      };
+      const payload = this.policyForm.value
 
       this.httpService.createPolicy(payload).subscribe({
         next: () => {

@@ -52,7 +52,7 @@ export class HttpService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('Authorization', `Bearer ${authToken}`)
-    return this.http.post(this.serverName + `/api/policy`, policy, { headers: headers });
+    return this.http.post(this.serverName + `/api/policies`, policy, { headers: headers });
   }
   
   GetAllInvestigator(): Observable<any> {
