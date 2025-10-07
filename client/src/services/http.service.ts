@@ -170,7 +170,7 @@ export class HttpService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('Authorization', `Bearer ${authToken}`);
-    return this.http.get<any[]>(`${this.serverName}/api/policy/all`, { headers: headers });
+    return this.http.get<any[]>(`${this.serverName}/api/policies`, { headers: headers });
   }
   
   getPoliciesByHolder(holderId: string) {

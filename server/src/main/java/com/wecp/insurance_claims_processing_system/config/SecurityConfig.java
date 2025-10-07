@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Policyholder endpoints
                 .antMatchers(HttpMethod.POST, "/api/policy/purchase/**").hasAuthority("POLICYHOLDER")
                 .antMatchers(HttpMethod.GET, "/policy/policyholder/**").hasAuthority("POLICYHOLDER")
+                .antMatchers(HttpMethod.GET, "/policies").hasAuthority("POLICYHOLDER")
 
                 // Admin endpoints
                 .antMatchers(HttpMethod.GET, "/api/policy/all").hasAuthority("ADMIN")

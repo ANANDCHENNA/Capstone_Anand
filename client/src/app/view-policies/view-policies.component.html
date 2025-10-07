@@ -1,0 +1,30 @@
+<div class="container mt-4">
+    <div class="card underwriter-card mb-4">
+        <!-- Gradient Header -->
+        <div class="underwriter-header d-flex justify-content-between align-items-center"
+            style="background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);">
+            <h5 class="mb-0">Policies</h5>
+            <input type="text" class="form-control form-control-sm underwriter-search w-25" placeholder="Search..."
+                [(ngModel)]="searchText" />
+        </div>
+        <!-- Table -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle underwriter-table">
+                    <thead>
+                        <tr>
+                            <th>Policy ID </th>
+                            <th>Policy Name </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let policy of filteredPolicies()">
+                            <td>{{ policy.id }}</td>
+                            <td>{{ policy.name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

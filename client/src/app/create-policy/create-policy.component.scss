@@ -1,0 +1,51 @@
+.minimalist-card {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  color: #212529;
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+
+  .form-label {
+    font-weight: 500;
+  }
+
+  .form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    transition: all 0.2s;
+
+    &:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+  }
+
+  .btn-outline-primary {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: #0d6efd;
+      color: #fff;
+      border-color: #0d6efd;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      background-color: #374d6d;
+      color: #fff;
+    }
+  }
+
+  .text-danger {
+    font-size: 0.875rem;
+  }
+}
+
+// Toast styles
+#snackbarToast {
+  min-width: 220px;
+  font-weight: 500;
+}
