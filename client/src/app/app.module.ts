@@ -20,6 +20,7 @@ import { ViewUnderwritersComponent } from './view-underwriters/view-underwriters
 import { UpdateClaimUnderwriterComponent } from './update-claim-underwriter/update-claim-underwriter.component';
 import { PurchasePolicyComponent } from './purchase/purchase-policy.component';
 import { ViewPoliciessComponent } from './view-policies/view-policies.component';
+import { CreatePolicyComponent } from './create-policy/create-policy.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ViewPoliciessComponent } from './view-policies/view-policies.component'
     ViewUnderwritersComponent,
     UpdateClaimUnderwriterComponent,
     PurchasePolicyComponent,
-    ViewPoliciessComponent
+    ViewPoliciessComponent,
+    CreatePolicyComponent
   ],
   imports: [
     BrowserModule,
