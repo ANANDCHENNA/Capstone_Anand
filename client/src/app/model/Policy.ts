@@ -1,7 +1,8 @@
 export interface Policy{
     id:number
     name:string
-    tenure:string
-    coverage:string
-    owners?:number[]
+    termMonths:number
+    premium: number
+    policyType: string
+    owners?:number[]   
 }

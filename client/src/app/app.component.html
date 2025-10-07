@@ -40,13 +40,10 @@
         <a class="nav-link" routerLink="/dashboard">View Claims</a>
       </li>
       <li *ngIf="IsLoggin && roleName === 'ADMIN'" class="nav-item">
-        <a class="nav-link" routerLink="/dashboard">View Polciies</a>
+        <a class="nav-link" routerLink="/dashboard">View Policies</a>
       </li>
       <li *ngIf="IsLoggin && roleName === 'ADMIN'" class="nav-item">
         <a class="nav-link" routerLink="/create-policy">Create Policy</a>
-      </li>
-      <li *ngIf="IsLoggin && roleName === 'ADMIN'" class="nav-item">
-        <a class="nav-link" routerLink="/dashboard">View Claims</a>
       </li>
     </ul>
 

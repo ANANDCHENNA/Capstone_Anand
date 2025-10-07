@@ -1,0 +1,45 @@
+.underwriter-card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  
+  /* Header with gradient */
+  .underwriter-header {
+    background: linear-gradient(90deg, #11998e, #38ef7d); /* greenish gradient */
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 12px 16px;
+  }
+
+  /* Table */
+.underwriter-table thead {
+    background: linear-gradient(90deg, #d4fc79, #96e6a1); /* light green gradient */
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .underwriter-table th {
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .underwriter-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    transition: 0.2s;
+  }
+  
+  /* Search Input */
+  .underwriter-search {
+    border-radius: 20px;
+    font-size: 0.9rem;
+    padding: 4px 10px;
+    border: 1px solid #ddd;
+  }
+  .underwriter-search:focus {
+    border-color: #38ef7d;
+    box-shadow: 0 0 4px rgba(56, 239, 125, 0.5);
+  }
