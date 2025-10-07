@@ -45,22 +45,41 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
+                // Public endpoints
                 .antMatchers("/api/user/register", "/api/user/login").permitAll()
+
+                // Policyholder endpoints
+                .antMatchers(HttpMethod.POST, "/api/policy/purchase/**").hasAuthority("POLICYHOLDER")
+                .antMatchers(HttpMethod.GET, "/policy/policyholder/**").hasAuthority("POLICYHOLDER")
+
+                // Admin endpoints
+                .antMatchers(HttpMethod.GET, "/api/policy/all").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/policy/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/policy/**").hasAuthority("ADMIN")
+
+                // Adjuster endpoints
                 .antMatchers(HttpMethod.PUT, "/api/adjuster/claim/**").hasAuthority("ADJUSTER")
                 .antMatchers(HttpMethod.GET, "/api/adjuster/claims").hasAuthority("ADJUSTER")
                 .antMatchers(HttpMethod.GET, "/api/adjuster/claim/{claimId}").hasAuthority("ADJUSTER")
                 .antMatchers(HttpMethod.GET, "/api/adjuster/underwriters").hasAuthority("ADJUSTER")
                 .antMatchers(HttpMethod.PUT, "/api/adjuster/claim/{claimId}/assign").hasAuthority("ADJUSTER")
+
+                // Policyholder claim endpoints
                 .antMatchers(HttpMethod.POST, "/api/policyholder/claim").hasAuthority("POLICYHOLDER")
                 .antMatchers(HttpMethod.GET, "/api/policyholder/claims").hasAuthority("POLICYHOLDER")
+
+                // Investigator endpoints
                 .antMatchers(HttpMethod.POST, "/api/investigator/investigation").hasAuthority("INVESTIGATOR")
                 .antMatchers(HttpMethod.PUT, "/api/investigator/investigation/**").hasAuthority("INVESTIGATOR")
                 .antMatchers(HttpMethod.GET, "/api/investigator/investigations").hasAuthority("INVESTIGATOR")
                 .antMatchers(HttpMethod.GET, "/api/investigator/claims").hasAuthority("INVESTIGATOR")
                 .antMatchers(HttpMethod.GET, "/api/investigator/investigations/{id}").hasAuthority("INVESTIGATOR")
+
+                // Underwriter endpoints
                 .antMatchers(HttpMethod.GET, "/api/underwriter/claims").hasAuthority("UNDERWRITER")
                 .antMatchers(HttpMethod.PUT, "/api/underwriter/claim/{id}/review").hasAuthority("UNDERWRITER")
 
+                // Everything else requires authentication
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -68,26 +87,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-    // @Bean
-    // public PasswordEncoder passwordEncoder() {
-    //     return new BCryptPasswordEncoder();
-    // }
-
-    // @Bean
-    // public UserDetailsService userDetailsService() {
-    // return new UserDetailsService();
-    // }
-
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-
-
-        // @Bean
-        // public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        //     return authenticationConfiguration.getAuthenticationManager();
-        // }
 
 }

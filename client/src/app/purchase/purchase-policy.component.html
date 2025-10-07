@@ -1,6 +1,6 @@
 <div class="card p-3">
   <h3>Buy a Policy</h3>
-  <form [formGroup]="form" (ngSubmit)="submit()">
+  <form [formGroup]="itemForm" (ngSubmit)="submit()">
     <div class="mb-2">
       <label>Policy Type</label>
       <select formControlName="policyType" class="form-control">
@@ -21,9 +21,9 @@
       <input type="number" formControlName="termMonths" class="form-control" />
     </div>
 
-    <button class="btn btn-primary" [disabled]="loading || form.invalid">Buy Policy</button>
+    <button class="btn btn-primary" [disabled]="loading || itemForm.invalid">Buy Policy</button>
   </form>
 
   <div *ngIf="successMsg" class="alert alert-success mt-2">{{successMsg}}</div>
-  <div *ngIf="errorMsg" class="alert alert-danger mt-2">{{errorMsg}}</div>
+  <div *ngIf="errorMsg" class="alert alert-danger mt-2">{{errorMsg | json}}</div>
 </div>

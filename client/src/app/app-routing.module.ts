@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashbaordComponent },
-  { path: 'buy-policy', component: PurchasePolicyComponent }
+  { path: 'buy-policy', component: PurchasePolicyComponent },
   { path: 'create-claim', component: CreateClaimComponent },  
   { path: 'view-underwriters', component: ViewUnderwritersComponent },  
   { path: 'update-claim/:id', component: UpdateClaimComponent },  
@@ -32,7 +32,6 @@ const routes: Routes = [
   { path: 'create-investigator', component: CreateInvestigatorComponent },  
   { path: 'update-claim-investigation/:id', component: UpdateInvestigationComponent },  
   { path: 'update-claim-underwriter/:id', component: UpdateClaimUnderwriterComponent },  
-
 ];
 
 @NgModule({

@@ -40,6 +40,26 @@
     </div>
   </div>
 
+  <!-- <div class="card-body">
+    <h5 class="card-title">
+      <i class="fas fa-file-alt me-2 text-primary"></i> Claim #{{ claim.id }}
+    </h5>
+    <p class="card-text text-truncate">
+      <i class="fas fa-align-left me-2 text-secondary"></i> {{ claim.description }}
+    </p>
+    <p>
+      <i class="fas fa-calendar-alt me-2 text-info"></i>
+      <strong>Date:</strong> {{ claim.date | date:'dd-MM-yyyy' }}
+    </p>
+    <p>
+      <i class="fas fa-flag me-2 text-warning"></i>
+      <strong>Status:</strong>
+      <span class="badge" [ngClass]="getStatusClass(claim.status)">
+        {{ claim.status }}
+      </span>
+    </p>
+  </div> -->
+
   <!-- UNDERWRITER -->
   <div *ngIf="role === 'UNDERWRITER'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <div class="col" *ngFor="let claim of filteredUnderwriterClaims()">
@@ -65,7 +85,7 @@
       <div class="card gradient-card h-100 shadow-sm">
         <div class="card-body">
           <h5 class="card-title">Investigation #{{ investigation.id }}</h5>
-          <p class="card-text text-truncate">{{ investigation.report }}</p>
+          <p class="card-text text-truncate">Investigation ID:{{ investigation.id }}</p>
           <p><strong>Claim:</strong> {{ investigation.claim.description }}</p>
           <span class="badge" [ngClass]="getStatusClass(investigation.status)">{{ investigation.status }}</span>
         </div>
@@ -83,8 +103,8 @@
     <div class="col" *ngFor="let claim of filteredPolicyholderClaims()">
       <div class="card gradient-card h-100 shadow-sm">
         <div class="card-body">
-          <h5 class="card-title">Claim #{{ claim.id }}</h5>
-          <p class="card-text text-truncate">{{ claim.description }}</p>
+          <h5 class="card-title">{{ claim.description }}</h5>
+          <p class="card-text text-truncate">Claim ID:{{ claim.id }}</p>
           <p><strong>Date:</strong> {{ claim.date | date:'dd-MM-yyyy' }}</p>
           <span class="badge" [ngClass]="getStatusClass(claim.status)">{{ claim.status }}</span>
         </div>
@@ -95,11 +115,30 @@
     </div>
   </div>
 
+  <!-- ADMIN -->
+  <!-- <div *ngIf="role === 'ADMIN'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let policy of filteredPolicies()">
+      <div class="card gradient-card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Policy #{{ policy.policyNumber }}</h5>
+          <p class="card-text"><strong>Type:</strong> {{ policy.policyType }}</p>
+          <p><strong>Premium:</strong> ₹{{ policy.premium }}</p>
+          <p><strong>Term:</strong> {{ policy.termMonths }} months</p>
+          <span class="badge bg-success">{{ policy.status }}</span>
+        </div>
+        <div class="card-footer text-center">
+          <button class="btn btn-outline-light btn-sm" (click)="editPolicy(policy)">Edit</button>
+          <button class="btn btn-danger btn-sm ms-2" (click)="deletePolicy(policy.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
   <!-- Claim Details Modal -->
   <div class="modal fade" id="claimModal" tabindex="-1" aria-labelledby="claimModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
+        <div class="modal-header modal-gradient text-white">
           <h5 class="modal-title" id="claimModalLabel">Claim #{{ selectedClaim?.id }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>

@@ -1,11 +1,23 @@
 package com.wecp.insurance_claims_processing_system.entity;
 
-import jakarta.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "policies")
 public class Policy {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,25 +27,24 @@ public class Policy {
 
     private String policyType;      // e.g., "Health", "Vehicle", "Life"
     private Double premium;         // amount to pay
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private int termMonths;         // duration in months
 
     @Enumerated(EnumType.STRING)
     private PolicyStatus status;    // e.g., ACTIVE, PENDING, CANCELLED
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "policyholder_id")
+    @JsonIgnore
     private Policyholder policyholder;
 
     public Policy() {}
 
-    public Policy(Long id, String policyNumber, String policyType, Double premium, LocalDate startDate, LocalDate endDate, PolicyStatus status, Policyholder policyholder) {
+    public Policy(Long id, String policyNumber, String policyType, Double premium, int termMonths, PolicyStatus status, Policyholder policyholder) {
         this.id = id;
         this.policyNumber = policyNumber;
         this.policyType = policyType;
         this.premium = premium;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.termMonths = termMonths;
         this.status = status;
         this.policyholder = policyholder;
     }
@@ -70,20 +81,12 @@ public class Policy {
         this.premium = premium;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public int getTermMonths() {
+        return termMonths;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setTermMonths(int termMonths) {
+        this.termMonths = termMonths;
     }
 
     public PolicyStatus getStatus() {
@@ -101,5 +104,4 @@ public class Policy {
     public void setPolicyholder(Policyholder policyholder) {
         this.policyholder = policyholder;
     }
-
 }

@@ -20,9 +20,8 @@ export class AppComponent {
     }
   }
   
-
   navigateToHome(){
-    this.router.navigateByUrl('/home');
+    this.router.navigate(['/home']);
   }
 
   logout() {

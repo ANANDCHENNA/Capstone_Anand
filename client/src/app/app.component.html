@@ -8,12 +8,18 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav me-auto">
       <li *ngIf="!IsLoggin" class="nav-item">
-        <a class="nav-link" (click)="navigateToHome()">Home</a>
+        <a class="nav-link" routerLink>Home</a>
       </li>
 
       <!-- Role-based links -->
       <li *ngIf="IsLoggin && roleName === 'POLICYHOLDER'" class="nav-item">
-        <a class="nav-link" routerLink="/create-claim">Create Claim</a>
+        <a class="nav-link" routerLink="/policies">View Policies</a>
+      </li>
+      <li *ngIf="IsLoggin && roleName === 'POLICYHOLDER'" class="nav-item">
+        <a class="nav-link" routerLink="/create-claim">My Claims</a>
+      </li>
+      <li *ngIf="IsLoggin && roleName === 'POLICYHOLDER'" class="nav-item">
+        <a class="nav-link" routerLink="/my-claim">My Policies</a>
       </li>
       <li *ngIf="IsLoggin && roleName === 'ADJUSTER'" class="nav-item">
         <a class="nav-link" routerLink="/dashboard">View Claims</a>
@@ -28,6 +34,15 @@
         <a class="nav-link" routerLink="/dashboard">View Investigations</a>
       </li>
       <li *ngIf="IsLoggin && roleName === 'UNDERWRITER'" class="nav-item">
+        <a class="nav-link" routerLink="/dashboard">View Claims</a>
+      </li>
+      <li *ngIf="IsLoggin && roleName === 'ADMIN'" class="nav-item">
+        <a class="nav-link" routerLink="/dashboard">View Polciies</a>
+      </li>
+      <li *ngIf="IsLoggin && roleName === 'ADMIN'" class="nav-item">
+        <a class="nav-link" routerLink="/create-policy">Create Policy</a>
+      </li>
+      <li *ngIf="IsLoggin && roleName === 'ADMIN'" class="nav-item">
         <a class="nav-link" routerLink="/dashboard">View Claims</a>
       </li>
     </ul>
