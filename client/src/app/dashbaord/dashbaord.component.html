@@ -179,9 +179,33 @@
           <p><strong>Date:</strong> {{ claim.date | date:'dd-MM-yyyy' }}</p>
           <span class="badge" [ngClass]="getStatusClass(claim.status)">{{ claim.status }}</span>
         </div>
-        <div class="card-footer text-center">
-          <button class="btn btn-light btn-sm w-100" (click)="openClaimModal(claim)">View Details</button>
+      </div>
+    </div>
+
+    <!-- Claims grid -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="col" *ngFor="let claim of filteredPolicyholderClaims()">
+        <div class="card gradient-card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ claim.description }}</h5>
+            <p class="card-text text-truncate">Claim ID:{{ claim.id }}</p>
+            <p><strong>Date:</strong> {{ claim.date | date:'dd-MM-yyyy' }}</p>
+            <span class="badge" [ngClass]="getStatusClass(claim.status)">{{ claim.status }}</span>
+          </div>
+          <div class="card-footer text-center">
+            <button class="btn btn-light btn-sm w-100" (click)="openClaimModal(claim)">View Details</button>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div *ngIf="isLoading" class="row mt-4">
+      <div class="col text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Loading your claims...</p>
       </div>
     </div>
   </div>
@@ -236,7 +260,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button *ngIf="role==='ADMIN'" class="btn btn-primary" (click)="onUpdateClaimAdjuster(selectedClaim.id)">Update</button>
+          <button *ngIf="role==='ADJUSTER'" class="btn btn-primary" (click)="onUpdateClaimAdjuster(selectedClaim.id)">Update</button>
         </div>
       </div>
     </div>

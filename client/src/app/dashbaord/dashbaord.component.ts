@@ -14,6 +14,9 @@ declare var bootstrap: any; // Bootstrap Toast API
 export class DashbaordComponent implements OnInit {
 
   role: string | null = '';
+  isLoading = false;
+  hasError = false;
+  errorDetails: string = '';
 
   // Search + Sort
   searchText: string = '';
@@ -67,9 +70,12 @@ itemsPerPage:number=7;
     if (this.role === 'INVESTIGATOR') {
       this.httpService.getInvestigations().subscribe(data => this.investigations = data);
     }
+
     if (this.role === 'POLICYHOLDER') {
-      this.httpService.getClaimsByPolicyholder(this.policyholderId).subscribe(data => this.claimByPolicyholder = data);
+      console.log('Loading claims for policyholder...');
+      this.loadPolicyholderClaims();
     }
+
     if (this.role === 'ADMIN') {
       this.httpService.getAllPolicies().subscribe(data => this.policies = data);
     }
@@ -112,11 +118,56 @@ itemsPerPage:number=7;
     }
   }
 
+  loadPolicyholderClaims() {
+    if (!this.policyholderId) {
+      console.error('No policyholder ID found!');
+      this.showSnackbar('Error: User ID not found. Please try logging in again.', 'danger');
+      return;
+    }
+
+    this.isLoading = true;
+    this.showSnackbar('Loading your claims...', 'info');
+
+    this.httpService.getClaimsByPolicyholder(this.policyholderId).subscribe({
+      next: (data) => {
+        console.log('Claims by policyholder:', data);
+        this.claimByPolicyholder = data || [];
+        this.hasError = false;
+        if (this.claimByPolicyholder.length === 0) {
+          this.showSnackbar('No claims found. Create a claim from My Policies page.', 'info');
+        } else {
+          this.showSnackbar(`Successfully loaded ${this.claimByPolicyholder.length} claims.`, 'success');
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching claims:', err);
+        this.hasError = true;
+        this.errorDetails = JSON.stringify(err, null, 2);
+        
+        let errorMsg = 'Error loading claims. ';
+        if (!navigator.onLine) {
+          errorMsg += 'Please check your internet connection.';
+        } else if (err.status === 0) {
+          errorMsg += 'Cannot connect to server. Please try again later.';
+        } else if (err.status === 401) {
+          errorMsg += 'Session expired. Please log in again.';
+          this.router.navigate(['/login']);
+        } else {
+          errorMsg += err.message || 'Please try again.';
+        }
+        this.showSnackbar(errorMsg, 'danger');
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
+  }
+
   onUnderwriterUpdateClaim(id: number) {
     this.router.navigate([`/update-claim-underwriter/${id}`]);
     this.showSnackbar(`Underwriter updated claim #${id}`, 'info');
   }
-  
+
   onInvestigatorUpdateInvestigation(id: number) {
     this.router.navigate([`/update-claim-investigation/${id}`]);
     this.showSnackbar(`Investigation #${id} updated!`, 'info');
@@ -323,4 +374,3 @@ itemsPerPage:number=7;
 
 
 }
-

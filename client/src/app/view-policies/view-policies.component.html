@@ -35,7 +35,7 @@
                                 <button *ngIf="roleName === 'ADMIN'" class="btn btn-sm btn-danger" (click)="deletePolicy(policy.id)">
                                     <i class="bi bi-trash"></i> Delete
                                 </button>
-                                <button *ngIf="roleName === 'POLICYHOLDER'" class="btn btn-sm btn-success" (click)="deletePolicy(policy.id)">
+                                <button *ngIf="roleName === 'POLICYHOLDER'" class="btn btn-sm btn-success" (click)="buyPolicy(policy)">
                                     <i class="bi bi-trash"></i> Buy
                                 </button>
 

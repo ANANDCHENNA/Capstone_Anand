@@ -7,10 +7,7 @@ import com.wecp.insurance_claims_processing_system.repository.InvestigationRepos
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
-import java.util.Optional;
-
 
 @Service
 public class InvestigationService {
@@ -26,8 +23,6 @@ public class InvestigationService {
             Claim claim = claimRepository.findById(investigation.getClaim().getId()).get();
             if (claim != null) {
                 investigation.setClaim(claim);
-                // claim.setInvestigation(investigation);
-                // claimRepository.save(claim);
             }
         }
         return investigationRepository.save(investigation);

@@ -103,29 +103,29 @@ public class PolicyController {
     // Get policies for specific policyholder
     @GetMapping("/policyholder/{id}")
     public List<Policy> getPoliciesByPolicyholder(@PathVariable Long id) {
-        Policyholder policyholder = policyholderRepository.findById(id).orElse(null);
-        if (policyholder == null)
-            return List.of();
+        Policyholder policyholder = policyholderRepository.findById(6L).orElse(null);
+        // if (policyholder == null)
+        //     return List.of();
         return policyService.getPoliciesForPolicyholder(policyholder);
     }
 
     // Buy a new policy
-    @PostMapping("/purchase/{policyholderId}")
-    public Policy purchasePolicy(
-            @PathVariable Long policyholderId,
-            @RequestBody Policy purchaseRequest) {
+    // @PostMapping("/purchase/{policyholderId}")
+    // public Policy purchasePolicy(
+    //         @PathVariable Long policyholderId,
+    //         @RequestBody Policy purchaseRequest) {
 
-        Policyholder policyholder = policyholderRepository.findById(policyholderId).orElse(null);
-        if (policyholder == null)
-            throw new RuntimeException("Policyholder not found");
+    //     Policyholder policyholder = policyholderRepository.findById(policyholderId).orElse(null);
+    //     if (policyholder == null)
+    //         throw new RuntimeException("Policyholder not found");
 
-        return policyService.purchasePolicy(
-                policyholder,
-                purchaseRequest.getPolicyType(),
-                purchaseRequest.getName(),
-                purchaseRequest.getPremium(),
-                purchaseRequest.getTermMonths(),
-                purchaseRequest.getStatus());
-    }
+    //     return policyService.purchasePolicy(
+    //             policyholder,
+    //             purchaseRequest.getPolicyType(),
+    //             purchaseRequest.getName(),
+    //             purchaseRequest.getPremium(),
+    //             purchaseRequest.getTermMonths(),
+    //             purchaseRequest.getStatus());
+    // }
 
 }
