@@ -17,8 +17,7 @@
                 <button class="login-dropdown-btn" (click)="toggleDropdown()">Login / Register <i
                         class="fas fa-caret-down"></i></button>
                 <div class="dropdown-content" [class.show]="isDropdownOpen">
-                    <a (click)="onLogin()">Client Login</a>
-                    <a (click)="onLogin()">Agent Login</a> <!-- Assuming agent login also goes to /login -->
+                    <a (click)="onLogin()">Login</a> 
                     <a (click)="onSignUp()">Register</a>
                 </div>
             </div>

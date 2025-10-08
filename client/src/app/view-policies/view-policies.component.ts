@@ -58,6 +58,37 @@ export class ViewPoliciesComponent implements OnInit {
         }
     }
 
+    buyPolicy(policy: Policy) {
+        const userId = localStorage.getItem('userId'); // adjust if you use authService for id
+        if (!userId) {
+            this.showToast('User not identified. Please login again.', 'error');
+            return;
+        }
+
+        if (!confirm(`Buy policy "${policy.name}" for ${policy.premium}?`)) {
+            return;
+        }
+        this.httpService.purchasePolicy(policy.id, userId).subscribe({
+            next: (res) => {
+                this.showToast('Policy purchased successfully!', 'success');
+                this.loadPolicies();
+            },
+            error: (err) => {
+                if (err.error === 'Policy already owned') {
+                    this.showToast('You already own this policy.', 'error');
+                } else {
+                    this.showToast('Error purchasing policy', 'error');
+                }
+                console.error('Purchase error', err);
+            }
+        });
+
+
+    }
+
+
+
+
     private showToast(message: string, type: 'success' | 'error') {
         const toast = document.getElementById('snackbarToast');
         if (toast) {

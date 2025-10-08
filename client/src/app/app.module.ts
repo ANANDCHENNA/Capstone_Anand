@@ -18,10 +18,11 @@ import { UpdateInvestigationComponent } from './update-claim-investigation/updat
 import { HomeComponent } from './home/home.component';
 import { ViewUnderwritersComponent } from './view-underwriters/view-underwriters.component';
 import { UpdateClaimUnderwriterComponent } from './update-claim-underwriter/update-claim-underwriter.component';
-import { PurchasePolicyComponent } from './purchase/purchase-policy.component';
 import { ViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CreatePolicyComponent } from './create-policy/create-policy.component';
 import { UpdatePolicyComponent } from './update-policy/update-policy.component';
+import { MyPoliciesComponent } from './my-policies/my-policies.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { UpdatePolicyComponent } from './update-policy/update-policy.component';
     UpdateInvestigationComponent,
     ViewUnderwritersComponent,
     UpdateClaimUnderwriterComponent,
-    PurchasePolicyComponent,
+    MyPoliciesComponent,
     ViewPoliciesComponent,
     CreatePolicyComponent,
     UpdatePolicyComponent
@@ -48,8 +49,10 @@ import { UpdatePolicyComponent } from './update-policy/update-policy.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule
   ],
   providers: [HttpService, HttpClientModule],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
+
