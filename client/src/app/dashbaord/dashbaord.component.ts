@@ -39,6 +39,11 @@ export class DashbaordComponent implements OnInit {
   // Policies
   policies: any[] = [];
 
+/// asign card per page
+
+
+ currentPage:{ [role: string]: number } = {  'ADJUSTER': 1,  'UNDERWRITER': 1,  'INVESTIGATOR': 1,  'POLICYHOLDER': 1};
+itemsPerPage:number=7;
   constructor(
     private httpService: HttpService,
     private authService: AuthService,
@@ -241,9 +246,51 @@ export class DashbaordComponent implements OnInit {
     }
     return result;
   }
+//----------------logic for pagination----------------
 
 
-  // ---------------- Status Colour ----------------
+  // ---------------- // Get paginated items for a role
+  getPaginatedClaims(role: string): any[] {
+    let data: any[] = [];
+  
+    switch (role) {
+      case 'ADJUSTER':
+        data = this.filteredAdjusterClaims();
+        break;
+      case 'UNDERWRITER':
+        data = this.filteredUnderwriterClaims();
+        break;
+      case 'INVESTIGATOR':
+        data = this.filteredInvestigatorRecords();
+        break;
+      case 'POLICYHOLDER':
+        data = this.filteredPolicyholderClaims();
+        break;
+    }
+  
+    const startIndex = (this.currentPage[role] - 1) * this.itemsPerPage;
+    return data.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+  
+  // Total pages for a role
+  getTotalPages(role: string): number {
+    let length = 0;
+    switch (role) {
+      case 'ADJUSTER': length = this.filteredAdjusterClaims().length; break;
+      case 'UNDERWRITER': length = this.filteredUnderwriterClaims().length; break;
+      case 'INVESTIGATOR': length = this.filteredInvestigatorRecords().length; break;
+      case 'POLICYHOLDER': length = this.filteredPolicyholderClaims().length; break;
+    }
+    return Math.ceil(length / this.itemsPerPage);
+  }
+  
+  // Change page
+  changePage(role: string, page: number) {
+    if (page >= 1 && page <= this.getTotalPages(role)) {
+      this.currentPage[role] = page;
+    }
+  }
+  //---------Status Colour ----------------
   getStatusClass(status: string): string {
     switch (status) {
       case 'Started': return 'bg-primary';
