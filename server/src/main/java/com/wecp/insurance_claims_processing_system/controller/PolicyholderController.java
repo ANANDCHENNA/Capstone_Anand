@@ -20,8 +20,8 @@ public class PolicyholderController {
     private ClaimService claimService;
     @Autowired
     private PolicyholderRepository policyholderRepository;
-    // @Autowired
-    // private PolicyRepository policyRepository;
+    @Autowired
+    private PolicyRepository policyRepository;
     @PostMapping("/api/policyholder/claim")
 
     public ResponseEntity<Claim> submitClaim(@RequestParam Long policyholderId, @RequestBody Claim claim) {
@@ -35,19 +35,19 @@ public class PolicyholderController {
         return ResponseEntity.ok(claims);
     }
     
-    // @PostMapping("/api/policyholder/purchase")
-    // public ResponseEntity<String> purchasePolicy(@RequestParam Long policyId, @RequestParam Long policyholderId) {
-    //     Policyholder holder = policyholderRepository.findById(policyholderId).get();
-    //     Policy policy = policyRepository.findById(policyId).get();
+    @PostMapping("/api/policyholder/purchase")
+    public ResponseEntity<String> purchasePolicy(@RequestParam Long policyId, @RequestParam Long policyholderId) {
+        Policyholder holder = policyholderRepository.findById(policyholderId).get();
+        Policy policy = policyRepository.findById(policyId).get();
     
-    //     // if(holder.getOwnedPolicies().contains(policy)) {
-    //     //     return ResponseEntity.badRequest().body("Policy already owned");
-    //     // }
+        if(holder.getOwnedPolicies().contains(policy)) {
+            return ResponseEntity.badRequest().body("Policy already owned");
+        }
     
-    //     // holder.getOwnedPolicies().add(policy);
-    //     policyholderRepository.save(holder);
-    //     return ResponseEntity.ok("Policy purchased successfully");
-    // }
+        holder.getOwnedPolicies().add(policy);
+        policyholderRepository.save(holder);
+        return ResponseEntity.ok("Policy purchased successfully");
+    }
     
     
 }
