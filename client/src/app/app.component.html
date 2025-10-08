@@ -10,13 +10,13 @@
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav me-auto">
-      <li *ngIf="IsLoggin" class="nav-item">
-        <a class="nav-link" routerLink>Home</a>
+      <li *ngIf="!IsLoggin" class="nav-item">
+        <a class="nav-link" routerLink = "/home">Home</a>
       </li>
 
       <!-- Role-based links -->
       <li *ngIf="IsLoggin && roleName === 'POLICYHOLDER'" class="nav-item">
-        <a class="nav-link" routerLink="/policies">View Policies</a>
+        <a class="nav-link" routerLink="/policies">Buy Policy</a>
       </li>
       <li *ngIf="IsLoggin && roleName === 'POLICYHOLDER'" class="nav-item">
         <a class="nav-link" routerLink="/create-claim">Create Claims</a>

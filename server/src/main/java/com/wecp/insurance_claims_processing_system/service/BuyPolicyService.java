@@ -28,7 +28,7 @@ public class BuyPolicyService {
         buyPolicy.setPolicyholder(policyholder);
         buyPolicy.setPolicy(policy);
         buyPolicy.setPurchaseDate(LocalDate.now());
-        buyPolicy.setExpiryDate(LocalDate.now().plusYears(policy.getDurationInYears()));
+        //buyPolicy.setExpiryDate(LocalDate.now().plusYears(policy.getDurationInYears()));
         buyPolicy.setStatus("ACTIVE");
 
         return buyPolicyRepository.save(buyPolicy);
