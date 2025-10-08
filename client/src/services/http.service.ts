@@ -231,7 +231,7 @@ export class HttpService {
     let headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${authToken}`);
-    return this.http.get(this.serverName + `/api/policies/${policyholderId}`, { headers: headers });
+    return this.http.get(this.serverName + `/api/policy/policyholder/${policyholderId}`, { headers: headers });
   }
 
   // Purchase a policy for the logged-in policyholder
@@ -243,7 +243,7 @@ export class HttpService {
     return this.http.post(
       this.serverName + `/api/policyholder/purchase?policyId=${policyId}&policyholderId=${policyholderId}`,
       {},
-      { headers: headers }
+      { headers: headers, responseType: 'text'}
     );
   }
 }

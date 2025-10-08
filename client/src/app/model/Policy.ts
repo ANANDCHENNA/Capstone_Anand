@@ -5,5 +5,6 @@ export interface Policy{
     termMonths:number
     premium: number
     policyType: string
+    status: string
     policyHolderIds?:number[]   
 }
