@@ -23,7 +23,7 @@ export class MyPoliciesComponent implements OnInit {
   }
 
   loadMyPolicies() {
-    this.httpService.getPoliciesByOwnedUser(6).subscribe({
+    this.httpService.getPoliciesByOwnedUser(this.userId).subscribe({
       next: (data: Policy[]) => {
         console.log(data)
         this.myPolicies = data;

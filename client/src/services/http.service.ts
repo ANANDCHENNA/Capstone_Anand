@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { InteropObservable, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { InteropObservable, Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import { environment } from '../environments/environment.development';
 import { AuthService } from './auth.service';
 import { PurchaseRequest } from '../app/model/PurchaseRequest';
@@ -13,6 +14,19 @@ export class HttpService {
   public serverName = environment.apiUrl;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
+
+  testConnection(): Observable<any> {
+    const authToken = this.authService.getToken();
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Authorization', `Bearer ${authToken}`);
+    
+    // Try both HTTP/1.1 and HTTP/2
+    return this.http.get(this.serverName + '/api/policyholder/claims/test', {
+      headers: headers,
+      observe: 'response'  // Get full response including headers
+    });
+  }
 
   getInvestigations(): Observable<any> {
     const authToken = this.authService.getToken();
@@ -72,12 +86,37 @@ export class HttpService {
     return this.http.get(this.serverName + `/api/underwriter/claims?underwriterId=` + id, { headers: headers });
   }
 
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      console.error('Client-side error:', error.error.message);
+    } else {
+      // Server-side error
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    // Return an observable with a user-facing error message
+    return throwError(() => new Error('Unable to fetch claims. Please try again later.'));
+  }
+
   getClaimsByPolicyholder(policyholderId: any): Observable<any> {
     const authToken = this.authService.getToken();
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Authorization', `Bearer ${authToken}`)
-    return this.http.get(this.serverName + `/api/policyholder/claims?policyholderId=` + policyholderId, { headers: headers });
+    headers = headers.set('Authorization', `Bearer ${authToken}`);
+    headers = headers.set('Accept', 'application/json');
+    
+    return this.http.get(
+      this.serverName + `/api/policyholder/claims?policyholderId=` + policyholderId,
+      { 
+        headers: headers,
+        withCredentials: false // Disable credentials to avoid CORS preflight
+      }
+    ).pipe(
+      retry(3), // Retry failed requests up to 3 times
+      catchError(this.handleError)
+    );
   }
 
   updateInvestigation(details: any, investigationId: any): Observable<any> {

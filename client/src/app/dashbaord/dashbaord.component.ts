@@ -116,7 +116,6 @@ export class DashbaordComponent implements OnInit {
     }
   }
 
-
   loadPolicyholderClaims() {
     if (!this.policyholderId) {
       console.error('No policyholder ID found!');
