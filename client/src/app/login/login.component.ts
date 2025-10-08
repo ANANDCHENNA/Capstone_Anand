@@ -42,11 +42,10 @@ export class LoginComponent implements OnInit {
           this.authService.saveToken(data.token)
           this.authService.saveUserId(data.userId);
           // this.router.navigate(['/dashboard'])
-          if(data.role==='POLICYHOLDER')
-          {
-          this.router.navigate(['/buy-policy'])
+          if (data.role === 'POLICYHOLDER') {
+            this.router.navigate(['/policies'])
           }
-          else{
+          else {
             this.router.navigate(['/dashboard'])
           }
           setTimeout(() => {

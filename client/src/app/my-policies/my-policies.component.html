@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <h4>My Policies</h4>
+  <div *ngIf="myPolicies.length === 0" class="alert alert-info">
+    You have no policies yet.
+  </div>
+  <div class="table-responsive" *ngIf="myPolicies.length > 0">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Policy ID</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Premium</th>
+          <th>Term (months)</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of myPolicies">
+          <td>{{ p.id }}</td>
+          <td>{{ p.name }}</td>
+          <td>{{ p.policyType }}</td>
+          <td>{{ p.premium}}</td>
+          <td>{{ p.termMonths }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary me-2" (click)="claimPolicy(p)">
+              <i class="bi bi-exclamation-triangle"></i> {{p.status === "Claimed" ? "Claimed" : "Claim"}}
+            </button>
+            <button class="btn btn-sm btn-secondary" [routerLink]="['/policy', p.id]">View</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
