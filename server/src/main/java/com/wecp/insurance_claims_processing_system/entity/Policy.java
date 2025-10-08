@@ -28,7 +28,7 @@ public class Policy {
     private int termMonths;       
     private String status;   
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "policyholder_id")
     @JsonIgnore
     private Policyholder policyholder;

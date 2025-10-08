@@ -52,7 +52,7 @@ export class MyPoliciesComponent implements OnInit {
     const payload: any = {
       description: description,
       date: new Date().toISOString(), // backend expects Date; ISO string is safe
-      status: 'STARTED',
+      status: 'Started',
       policy_id: policy.id
     };
 

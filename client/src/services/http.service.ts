@@ -198,7 +198,7 @@ export class HttpService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('Authorization', `Bearer ${authToken}`);
-    return this.http.post(this.serverName + '/api/policy/purchase' + userId, details, { headers: headers });
+    return this.http.post(this.serverName + '/api/policy/purchase/' + userId, details, { headers: headers });
   }
 
   getMyPolicies(): Observable<any[]> {
