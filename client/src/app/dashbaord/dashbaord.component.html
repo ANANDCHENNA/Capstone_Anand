@@ -132,7 +132,7 @@
   </div>
 
   <!-- ADMIN -->
-  <!-- <div *ngIf="role === 'ADMIN'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  <div *ngIf="role === 'ADMIN'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <div class="col" *ngFor="let policy of filteredPolicies()">
       <div class="card gradient-card h-100 shadow-sm">
         <div class="card-body">
@@ -148,7 +148,7 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 
   <!-- Claim Details Modal -->
   <div class="modal fade" id="claimModal" tabindex="-1" aria-labelledby="claimModalLabel" aria-hidden="true">
@@ -167,7 +167,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button *ngIf="role==='ADMIN'" class="btn btn-primary" (click)="onUpdateClaimAdjuster(selectedClaim.id)">Update</button>
+          <button *ngIf="role==='ADJUSTER'" class="btn btn-primary" (click)="onUpdateClaimAdjuster(selectedClaim.id)">Update</button>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
+ 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,19 +10,18 @@ import { AuthService } from '../../services/auth.service';
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   IsLoggin: any = false;
   roleName: string | null;
-
+ 
   // Mobile Navigation
   isMobileNavOpen: boolean = false;
   isDropdownOpen: boolean = false;
-
+ 
   // Hero Slider
   currentSlideIndex: number = 0;
   slidesArray: any[] = new Array(3); // To easily generate dots in *ngFor
   slideInterval: any;
   slideDuration: number = 8000; // 8 seconds per slide
-
+ 
   // Typing Effect
-  // Use a template variable (#typingText) in HTML and query it
   @ViewChildren('typingText') typingTextElements!: QueryList<ElementRef>;
   phrases: string[][] = [
     ["Your Peace of Mind, Our Priority.", "Swift, Simple, Secure Claims.", "Protecting What Matters Most."],
@@ -34,12 +33,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private currentCharIndex: number = 0;
   private isTypingDirection: boolean = true; // true for typing, false for erasing
   private typingTimeout: any;
-
+ 
   readonly typeSpeed: number = 70; // Typing speed in ms
   readonly eraseSpeed: number = 40; // Erasing speed in ms
   readonly newPhraseDelay: number = 1500; // Delay before typing new phrase
   readonly endPhraseDelay: number = 2000; // Delay after typing a phrase
-
+ 
   // Statistics Counter
   @ViewChildren('counter') counterElements!: QueryList<ElementRef>;
   animatedCounters = {
@@ -49,7 +48,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     years: 0
   };
   private observer!: IntersectionObserver;
-
+ 
   // FAQ Accordion
   faqs = [
     { question: 'How do I file a claim?', answer: 'You can easily file a claim through our online portal by logging into your account. Alternatively, you can contact our claims department directly via phone or email, and our representatives will guide you through the process.', open: false },
@@ -57,21 +56,25 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     { question: 'How long does it take to process a claim?', answer: 'We pride ourselves on efficient claim processing. Most straightforward claims are processed within 5-7 business days once all required documentation is received. More complex cases may take longer, but we keep you informed every step of the way.', open: false },
     { question: 'Can I track the status of my claim online?', answer: 'Yes! Once you\'ve filed a claim, you can log into your ClaimSafe account and use our claim tracker to monitor its real-time status, view updates, and communicate with your claims adjuster.', open: false }
   ];
-
-
+ 
+ 
   constructor(private authService: AuthService, private router: Router) {
     this.IsLoggin = authService.getLoginStatus;
     this.roleName = authService.getRole;
-
+ 
     if (this.IsLoggin === false) {
+      // This line seems to imply a redirect to home if not logged in.
+      // If the component is already home, this might cause a loop or be unnecessary.
+      // Re-evaluate if this specific line is needed in the HomeComponent constructor.
+      // For now, I'm keeping it as per your original code.
       this.router.navigateByUrl('/home');
     }
   }
-
+ 
   ngOnInit(): void {
     this.showSlide(0);
   }
-
+ 
   ngAfterViewInit(): void {
     // Set up Intersection Observer for counters
     const options = {
@@ -79,7 +82,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       rootMargin: '0px',
       threshold: 0.5 // Trigger when 50% of item is visible
     };
-
+ 
     this.observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -91,11 +94,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       });
     }, options);
-
+ 
     // Ensure counterElements are available before observing
-    // Use a short timeout to ensure ViewChildren are rendered,
-    // or if they are already there, observe them directly.
-    // QueryList.changes is also an option for dynamic content.
     if (this.counterElements.length > 0) {
         this.counterElements.forEach(counter => {
             this.observer.observe(counter.nativeElement);
@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         });
     }
   }
-
+ 
   ngOnDestroy(): void {
     clearInterval(this.slideInterval);
     if (this.typingTimeout) {
@@ -119,35 +119,55 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       this.observer.disconnect();
     }
   }
-
+ 
+  // --- NEW METHOD FOR SCROLLING ---
+  scrollToSection(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      // Adjust this value based on your fixed header's height
+      // The fixed header is `80px` tall according to the CSS.
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerOffset;
+ 
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+      this.closeMobileNav(); // Close mobile nav after clicking a link
+    }
+  }
+ 
   // --- Your Existing Methods ---
   onLogin(): void {
     this.router.navigate(['/login']);
+    this.isDropdownOpen = false; // Close dropdown after navigation
   }
-
+ 
   onSignUp(): void {
     this.router.navigate(['/registration']);
+    this.isDropdownOpen = false; // Close dropdown after navigation
   }
-
+ 
   learnMore(insuranceId: number): void {
     this.router.navigate(['/insurance-details', insuranceId]);
   }
-
+ 
   claimNow(): void {
     this.router.navigate(['/claim-registration']);
   }
-
+ 
   getFloatingElements(): string[] {
     return ['shield', 'heart', 'home'];
   }
-
+ 
   getBannerContent(): { title: string; subtitle: string } {
     return {
       title: 'Ready to Experience Worry-Free Coverage?',
       subtitle: 'Join thousands of satisfied clients who trust us with their most important assets. Get a personalized quote today!'
     };
   }
-
+ 
   getLogoDetails(): { src: string; alt: string; title: string } {
     return {
       src: '../../assets/logo.png', // Assuming you have this image in your assets
@@ -155,59 +175,57 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       title: 'ClaimSafe'
     };
   }
-
+ 
   // --- Mobile Navigation ---
   toggleMobileNav(): void {
     this.isMobileNavOpen = !this.isMobileNavOpen;
   }
-
+ 
   closeMobileNav(): void {
     this.isMobileNavOpen = false;
   }
-
+ 
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
-
+ 
   // --- Hero Slider ---
   showSlide(index: number): void {
     clearInterval(this.slideInterval);
     if (this.typingTimeout) {
       clearTimeout(this.typingTimeout);
     }
-
+ 
     this.currentSlideIndex = index;
     this.resetTypingEffect(index); // Reset and start typing for the new slide
     this.startSlideTimer(); // Reset the auto-slide timer whenever slide changes
   }
-
+ 
   nextSlide(): void {
     this.showSlide((this.currentSlideIndex + 1) % this.slidesArray.length);
   }
-
+ 
   prevSlide(): void {
     this.showSlide((this.currentSlideIndex - 1 + this.slidesArray.length) % this.slidesArray.length);
   }
-
+ 
   startSlideTimer(): void {
     clearInterval(this.slideInterval);
     this.slideInterval = setInterval(() => {
       this.nextSlide();
     }, this.slideDuration);
   }
-
+ 
   // --- Typing Effect Logic ---
   private resetTypingEffect(slideIndex: number): void {
     if (this.typingTimeout) {
       clearTimeout(this.typingTimeout);
     }
-    this.typedText[slideIndex] = ''; // Clear current text for the active slide
+    this.typedText = this.typedText.map((val, idx) => idx === slideIndex ? '' : val); // Clear only active slide's text
     this.currentPhraseIndex = 0;
     this.currentCharIndex = 0;
     this.isTypingDirection = true; // Start fresh, initially typing
-
-    // Clear and restart animation for the specific typing element to reset cursor blink
-    // Ensure the typingTextElements QueryList has populated before trying to access
+ 
     if (this.typingTextElements && this.typingTextElements.toArray().length > slideIndex) {
       const activeTypingElement = this.typingTextElements.toArray()[slideIndex]?.nativeElement;
       if (activeTypingElement) {
@@ -218,16 +236,15 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.type(); // Start typing for the new slide
   }
-
+ 
   private type(): void {
     const currentSlidePhrases = this.phrases[this.currentSlideIndex];
     if (!currentSlidePhrases || currentSlidePhrases.length === 0) return;
-
+ 
     const currentPhrase = currentSlidePhrases[this.currentPhraseIndex];
-
+ 
     if (this.isTypingDirection) { // Typing
       if (this.currentCharIndex < currentPhrase.length) {
-        // Create a new array reference to trigger change detection
         this.typedText = this.typedText.map((val, idx) =>
           idx === this.currentSlideIndex ? val + currentPhrase.charAt(this.currentCharIndex) : val
         );
@@ -239,7 +256,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     } else { // Erasing
       if (this.currentCharIndex > 0) {
-        // Create a new array reference to trigger change detection
         this.typedText = this.typedText.map((val, idx) =>
           idx === this.currentSlideIndex ? currentPhrase.substring(0, this.currentCharIndex - 1) : val
         );
@@ -252,7 +268,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
   }
-
+ 
   // --- Statistics Counter ---
   private getCounterName(element: HTMLElement): keyof typeof this.animatedCounters {
     const parent = element.closest('.stat-item');
@@ -260,17 +276,17 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     if (parent?.querySelector('p')?.textContent?.includes('Approved')) return 'approvals';
     if (parent?.querySelector('p')?.textContent?.includes('Support')) return 'support';
     if (parent?.querySelector('p')?.textContent?.includes('Years')) return 'years';
-    return 'clients'; // Default fallback
+    return 'clients'; // Default fallback, though should ideally cover all cases
   }
-
+ 
   private animateCounter(counterName: keyof typeof this.animatedCounters, target: number): void {
     const duration = 2000; // Total duration for animation (2 seconds)
     const frames = 60; // Number of frames
     const frameDuration = duration / frames; // Duration per frame
-
+ 
     let start = 0;
     const increment = target / frames;
-
+ 
     const interval = setInterval(() => {
       start += increment;
       if (start < target) {
@@ -281,8 +297,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }, frameDuration);
   }
-
-  // --- FAQ Accordion ---
+ 
+  // --- FAQ Accordion ---s
   toggleAccordion(index: number): void {
     this.faqs.forEach((faq, i) => {
       if (i === index) {
@@ -293,3 +309,4 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 }
+ 

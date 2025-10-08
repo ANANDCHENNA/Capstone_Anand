@@ -120,7 +120,7 @@ button {
   background: #007bb6;
   left: 0;
   bottom: -5px;
-  transition: width 0.3s ease-in-out;
+  transition: width 0.5s ease-in-out;
 }
 
 .nav-links a:hover::after {
@@ -176,7 +176,7 @@ button {
   /* Position below the button */
   margin-top: 10px;
   /* Space between button and dropdown */
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .dropdown-content a {

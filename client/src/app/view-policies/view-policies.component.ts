@@ -52,7 +52,7 @@ export class ViewPoliciesComponent implements OnInit {
                 },
                 error: (error) => {
                     console.error('Error deleting policy:', error);
-                    this.showToast('Error deleting policy', 'error');
+                    this.showToast('Policy already bought', 'error');
                 }
             });
         }

@@ -62,9 +62,11 @@ export class DashbaordComponent implements OnInit {
     if (this.role === 'INVESTIGATOR') {
       this.httpService.getInvestigations().subscribe(data => this.investigations = data);
     }
+
     if (this.role === 'POLICYHOLDER') {
       this.httpService.getClaimsByPolicyholder(this.policyholderId).subscribe(data => this.claimByPolicyholder = data);
     }
+
     if (this.role === 'ADMIN') {
       this.httpService.getAllPolicies().subscribe(data => this.policies = data);
     }
@@ -111,7 +113,7 @@ export class DashbaordComponent implements OnInit {
     this.router.navigate([`/update-claim-underwriter/${id}`]);
     this.showSnackbar(`Underwriter updated claim #${id}`, 'info');
   }
-  
+
   onInvestigatorUpdateInvestigation(id: number) {
     this.router.navigate([`/update-claim-investigation/${id}`]);
     this.showSnackbar(`Investigation #${id} updated!`, 'info');
@@ -265,12 +267,54 @@ export class DashbaordComponent implements OnInit {
     this.showSnackbar(`Editing Policy #${policy.policyNumber}`, 'info');
   }
 
+  // deletePolicy(id: number) {
+  //   if (confirm('Are you sure you want to delete this policy?')) {
+  //     this.httpService.deletePolicy(id).subscribe(() => {
+  //       this.policies = this.policies.filter(p => p.id !== id);
+  //       this.showSnackbar(`Policy deleted successfully!`, 'success');
+  //     });
+  //   }
+  // }
+
   deletePolicy(id: number) {
     if (confirm('Are you sure you want to delete this policy?')) {
-      this.httpService.deletePolicy(id).subscribe(() => {
-        this.policies = this.policies.filter(p => p.id !== id);
-        this.showSnackbar(`Policy deleted successfully!`, 'success');
+      this.httpService.deletePolicy(id).subscribe({
+        next: () => {
+          this.showToast('Policy deleted successfully!', 'success');
+          this.loadPolicies(); // Reload the list
+        },
+        error: (error) => {
+          console.error('Error deleting policy:', error);
+          this.showToast('Policy already bought', 'error');
+        }
       });
+    }
+  }
+
+  loadPolicies() {
+    this.httpService.getAllPolicies().subscribe({
+      next: (data) => {
+        this.policies = data;
+      },
+      error: (error) => {
+        console.error('Error loading policies:', error);
+        this.showToast('Error loading policies', 'error');
+      }
+    });
+  }
+
+  private showToast(message: string, type: 'success' | 'error') {
+    const toast = document.getElementById('snackbarToast');
+    if (toast) {
+      toast.classList.remove('text-bg-success', 'text-bg-danger');
+      toast.classList.add(type === 'success' ? 'text-bg-success' : 'text-bg-danger');
+      const toastBody = toast.querySelector('.toast-body');
+      if (toastBody) {
+        toastBody.textContent = message;
+      }
+      // @ts-ignore
+      const bsToast = new bootstrap.Toast(toast);
+      bsToast.show();
     }
   }
 

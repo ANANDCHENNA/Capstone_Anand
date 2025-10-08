@@ -1,24 +1,23 @@
 <div class="dashboard-container">
-
+ 
     <!-- --- Hero Section (Navigation/Header) ----->
     <header class="hero-section">
         <div class="logo-area">
-            <!-- Using your getLogoDetails method -->
-            <img src="../../assets/logo.png"  alt="ClaimSafe Logo" class="main-logo">
+            <img [src]="getLogoDetails().src" [alt]="getLogoDetails().alt" class="main-logo">
             <h1>{{ getLogoDetails().title }}</h1>
         </div>
         <nav class="nav-links" [class.nav-open]="isMobileNavOpen">
-            <a href="#insurance-grid" (click)="closeMobileNav()">Policies</a>
-            <a href="#features" (click)="closeMobileNav()">Benefits</a>
-            <a href="#testimonials" (click)="closeMobileNav()">Testimonials</a>
-            <a href="#faq" (click)="closeMobileNav()">FAQ</a>
-            <a href="#contact" (click)="closeMobileNav()">Contact</a>
+            <!-- Updated (click) handlers to include scrollToSection -->
+            <a (click)="scrollToSection('insurance-grid')">Policies</a>
+            <a (click)="scrollToSection('features')">Benefits</a>
+            <a (click)="scrollToSection('testimonials')">Testimonials</a>
+            <a (click)="scrollToSection('faq')">FAQ</a>
+            <a (click)="scrollToSection('contact')">Contact</a>
             <div class="dropdown">
                 <button class="login-dropdown-btn" (click)="toggleDropdown()">Login / Register <i
                         class="fas fa-caret-down"></i></button>
                 <div class="dropdown-content" [class.show]="isDropdownOpen">
-                    <a (click)="onLogin()">Client Login</a>
-                    <a (click)="onLogin()">Agent Login</a> <!-- Assuming agent login also goes to /login -->
+                    <a (click)="onLogin()">Login</a>
                     <a (click)="onSignUp()">Register</a>
                 </div>
             </div>
@@ -27,40 +26,37 @@
             <i class="fas" [class.fa-bars]="!isMobileNavOpen" [class.fa-times]="isMobileNavOpen"></i>
         </button>
     </header>
-
+ 
     <!-- --- HERO SLIDER SECTION --- -->
     <section class="hero-slider" id="heroSlider">
         <div class="slider-wrapper">
             <!-- Slide 1 -->
             <div class="slide" [class.active]="currentSlideIndex === 0">
-                <img src="../../assets/slide1.jpg"
-                    alt="Family peace of mind" class="slide-bg">
-                <div class=""></div>
+                <img src="../../assets/slide1.jpg" alt="Family peace of mind" class="slide-bg">
+                <div></div> <!-- Use a class for the overlay -->
                 <div class="slider-content container">
                     <h2 class="typing-text" #typingText>{{ typedText[0] }}</h2>
                     <p>Experience stress-free insurance claims with ClaimSafe. We're here for you, always.</p>
                     <a (click)="claimNow()" class="banner-btn">File a Claim Now</a>
                 </div>
             </div>
-
+ 
             <!-- Slide 2 -->
             <div class="slide" [class.active]="currentSlideIndex === 1">
-                <img src="../../assets/slide2.jpg"
-                    alt="Digital claims processing" class="slide-bg">
-                <div class=""></div>
+                <img src="../../assets/slide2.jpg" alt="Digital claims processing" class="slide-bg">
+                <div ></div>
                 <div class="slider-content container">
                     <h2 class="typing-text" #typingText>{{ typedText[1] }}</h2>
-                    <p>Our digital platform makes filing and tracking your claims easier than 
+                    <p>Our digital platform makes filing and tracking your claims easier than
                         <br> ever.</p>
                     <a (click)="claimNow()" class="banner-btn">Learn About Our Process</a>
                 </div>
             </div>
-
+ 
             <!-- Slide 3 -->
             <div class="slide" [class.active]="currentSlideIndex === 2">
-                <img src="../../assets/slide3.jpg"
-                    alt="Supportive insurance agent" class="slide-bg">
-                <div class=""></div>
+                <img src="../../assets/slide3.jpg" alt="Supportive insurance agent" class="slide-bg">
+                <div ></div>
                 <div class="slider-content container">
                     <h2 class="typing-text" #typingText>{{ typedText[2] }}</h2>
                     <p>Our expert team provides personalized support, guiding you through every claim.</p>
@@ -68,11 +64,11 @@
                 </div>
             </div>
         </div>
-
+ 
         <!-- Slider Navigation Arrows -->
         <button class="slider-nav prev" (click)="prevSlide()"><i class="fas fa-chevron-left"></i></button>
         <button class="slider-nav next" (click)="nextSlide()"><i class="fas fa-chevron-right"></i></button>
-
+ 
         <!-- Slider Dots -->
         <div class="slider-dots">
             <span class="dot" *ngFor="let dot of slidesArray; let i = index" [class.active]="currentSlideIndex === i"
@@ -80,7 +76,7 @@
         </div>
     </section>
     <!-- END HERO SLIDER SECTION -->
-
+ 
     <main>
         <!-- --- Insurance Grid & Cards --- -->
         <section id="insurance-grid" class="insurance-grid container">
@@ -107,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-
+ 
                 <!-- Card 2: Auto Insurance -->
                 <div class="insurance-card-container">
                     <div class="insurance-card">
@@ -129,7 +125,7 @@
                         </div>
                     </div>
                 </div>
-
+ 
                 <!-- Card 3: Health Insurance -->
                 <div class="insurance-card-container">
                     <div class="insurance-card">
@@ -151,7 +147,7 @@
                         </div>
                     </div>
                 </div>
-
+ 
                 <!-- Card 4: Life Insurance -->
                 <div class="insurance-card-container">
                     <div class="insurance-card">
@@ -173,7 +169,7 @@
                         </div>
                     </div>
                 </div>
-
+ 
                 <!-- Card 5: Business Insurance -->
                 <div class="insurance-card-container">
                     <div class="insurance-card">
@@ -195,7 +191,7 @@
                         </div>
                     </div>
                 </div>
-
+ 
                 <!-- Card 6: Travel Insurance -->
                 <div class="insurance-card-container">
                     <div class="insurance-card">
@@ -219,40 +215,41 @@
                 </div>
             </div>
         </section>
-
+ 
         <!-- --- Promo Banner --- -->
         <section class="promo-banner container">
             <h3>{{ getBannerContent().title }}</h3>
             <p>{{ getBannerContent().subtitle }}</p>
             <a (click)="claimNow()" class="btn-light">Get a Free Quote</a>
         </section>
-
+ 
         <!-- --- Statistics Section --- -->
         <section class="stats-section">
             <h2 class="section-title">Our Impact in Numbers</h2>
             <div class="stats-container container">
                 <div class="stat-item">
-                    <span class="counter" #counter data-target="15000">{{ animatedCounters.clients | number:'1.0-0' }}</span>
+                    <span class="counter" #counter data-target="15000">{{ animatedCounters.clients | number:'1.0-0'
+                        }}</span>
                     <p>Happy Clients</p>
                 </div>
                 <div class="stat-item">
-                    <span class="counter" #counter data-target="98">{{ animatedCounters.approvals | number:'1.0-0' }}</span><span
-                        class="counter-suffix">%</span>
+                    <span class="counter" #counter data-target="98">{{ animatedCounters.approvals | number:'1.0-0'
+                        }}</span><span class="counter-suffix">%</span>
                     <p>Claims Approved</p>
                 </div>
                 <div class="stat-item">
-                    <span class="counter" #counter data-target="24">{{ animatedCounters.support | number:'1.0-0' }}</span><span
-                        class="counter-suffix">/7</span>
+                    <span class="counter" #counter data-target="24">{{ animatedCounters.support | number:'1.0-0'
+                        }}</span><span class="counter-suffix">/7</span>
                     <p>Support Available</p>
                 </div>
                 <div class="stat-item">
-                    <span class="counter" #counter data-target="10">{{ animatedCounters.years | number:'1.0-0' }}</span><span
-                        class="counter-suffix">+</span>
+                    <span class="counter" #counter data-target="10">{{ animatedCounters.years | number:'1.0-0'
+                        }}</span><span class="counter-suffix">+</span>
                     <p>Years in Service</p>
                 </div>
             </div>
         </section>
-
+ 
         <!-- --- Features Section --- -->
         <section id="features" class="features-section">
             <h2 class="section-title full-width">Why Choose ClaimSafe?</h2>
@@ -293,7 +290,7 @@
                     industry standards.</p>
             </div>
         </section>
-
+ 
         <!-- --- Testimonials Section --- -->
         <section id="testimonials" class="testimonials-section">
             <h2 class="section-title">What Our Clients Say</h2>
@@ -327,7 +324,7 @@
                 </div>
             </div>
         </section>
-
+ 
         <!-- --- FAQ Section --- -->
         <section id="faq" class="faq-section">
             <h2 class="section-title">Frequently Asked Questions</h2>
@@ -343,7 +340,7 @@
                 </div>
             </div>
         </section>
-
+ 
         <!-- --- Contact Section --- -->
         <section id="contact" class="contact-section">
             <h2 class="section-title">Get in Touch With Us</h2>
@@ -357,23 +354,23 @@
             </form>
         </section>
     </main>
-
+ 
     <!-- --- Footer --- -->
     <footer class="main-footer">
         <div class="footer-content container">
             <div class="footer-logo">
-                <img src="../../assets/logo.png" alt="ClaimSafe Logo" class="main-logo">
+                <img [src]="getLogoDetails().src" [alt]="getLogoDetails().alt" class="main-logo">
                 <h3>{{ getLogoDetails().title }}</h3>
                 <p>&copy; 2023 {{ getLogoDetails().title }}. All rights reserved.</p>
             </div>
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#insurance-grid">Policies</a></li>
-                    <li><a href="#features">Benefits</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a (click)="scrollToSection('insurance-grid')">Policies</a></li>
+                    <li><a (click)="scrollToSection('features')">Benefits</a></li>
+                    <li><a (click)="scrollToSection('testimonials')">Testimonials</a></li>
+                    <li><a (click)="scrollToSection('faq')">FAQ</a></li>
+                    <li><a (click)="scrollToSection('contact')">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
@@ -396,5 +393,5 @@
             <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
         </div>
     </footer>
-
+ 
 </div> <!-- End .dashboard-container -->
