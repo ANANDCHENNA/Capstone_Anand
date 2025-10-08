@@ -233,6 +233,25 @@ export class HttpService {
     return this.http.put<any>(`${this.serverName}/api/policy/${policyId}`, payload, { headers: headers });
   }
 
+  Login(details:any):Observable<any> {
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json');
+        return this.http.post(this.serverName+'/api/user/login',details,{headers:headers});
+      }
+   
+   
+      loginSendOtp(payload: { username: string; password: string }): Observable<any> {
+        return this.http.post(`${this.serverName}/api/user/login`, payload);
+      }
+   
+      verifyOtp(payload: { username: string; otp: string }): Observable<any> {
+        return this.http.post(`${this.serverName}/api/user/verify-otp`, payload);
+      }
+   
+      resendOtp(payload: { username: string }): Observable<any> {
+        return this.http.post(`${this.serverName}/api/user/resend-otp`, payload);
+      }
+
   deletePolicy(policyId: number) {
     const authToken = this.authService.getToken();
     let headers = new HttpHeaders();
@@ -241,19 +260,11 @@ export class HttpService {
     return this.http.delete(`${this.serverName}/api/policy/${policyId}`, { headers: headers });
   }
 
-
-  Login(details: any): Observable<any> {
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    return this.http.post(this.serverName + '/api/user/login', details, { headers: headers });
-  }
-
   registerUser(details: any): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     return this.http.post(this.serverName + '/api/user/register', details, { headers: headers });
   }
-
 
   // Fetch all policies
   // getAllPolicies(): Observable<any> {

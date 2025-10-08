@@ -46,10 +46,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 // Public endpoints
-                .antMatchers("/api/user/register", "/api/user/login").permitAll()
+                .antMatchers("/api/user/login","/api/user/verify-otp","/api/user/resend-otp","/api/user/register").permitAll()
 
                 // Policyholder endpoints
                 .antMatchers(HttpMethod.POST, "/api/policy/purchase/**").hasAuthority("POLICYHOLDER")
+                .antMatchers(HttpMethod.POST, "/api/user/verify-otp").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/user/resend-otp").permitAll()
                 .antMatchers(HttpMethod.GET, "/policy/policyholder/**").hasAuthority("POLICYHOLDER")
                 .antMatchers(HttpMethod.GET, "/policies").hasAuthority("POLICYHOLDER")
 
@@ -80,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Underwriter endpoints
                 .antMatchers(HttpMethod.GET, "/api/underwriter/claims").hasAuthority("UNDERWRITER")
                 .antMatchers(HttpMethod.PUT, "/api/underwriter/claim/{id}/review").hasAuthority("UNDERWRITER")
-                
+
                 // Admin endpoints
                 .antMatchers(HttpMethod.POST, "/api/policies").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/policies").hasAuthority("ADMIN")

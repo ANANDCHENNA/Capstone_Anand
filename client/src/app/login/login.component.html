@@ -1,47 +1,77 @@
 <section class="hero-section">
-    <div class="hero-background-overlay"></div> <!-- For the faded overlay -->
-    <div class="container hero-content-wrapper">
-        <!-- Left side content -->
-        <div class="hero-text-content">
-            <div class="logo-area">
-                <i class="fas fa-hand-holding-heart logo-icon"></i> <!-- Example icon -->
-                <span class="company-name">Insure</span>
-            </div>
-            <h1>The Best Insurance <br> Begins Here</h1>
-            <p><i>Smarter. Faster. Transparent.</i></p>
+  <div class="hero-background-overlay"></div>
+  <div class="container hero-content-wrapper">
+    <!-- Left side content -->
+    <div class="hero-text-content">
+      <div class="logo-area">
+        <i class="fas fa-hand-holding-heart logo-icon"></i> <!-- Example icon -->
+        <span class="company-name">Insure</span>
+      </div>
+      <h1>The Best Insurance <br> Begins Here</h1>
+      <p><i>Smarter. Faster. Transparent.</i></p>
+    </div>
+
+    <!-- Right side: Integrated Login Form -->
+    <div class="login-form-wrapper">
+      <div class="login-container">
+        <div class="header">
+          <i class="fas fa-shield-alt logo"></i> <!-- Example logo icon -->
+          <h2>Welcome Back</h2>
+          <p class="tagline">Claiming made simple, secure, and swift.</p>
         </div>
 
-        <!-- Right side: Integrated Login Form -->
-        <div class="login-form-wrapper">
-            <div class="login-container">
-                <div class="header">
-                    <i class="fas fa-shield-alt logo"></i> <!-- Example logo icon -->
-                    <h2>Welcome Back</h2>
-                    <p class="tagline">Claiming made simple, secure, and swift.</p>
-                </div>
-                <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
-                    <div class="form-group">
-                        <label for="username">Username<span class="required">*</span></label>
-                        <input type="username" id="username" formControlName="username" class="form-control"
-                            placeholder="Enter Username" required>
-                        <div *ngIf="itemForm.get('username')?.touched && itemForm.get('username')?.invalid" class="error-message">
-                            <div *ngIf="itemForm.get('username')?.errors?.['required']">Username is required</div>
-                            <div *ngIf="itemForm.get('username')?.errors?.['username']">Please enter a valid username</div>
-                        </div>
-                        <p class="error-message">{{errorMessage}}</p>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password <span class="required">*</span></label>
-                        <input type="password" id="password" formControlName="password" class="form-control"
-                            placeholder="Enter Password" required>
-                    </div>
-                    <button type="submit" [disabled]="!itemForm.valid" class="submit-button">Submit</button>
-                </form>
-                <p class="sign">
-                    Don't have an account?
-                    <a routerLink="/registration">Sign Up</a>
-                </p>
+        <!-- LOGIN FORM (hidden when otpSent true) -->
+        <form *ngIf="!otpSent" [formGroup]="itemForm" (ngSubmit)="onLogin()">
+          <div class="form-group">
+            <label for="username">Username<span class="required">*</span></label>
+            <input type="text" formControlName="username" class="form-control" id="username"
+              placeholder="Enter username">
+            <div *ngIf="itemForm.controls['username'].invalid && (itemForm.controls['username'].touched)"
+              class="error-message">Username required</div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password <span class="required">*</span></label>
+            <input type="password" formControlName="password" class="form-control" id="password"
+              placeholder="Enter password">
+            <div *ngIf="itemForm.controls['password'].invalid && (itemForm.controls['password'].touched)"
+              class="error-message">Password required</div>
+          </div>
+          <button type="submit" class="submit-button" [disabled]="!itemForm.valid">Login</button>
+        </form>
+
+        <!-- OTP FORM -->
+        <div *ngIf="otpSent">
+          <p class="tagline text-success">OTP sent to your registered email for <strong>{{usernameForOtp}}</strong></p>
+          <form [formGroup]="otpForm" (ngSubmit)="submitOtp()">
+            <div class="form-group">
+              <label for="otp">Enter OTP<span class="required">*</span></label>
+              <input type="text" formControlName="otp" class="form-control otp-input" id="otp"
+                placeholder="6-digit code" maxlength="6">
+              <div *ngIf="otpForm.controls['otp'].invalid && (otpForm.controls['otp'].touched)" class="error-message">
+                Enter a valid 6-digit code</div>
             </div>
+
+            <button class="submit-button" type="submit" style="margin-bottom: 15px;">Verify & Login</button>
+
+            <div class="resend-otp-area">
+              <button class="btn-link-custom" type="button" [disabled]="resendDisabled" (click)="resendOtp()">
+
+                Resend OTP
+              </button>
+              <div *ngIf="resendDisabled" class="small-text-muted">You can resend in {{resendTimer}}s</div>
+            </div>
+          </form>
         </div>
+
+        <p class="sign">
+
+          Don't have an account?
+          <a (click)="registration()">Sign Up</a>
+        </p>
+
+        <div *ngIf="showError" class="error-message-alert mt-3">{{errorMessage}}</div>
+      </div>
     </div>
+  </div>
 </section>
