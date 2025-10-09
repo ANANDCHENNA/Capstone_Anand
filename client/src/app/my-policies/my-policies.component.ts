@@ -12,7 +12,7 @@ import { Policy } from '../model/Policy';
 })
 export class MyPoliciesComponent implements OnInit {
   myPolicies: Policy[] = [];
-  userId = localStorage.getItem('userId') || '';
+  userId = localStorage.getItem('userId');
   constructor(
     private httpService: HttpService,
     private router: Router

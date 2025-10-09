@@ -23,18 +23,17 @@ public class PolicyholderController {
     @Autowired
     private PolicyRepository policyRepository;
 
-    // @PostMapping("/api/policyholder/claim")
-    // public ResponseEntity<?> submitClaim(@RequestParam Long policyholderId,
-    // @RequestBody Claim claim) {
-    // Claim savedClaim = claimService.submitClaim(policyholderId, claim);
-    // return ResponseEntity.status(HttpStatus.OK).body(savedClaim);
-    // }
-
-    @PostMapping(value = "/api/policyholder/claim", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Claim> submitClaim(@RequestParam Long policyholderId, @RequestBody Claim claim) {
+    @PostMapping("/api/policyholder/claim")
+    public ResponseEntity<?> submitClaim(@RequestParam Long policyholderId, @RequestBody Claim claim) {
         Claim savedClaim = claimService.submitClaim(policyholderId, claim);
-        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(savedClaim);
+        return ResponseEntity.status(HttpStatus.OK).body(savedClaim);
     }
+
+    // @PostMapping(value = "/api/policyholder/claim", produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<Claim> submitClaim(@RequestParam Long policyholderId, @RequestBody Claim claim) {
+    //     Claim savedClaim = claimService.submitClaim(policyholderId, claim);
+    //     return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(savedClaim);
+    // }
 
     @GetMapping("/api/policyholder/claims")
     public ResponseEntity<List<Claim>> getClaims(@RequestParam Long policyholderId) {

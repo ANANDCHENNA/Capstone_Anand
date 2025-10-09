@@ -30,10 +30,9 @@ public class ClaimService {
 
     // Create Claim Component
     public Claim submitClaim(Long policyholderId, Claim claim) {
-
-    Policyholder ph = policyholderRepository.findById(policyholderId).get();
-    claim.setPolicyholder(ph);
-    return claimRepository.save(claim);
+        Policyholder ph = policyholderRepository.findById(policyholderId).get();
+        claim.setPolicyholder(ph);
+        return claimRepository.save(claim);
     }
 
     // Dashboard Component for role: Policyholder
