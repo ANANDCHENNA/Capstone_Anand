@@ -42,8 +42,16 @@ export class UpdateInvestigationComponent implements OnInit {
 
   onSubmit() {
     if (this.itemForm.valid) {
-      console.log(this.itemForm.value)
-      this.httpService.updateInvestigation(this.itemForm.value, this.investigationId).subscribe({
+      const formValue = this.itemForm.getRawValue();
+      console.log(formValue);
+      const payload = {
+        report : formValue.report,
+        status: formValue.status,
+        claim: {
+          id: formValue.claimId
+        }
+      }
+      this.httpService.updateInvestigation(payload, this.investigationId).subscribe({
         next: () => {
           this.router.navigate(['/dashboard']);
         },
