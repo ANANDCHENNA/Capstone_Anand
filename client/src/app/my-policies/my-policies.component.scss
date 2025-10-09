@@ -1,99 +1,361 @@
-/* Add to your existing CSS file */
+/* Base styling from your theme */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    /* Keeping the background animation as it's a core part of the base theme */
+    background: linear-gradient(-45deg, #e0f2f7, #c1e4ed, #aed8ee, #8ecdea);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #4b4343;
+    line-height: 1.6;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
 
-/* General Styling for tables to match the glassy theme */
-.glass-table-container {
-  background: rgba(255, 255, 255, 0.75); /* Light glass background for container */
-  backdrop-filter: blur(15px); /* Apply blur for glass effect */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.main-content-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* Reusing and adapting form-container-wrapper for table view */
+.form-container-wrapper {
+  max-width: 600px; /* Default max-width from previous form */
+  width: 100%;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Reduced shadow intensity */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.4); /* Glass border */
-  border-radius: 15px;
-  overflow: hidden; /* Ensures rounded corners apply to content */
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Lighter initial shadow */
-  margin-top: 1.5rem; /* Space from title */
+  animation: fadeInForm 0.8s ease-out;
 }
 
-.glass-table {
-  --bs-table-bg: transparent; /* Make table background transparent */
-  --bs-table-hover-bg: rgba(0, 198, 255, 0.1); /* Light aqua hover for rows */
-  --bs-table-striped-bg: rgba(255, 255, 255, 0.1); /* Light stripe for rows */
-  color: #333d47; /* Consistent text color */
+.large-form-wrapper { /* Override for wider table container */
+    max-width: 1000px; /* Adjusted max-width for this table with actions */
+    padding: 30px; /* Slightly reduced padding for table */
 }
 
-.glass-table thead th {
-  background-color: rgba(0, 77, 122, 0.2); /* Slightly darker transparent blue for header */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Lighter header border */
-  color: #004d7a; /* Dark blue for header text */
+
+@keyframes fadeInForm {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-title {
+  text-align: center;
+  color: #34495e; /* More muted dark blue */
+  font-size: 2.5rem;
   font-weight: 700;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  margin-bottom: 40px;
+  text-shadow: none; /* Removed text shadow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
 }
 
-.glass-table tbody tr {
-  border-color: rgba(0, 77, 122, 0.1); /* Lighter border for table rows */
+.form-icon {
+    font-size: 2.8rem;
+    color: #5d9cec; /* Muted blue */
+    text-shadow: none; /* Removed icon shadow */
 }
 
-.glass-table tbody td {
-  padding: 0.75rem 1rem;
-}
-
-/* Custom styles for the info alert to make it glassy */
-.alert-glass-effect {
-  background: rgba(0, 198, 255, 0.75); /* Aqua accent glass background */
+/* Themed Info Message (Replaces alert-glass-effect) */
+.themed-info-message {
+  background: rgba(93, 156, 236, 0.7); /* Muted blue glass background */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.4);
   color: #ffffff; /* White text for contrast */
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  animation: fadeSlideUp 0.6s ease forwards; /* Reuse existing animation */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Reduced shadow intensity */
+  animation: fadeInForm 0.6s ease forwards;
+  padding: 18px 25px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
 }
 
-.alert-glass-effect .fa-info-circle {
+.themed-info-message i {
   color: #fff; /* White icon in alert */
+  font-size: 1.3rem;
 }
 
-/* Button styling for table actions to match theme */
-.claim-button.btn-primary {
-  background: linear-gradient(135deg, #007bb6 0%, #00c6ff 100%); /* Sea blue to aqua */
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 198, 255, 0.2);
-  color: #ffffff;
-  transition: all 0.3s ease;
-  font-weight: 600;
+/* Table Styling */
+.policy-table-responsive {
+    overflow-x: auto;
+    margin-top: 25px;
 }
 
-.claim-button.btn-primary:hover {
-  background: linear-gradient(135deg, #00c6ff 0%, #007bb6 100%);
-  box-shadow: 0 4px 12px rgba(0, 198, 255, 0.3);
-  transform: translateY(-1px);
+.policy-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: -10px;
 }
 
-.claim-button.btn-success {
-    background: linear-gradient(135deg, #28a745 0%, #4CAF50 100%); /* Green gradient for claimed */
+.policy-table thead th {
+    background: #e9ecef; /* Simple light gray background */
+    color: #495057; /* Darker text for contrast */
+    font-weight: 700;
+    padding: 15px 20px;
+    text-align: left;
     border: none;
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
-    color: #ffffff;
+    font-size: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    white-space: nowrap;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05); /* Very subtle shadow */
+}
+
+.policy-table thead th:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.policy-table thead th:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.policy-table thead th i {
+    margin-right: 8px;
+    color: #6c757d; /* Icon color for contrast */
+}
+
+.policy-table tbody tr {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05); /* Subtle row shadow */
+}
+
+.policy-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-2px) scale(1.005); /* Slightly less dramatic hover */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Reduced hover shadow */
+}
+
+/* Alternating row background for striped effect */
+.policy-table tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.7);
+}
+.policy-table tbody tr:nth-child(odd):hover {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+
+.policy-table tbody td {
+    padding: 15px 20px;
+    border: none;
+    color: #333d47;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.policy-table tbody tr td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.policy-table tbody tr td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.policy-currency-icon {
+    color: #28a745; /* Green for currency icon */
+    margin-right: 5px;
+    font-size: 0.9rem;
+}
+
+/* Action Buttons (Re-introducing with theme styles) */
+.policy-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.action-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
     font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Reduced button shadow */
+}
+
+.claim-action-button { /* For the 'Claim' button */
+    background: linear-gradient(135deg, #5d9cec 0%, #7aa8ed 100%); /* Muted blue gradient */
+    color: white;
+}
+
+.claim-action-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #7aa8ed 0%, #5d9cec 100%);
+    transform: translateY(-1px) scale(1.03); /* Slightly less dramatic hover */
+    box-shadow: 0 4px 12px rgba(93, 156, 236, 0.3); /* Reduced glow */
+}
+
+.claim-claimed-button { /* For the 'Claimed' button (disabled) */
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); /* Green gradient for claimed status */
+    color: white;
     cursor: not-allowed;
-    opacity: 0.9;
+    opacity: 0.8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Ensure no extra glow even if green */
 }
 
-.claim-button.btn-success:hover {
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2); /* No extra shadow on hover for disabled */
-    transform: none; /* No transform on hover for disabled */
+.claim-claimed-button:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.view-button.btn-secondary {
-  background: rgba(108, 117, 125, 0.8); /* Slightly transparent secondary gray */
-  border: none;
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.2);
-  transition: all 0.3s ease;
-  font-weight: 600;
+.view-action-button { /* For the 'View' button */
+    background: linear-gradient(135deg, #adb5bd 0%, #6c757d 100%); /* Grey gradient */
+    color: white;
 }
 
-.view-button.btn-secondary:hover {
-  background: rgba(108, 117, 125, 1); /* Solid secondary gray on hover */
-  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
-  transform: translateY(-1px);
+.view-action-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+.action-button i {
+    font-size: 1.05rem;
+}
+
+/* Toast / Snackbar Styling - Reused from previous component, toned down */
+.themed-toast {
+    background: rgba(93, 156, 236, 0.8) !important; /* Muted aqua accent for success */
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff !important;
+    box-shadow: 0 5px 15px rgba(93, 156, 236, 0.2); /* Reduced shadow glow */
+    border-radius: 12px;
+}
+.themed-toast .toast-body {
+    font-weight: 500;
+}
+.themed-toast .btn-close-white {
+    filter: invert(1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .large-form-wrapper {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 992px) {
+    .large-form-wrapper {
+        padding: 25px;
+    }
+    .form-title {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+    .form-icon {
+        font-size: 2.4rem;
+    }
+    .policy-table thead th, .policy-table tbody td {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    .action-button {
+        padding: 7px 12px;
+        font-size: 0.85rem;
+    }
+    .action-button i {
+        font-size: 0.95rem;
+    }
+    .themed-info-message {
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content-area {
+        padding: 20px 10px;
+    }
+    .large-form-wrapper {
+        padding: 20px;
+    }
+    .form-title {
+        font-size: 1.8rem;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+    .form-icon {
+        font-size: 2rem;
+    }
+    .policy-table thead th, .policy-table tbody td {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+    .policy-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .action-button {
+        width: 100%;
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+    .themed-info-message {
+        font-size: 0.95rem;
+        padding: 12px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .large-form-wrapper {
+        padding: 15px;
+    }
+    .form-title {
+        font-size: 1.5rem;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    .form-icon {
+        font-size: 1.8rem;
+    }
+    .policy-table thead th, .policy-table tbody td {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+    .action-button {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+    }
+    .themed-info-message {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
 }

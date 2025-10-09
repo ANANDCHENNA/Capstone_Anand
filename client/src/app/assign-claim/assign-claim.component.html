@@ -1,22 +1,22 @@
 <div class="container my-5">
   <div class="card shadow-sm p-4 minimalist-card">
-    <h2 class="text-center mb-4">Assign Claim</h2>
+    <h2 class="text-center mb-4"><i class="fas fa-handshake me-2"></i> Assign Claim</h2>
 
     <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
 
       <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
+        <label for="description" class="form-label"><i class="fas fa-file-alt me-2"></i> Description</label>
         <textarea id="description" formControlName="description" class="form-control"
                   rows="3" placeholder="Enter claim description"></textarea>
       </div>
 
       <div class="mb-3">
-        <label for="status" class="form-label">Status</label>
+        <label for="status" class="form-label"><i class="fas fa-info-circle me-2"></i> Status</label>
         <input id="status" formControlName="status" class="form-control" readonly>
       </div>
 
       <div class="mb-3">
-        <label for="underwriterId" class="form-label">Select Underwriter</label>
+        <label for="underwriterId" class="form-label"><i class="fas fa-user-tie me-2"></i> Select Underwriter</label>
         <select id="underwriterId" formControlName="underwriterId" class="form-select">
           <option value="">Select an underwriter</option>
           <option *ngFor="let underwriter of underwriters" [value]="underwriter.id">
@@ -25,11 +25,11 @@
         </select>
         <div *ngIf="itemForm.get('underwriterId')?.touched && itemForm.get('underwriterId')?.invalid"
              class="text-danger mt-1">
-          Please select an underwriter
+          <i class="fas fa-exclamation-circle me-1"></i> Please select an underwriter
         </div>
       </div>
       <div class="mb-3">
-        <label for="investigatorId" class="form-label">Select investigator</label>
+        <label for="investigatorId" class="form-label"><i class="fas fa-search me-2"></i> Select Investigator</label>
         <select id="investigatorId" formControlName="investigatorId" class="form-select">
           <option value="">Select an investigator</option>
           <option *ngFor="let investigator of investigators" [value]="investigator.id">
@@ -38,12 +38,12 @@
         </select>
         <div *ngIf="itemForm.get('investigatorId')?.touched && itemForm.get('investigatorId')?.invalid"
              class="text-danger mt-1">
-          Please select an investigator
+          <i class="fas fa-exclamation-circle me-1"></i> Please select an investigator
         </div>
       </div>
       <div class="text-center mt-4">
         <button type="submit" [disabled]="itemForm.invalid" class="btn btn-outline-primary px-5">
-          Assign Claim
+          <i class="fas fa-check-circle me-2"></i> Assign Claim
         </button>
       </div>
     </form>
@@ -55,7 +55,7 @@
   <div id="snackbarToast" class="toast align-items-center text-bg-primary border-0" role="alert"
        aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
-      <div class="toast-body">Snackbar Message</div>
+      <div class="toast-body"><i class="fas fa-bell me-2"></i> Snackbar Message</div>
       <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
               aria-label="Close"></button>
     </div>
