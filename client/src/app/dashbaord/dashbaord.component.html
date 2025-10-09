@@ -1,5 +1,7 @@
 <div class="container my-4">
-
+ 
+  <h3 class=" color: #003366; font-weight:600;text-primary  fw-bold">{{welcomeMessage}}</h3>
+  <hr>
   <!-- Search + Sort Controls -->
   <div class="row g-3 mb-4">
     <div class="col-md-4">
@@ -19,10 +21,10 @@
       </select>
     </div>
   </div>
-
+ 
   <!-- ADJUSTER -->
-  <!-- <div *ngIf="role === 'ADJUSTER'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    <div class="col" *ngFor="let claim of filteredAdjusterClaims()">
+  <div *ngIf="role === 'ADJUSTER'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let claim of getPaginatedClaims('ADJUSTER')">
       <div class="card gradient-card h-100 shadow-sm">
         <div class="card-body">
           <h5 class="card-title">Claim #{{ claim.id }}</h5>
@@ -38,10 +40,33 @@
         </div>
       </div>
     </div>
-  </div> -->
-
-
-  <div *ngIf="role === 'ADJUSTER'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  </div>
+ 
+<!-- --------adjuster change for checking pagingh------------- -->
+ 
+ 
+ 
+<!-- Pagination controls -->
+<nav *ngIf="getTotalPages('ADJUSTER') > 1" class="mt-3">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage['ADJUSTER'] === 1">
+      <a class="page-link" (click)="changePage('ADJUSTER', currentPage['ADJUSTER'] - 1)">Previous</a>
+    </li>
+    <li class="page-item" *ngFor="let page of [].constructor(getTotalPages('ADJUSTER')); let i = index"
+        [class.active]="currentPage['ADJUSTER'] === i + 1">
+      <a class="page-link" (click)="changePage('ADJUSTER', i + 1)">{{ i + 1 }}</a>
+    </li>
+    <li class="page-item" [class.disabled]="currentPage['ADJUSTER'] === getTotalPages('ADJUSTER')">
+      <a class="page-link" (click)="changePage('ADJUSTER', currentPage['ADJUSTER'] + 1)">Next</a>
+    </li>
+  </ul>
+</nav>
+ 
+ 
+ 
+ 
+ 
+  <!-- <div *ngIf="role === 'ADJUSTER'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <div class="col" *ngFor="let claim of filteredAdjusterClaims()">
       <div class="card gradient-card h-100 shadow-sm">
         <div class="card-body">
@@ -71,14 +96,14 @@
         </div>
       </div>
     </div>
-  </div>
-
-  
-    
-
+  </div> -->
+ 
+ 
+   
+ 
   <!-- UNDERWRITER -->
   <div *ngIf="role === 'UNDERWRITER'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    <div class="col" *ngFor="let claim of filteredUnderwriterClaims()">
+    <div class="col" *ngFor="let claim of getPaginatedClaims('UNDERWRITER')">
       <div class="card gradient-card h-100 shadow-sm">
         <div class="card-body">
           <h5 class="card-title">Claim #{{ claim.id }}</h5>
@@ -94,10 +119,28 @@
       </div>
     </div>
   </div>
-
+ 
+ <nav *ngIf="getTotalPages('UNDERWRITER') > 1" class="mt-3">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage['UNDERWRITER'] === 1">
+        <a class="page-link" (click)="changePage('UNDERWRITER', currentPage['UNDERWRITER'] - 1)">Previous</a>
+      </li>
+      <li class="page-item" *ngFor="let page of [].constructor(getTotalPages('UNDERWRITER')); let i = index"
+          [class.active]="currentPage['UNDERWRITER'] === i + 1">
+        <a class="page-link" (click)="changePage('UNDERWRITER', i + 1)">{{ i + 1 }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage['UNDERWRITER'] === getTotalPages('UNDERWRITER')">
+        <a class="page-link" (click)="changePage('UNDERWRITER', currentPage['UNDERWRITER'] + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+ 
+ 
+ 
+ 
   <!-- INVESTIGATOR -->
   <div *ngIf="role === 'INVESTIGATOR'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    <div class="col" *ngFor="let investigation of filteredInvestigatorRecords()">
+    <div class="col" *ngFor="let investigation of getPaginatedClaims('INVESTIGATOR')">
       <div class="card gradient-card h-100 shadow-sm">
         <div class="card-body">
           <h5 class="card-title">Investigation #{{ investigation.id }}</h5>
@@ -113,31 +156,37 @@
       </div>
     </div>
   </div>
-
+  <nav *ngIf="getTotalPages('INVESTIGATOR') > 1" class="mt-3">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage['INVESTIGATOR'] === 1">
+        <a class="page-link" (click)="changePage('INVESTIGATOR', currentPage['INVESTIGATOR'] - 1)">Previous</a>
+      </li>
+      <li class="page-item" *ngFor="let page of [].constructor(getTotalPages('INVESTIGATOR')); let i = index"
+          [class.active]="currentPage['INVESTIGATOR'] === i + 1">
+        <a class="page-link" (click)="changePage('INVESTIGATOR', i + 1)">{{ i + 1 }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage['INVESTIGATOR'] === getTotalPages('INVESTIGATOR')">
+        <a class="page-link" (click)="changePage('INVESTIGATOR', currentPage['INVESTIGATOR'] + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+ 
   <!-- POLICYHOLDER -->
-  <div *ngIf="role === 'POLICYHOLDER'" class="container">
-    <!-- Connection status and debug info -->
-    <div class="row mb-4" *ngIf="hasError">
-      <div class="col">
-        <div class="alert alert-danger">
-          <h5>Connection Error</h5>
-          <p>There was an error connecting to the server. Please try the test connection button below.</p>
-          <button class="btn btn-primary me-2" [disabled]="isLoading">
-            {{ isLoading ? 'Testing...' : 'Test Connection' }}
-          </button>
-          <button class="btn btn-secondary" (click)="loadPolicyholderClaims()" [disabled]="isLoading">
-            {{ isLoading ? 'Loading...' : 'Retry Loading Claims' }}
-          </button>
-          <div *ngIf="errorDetails" class="mt-3">
-            <pre class="bg-light p-3 rounded">{{ errorDetails }}</pre>
-          </div>
+  <!-- <div *ngIf="role === 'POLICYHOLDER'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let claim of getPaginatedClaims('POLICYHOLDER')">
+      <div class="card gradient-card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ claim.description }}</h5>
+          <p class="card-text text-truncate">Claim ID:{{ claim.id }}</p>
+          <p><strong>Date:</strong> {{ claim.date | date:'dd-MM-yyyy' }}</p>
+          <span class="badge" [ngClass]="getStatusClass(claim.status)">{{ claim.status }}</span>
         </div>
       </div>
-    </div>
-
+    </div> -->
+ 
     <!-- Claims grid -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      <div class="col" *ngFor="let claim of filteredPolicyholderClaims()">
+      <div class="col" *ngFor="let claim of getPaginatedClaims('POLICYHOLDER')">
         <div class="card gradient-card h-100 shadow-sm">
           <div class="card-body">
             <h5 class="card-title">{{ claim.description }}</h5>
@@ -151,9 +200,9 @@
         </div>
       </div>
     </div>
-
+ 
     <!-- Loading indicator -->
-    <div *ngIf="isLoading" class="row mt-4">
+    <!-- <div *ngIf="isLoading" class="row mt-4">
       <div class="col text-center">
         <div class="spinner-border text-primary" role="status">
           <span class="visually-hidden">Loading...</span>
@@ -161,8 +210,22 @@
         <p class="mt-2">Loading your claims...</p>
       </div>
     </div>
-  </div>
-
+  </div> -->
+  <nav *ngIf="getTotalPages('POLICYHOLDER') > 1" class="mt-3">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage['POLICYHOLDER'] === 1">
+        <a class="page-link" (click)="changePage('POLICYHOLDER', currentPage['POLICYHOLDER'] - 1)">Previous</a>
+      </li>
+      <li class="page-item" *ngFor="let page of [].constructor(getTotalPages('POLICYHOLDER')); let i = index"
+          [class.active]="currentPage['POLICYHOLDER'] === i + 1">
+        <a class="page-link" (click)="changePage('POLICYHOLDER', i + 1)">{{ i + 1 }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage['POLICYHOLDER'] === getTotalPages('POLICYHOLDER')">
+        <a class="page-link" (click)="changePage('POLICYHOLDER', currentPage['POLICYHOLDER'] + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+ 
   <!-- ADMIN -->
   <!-- <div *ngIf="role === 'ADMIN'" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <div class="col" *ngFor="let policy of filteredPolicies()">
@@ -181,7 +244,7 @@
       </div>
     </div>
   </div> -->
-
+ 
   <!-- Claim Details Modal -->
   <div class="modal fade" id="claimModal" tabindex="-1" aria-labelledby="claimModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -204,7 +267,7 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- Toast -->
   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
     <div id="snackbarToast" class="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
@@ -215,5 +278,5 @@
       </div>
     </div>
   </div>
-
+ 
 </div>
