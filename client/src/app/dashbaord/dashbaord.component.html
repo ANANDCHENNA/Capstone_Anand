@@ -225,6 +225,9 @@
             <p class="card-text text-truncate">
               <i class="fas fa-id-badge me-2 text-muted"></i> Claim ID:{{ claim.id }}
             </p>
+            <p *ngIf="claim.investigation !== null" class="card-text text-truncate">
+              <i class="fas fa-id-badge me-2 text-muted"></i> Claim Report :{{ claim.investigation | json }}
+            </p>
             <p>
               <i class="fas fa-calendar-alt me-2 text-info"></i>
               <strong>Date:</strong> {{ claim.date | date:'dd-MM-yyyy' }}

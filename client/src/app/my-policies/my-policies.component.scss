@@ -1,99 +1,179 @@
-/* Add to your existing CSS file */
+/* Existing styles for the policies table can remain */
 
-/* General Styling for tables to match the glassy theme */
-.glass-table-container {
-  background: rgba(255, 255, 255, 0.75); /* Light glass background for container */
-  backdrop-filter: blur(15px); /* Apply blur for glass effect */
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.4); /* Glass border */
+/* New styles for the claim form */
+.claim-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.claim-form-container {
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white for glass effect */
+  backdrop-filter: blur(10px); /* Glass blur effect */
   border-radius: 15px;
-  overflow: hidden; /* Ensures rounded corners apply to content */
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Lighter initial shadow */
-  margin-top: 1.5rem; /* Space from title */
+  padding: 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+  animation: fadeIn 0.3s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for definition */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.claim-form-container h2 {
+  text-align: center;
+  color: #4B0082; /* Deep Purple */
+  margin-bottom: 25px;
+  font-size: 1.8em;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Lighter border for inputs */
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.7); /* Slightly transparent input background */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 1em;
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #9370DB; /* Medium Purple */
+  box-shadow: 0 0 0 0.2rem rgba(147, 112, 219, 0.25); /* Focus glow */
+  outline: none;
+}
+
+.error-message {
+  color: #dc3545; /* Red for error messages */
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.submit-button,
+.cancel-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 15px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.submit-button {
+  background-color: #4B0082; /* Deep Purple */
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #6A0DAD; /* Darker purple on hover */
+  box-shadow: 0 4px 10px rgba(75, 0, 130, 0.3);
+}
+
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  background-color: #9370DB; /* Medium Purple */
+  margin-bottom: 0; /* No margin at the bottom for the last button */
+}
+
+.cancel-button:hover {
+  background-color: #BA55D3; /* Orchid - lighter purple on hover */
+  box-shadow: 0 4px 10px rgba(147, 112, 219, 0.3);
+}
+
+/* Glass effect for buttons */
+.submit-button::before,
+.cancel-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transition: 0.5s;
+}
+
+.submit-button:hover::before,
+.cancel-button:hover::before {
+  left: 100%;
+}
+
+/* Styles for the policy table (existing, but ensure consistency) */
+.glass-table-container {
+  background-color: rgba(255, 255, 255, 0.3); /* Slightly less opaque for the table container */
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .glass-table {
-  --bs-table-bg: transparent; /* Make table background transparent */
-  --bs-table-hover-bg: rgba(0, 198, 255, 0.1); /* Light aqua hover for rows */
-  --bs-table-striped-bg: rgba(255, 255, 255, 0.1); /* Light stripe for rows */
-  color: #333d47; /* Consistent text color */
+  background-color: transparent; /* Table background should be transparent */
+  color: #333;
+}
+
+.glass-table th,
+.glass-table td {
+  border-color: rgba(255, 255, 255, 0.4); /* Lighter border for table cells */
+  padding: 12px;
 }
 
 .glass-table thead th {
-  background-color: rgba(0, 77, 122, 0.2); /* Slightly darker transparent blue for header */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Lighter header border */
-  color: #004d7a; /* Dark blue for header text */
-  font-weight: 700;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  background-color: rgba(147, 112, 219, 0.2); /* Light purple background for headers */
+  color: #4B0082;
+  font-weight: bold;
 }
 
-.glass-table tbody tr {
-  border-color: rgba(0, 77, 122, 0.1); /* Lighter border for table rows */
+.glass-table tbody tr:hover {
+  background-color: rgba(147, 112, 219, 0.1); /* Lighter hover effect */
 }
 
-.glass-table tbody td {
-  padding: 0.75rem 1rem;
-}
-
-/* Custom styles for the info alert to make it glassy */
 .alert-glass-effect {
-  background: rgba(0, 198, 255, 0.75); /* Aqua accent glass background */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: #ffffff; /* White text for contrast */
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(5px);
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  animation: fadeSlideUp 0.6s ease forwards; /* Reuse existing animation */
-}
-
-.alert-glass-effect .fa-info-circle {
-  color: #fff; /* White icon in alert */
-}
-
-/* Button styling for table actions to match theme */
-.claim-button.btn-primary {
-  background: linear-gradient(135deg, #007bb6 0%, #00c6ff 100%); /* Sea blue to aqua */
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 198, 255, 0.2);
-  color: #ffffff;
-  transition: all 0.3s ease;
-  font-weight: 600;
-}
-
-.claim-button.btn-primary:hover {
-  background: linear-gradient(135deg, #00c6ff 0%, #007bb6 100%);
-  box-shadow: 0 4px 12px rgba(0, 198, 255, 0.3);
-  transform: translateY(-1px);
-}
-
-.claim-button.btn-success {
-    background: linear-gradient(135deg, #28a745 0%, #4CAF50 100%); /* Green gradient for claimed */
-    border: none;
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
-    color: #ffffff;
-    font-weight: 600;
-    cursor: not-allowed;
-    opacity: 0.9;
-}
-
-.claim-button.btn-success:hover {
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2); /* No extra shadow on hover for disabled */
-    transform: none; /* No transform on hover for disabled */
-}
-
-.view-button.btn-secondary {
-  background: rgba(108, 117, 125, 0.8); /* Slightly transparent secondary gray */
-  border: none;
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.2);
-  transition: all 0.3s ease;
-  font-weight: 600;
-}
-
-.view-button.btn-secondary:hover {
-  background: rgba(108, 117, 125, 1); /* Solid secondary gray on hover */
-  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
-  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #4B0082;
+  font-weight: bold;
 }
