@@ -90,28 +90,20 @@ button {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
+
 .logo-area {
   display: flex;
-  width: 120px;
-  height: auto;
   align-items: center;
   gap: 15px;
 }
 
 .logo-area .main-logo {
-  width: 50px;
-  height: auto;
+  width: auto;
+  height: 50px;
+  object-fit: contain;
   //filter: drop-shadow(0 0 8px #00c6ff);
 }
 
-
-.logo-area h1 {
-  color: #004d7a;
-  margin: 0;
-  font-size: 26px;
-  font-weight: 700;
-  text-shadow: 0 0 5px rgba(0, 198, 255, 0.2);
-}
 
 .nav-links {
   display: flex;
@@ -191,7 +183,7 @@ button {
   /* Position below the button */
   margin-top: 10px;
   /* Space between button and dropdown */
-  animation: fadeIn 1s ease-out;
+  animation: fadeIn 0.2s ease-out;
 }
 
 .dropdown-content a {
@@ -211,9 +203,14 @@ button {
   border-radius: 8px; /* Apply to dropdown items */
 }
 
+.dropdown-content.show{
+  display: block;
+}
+
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
+
 }
 
 @keyframes fadeIn {
@@ -1016,12 +1013,18 @@ button {
   /* Prevent shrinking too much */
 }
 
-.footer-logo img {
-  width: 40px;
-  height: auto;
-  margin-bottom: 10px;
-  filter: brightness(0) invert(1);
-  /* Makes logo white if it's black */
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-logo .main-logo {
+  width: auto;
+  height: 40px;
+  object-fit: contain;
+  //filter: drop-shadow(0 0 8px #00c6ff);
 }
 
 .footer-logo h3 {

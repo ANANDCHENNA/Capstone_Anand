@@ -140,6 +140,7 @@ export class HttpService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('Authorization', `Bearer ${authToken}`);
+    console.log(this.serverName + '/api/policyholder/claim?policyholderId=' + policyholderId, details, { headers: headers });
     return this.http.post(this.serverName + '/api/policyholder/claim?policyholderId=' + policyholderId, details, { headers: headers });
   }
 

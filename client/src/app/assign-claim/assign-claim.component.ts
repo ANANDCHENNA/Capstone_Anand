@@ -37,19 +37,20 @@ export class AssignClaimComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id = this.route?.snapshot?.params?.['id'];
+    if (this.id) {
+      this.itemForm.patchValue({ claimId: this.id });
+      this.httpService.getClaimById(this.id).subscribe((data) => {
+        this.itemForm.patchValue(data);
+      })
+    }
+
     this.httpService.GetAllUnderwriter().subscribe((data) => {
       this.underwriters = data
     })
     this.httpService.GetAllInvestigator().subscribe((data) => {
       this.investigators = data
     })
-    this.id = this.route?.snapshot?.params?.['id'] ?? null;
-    if (this.id) {
-      this.httpService.getClaimById(this.id).subscribe((data) => {
-        console.log(data);
-        this.itemForm.patchValue(data);
-      })
-    }
   }
 
   onSubmit() {

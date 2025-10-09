@@ -15,29 +15,22 @@ public class Claim {
     private String description;
     private Date date;
     private String status;
-    // private String claimType;
     private Long policy_id;
-    // @ManyToOne
-    // @JoinColumn(name = "policy_id")
-    // private Policy policy;
+    
     @ManyToOne
     @JoinColumn(name = "policyholder_id")
-    @JsonIgnore
     private Policyholder policyholder;
 
     @ManyToOne
     @JoinColumn(name = "adjuster_id")
-    @JsonIgnore
     private Adjuster adjuster;
 
     @ManyToOne
     @JoinColumn(name = "underwriter_id")
-    @JsonIgnore
     private Underwriter underwriter;
 
     @ManyToOne
     @JoinColumn(name = "investigator_id")
-    @JsonIgnore
     private Investigator investigator;
 
     @OneToOne(mappedBy = "claim")
@@ -47,25 +40,19 @@ public class Claim {
     public Claim() {
     }
 
-    public Claim(Long id, String description, Date date, String status, Policyholder policyholder, Adjuster adjuster,
-            Underwriter underwriter, Investigator investigator, Investigation investigation) {
-        this.id = id;
-            }
 
-    public Claim(Long id, String description, Date date, String status, Policyholder policyholder, Adjuster adjuster,
-            Underwriter underwriter, Investigation investigation, Long policy_id, Policy policy) {
-        this.description = description;
+    public Claim(Long id, String description, Date date, String status, Long policy_id, Policyholder policyholder,
+            Adjuster adjuster, Underwriter underwriter, Investigator investigator, Investigation investigation) {
         this.id = id;
+        this.description = description;
         this.date = date;
         this.status = status;
-        // this.claimType = claimType;
+        this.policy_id = policy_id;
         this.policyholder = policyholder;
         this.adjuster = adjuster;
         this.underwriter = underwriter;
-        this.investigation = investigation;
         this.investigator = investigator;
-        this.policy_id = policy_id;
-        // this.policy=policy;
+        this.investigation = investigation;
     }
 
     public Long getId() {
@@ -140,14 +127,6 @@ public class Claim {
         this.investigator = investigator;
     }
 
-    // public String getClaimType() {
-    // return claimType;
-    // }
-
-    // public void setClaimType(String claimType) {
-    // this.claimType = claimType;
-    // }
-
     public Long getPolicy_id() {
         return policy_id;
     }
@@ -155,13 +134,4 @@ public class Claim {
     public void setPolicy_id(Long policy_id) {
         this.policy_id = policy_id;
     }
-
-    // public Policy getPolicy() {
-    // return policy;
-    // }
-
-    // public void setPolicy(Policy policy) {
-    // this.policy = policy;
-    // }
-
 }
