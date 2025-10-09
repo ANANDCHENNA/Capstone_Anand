@@ -1,0 +1,136 @@
+/* Add to your existing CSS file */
+
+/* Card for the form */
+.gradient-form-card {
+  background: rgba(255, 255, 255, 0.75); /* Light glass background */
+  backdrop-filter: blur(20px); /* Apply blur for glass effect */
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4); /* Glass border */
+  color: #333d47; /* Consistent text color */
+  border-radius: 20px; /* Slightly more rounded */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); /* Stronger shadow for the form card */
+  animation: fadeSlideUp 0.6s ease forwards; /* Re-use existing animation */
+  max-width: 500px; /* Limit width for better form appearance */
+  margin: 3rem auto; /* Center the card horizontally with margin */
+}
+
+.gradient-form-card .card-title {
+  color: #004d7a; /* Dark blue for headings */
+  font-weight: 700;
+  font-size: 2rem; /* Larger title */
+}
+
+.gradient-form-card .form-label {
+  color: #004d7a; /* Dark blue for labels */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block; /* Ensure icons and text align */
+}
+
+/* Glassy style for form controls */
+.form-control-glass,
+.form-select-glass,
+.input-group-text.form-select-glass { /* Apply to input group text as well */
+  background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
+  border: 1px solid rgba(0, 198, 255, 0.3); /* Light aqua border */
+  color: #333d47; /* Text color */
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  padding: 0.75rem 1rem; /* Adjust padding */
+}
+
+.form-control-glass::placeholder,
+.form-select-glass option { /* Style placeholder text */
+  color: rgba(51, 61, 71, 0.6);
+}
+
+.form-control-glass:focus,
+.form-select-glass:focus {
+  background-color: #ffffff; /* Solid white on focus */
+  border-color: #00c6ff; /* Aqua accent on focus */
+  box-shadow: 0 0 0 0.25rem rgba(0, 198, 255, 0.25); /* Aqua glow on focus */
+  outline: none;
+}
+
+/* Specific styling for the input-group-text part */
+.input-group-text.form-select-glass {
+    border-right: none; /* Blend with input */
+    background-color: rgba(0, 198, 255, 0.1); /* Light aqua background */
+    color: #007bb6; /* Blue icon color */
+    padding: 0.75rem 1rem;
+}
+.input-group .form-control-glass {
+    border-left: none; /* Blend with input group text */
+}
+
+
+/* Buy Policy Button */
+.buy-policy-button {
+  background: linear-gradient(135deg, #007bb6 0%, #00c6ff 100%); /* Sea blue to aqua */
+  border: none;
+  box-shadow: 0 5px 20px rgba(0, 198, 255, 0.4);
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  transition: all 0.4s ease;
+}
+
+.buy-policy-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #00c6ff 0%, #007bb6 100%);
+  box-shadow: 0 8px 25px rgba(0, 198, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.buy-policy-button:disabled {
+  background: linear-gradient(135deg, #a0d9e4 0%, #c1e8f2 100%); /* Lighter disabled state */
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Alert styling for success/error messages */
+.alert-glass-success {
+  background: rgba(40, 167, 69, 0.85); /* Transparent green */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeSlideUp 0.6s ease forwards;
+}
+
+.alert-glass-danger {
+  background: rgba(220, 53, 69, 0.85); /* Transparent red */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeSlideUp 0.6s ease forwards;
+}
+
+/* Spinner color for buttons */
+.buy-policy-button .spinner-border {
+  color: #ffffff !important; /* White spinner inside button */
+}
+
+/* Validation feedback color */
+.text-danger {
+    color: #dc3545 !important; /* Ensure Bootstrap red is used */
+    font-size: 0.875em;
+    font-weight: 500;
+}
+
+/* Icons within select options */
+.form-select-glass option i {
+  margin-right: 0.5rem; /* Space between icon and text in options */
+}
+
+/* Ensure font awesome icons are properly aligned in options */
+.form-select-glass option {
+  display: flex;
+  align-items: center;
+}
