@@ -294,60 +294,6 @@
   }
 }
 
-/* Spinner styling */
-.spinner-border {
-  color: #007bb6 !important; /* Sea blue medium for spinner */
-}
-
-/* Alert styling for connection error */
-.alert.alert-danger {
-  background: rgba(220, 53, 69, 0.85); /* Slightly transparent danger red */
-  color: #ffffff;
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.alert.alert-danger h5 {
-  color: #ffffff;
-  font-weight: 700;
-}
-
-.alert.alert-danger p {
-  color: #f8d7da; /* Lighter red for paragraph text */
-}
-
-.alert.alert-danger .btn-primary {
-  background: linear-gradient(135deg, #007bb6 0%, #00c6ff 100%);
-  border: none;
-  color: #ffffff;
-  font-weight: 600;
-  box-shadow: 0 2px 10px rgba(0, 198, 255, 0.3);
-}
-
-.alert.alert-danger .btn-primary:hover {
-  background: linear-gradient(135deg, #00c6ff 0%, #007bb6 100%);
-  box-shadow: 0 4px 15px rgba(0, 198, 255, 0.5);
-  transform: translateY(-1px);
-}
-
-.alert.alert-danger .btn-secondary {
-  background-color: #6c757d;
-  border-color: #6c757d;
-  color: #ffffff;
-}
-
-.alert.alert-danger .btn-secondary:hover {
-  background-color: #5a6268;
-  border-color: #545b62;
-}
-
-.alert.alert-danger pre {
-  background-color: rgba(255, 255, 255, 0.2); /* Transparent white for code blocks */
-  color: #f8d7da; /* Lighter red for error details */
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  padding: 10px;
+.toast{
+  padding : 10px;
 }

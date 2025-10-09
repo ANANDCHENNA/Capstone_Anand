@@ -116,34 +116,6 @@ export class DashbaordComponent implements OnInit {
     }
   }
 
-  testConnection() {
-    this.isLoading = true;
-    this.connectionTestResult = 'Testing connection...';
-    this.showSnackbar('Testing API connection...', 'info');
-
-    this.httpService.testConnection().subscribe({
-      next: (response) => {
-        console.log('Connection test response:', response);
-        this.connectionTestResult = 'Connection successful!';
-        this.showSnackbar('API connection successful!', 'success');
-        // Try loading claims again
-        if (this.role === 'POLICYHOLDER') {
-          this.loadPolicyholderClaims();
-        }
-      },
-      error: (err) => {
-        console.error('Connection test failed:', err);
-        this.connectionTestResult = `Connection failed: ${err.message}`;
-        this.showSnackbar('API connection failed: ' + err.message, 'danger');
-        this.hasError = true;
-        this.errorDetails = JSON.stringify(err, null, 2);
-      },
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
-  }
-
   loadPolicyholderClaims() {
     if (!this.policyholderId) {
       console.error('No policyholder ID found!');

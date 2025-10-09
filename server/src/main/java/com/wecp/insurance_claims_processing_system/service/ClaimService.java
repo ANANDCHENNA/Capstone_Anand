@@ -31,9 +31,9 @@ public class ClaimService {
     // Create Claim Component
     public Claim submitClaim(Long policyholderId, Claim claim) {
 
-        Policyholder ph = policyholderRepository.findById(policyholderId).get();
-        claim.setPolicyholder(ph);
-        return claimRepository.save(claim);
+    Policyholder ph = policyholderRepository.findById(policyholderId).get();
+    claim.setPolicyholder(ph);
+    return claimRepository.save(claim);
     }
 
     // Dashboard Component for role: Policyholder
@@ -46,15 +46,15 @@ public class ClaimService {
     }
 
     // Update the claim for role: Adjuster
-    public Claim updateClaim(Long id, Claim claimDetails) {  
+    public Claim updateClaim(Long id, Claim claimDetails) {
         Claim c = claimRepository.findById(id).get();
         c.setDescription(claimDetails.getDescription());
         c.setStatus(claimDetails.getStatus());
         c.setDate(claimDetails.getDate());
-        if(claimDetails.getUnderwriter() != null && claimDetails.getUnderwriter().getId() != null){
+        if (claimDetails.getUnderwriter() != null && claimDetails.getUnderwriter().getId() != null) {
             Underwriter underwriter = underwriterRepository.findById(id).orElse(null);
             c.setUnderwriter(underwriter);
-            //c.setPolicy_id(id);
+            // c.setPolicy_id(id);
         }
         return claimRepository.save(c);
     }
@@ -71,20 +71,21 @@ public class ClaimService {
 
         return underwriterRepository.findAll();
     }
-     // Adjuster Assigning Claim
-     public List<Investigator> getAllInvestigators() {
+
+    // Adjuster Assigning Claim
+    public List<Investigator> getAllInvestigators() {
 
         return investigatorRepository.findAll();
     }
 
     // Adjuster Assigning Claim
-    public Claim assignClaimToUnderwriter(Long claimId, Long underwriterId,Long investigatorId) {
+    public Claim assignClaimToUnderwriter(Long claimId, Long underwriterId, Long investigatorId) {
 
         Claim claim = claimRepository.findById(claimId).get();
         Underwriter underwriter = underwriterRepository.findById(underwriterId).get();
-        Investigator investigator=investigatorRepository.findById(investigatorId).get();
+        Investigator investigator = investigatorRepository.findById(investigatorId).get();
 
-        if ((claim != null && underwriter != null)&& (investigator!=null)) {
+        if ((claim != null && underwriter != null) && (investigator != null)) {
             claim.setUnderwriter(underwriter);
             claim.setInvestigator(investigator);
             return claimRepository.save(claim);
@@ -101,7 +102,8 @@ public class ClaimService {
         return claims;
 
     }
-    //dashboard component for Investigator
+
+    // dashboard component for Investigator
     public List<Claim> getAllClaimsForReviewInvestigator(Long investigatorId) {
 
         Investigator uw = investigatorRepository.findById(investigatorId).get();
@@ -109,6 +111,7 @@ public class ClaimService {
         return claims;
 
     }
+
     // Underwriter update claim
     public Claim reviewClaim(Long id, String status) {
 
