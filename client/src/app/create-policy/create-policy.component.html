@@ -1,33 +1,33 @@
-<div class="container my-5 minimalist-card p-4">
+<div class="container my-5 custom-card p-4"> <!-- Changed class to custom-card -->
   <h2 class="mb-4 text-center">Create New Policy</h2>
 
   <form [formGroup]="policyForm" (ngSubmit)="onSubmit()">
     <!-- Policy Number -->
     <div class="mb-3">
-      <label for="policyNumber" class="form-label">Policy Number</label>
+      <label for="policyNumber" class="form-label">Policy Number <i class="fas fa-hashtag form-icon"></i></label> <!-- Added icon -->
       <input type="text" id="policyNumber" formControlName="policyNumber" 
              class="form-control" placeholder="Enter policy number"/>
       <div *ngIf="policyForm.get('policyNumber')?.touched && policyForm.get('policyNumber')?.invalid"
-           class="text-danger mt-1">
+           class="text-danger mt-1 error-message">
         Policy number is required
       </div>
     </div>
 
     <!-- Policy Name -->
     <div class="mb-3">
-      <label for="name" class="form-label">Policy Name</label>
+      <label for="name" class="form-label">Policy Name <i class="fas fa-file-alt form-icon"></i></label> <!-- Added icon -->
       <input type="text" id="name" formControlName="name" 
-             class="form-control" placeholder="Enter policy number"/>
+             class="form-control" placeholder="Enter policy name"/> <!-- Corrected placeholder -->
       <div *ngIf="policyForm.get('name')?.touched && policyForm.get('name')?.invalid"
-           class="text-danger mt-1">
+           class="text-danger mt-1 error-message">
         Policy Name is required
       </div>
     </div>
 
     <!-- Policy Type -->
     <div class="mb-3">
-      <label for="policyType" class="form-label">Policy Type</label>
-      <select id="policyType" formControlName="policyType" class="form-control">
+      <label for="policyType" class="form-label">Policy Type <i class="fas fa-list-alt form-icon"></i></label> <!-- Added icon -->
+      <select id="policyType" formControlName="policyType" class="form-select"> <!-- Changed class to form-select -->
         <option value="">Select Policy Type</option>
         <option value="LIFE">Life Insurance</option>
         <option value="HEALTH">Health Insurance</option>
@@ -35,18 +35,18 @@
         <option value="PROPERTY">Property Insurance</option>
       </select>
       <div *ngIf="policyForm.get('policyType')?.touched && policyForm.get('policyType')?.invalid"
-           class="text-danger mt-1">
+           class="text-danger mt-1 error-message">
         Policy type is required
       </div>
     </div>
 
     <!-- Coverage Amount -->
     <div class="mb-3">
-      <label for="termMonths" class="form-label">Term Months</label>
+      <label for="termMonths" class="form-label">Term Months <i class="fas fa-calendar-alt form-icon"></i></label> <!-- Added icon -->
       <input type="number" id="termMonths" formControlName="termMonths" 
-             class="form-control" placeholder="Enter coverage amount"/>
+             class="form-control" placeholder="Enter term in months"/> <!-- Corrected placeholder -->
       <div *ngIf="policyForm.get('termMonths')?.touched && policyForm.get('termMonths')?.invalid"
-           class="text-danger mt-1">
+           class="text-danger mt-1 error-message">
         <span *ngIf="policyForm.get('termMonths')?.errors?.['required']">Term is required</span>
         <span *ngIf="policyForm.get('termMonths')?.errors?.['min']">Term must be greater than 0</span>
       </div>
@@ -54,11 +54,11 @@
 
     <!-- Premium Amount -->
     <div class="mb-3">
-      <label for="premium" class="form-label">Premium Amount</label>
+      <label for="premium" class="form-label">Premium Amount <i class="fas fa-dollar-sign form-icon"></i></label> <!-- Added icon -->
       <input type="number" id="premium" formControlName="premium" 
              class="form-control" placeholder="Enter premium amount"/>
       <div *ngIf="policyForm.get('premium')?.touched && policyForm.get('premium')?.invalid"
-           class="text-danger mt-1">
+           class="text-danger mt-1 error-message">
         <span *ngIf="policyForm.get('premium')?.errors?.['required']">Premium amount is required</span>
         <span *ngIf="policyForm.get('premium')?.errors?.['min']">Premium amount must be greater than 0</span>
       </div>
@@ -66,15 +66,15 @@
 
     <!-- Submit Button -->
     <div class="d-grid mt-4">
-      <button type="submit" class="btn btn-outline-primary btn-lg" [disabled]="!policyForm.valid">
-        Create Policy
+      <button type="submit" class="submit-btn" [disabled]="!policyForm.valid"> <!-- Changed class to submit-btn -->
+        <i class="fas fa-plus-circle me-2"></i> Create Policy <!-- Added icon -->
       </button>
     </div>
   </form>
 </div>
 
 <!-- Toast / Snackbar -->
-<div id="snackbarToast" class="toast align-items-center text-bg-success border-0 position-fixed bottom-0 end-0 m-3"
+<div id="snackbarToast" class="toast-custom align-items-center text-bg-success border-0 position-fixed bottom-0 end-0 m-3"
      role="alert" aria-live="assertive" aria-atomic="true">
   <div class="d-flex">
     <div class="toast-body">

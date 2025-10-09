@@ -1,51 +1,140 @@
-.minimalist-card {
-  background-color: #f8f9fa;
-  border-radius: 12px;
-  color: #212529;
-  max-width: 600px;
-  margin: auto;
-  padding: 2rem;
+/* Re-themed CSS */
 
-  .form-label {
-    font-weight: 500;
-  }
-
-  .form-control, .form-select {
-    border-radius: 8px;
-    border: 1px solid #ced4da;
-    transition: all 0.2s;
-
-    &:focus {
-      border-color: #0d6efd;
-      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-    }
-  }
-
-  .btn-outline-primary {
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.2s;
-
-    &:hover {
-      background-color: #0d6efd;
-      color: #fff;
-      border-color: #0d6efd;
-    }
-
-    &:disabled {
-      opacity: 0.6;
-      background-color: #374d6d;
-      color: #fff;
-    }
-  }
-
-  .text-danger {
-    font-size: 0.875rem;
-  }
+/* Applying general body and utility styles from the first theme */
+body {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #f0f8ff 0%, #66b3e0 100%);
+  color: #333d47; /* Direct hex code for text-dark */
+  line-height: 1.6;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  perspective: 1500px;
+  margin: 0;
+  padding: 0;
 }
 
-// Toast styles
-#snackbarToast {
-  min-width: 220px;
+/* Removed :root as requested, using direct hex codes */
+
+.minimalist-card {
+  /* Adapting to the glassy, bluish theme */
+  background: rgba(255, 255, 255, 0.75); /* Direct hex for glass-light-bg */
+  backdrop-filter: blur(15px); /* Add blur for glass effect */
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 15px; /* Slightly larger border-radius */
+  color: #333d47; /* Direct hex for text-dark */
+  max-width: 600px;
+  margin: auto;
+  padding: 2.5rem; /* Slightly more padding */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); /* Direct hex for shadow-light */
+  border: 1px solid rgba(255, 255, 255, 0.4); /* Direct hex for glass-border */
+  transition: all 0.3s ease; /* Add transition for hover effect */
+}
+
+.minimalist-card:hover {
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35); /* Direct hex for shadow-dark */
+  transform: translateY(-3px); /* Slight lift on hover */
+}
+
+.minimalist-card h2 {
+  color: #004d7a; /* Direct hex for sea-blue-dark */
+  font-weight: 700; /* Bold heading */
+  font-size: 2.2rem; /* Slightly larger heading */
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.minimalist-card .form-label {
+  font-weight: 600; /* Slightly bolder labels */
+  color: #004d7a; /* Direct hex for sea-blue-dark */
+  margin-bottom: 0.5rem; /* Space between label and input */
+  font-size: 1.05rem;
+}
+
+.minimalist-card .form-control, .minimalist-card .form-select {
+  border-radius: 10px; /* More rounded inputs */
+  border: 1px solid rgba(0, 77, 122, 0.2); /* Soft blue border (based on sea-blue-dark) */
+  background-color: #f0f8ff; /* Direct hex for off-white */
+  transition: all 0.3s ease;
+  padding: 0.85rem 1.25rem; /* Adjust padding */
+  color: #333d47; /* Direct hex for text-dark */
+}
+
+.minimalist-card .form-control::placeholder, .minimalist-card .form-select::placeholder {
+  color: #333d47; /* Direct hex for text-dark */
+  opacity: 0.7;
+}
+
+.minimalist-card .form-control:focus, .minimalist-card .form-select:focus {
+  border-color: #00c6ff; /* Direct hex for aqua-accent */
+  box-shadow: 0 0 0 0.2rem rgba(0, 198, 255, 0.25); /* Aqua shadow (based on aqua-accent) */
+  background-color: #ffffff; /* Direct hex for white-light */
+  outline: none; /* Remove default outline */
+}
+
+.minimalist-card .btn-outline-primary {
+  /* Re-theming to match the button style from the first CSS */
+  background: linear-gradient(135deg, #007bb6 0%, #00c6ff 100%); /* Direct hex for sea-blue-medium and aqua-accent */
+  border: none; /* Remove border as gradient handles it */
+  color: #ffffff; /* Direct hex for white-light */
+  padding: 15px 30px; /* Adjust padding */
+  border-radius: 35px; /* Pill-shaped button */
+  font-weight: 700; /* Bolder font weight */
+  font-size: 1.15rem; /* Slightly larger font */
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 30px rgba(0, 198, 255, 0.4); /* Aqua shadow (based on aqua-accent) */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.minimalist-card .btn-outline-primary:hover {
+  background: linear-gradient(135deg, #00c6ff 0%, #007bb6 100%); /* Reverse gradient on hover (aqua-accent and sea-blue-medium) */
+  box-shadow: 0 12px 35px rgba(0, 198, 255, 0.7); /* Stronger shadow (based on aqua-accent) */
+  transform: translateY(-5px) scale(1.03); /* Lift and slight scale */
+  color: #ffffff; /* Ensure text remains white */
+  border-color: transparent; /* Keep border transparent */
+}
+
+.minimalist-card .btn-outline-primary:disabled {
+  opacity: 0.7; /* Slightly more opaque disabled state */
+  background: linear-gradient(135deg, rgba(0, 77, 122, 0.5) 0%, rgba(0, 198, 255, 0.4) 100%); /* Greyer disabled gradient (based on sea-blue-dark and aqua-accent) */
+  color: rgba(255, 255, 255, 0.8);
+  box-shadow: none; /* No shadow when disabled */
+  transform: none; /* No transform when disabled */
+  cursor: not-allowed; /* Change cursor */
+}
+
+.minimalist-card .text-danger {
+  font-size: 0.9rem; /* Slightly larger error text */
+  color: #e63946; /* A more distinct error red */
   font-weight: 500;
+}
+
+/* Toast / Snackbar Styling */
+#snackbarToast {
+  min-width: 250px; /* Slightly wider */
+  font-weight: 600; /* Bolder toast text */
+  background-color: #004d7a !important; /* Direct hex for sea-blue-dark */
+  color: #ffffff !important; /* Direct hex for white-light */
+  border-radius: 10px; /* Match other rounded elements */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* Add shadow to toast */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#snackbarToast .btn-close-white {
+  filter: brightness(0) invert(1); /* Ensure close button is white */
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+#snackbarToast .btn-close-white:hover {
+  opacity: 1;
+}
+
+/* Specific styling for the `value=""` inputs for consistency, though these would ideally be set by the component */
+input[type="date"].form-control,
+input[type="text"].form-control[value=""] {
+  /* This targets inputs that might not have dynamic content yet but should still look themed */
+  background-color: #f0f8ff; /* Direct hex for off-white */
+  border-color: rgba(0, 77, 122, 0.2); /* Based on sea-blue-dark */
+  color: #333d47; /* Direct hex for text-dark */
 }

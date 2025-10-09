@@ -20,18 +20,33 @@
 /* Base Styles */
 body {
   font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: linear-gradient(135deg, #f0f8ff 0%, #66b3e0 100%);
-  color: #333d47;
+  /* Updated Background */
+  background: linear-gradient(-45deg, #e0f2f7, #c1e4ed, #aed8ee, #8ecdea); /* Soft, cool blue gradient */
+  background-size: 400% 400%; /* Make gradient larger than viewport */
+  animation: gradientShift 15s ease infinite; /* Smooth, slow animation */
+  /* End Updated Background */
+  color: #333d47; /* Direct hex code for text-dark */
   line-height: 1.6;
   overflow-x: hidden;
-  /* Prevent horizontal scroll */
   scroll-behavior: smooth;
-  /* Smooth scroll behavior for anchors */
   perspective: 1500px;
-  /* Needed for global 3D context, especially for cards */
   margin: 0;
   padding: 0;
 }
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
 
 .dashboard-container {
   min-height: 100vh;

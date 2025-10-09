@@ -1,14 +1,110 @@
-/* Existing gradient card styles */
+/* --- New CSS for Modal Opening Animation --- */
+
+/* Keyframes for the Modal Entry Animation */
+@keyframes modalFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95); /* Starts slightly below and smaller */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1); /* Ends at original position and size */
+  }
+}
+
+/* Apply the animation to the modal dialog when it becomes active */
+.modal.fade .modal-dialog {
+  opacity: 0; /* Start hidden */
+  transform: translateY(50px) scale(0.95); /* Initial state for animation */
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Smooth transition for non-JS opening or fallback */
+}
+
+/* When the modal is shown, apply the animation */
+.modal.show .modal-dialog {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: modalFadeInUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Using a smooth ease-out curve */
+}
+
+/* --- Button Pulse Effect on Click (or active state) --- */
+
+@keyframes buttonPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 198, 255, 0.7); /* Aqua accent */
+  }
+  70% {
+    transform: scale(1.05); /* Slightly scales up */
+    box-shadow: 0 0 0 10px rgba(0, 198, 255, 0); /* Ripple out */
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 198, 255, 0);
+  }
+}
+
+/* Apply this to the buttons that open the modal */
+.gradient-card .btn-light,
+.gradient-card .btn-outline-light,
+.modal-footer .btn-primary,
+.alert.alert-danger .btn-primary {
+  position: relative; /* Needed for pseudo-elements if we wanted a more complex ripple */
+  overflow: hidden; /* Hide parts of the pulse if it goes too far */
+  z-index: 1;
+}
+
+/* On click/active state for these buttons */
+.gradient-card .btn-light:active,
+.gradient-card .btn-outline-light:active,
+.modal-footer .btn-primary:active,
+.alert.alert-danger .btn-primary:active {
+  animation: buttonPulse 0.4s ease-out; /* Short, quick pulse */
+  transform: scale(0.98); /* Slight press effect */
+}
+
+
+/* Re-themed gradient card styles to glassy bluish theme */
 .gradient-card {
-  background: linear-gradient(90deg, #2b5876, #4e4376);
-  color: white;
-  border: none;
+  /* Adjusted background to glassy bluish theme */
+  background: rgba(255, 255, 255, 0.75); /* Light glass background */
+  backdrop-filter: blur(15px); /* Apply blur for glass effect */
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.4); /* Glass border */
+  color: #333d47; /* Direct hex code for text-dark */
   border-radius: 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeSlideUp 0.6s ease forwards;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Lighter initial shadow */
 }
+
+/* Card Title in gradient-card */
+.gradient-card .card-title {
+  color: #004d7a; /* Dark blue for headings */
+  font-weight: 700;
+}
+
+/* Card Text in gradient-card */
+.gradient-card .card-text,
+.gradient-card p {
+  color: #333d47; /* Direct hex for text-dark */
+}
+
+/* Icons within gradient-card */
+.gradient-card .card-body i.text-primary {
+  color: #007bb6 !important; /* Sea blue medium for primary icons */
+}
+.gradient-card .card-body i.text-secondary {
+  color: #66b3e0 !important; /* Lighter blue for secondary icons */
+}
+.gradient-card .card-body i.text-info {
+  color: #00c6ff !important; /* Aqua accent for info icons */
+}
+.gradient-card .card-body i.text-warning {
+  color: #ffc107 !important; /* Standard warning yellow */
+}
+
 
 /* Add a small delay for each card using nth-child for a cascading effect */
 .col:nth-child(1) .gradient-card { animation-delay: 0.1s; }
@@ -17,16 +113,22 @@
 .col:nth-child(4) .gradient-card { animation-delay: 0.4s; }
 .col:nth-child(5) .gradient-card { animation-delay: 0.5s; }
 
-/* Hover effect */
+/* Hover effect for gradient-card */
 .gradient-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0px 10px 20px rgba(0, 114, 255, 0.4);
+  box-shadow: 0px 15px 30px rgba(0, 198, 255, 0.4); /* Aqua accent for shadow on hover */
 }
 
-/* Footer styling */
+/* Footer styling for gradient-card */
 .gradient-card .card-footer {
-  background: rgba(255, 255, 255, 0.15);
-  border-top: none;
+  background: rgba(0, 77, 122, 0.1); /* Very light transparent dark blue */
+  border-top: 1px solid rgba(255, 255, 255, 0.3); /* Lighter border for footer */
+  display: flex; /* Ensure footer content is flexed as in HTML */
+  justify-content: space-between; /* Space out buttons */
+  align-items: center; /* Vertically align buttons */
+  padding: 0.75rem 1.25rem; /* Adjust padding */
+  border-bottom-left-radius: 15px; /* Match card radius */
+  border-bottom-right-radius: 15px; /* Match card radius */
 }
 
 /* Badge styling */
@@ -34,18 +136,151 @@
   font-size: 0.9rem;
   padding: 6px 10px;
   border-radius: 8px;
+  font-weight: 600; /* Make badges a bit bolder */
 }
 
-/* Light button styling */
-.btn-light {
-  color: #0072ff;
-  font-weight: 500;
+/* Status specific badge styling */
+.badge.bg-success {
+  background-color: #28a745 !important; /* Bootstrap default green */
+  color: #ffffff;
+}
+.badge.bg-info {
+  background-color: #17a2b8 !important; /* Bootstrap default info */
+  color: #ffffff;
+}
+.badge.bg-warning {
+  background-color: #ffc107 !important; /* Bootstrap default warning */
+  color: #333d47;
+}
+.badge.bg-danger {
+  background-color: #dc3545 !important; /* Bootstrap default danger */
+  color: #ffffff;
+}
+.badge.bg-primary {
+  background-color: #007bb6 !important; /* Sea blue medium for primary */
+  color: #ffffff;
+}
+.badge.bg-secondary {
+  background-color: #6c757d !important; /* Bootstrap default secondary */
+  color: #ffffff;
+}
+.badge.bg-dark {
+  background-color: #343a40 !important; /* Bootstrap default dark */
+  color: #ffffff;
+}
+
+
+/* Light button styling within gradient-card */
+.gradient-card .btn-light {
+  background-color: #f0f8ff; /* Off-white background */
+  color: #007bb6; /* Sea blue medium text */
+  font-weight: 600; /* Bolder text for light button */
+  border: 1px solid rgba(0, 123, 182, 0.3); /* Soft blue border */
+  border-radius: 8px; /* Slightly more rounded */
+  transition: all 0.3s ease;
+}
+
+.gradient-card .btn-light:hover {
+  background-color: #e2f0fb; /* Slightly darker off-white on hover */
+  color: #004d7a; /* Darker blue text on hover */
+  box-shadow: 0 2px 8px rgba(0, 198, 255, 0.2); /* Light aqua shadow on hover */
+  transform: translateY(-1px);
+}
+
+/* Outline light button styling for assign button */
+.gradient-card .btn-outline-light {
+  background: transparent; /* Transparent background */
+  color: #007bb6; /* Sea blue medium text */
+  border: 1px solid #007bb6; /* Sea blue medium border */
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.gradient-card .btn-outline-light:hover {
+  background-color: #007bb6; /* Solid sea blue medium on hover */
+  color: #ffffff; /* White text on hover */
+  box-shadow: 0 2px 8px rgba(0, 198, 255, 0.3); /* Aqua shadow on hover */
+  transform: translateY(-1px);
+}
+
+/* Modal styling */
+.modal-content {
+  background: rgba(255, 255, 255, 0.85); /* Slightly less transparent glass */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
+  color: #333d47; /* Consistent text color */
+}
+
+.modal-gradient {
+  /* Re-themed modal header to a consistent blue gradient */
+  background: linear-gradient(135deg, #007bb6 0%, #00c6ff 100%); /* Sea blue medium to aqua accent */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff; /* White text for header */
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.modal-title {
+  color: #ffffff; /* Ensure title is white */
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.modal-header .btn-close {
+  filter: brightness(0) invert(1); /* White close button */
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.modal-header .btn-close:hover {
+  opacity: 1;
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(0, 77, 122, 0.1); /* Light border */
+  background: rgba(255, 255, 255, 0.7); /* Lighter footer background */
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+/* --- MODIFIED: Close button in modal footer to be red --- */
+.modal-footer .btn-secondary {
+  /* Using a red gradient for the close button to make it stand out */
+  background: linear-gradient(135deg, #dc3545 0%, #e63946 100%); /* Danger red gradient */
   border: none;
+  color: #ffffff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3); /* Red shadow */
 }
 
-.modal-gradient{
-  background: linear-gradient(90deg, #2b5876, #4e4376);
+.modal-footer .btn-secondary:hover {
+  background: linear-gradient(135deg, #e63946 0%, #dc3545 100%); /* Slightly darker/reversed red on hover */
+  box-shadow: 0 6px 15px rgba(220, 53, 69, 0.5);
+  transform: translateY(-2px);
 }
+/* --- END MODIFIED --- */
+
+.modal-footer .btn-primary {
+  background: linear-gradient(135deg, #007bb6 0%, #00c6ff 100%); /* Sea blue medium to aqua accent */
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 15px rgba(0, 198, 255, 0.3);
+}
+
+.modal-footer .btn-primary:hover {
+  background: linear-gradient(135deg, #00c6ff 0%, #007bb6 100%);
+  box-shadow: 0 6px 20px rgba(0, 198, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Toast (snackbarToast) is already re-themed from previous CSS */
 
 /* ✨ Animation Keyframes */
 @keyframes fadeSlideUp {
@@ -57,4 +292,62 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Spinner styling */
+.spinner-border {
+  color: #007bb6 !important; /* Sea blue medium for spinner */
+}
+
+/* Alert styling for connection error */
+.alert.alert-danger {
+  background: rgba(220, 53, 69, 0.85); /* Slightly transparent danger red */
+  color: #ffffff;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.alert.alert-danger h5 {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.alert.alert-danger p {
+  color: #f8d7da; /* Lighter red for paragraph text */
+}
+
+.alert.alert-danger .btn-primary {
+  background: linear-gradient(135deg, #007bb6 0%, #00c6ff 100%);
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 198, 255, 0.3);
+}
+
+.alert.alert-danger .btn-primary:hover {
+  background: linear-gradient(135deg, #00c6ff 0%, #007bb6 100%);
+  box-shadow: 0 4px 15px rgba(0, 198, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.alert.alert-danger .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #ffffff;
+}
+
+.alert.alert-danger .btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.alert.alert-danger pre {
+  background-color: rgba(255, 255, 255, 0.2); /* Transparent white for code blocks */
+  color: #f8d7da; /* Lighter red for error details */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 10px;
 }
