@@ -1,29 +1,63 @@
-<div class="card p-3">
-  <h3>Buy a Policy</h3>
-  <form [formGroup]="itemForm" (ngSubmit)="submit()">
-    <div class="mb-2">
-      <label>Policy Type</label>
-      <select formControlName="policyType" class="form-control">
-        <option>Health</option>
-        <option>Life</option>
-        <option>Vehicle</option>
-        <option>Home</option>
-      </select>
+<div class="container mt-4">
+  <div class="card p-4 gradient-form-card shadow-lg"> <!-- Added gradient-form-card and increased padding/shadow -->
+    <h3 class="card-title text-center mb-4">
+      <i class="fas fa-shopping-cart me-2 text-primary"></i> Buy a Policy
+    </h3>
+
+    <form [formGroup]="itemForm" (ngSubmit)="submit()">
+      <div class="mb-3"> <!-- Changed mb-2 to mb-3 for more spacing -->
+        <label for="policyType" class="form-label">
+          <i class="fas fa-hand-holding-usd me-2 text-info"></i> Policy Type
+        </label>
+        <select id="policyType" formControlName="policyType" class="form-select form-select-glass">
+          <option value="Health"><i class="fas fa-heartbeat me-2"></i> Health</option>
+          <option value="Life"><i class="fas fa-ribbon me-2"></i> Life</option>
+          <option value="Vehicle"><i class="fas fa-car-side me-2"></i> Vehicle</option>
+          <option value="Home"><i class="fas fa-home me-2"></i> Home</option>
+        </select>
+        <!-- Optional: Add validation feedback -->
+        <div *ngIf="itemForm.get('policyType')?.invalid && itemForm.get('policyType')?.touched" class="text-danger mt-1">
+          <i class="fas fa-exclamation-circle me-1"></i> Policy type is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="premium" class="form-label">
+          <i class="fas fa-money-bill-wave me-2 text-success"></i> Premium
+        </label>
+        <div class="input-group">
+          <span class="input-group-text form-select-glass"><i class="fas fa-rupee-sign"></i></span>
+          <input id="premium" type="number" formControlName="premium" class="form-control form-control-glass" placeholder="e.g., 1000" />
+        </div>
+        <!-- Optional: Add validation feedback -->
+        <div *ngIf="itemForm.get('premium')?.invalid && itemForm.get('premium')?.touched" class="text-danger mt-1">
+          <i class="fas fa-exclamation-circle me-1"></i> Premium must be a positive number.
+        </div>
+      </div>
+
+      <div class="mb-4"> <!-- Increased spacing before button -->
+        <label for="termMonths" class="form-label">
+          <i class="fas fa-calendar-alt me-2 text-warning"></i> Term (months)
+        </label>
+        <input id="termMonths" type="number" formControlName="termMonths" class="form-control form-control-glass" placeholder="e.g., 12" />
+        <!-- Optional: Add validation feedback -->
+        <div *ngIf="itemForm.get('termMonths')?.invalid && itemForm.get('termMonths')?.touched" class="text-danger mt-1">
+          <i class="fas fa-exclamation-circle me-1"></i> Term must be a positive number.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 buy-policy-button" [disabled]="loading || itemForm.invalid">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        <i *ngIf="!loading" class="fas fa-paper-plane me-2"></i> {{ loading ? 'Purchasing...' : 'Buy Policy' }}
+      </button>
+    </form>
+
+    <div *ngIf="successMsg" class="alert alert-success mt-3 alert-glass-success fade-in">
+      <i class="fas fa-check-circle me-2"></i> {{successMsg}}
     </div>
-
-    <div class="mb-2">
-      <label>Premium</label>
-      <input type="number" formControlName="premium" class="form-control" />
+    <div *ngIf="errorMsg" class="alert alert-danger mt-3 alert-glass-danger fade-in">
+      <i class="fas fa-times-circle me-2"></i> {{errorMsg | json}}
     </div>
-
-    <div class="mb-2">
-      <label>Term (months)</label>
-      <input type="number" formControlName="termMonths" class="form-control" />
-    </div>
-
-    <button class="btn btn-primary" [disabled]="loading || itemForm.invalid">Buy Policy</button>
-  </form>
-
-  <div *ngIf="successMsg" class="alert alert-success mt-2">{{successMsg}}</div>
-  <div *ngIf="errorMsg" class="alert alert-danger mt-2">{{errorMsg | json}}</div>
+  </div>
 </div>
+

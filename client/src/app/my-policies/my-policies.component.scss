@@ -1,0 +1,99 @@
+/* Add to your existing CSS file */
+
+/* General Styling for tables to match the glassy theme */
+.glass-table-container {
+  background: rgba(255, 255, 255, 0.75); /* Light glass background for container */
+  backdrop-filter: blur(15px); /* Apply blur for glass effect */
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.4); /* Glass border */
+  border-radius: 15px;
+  overflow: hidden; /* Ensures rounded corners apply to content */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Lighter initial shadow */
+  margin-top: 1.5rem; /* Space from title */
+}
+
+.glass-table {
+  --bs-table-bg: transparent; /* Make table background transparent */
+  --bs-table-hover-bg: rgba(0, 198, 255, 0.1); /* Light aqua hover for rows */
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.1); /* Light stripe for rows */
+  color: #333d47; /* Consistent text color */
+}
+
+.glass-table thead th {
+  background-color: rgba(0, 77, 122, 0.2); /* Slightly darker transparent blue for header */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Lighter header border */
+  color: #004d7a; /* Dark blue for header text */
+  font-weight: 700;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.glass-table tbody tr {
+  border-color: rgba(0, 77, 122, 0.1); /* Lighter border for table rows */
+}
+
+.glass-table tbody td {
+  padding: 0.75rem 1rem;
+}
+
+/* Custom styles for the info alert to make it glassy */
+.alert-glass-effect {
+  background: rgba(0, 198, 255, 0.75); /* Aqua accent glass background */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff; /* White text for contrast */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeSlideUp 0.6s ease forwards; /* Reuse existing animation */
+}
+
+.alert-glass-effect .fa-info-circle {
+  color: #fff; /* White icon in alert */
+}
+
+/* Button styling for table actions to match theme */
+.claim-button.btn-primary {
+  background: linear-gradient(135deg, #007bb6 0%, #00c6ff 100%); /* Sea blue to aqua */
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 198, 255, 0.2);
+  color: #ffffff;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.claim-button.btn-primary:hover {
+  background: linear-gradient(135deg, #00c6ff 0%, #007bb6 100%);
+  box-shadow: 0 4px 12px rgba(0, 198, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.claim-button.btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #4CAF50 100%); /* Green gradient for claimed */
+    border: none;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+    color: #ffffff;
+    font-weight: 600;
+    cursor: not-allowed;
+    opacity: 0.9;
+}
+
+.claim-button.btn-success:hover {
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2); /* No extra shadow on hover for disabled */
+    transform: none; /* No transform on hover for disabled */
+}
+
+.view-button.btn-secondary {
+  background: rgba(108, 117, 125, 0.8); /* Slightly transparent secondary gray */
+  border: none;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.2);
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.view-button.btn-secondary:hover {
+  background: rgba(108, 117, 125, 1); /* Solid secondary gray on hover */
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+  transform: translateY(-1px);
+}
