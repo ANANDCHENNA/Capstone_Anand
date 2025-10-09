@@ -21,7 +21,7 @@ import { UpdatePolicyComponent } from './update-policy/update-policy.component';
 import { MyPoliciesComponent } from './my-policies/my-policies.component';
 
 const routes: Routes = [
-  { path: '' ,redirectTo: '/home', pathMatch: 'full' },
+  { path: '' ,redirectTo: '/', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'home', component: HomeComponent },
