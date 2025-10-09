@@ -23,7 +23,7 @@ export class DashbaordComponent implements OnInit {
   sortKey: string = '';
   sortOrder: 'asc' | 'desc' = 'asc';
   snackbarMessage: string = '';
-
+  welcomeMessage: string = '';
   // Adjuster
   claimList: Claim[] = [];
 
@@ -42,23 +42,25 @@ export class DashbaordComponent implements OnInit {
   // Policies
   policies: any[] = [];
 
-/// asign card per page
+  /// asign card per page
 
 
- currentPage:{ [role: string]: number } = {  'ADJUSTER': 1,  'UNDERWRITER': 1,  'INVESTIGATOR': 1,  'POLICYHOLDER': 1};
-itemsPerPage:number=7;
+  currentPage: { [role: string]: number } = { 'ADJUSTER': 1, 'UNDERWRITER': 1, 'INVESTIGATOR': 1, 'POLICYHOLDER': 1 };
+  itemsPerPage: number = 12;
   constructor(
     private httpService: HttpService,
     private authService: AuthService,
     private router: Router
   ) {
     this.role = this.authService.getRole;
+
   }
+
 
   ngOnInit(): void {
     this.underWriterId = this.authService.getUserId();
     this.policyholderId = this.authService.getUserId();
-
+    this.setWelcomeMessage();
     if (this.role === 'ADJUSTER') {
       this.httpService.getAllClaims().subscribe(data => this.claimList = data);
     }
@@ -78,6 +80,26 @@ itemsPerPage:number=7;
 
     if (this.role === 'ADMIN') {
       this.httpService.getAllPolicies().subscribe(data => this.policies = data);
+    }
+  }
+  //--------------welcome message method--------------
+  setWelcomeMessage(): void {
+    switch (this.role?.toLowerCase()) {
+      case 'policyholder':
+        this.welcomeMessage = 'Welcome Policyholder';
+        break;
+      case 'adjuster':
+        this.welcomeMessage = 'Welcome Adjuster ';
+        break;
+      case 'underwriter':
+        this.welcomeMessage = 'Welcome Underwriter ';
+        break;
+      case 'investigator':
+        this.welcomeMessage = 'Welcome Investigator ';
+        break;
+      default:
+        this.welcomeMessage = 'Welcome to Insurance Portal';
+
     }
   }
 
@@ -143,7 +165,7 @@ itemsPerPage:number=7;
         console.error('Error fetching claims:', err);
         this.hasError = true;
         this.errorDetails = JSON.stringify(err, null, 2);
-        
+
         let errorMsg = 'Error loading claims. ';
         if (!navigator.onLine) {
           errorMsg += 'Please check your internet connection.';
@@ -297,13 +319,13 @@ itemsPerPage:number=7;
     }
     return result;
   }
-//----------------logic for pagination----------------
+  //----------------logic for pagination----------------
 
 
   // ---------------- // Get paginated items for a role
   getPaginatedClaims(role: string): any[] {
     let data: any[] = [];
-  
+
     switch (role) {
       case 'ADJUSTER':
         data = this.filteredAdjusterClaims();
@@ -318,11 +340,11 @@ itemsPerPage:number=7;
         data = this.filteredPolicyholderClaims();
         break;
     }
-  
+
     const startIndex = (this.currentPage[role] - 1) * this.itemsPerPage;
     return data.slice(startIndex, startIndex + this.itemsPerPage);
   }
-  
+
   // Total pages for a role
   getTotalPages(role: string): number {
     let length = 0;
@@ -334,7 +356,7 @@ itemsPerPage:number=7;
     }
     return Math.ceil(length / this.itemsPerPage);
   }
-  
+
   // Change page
   changePage(role: string, page: number) {
     if (page >= 1 && page <= this.getTotalPages(role)) {
