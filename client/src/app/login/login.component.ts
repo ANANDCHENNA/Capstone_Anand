@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
           this.authService.SetRole(data.role)
           this.authService.saveToken(data.token)
           this.authService.saveUserId(data.userId);
-          if (data.role === 'POLICYHOLDER') {
+          if (data.role === 'POLICYHOLDER' || data.role === "ADMIN") {
             this.router.navigate(['/policies'])
           }
           else {
