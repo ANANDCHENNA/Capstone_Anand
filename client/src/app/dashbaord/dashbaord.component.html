@@ -122,7 +122,7 @@
         <div class="alert alert-danger">
           <h5>Connection Error</h5>
           <p>There was an error connecting to the server. Please try the test connection button below.</p>
-          <button class="btn btn-primary me-2" (click)="testConnection()" [disabled]="isLoading">
+          <button class="btn btn-primary me-2" [disabled]="isLoading">
             {{ isLoading ? 'Testing...' : 'Test Connection' }}
           </button>
           <button class="btn btn-secondary" (click)="loadPolicyholderClaims()" [disabled]="isLoading">

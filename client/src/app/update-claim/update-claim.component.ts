@@ -44,6 +44,7 @@ export class UpdateClaimComponent implements OnInit {
     this.claimId = this.route?.snapshot?.params?.['id'] ?? null;
 
     this.httpService.getClaimById?.(this.claimId).subscribe((data) => {
+      console.log(data);
       if (data.date) {
         const formattedDate = new Date(data.date).toISOString().split('T')[0]; // "YYYY-MM-DD"
         data.date = formattedDate;

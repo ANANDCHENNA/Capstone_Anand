@@ -17,7 +17,7 @@ export class AssignClaimComponent implements OnInit {
   itemForm: FormGroup;
 
   underwriters: Underwriter[] = []
-  investigators:Investigator[]=[]
+  investigators: Investigator[] = []
   id: number | undefined
 
   constructor(
@@ -46,6 +46,7 @@ export class AssignClaimComponent implements OnInit {
     this.id = this.route?.snapshot?.params?.['id'] ?? null;
     if (this.id) {
       this.httpService.getClaimById(this.id).subscribe((data) => {
+        console.log(data);
         this.itemForm.patchValue(data);
       })
     }
@@ -53,6 +54,7 @@ export class AssignClaimComponent implements OnInit {
 
   onSubmit() {
     if (this.itemForm.valid) {
+      console.log(this.itemForm.value)
       this.httpService.assignClaim({ ...this.itemForm.value, claimId: this.id }).subscribe({
         next: () => {
           this.router.navigate(['/dashboard']);

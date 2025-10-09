@@ -22,18 +22,22 @@ public class Claim {
     // private Policy policy;
     @ManyToOne
     @JoinColumn(name = "policyholder_id")
+    @JsonIgnore
     private Policyholder policyholder;
 
     @ManyToOne
     @JoinColumn(name = "adjuster_id")
+    @JsonIgnore
     private Adjuster adjuster;
 
     @ManyToOne
     @JoinColumn(name = "underwriter_id")
+    @JsonIgnore
     private Underwriter underwriter;
 
     @ManyToOne
     @JoinColumn(name = "investigator_id")
+    @JsonIgnore
     private Investigator investigator;
 
     @OneToOne(mappedBy = "claim")
