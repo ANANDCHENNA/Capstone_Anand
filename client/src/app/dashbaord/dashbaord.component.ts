@@ -46,7 +46,7 @@ export class DashbaordComponent implements OnInit {
  
  
   currentPage: { [role: string]: number } = { 'ADJUSTER': 1, 'UNDERWRITER': 1, 'INVESTIGATOR': 1, 'POLICYHOLDER': 1 };
-  itemsPerPage: number = 12;
+  itemsPerPage: number = 6;
   constructor(
     private httpService: HttpService,
     private authService: AuthService,
@@ -165,7 +165,6 @@ export class DashbaordComponent implements OnInit {
         console.error('Error fetching claims:', err);
         this.hasError = true;
         this.errorDetails = JSON.stringify(err, null, 2);
- 
         let errorMsg = 'Error loading claims. ';
         if (!navigator.onLine) {
           errorMsg += 'Please check your internet connection.';
@@ -319,8 +318,10 @@ export class DashbaordComponent implements OnInit {
     }
     return result;
   }
-  
- // Get paginated items for a role
+  //----------------logic for pagination----------------
+ 
+ 
+  // ---------------- // Get paginated items for a role
   getPaginatedClaims(role: string): any[] {
     let data: any[] = [];
  
@@ -354,7 +355,6 @@ export class DashbaordComponent implements OnInit {
     }
     return Math.ceil(length / this.itemsPerPage);
   }
- 
   // Change page
   changePage(role: string, page: number) {
     if (page >= 1 && page <= this.getTotalPages(role)) {
