@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   slideDuration: number = 8000; // 8 seconds per slide
 
   // Typing Effect
-  // Use a template variable (#typingText) in HTML and query it
   @ViewChildren('typingText') typingTextElements!: QueryList<ElementRef>;
   phrases: string[][] = [
     ["Your Peace of Mind, Our Priority.", "Swift, Simple, Secure Claims.", "Protecting What Matters Most."],
@@ -64,6 +63,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.roleName = authService.getRole;
 
     if (this.IsLoggin === false) {
+      // This line seems to imply a redirect to home if not logged in.
+      // If the component is already home, this might cause a loop or be unnecessary.
+      // Re-evaluate if this specific line is needed in the HomeComponent constructor.
+      // For now, I'm keeping it as per your original code.
       this.router.navigateByUrl('/home');
     }
   }
@@ -93,9 +96,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     }, options);
 
     // Ensure counterElements are available before observing
-    // Use a short timeout to ensure ViewChildren are rendered,
-    // or if they are already there, observe them directly.
-    // QueryList.changes is also an option for dynamic content.
     if (this.counterElements.length > 0) {
         this.counterElements.forEach(counter => {
             this.observer.observe(counter.nativeElement);
@@ -120,13 +120,33 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  // --- NEW METHOD FOR SCROLLING ---
+  scrollToSection(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      // Adjust this value based on your fixed header's height
+      // The fixed header is `80px` tall according to the CSS.
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+      this.closeMobileNav(); // Close mobile nav after clicking a link
+    }
+  }
+
   // --- Your Existing Methods ---
   onLogin(): void {
     this.router.navigate(['/login']);
+    this.isDropdownOpen = false; // Close dropdown after navigation
   }
 
   onSignUp(): void {
     this.router.navigate(['/registration']);
+    this.isDropdownOpen = false; // Close dropdown after navigation
   }
 
   learnMore(insuranceId: number): void {
@@ -201,13 +221,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.typingTimeout) {
       clearTimeout(this.typingTimeout);
     }
-    this.typedText[slideIndex] = ''; // Clear current text for the active slide
+    this.typedText = this.typedText.map((val, idx) => idx === slideIndex ? '' : val); // Clear only active slide's text
     this.currentPhraseIndex = 0;
     this.currentCharIndex = 0;
     this.isTypingDirection = true; // Start fresh, initially typing
 
-    // Clear and restart animation for the specific typing element to reset cursor blink
-    // Ensure the typingTextElements QueryList has populated before trying to access
     if (this.typingTextElements && this.typingTextElements.toArray().length > slideIndex) {
       const activeTypingElement = this.typingTextElements.toArray()[slideIndex]?.nativeElement;
       if (activeTypingElement) {
@@ -227,7 +245,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if (this.isTypingDirection) { // Typing
       if (this.currentCharIndex < currentPhrase.length) {
-        // Create a new array reference to trigger change detection
         this.typedText = this.typedText.map((val, idx) =>
           idx === this.currentSlideIndex ? val + currentPhrase.charAt(this.currentCharIndex) : val
         );
@@ -239,7 +256,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     } else { // Erasing
       if (this.currentCharIndex > 0) {
-        // Create a new array reference to trigger change detection
         this.typedText = this.typedText.map((val, idx) =>
           idx === this.currentSlideIndex ? currentPhrase.substring(0, this.currentCharIndex - 1) : val
         );
@@ -260,7 +276,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     if (parent?.querySelector('p')?.textContent?.includes('Approved')) return 'approvals';
     if (parent?.querySelector('p')?.textContent?.includes('Support')) return 'support';
     if (parent?.querySelector('p')?.textContent?.includes('Years')) return 'years';
-    return 'clients'; // Default fallback
+    return 'clients'; // Default fallback, though should ideally cover all cases
   }
 
   private animateCounter(counterName: keyof typeof this.animatedCounters, target: number): void {

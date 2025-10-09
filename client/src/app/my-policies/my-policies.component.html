@@ -1,18 +1,22 @@
 <div class="container mt-4">
-  <h4>My Policies</h4>
-  <div *ngIf="myPolicies.length === 0" class="alert alert-info">
-    You have no policies yet.
+  <h4 class="mb-3">
+    <i class="fas fa-shield-alt me-2 text-primary"></i> My Policies
+  </h4>
+
+  <div *ngIf="myPolicies.length === 0" class="alert alert-info alert-glass-effect fade-in">
+    <i class="fas fa-info-circle me-2"></i> You have no policies yet.
   </div>
-  <div class="table-responsive" *ngIf="myPolicies.length > 0">
-    <table class="table table-hover">
+
+  <div class="table-responsive glass-table-container" *ngIf="myPolicies.length > 0">
+    <table class="table table-hover table-striped glass-table">
       <thead>
         <tr>
-          <th>Policy ID</th>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Premium</th>
-          <th>Term (months)</th>
-          <th>Actions</th>
+          <th><i class="fas fa-hashtag me-2"></i>Policy ID</th>
+          <th><i class="fas fa-signature me-2"></i>Name</th>
+          <th><i class="fas fa-tag me-2"></i>Type</th>
+          <th><i class="fas fa-money-bill-wave me-2"></i>Premium</th>
+          <th><i class="fas fa-clock me-2"></i>Term (months)</th>
+          <th><i class="fas fa-cogs me-2"></i>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -20,13 +24,25 @@
           <td>{{ p.id }}</td>
           <td>{{ p.name }}</td>
           <td>{{ p.policyType }}</td>
-          <td>{{ p.premium}}</td>
+          <td><i class="fas fa-rupee-sign me-1"></i>{{ p.premium }}</td>
           <td>{{ p.termMonths }}</td>
           <td>
-            <button class="btn btn-sm btn-primary me-2" (click)="claimPolicy(p)">
-              <i class="bi bi-exclamation-triangle"></i> {{p.status === "Claimed" ? "Claimed" : "Claim"}}
+            <button
+              class="btn btn-sm btn-primary me-2 claim-button"
+              (click)="claimPolicy(p)"
+              [disabled]="p.status === 'Claimed'"
+              [ngClass]="{'btn-success': p.status === 'Claimed', 'btn-primary': p.status !== 'Claimed'}"
+            >
+              <ng-container *ngIf="p.status === 'Claimed'">
+                <i class="fas fa-check-circle me-1"></i> Claimed
+              </ng-container>
+              <ng-container *ngIf="p.status !== 'Claimed'">
+                <i class="fas fa-exclamation-triangle me-1"></i> Claim
+              </ng-container>
             </button>
-            <button class="btn btn-sm btn-secondary" [routerLink]="['/policy', p.id]">View</button>
+            <button class="btn btn-sm btn-secondary view-button" [routerLink]="['/policy', p.id]">
+              <i class="fas fa-eye me-1"></i> View
+            </button>
           </td>
         </tr>
       </tbody>
