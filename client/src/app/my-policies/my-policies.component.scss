@@ -1,179 +1,833 @@
-/* Existing styles for the policies table can remain */
+/* Base styling from your theme */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    /* Keeping the background animation as it's a core part of the base theme */
+    background: linear-gradient(-45deg, #e0f2f7, #c1e4ed, #aed8ee, #8ecdea);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #4b4343;
+    line-height: 1.6;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
 
-/* New styles for the claim form */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.main-content-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* Adjust based on your header/footer height if any */
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* Reusing and adapting form-container-wrapper for table view */
+.form-container-wrapper {
+  max-width: 600px; /* Default max-width from previous form */
+  width: 100%;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  animation: fadeInForm 0.8s ease-out;
+}
+
+.large-form-wrapper { /* Override for wider table container */
+    max-width: 1000px;
+    padding: 30px;
+}
+
+@keyframes fadeInForm {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-title {
+  text-align: center;
+  color: #34495e;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.form-icon {
+    font-size: 2.8rem;
+    color: #5d9cec;
+    text-shadow: none;
+}
+
+/* Themed Info Message (Replaces alert-glass-effect) */
+.themed-info-message {
+  background: rgba(93, 156, 236, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeInForm 0.6s ease forwards;
+  padding: 18px 25px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.themed-info-message i {
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+/* Table Styling */
+.policy-table-responsive {
+    overflow-x: auto;
+    margin-top: 25px;
+}
+
+.policy-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: -10px;
+}
+
+.policy-table thead th {
+    background: #e9ecef;
+    color: #495057;
+    font-weight: 700;
+    padding: 15px 20px;
+    text-align: left;
+    border: none;
+    font-size: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    white-space: nowrap;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+
+.policy-table thead th:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.policy-table thead th:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.policy-table thead th i {
+    margin-right: 8px;
+    color: #6c757d;
+}
+
+.policy-table tbody tr {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+
+.policy-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-2px) scale(1.005);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Alternating row background for striped effect */
+.policy-table tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.7);
+}
+.policy-table tbody tr:nth-child(odd):hover {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+
+.policy-table tbody td {
+    padding: 15px 20px;
+    border: none;
+    color: #333d47;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.policy-table tbody tr td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.policy-table tbody tr td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.policy-currency-icon {
+    color: #28a745;
+    margin-right: 5px;
+    font-size: 0.9rem;
+}
+
+/* Action Buttons */
+.policy-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.action-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.claim-action-button { /* For the 'Claim' button */
+    background: linear-gradient(135deg, #5d9cec 0%, #7aa8ed 100%);
+    color: white;
+}
+
+.claim-action-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #7aa8ed 0%, #5d9cec 100%);
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 4px 12px rgba(93, 156, 236, 0.3);
+}
+
+.claim-claimed-button { /* For the 'Claimed' button (disabled) */
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.claim-claimed-button:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.view-action-button { /* For the 'View' button */
+    background: linear-gradient(135deg, #adb5bd 0%, #6c757d 100%);
+    color: white;
+}
+
+.view-action-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+.action-button i {
+    font-size: 1.05rem;
+}
+
+/* Toast / Snackbar Styling */
+.themed-toast {
+    background: rgba(93, 156, 236, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff !important;
+    box-shadow: 0 5px 15px rgba(93, 156, 236, 0.2);
+    border-radius: 12px;
+}
+.themed-toast .toast-body {
+    font-weight: 500;
+}
+.themed-toast .btn-close-white {
+    filter: invert(1);
+}
+
+
+/* --- CLAIM FORM OVERLAY AND CONTAINER STYLES --- */
+
 .claim-form-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  background-color: rgba(0, 0, 0, 0.6); /* Darker, more opaque overlay */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Ensure it's above other content */
+  z-index: 1050; /* Ensure it's above other content and typically higher than bootstrap modals */
+  animation: fadeInOverlay 0.3s ease-out;
+}
+
+@keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .claim-form-container {
-  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white for glass effect */
-  backdrop-filter: blur(10px); /* Glass blur effect */
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 500px;
-  animation: fadeIn 0.3s ease-out;
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for definition */
+  /* ADJUSTMENTS FOR SMALLER SIZE */
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 18px; /* Slightly less rounded */
+  padding: 25px; /* Reduced padding */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Slightly less intense shadow */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(18px); /* Slightly less blur, but still strong */
+  -webkit-backdrop-filter: blur(18px);
+  width: 95%; /* Wider on very small screens */
+  max-width: 450px; /* **REDUCED MAX WIDTH HERE** */
+  animation: slideInFromTop 0.4s ease-out forwards;
+  position: relative;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes slideInFromTop {
+    from { opacity: 0; transform: translateY(-30px); } /* Reduced slide distance */
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .claim-form-container h2 {
   text-align: center;
-  color: #4B0082; /* Deep Purple */
-  margin-bottom: 25px;
-  font-size: 1.8em;
+  color: #34495e;
+  font-size: 1.6rem; /* Reduced font size */
+  font-weight: 600;
+  margin-bottom: 25px; /* Reduced margin */
 }
 
+/* Form Group, Label, Input, Select, Error Message - Reusing existing theming */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 18px; /* Reduced margin */
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #333;
+  margin-bottom: 7px; /* Reduced margin */
+  font-weight: 600;
+  color: #333d47;
+  font-size: 0.9rem; /* Reduced font size */
 }
 
 .form-control {
   width: 100%;
-  padding: 12px 15px;
-  border: 1px solid rgba(255, 255, 255, 0.5); /* Lighter border for inputs */
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.7); /* Slightly transparent input background */
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  font-size: 1em;
+  padding: 10px 12px; /* Reduced padding */
+  border: 1px solid rgba(173, 216, 230, 0.7);
+  border-radius: 8px; /* Slightly less rounded */
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05); /* Reduced inner shadow */
+  font-size: 0.95em; /* Slightly reduced font size */
   color: #333;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .form-control:focus {
-  border-color: #9370DB; /* Medium Purple */
-  box-shadow: 0 0 0 0.2rem rgba(147, 112, 219, 0.25); /* Focus glow */
+  border-color: #5d9cec;
+  box-shadow: 0 0 0 2px rgba(93, 156, 236, 0.2); /* Reduced focus glow */
   outline: none;
+  background-color: #fff;
+}
+
+.form-control:disabled {
+  background-color: rgba(230, 230, 230, 0.7);
+  cursor: not-allowed;
+  color: #6c757d;
+  border-color: rgba(173, 216, 230, 0.4);
 }
 
 .error-message {
-  color: #dc3545; /* Red for error messages */
-  font-size: 0.9em;
+  color: #dc3545;
+  font-size: 0.8em; /* Slightly smaller error message */
   margin-top: 5px;
+  font-weight: 500;
 }
 
+/* Submit and Cancel Buttons - Reusing action-button styles */
 .submit-button,
 .cancel-button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-top: 15px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  color: white;
+    width: 100%;
+    padding: 10px; /* Reduced padding */
+    border: none;
+    border-radius: 20px; /* Slightly less rounded */
+    cursor: pointer;
+    font-size: 1em; /* Reduced font size */
+    font-weight: 700;
+    margin-top: 12px; /* Reduced margin */
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12); /* Reduced shadow */
 }
 
 .submit-button {
-  background-color: #4B0082; /* Deep Purple */
+    background: linear-gradient(135deg, #5d9cec 0%, #4a8ae6 100%);
+    color: white;
 }
 
 .submit-button:hover:not(:disabled) {
-  background-color: #6A0DAD; /* Darker purple on hover */
-  box-shadow: 0 4px 10px rgba(75, 0, 130, 0.3);
+    background: linear-gradient(135deg, #4a8ae6 0%, #5d9cec 100%);
+    transform: translateY(-1px) scale(1.005); /* Less dramatic hover */
+    box-shadow: 0 4px 15px rgba(93, 156, 236, 0.3); /* Reduced hover glow */
 }
 
 .submit-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
+    background: linear-gradient(135deg, #ced4da 0%, #adb5bd 100%);
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+    transform: none;
 }
 
 .cancel-button {
-  background-color: #9370DB; /* Medium Purple */
-  margin-bottom: 0; /* No margin at the bottom for the last button */
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #495057;
+    border: 1px solid rgba(173, 216, 230, 0.7);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* Reduced shadow */
 }
 
-.cancel-button:hover {
-  background-color: #BA55D3; /* Orchid - lighter purple on hover */
-  box-shadow: 0 4px 10px rgba(147, 112, 219, 0.3);
+.cancel-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+    transform: translateY(-0.5px) scale(1.005); /* Less dramatic hover */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* Glass effect for buttons */
-.submit-button::before,
-.cancel-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
+/* Responsive adjustments for the modal */
+@media (max-width: 768px) {
+    .claim-form-container {
+        padding: 20px;
+        max-width: 90%; /* Slightly smaller on medium screens */
+    }
+    .claim-form-container h2 {
+        font-size: 1.5rem; /* Further reduced font size */
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        font-size: 0.85rem;
+    }
+    .form-control {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+    .submit-button, .cancel-button {
+        padding: 8px;
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 480px) {
+    .claim-form-container {
+        padding: 15px;
+        max-width: 95%; /* Make it fill more of the screen on very small devices */
+    }
+    .claim-form-container h2 {
+        font-size: 1.3rem; /* Smallest font size */
+        margin-bottom: 15px;
+    }
+    .form-control {
+        padding: 7px 9px;
+        font-size: 0.85em;
+    }
+    .submit-button, .cancel-button {
+        padding: 7px;
+        font-size: 0.85em;
+    }
+}
+
+
+
+/* Base styling from your theme */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background: linear-gradient(-45deg, #e0f2f7, #c1e4ed, #aed8ee, #8ecdea);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #4b4343;
+    line-height: 1.6;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.main-content-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* Reusing and adapting form-container-wrapper for table view */
+.form-container-wrapper {
+  max-width: 600px; /* Default max-width from previous form */
   width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-  transition: 0.5s;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 18px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  animation: fadeInForm 0.8s ease-out;
 }
 
-.submit-button:hover::before,
-.cancel-button:hover::before {
-  left: 100%;
+.large-form-wrapper { /* Override for wider table container */
+    max-width: 1200px;
+    padding: 30px; /* Slightly reduced padding for table */
 }
 
-/* Styles for the policy table (existing, but ensure consistency) */
-.glass-table-container {
-  background-color: rgba(255, 255, 255, 0.3); /* Slightly less opaque for the table container */
-  backdrop-filter: blur(8px);
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+
+@keyframes fadeInForm {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.glass-table {
-  background-color: transparent; /* Table background should be transparent */
-  color: #333;
+.form-title {
+  text-align: center;
+  color: #004d7a;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
 }
 
-.glass-table th,
-.glass-table td {
-  border-color: rgba(255, 255, 255, 0.4); /* Lighter border for table cells */
-  padding: 12px;
+.form-icon {
+    font-size: 2.8rem;
+    color: #00c6ff;
+    text-shadow: 0 0 15px rgba(0, 198, 255, 0.3);
 }
 
-.glass-table thead th {
-  background-color: rgba(147, 112, 219, 0.2); /* Light purple background for headers */
-  color: #4B0082;
-  font-weight: bold;
+/* Policy List Specific Styles */
+.policy-list-header {
+    display: flex;
+    justify-content: flex-end; /* Align search to the right */
+    margin-bottom: 25px;
 }
 
-.glass-table tbody tr:hover {
-  background-color: rgba(147, 112, 219, 0.1); /* Lighter hover effect */
+.policy-search-input {
+    width: 280px; /* Slightly wider search */
+    padding: 12px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 30px; /* More rounded */
+    font-size: 1rem;
+    color: #333d47;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-.alert-glass-effect {
-  background-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #4B0082;
-  font-weight: bold;
+.policy-search-input:focus {
+    border-color: #00c6ff;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.2), 0 0 15px rgba(0, 198, 255, 0.1);
+    outline: none;
+    width: 320px; /* Expand on focus */
+}
+
+/* Table Styling */
+.policy-table-responsive {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.policy-table {
+    width: 100%;
+    border-collapse: separate; /* For rounded corners on cells */
+    border-spacing: 0 10px; /* Space between rows */
+    margin-top: -10px; /* Compensate for top spacing */
+}
+
+.policy-table thead th {
+    background: linear-gradient( #aed8ee 0%, #8ecdea 100%); /* Light blue gradient */
+    color: #004d7a;
+    font-weight: 700;
+    padding: 15px 20px;
+    text-align: left;
+    border: none;
+    font-size: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    white-space: nowrap; /* Prevent header text wrapping */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.policy-table thead th:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.policy-table thead th:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.policy-table thead th i {
+    margin-right: 8px;
+    color: #007bb6;
+}
+
+.policy-table tbody tr {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.policy-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-3px) scale(1.005);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.policy-table tbody td {
+    padding: 15px 20px;
+    border: none;
+    color: #333d47;
+    font-size: 0.95rem;
+    white-space: nowrap; /* Prevent table data wrapping */
+}
+
+.policy-table tbody tr td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.policy-table tbody tr td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* Action Buttons */
+.policy-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center; /* Center buttons within their cell */
+}
+
+.action-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button {
+    background: linear-gradient(135deg, #00c6ff 0%, #007bb6 100%); /* Blue gradient */
+    color: white;
+}
+
+.edit-button:hover {
+    background: linear-gradient(135deg, #007bb6 0%, #004d7a 100%);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 198, 255, 0.4);
+}
+
+.delete-button {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee3c3c 100%); /* Red gradient */
+    color: white;
+}
+
+.delete-button:hover {
+    background: linear-gradient(135deg, #ee3c3c 0%, #c00404 100%);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.buy-button {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); /* Green gradient */
+    color: white;
+}
+
+.buy-button:hover {
+    background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+}
+
+.action-button i {
+    font-size: 1.05rem;
+}
+
+.no-policies-message {
+    text-align: center;
+    padding: 30px;
+    color: #6c757d;
+    font-style: italic;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.no-policies-message i {
+    margin-right: 8px;
+    color: #007bb6;
+}
+
+
+/* Toast / Snackbar Styling - Reused from previous component */
+.themed-toast {
+    background: rgba(0, 198, 255, 0.85) !important; /* Aqua accent for success */
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff !important;
+    box-shadow: 0 10px 30px rgba(0, 198, 255, 0.3);
+    border-radius: 12px;
+}
+.themed-toast .toast-body {
+    font-weight: 500;
+}
+.themed-toast .btn-close-white {
+    filter: invert(1); /* Ensure close button is visible on colored background */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .large-form-wrapper {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 992px) {
+    .large-form-wrapper {
+        padding: 25px;
+    }
+    .form-title {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+    .form-icon {
+        font-size: 2.4rem;
+    }
+    .policy-search-input {
+        width: 250px;
+    }
+    .policy-search-input:focus {
+        width: 280px;
+    }
+    .policy-table thead th, .policy-table tbody td {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    .action-button {
+        padding: 7px 12px;
+        font-size: 0.85rem;
+    }
+    .action-button i {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content-area {
+        padding: 20px 10px;
+    }
+    .large-form-wrapper {
+        padding: 20px;
+    }
+    .form-title {
+        font-size: 1.8rem;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+    .form-icon {
+        font-size: 2rem;
+    }
+    .policy-list-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    .policy-search-input {
+        width: 100%; /* Full width on smaller screens */
+        padding: 10px 15px;
+    }
+    .policy-search-input:focus {
+        width: 100%;
+    }
+    .policy-table thead th, .policy-table tbody td {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+    .policy-actions {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 8px;
+    }
+    .action-button {
+        width: 100%;
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+    .no-policies-message {
+        font-size: 1rem;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .large-form-wrapper {
+        padding: 15px;
+    }
+    .form-title {
+        font-size: 1.5rem;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    .form-icon {
+        font-size: 1.8rem;
+    }
+    .policy-table thead th, .policy-table tbody td {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+    .action-button {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+    }
+    .no-policies-message {
+        font-size: 0.9rem;
+        padding: 15px;
+    }
 }

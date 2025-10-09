@@ -1,11 +1,10 @@
-<div class="container mt-4">
-  <h4 class="mb-3">
-    <i class="fas fa-shield-alt me-2 text-primary"></i> My Policies
-  </h4>
+<!-- <div class="main-content-area">
+  <div class="form-container-wrapper large-form-wrapper">
+    <h2 class="form-title"><i class="fas fa-shield-alt form-icon"></i> My Policies</h2>
 
-  <div *ngIf="myPolicies.length === 0" class="alert alert-info alert-glass-effect fade-in">
-    <i class="fas fa-info-circle me-2"></i> You have no policies yet.
-  </div>
+    <div *ngIf="myPolicies.length === 0" class="themed-info-message fade-in">
+      <i class="fas fa-info-circle"></i> You have no policies yet.
+    </div>
 
   <div class="table-responsive glass-table-container" *ngIf="myPolicies.length > 0">
     <table class="table table-hover table-striped glass-table">
@@ -44,7 +43,7 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </div> -->
 
   <!-- Claim Form Modal/Container -->
   <div class="claim-form-overlay" *ngIf="showClaimForm">
@@ -92,4 +91,69 @@
       </form>
     </div>
   </div>
+<!-- </div> -->
+
+
+
+
+
+
+
+
+
+
+
+<div class="main-content-area">
+  <div class="form-container-wrapper large-form-wrapper">
+      <h2 class="form-title"><i class="fas fa-handshake form-icon"></i> My Policies</h2>
+
+      <div class="policy-list-header">
+          <input type="text" class="form-control policy-search-input" placeholder="Search policies..." />
+      </div>
+
+      <div class="table-responsive policy-table-responsive">
+          <table class="policy-table table-hover align-middle">
+              <thead>
+                  <tr>
+                      <th><i class="fas fa-fingerprint"></i> Policy ID</th>
+                      <th><i class="fas fa-signature"></i> Policy Name</th>
+                      <th><i class="fas fa-shield-alt"></i> Policy Type</th>
+                      <th><i class="fas fa-dollar-sign"></i> Premium</th>
+                      <th><i class="fas fa-calendar-alt"></i> Term (Months)</th>
+                      <th><i class="fas fa-cogs"></i> Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let p of myPolicies" class="policy-table-row">
+                      <td>{{ p.id }}</td>
+                      <td>{{ p.name }}</td>
+                      <td>{{ p.policyType }}</td>
+                      <td>{{ p.premium | currency }}</td>
+                      <td>{{ p.termMonths }}</td>
+                      <td class="policy-actions">
+                          <button class="btn btn-sm me-2 claim-button" (click)="initiateClaim(p)" [disabled]="p.status === 'Claimed'" [ngClass]="{'btn-success': p.status === 'Claimed', 'btn-primary': p.status !== 'Claimed'}">
+                              <i class="fas fa-shopping-cart"></i> Claim
+                          </button>
+                      </td>
+                  </tr>
+                  <tr *ngIf="myPolicies.length === 0">
+                      <td colspan="6" class="text-center no-policies-message">
+                          <i class="fas fa-info-circle"></i> No policies found matching your search.
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
+<!-- Toast / Snackbar (Styled to match the theme) -->
+<div id="snackbarToast" class="themed-toast align-items-center text-bg-success border-0 position-fixed bottom-0 end-0 m-3"
+   role="alert" aria-live="assertive" aria-atomic="true">
+<div class="d-flex">
+  <div class="toast-body">
+    <!-- Toast message will be set dynamically -->
+  </div>
+  <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+</div>
 </div>

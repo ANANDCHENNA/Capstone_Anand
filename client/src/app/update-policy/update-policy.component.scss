@@ -1,0 +1,307 @@
+/* Base styling from your theme */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background: linear-gradient(-45deg, #e0f2f7, #c1e4ed, #aed8ee, #8ecdea);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #4b4343;
+    line-height: 1.6;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.main-content-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.form-container-wrapper {
+  max-width: 600px;
+  width: 100%;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 18px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  animation: fadeInForm 0.8s ease-out;
+}
+
+@keyframes fadeInForm {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-title {
+  text-align: center;
+  color: #004d7a;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.form-icon {
+    font-size: 2.8rem;
+    color: #00c6ff;
+    text-shadow: 0 0 15px rgba(0, 198, 255, 0.3);
+}
+
+.form-group {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #333d47;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label-icon {
+    color: #007bb6;
+    font-size: 1.2rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #333d47;
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+.form-control:focus {
+  border-color: #00c6ff;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.2), 0 0 15px rgba(0, 198, 255, 0.1);
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: #333d47;
+  opacity: 0.6;
+}
+
+/* Specific styling for select dropdowns to give them a consistent look */
+.form-control[id$="Type"], /* Catches policyType */
+.form-control[id="status"] { /* From previous component, good to keep general */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007bb6'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 18px;
+    padding-right: 40px;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.9em;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0;
+  transform: translateY(-5px);
+  animation: slideInError 0.3s ease-out forwards;
+}
+
+@keyframes slideInError {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.error-message i {
+    color: #e74c3c;
+    font-size: 1em;
+}
+
+/* Button Group for spacing multiple buttons */
+.button-group {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+    margin-top: 30px;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+
+.submit-button, .cancel-button {
+  width: 100%; /* Default to full width for small screens */
+  padding: 18px 25px;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 700;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex: 1; /* Allow buttons to grow and shrink in button-group */
+  min-width: 150px; /* Minimum width before wrapping */
+}
+
+.submit-button {
+  background: linear-gradient(135deg,#adb5bd 0%, #6c757d 100%);
+  box-shadow: 0 8px 30px rgba(0, 198, 255, 0.4);
+}
+
+.cancel-button {
+  background: linear-gradient(135deg,#adb5bd 0%, #6c757d 100% ); /* Grey gradient for cancel */
+  box-shadow: 0 8px 30px rgba(102, 77, 77, 0.993);
+}
+
+
+.submit-button i, .cancel-button i {
+    font-size: 1.3rem;
+}
+
+.submit-button:hover {
+  background: linear-gradient(135deg, #00c6ff 0%, #007bb6 100%);
+  box-shadow: 0 12px 35px rgba(0, 198, 255, 0.7);
+  transform: translateY(-5px) scale(1.01);
+}
+
+.cancel-button:hover {
+  background: linear-gradient(135deg,  #c00404 0%, #f72626 100%);
+  box-shadow: 0 12px 35px rgba(108, 117, 125, 0.5);
+  transform: translateY(-5px) scale(1.01);
+}
+
+.submit-button:disabled, .cancel-button:disabled {
+  background: #cccccc;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.7;
+}
+
+.submit-button:disabled:hover, .cancel-button:disabled:hover {
+    background: #cccccc;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transform: none;
+}
+
+/* Shimmer effect for buttons */
+.submit-button::before, .cancel-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-45deg);
+  transition: left 0.7s ease;
+  z-index: 1;
+}
+
+.submit-button:not(:disabled):hover::before,
+.cancel-button:not(:disabled):hover::before {
+  left: 150%;
+}
+
+/* Toast / Snackbar Styling */
+.themed-toast {
+    background: rgba(0, 198, 255, 0.85) !important; /* Aqua accent for success */
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff !important;
+    box-shadow: 0 10px 30px rgba(0, 198, 255, 0.3);
+    border-radius: 12px;
+}
+.themed-toast .toast-body {
+    font-weight: 500;
+}
+.themed-toast .btn-close-white {
+    filter: invert(1); /* Ensure close button is visible on colored background */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .form-container-wrapper {
+    padding: 30px 25px;
+    margin: 20px;
+  }
+
+  .form-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .form-icon {
+      font-size: 2.2rem;
+  }
+
+  .form-group label {
+    font-size: 1rem;
+  }
+
+  .form-control {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+  }
+
+  .submit-button, .cancel-button {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+    .form-container-wrapper {
+        padding: 25px 20px;
+    }
+    .form-title {
+        font-size: 1.8rem;
+        gap: 10px;
+    }
+    .form-icon {
+        font-size: 2rem;
+    }
+    .form-group label {
+        font-size: 0.95rem;
+    }
+    .form-control {
+        font-size: 0.9rem;
+    }
+    .submit-button, .cancel-button {
+        font-size: 1rem;
+        padding: 14px 18px;
+    }
+    .button-group {
+        flex-direction: column; /* Stack buttons vertically on very small screens */
+        gap: 10px;
+    }
+}

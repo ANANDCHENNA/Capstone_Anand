@@ -1,79 +1,87 @@
-<div class="container my-5 minimalist-card p-4">
-  <h2 class="mb-4 text-center">Update Policy</h2>
+<div class="main-content-area">
+    <div class="form-container-wrapper">
+        <h2 class="form-title"><i class="fas fa-file-contract form-icon"></i> Update Policy</h2>
 
-  <form [formGroup]="policyForm" (ngSubmit)="onSubmit()">
-    <!-- Policy Number -->
-    <div class="mb-3">
-      <label for="policyNumber" class="form-label">Policy Number</label>
-      <input type="text" id="policyNumber" formControlName="policyNumber" 
-             class="form-control" placeholder="Enter policy number"/>
-      <div *ngIf="policyForm.get('policyNumber')?.touched && policyForm.get('policyNumber')?.invalid"
-           class="text-danger mt-1">
-        Policy number is required
-      </div>
-    </div>
+        <form [formGroup]="policyForm" (ngSubmit)="onSubmit()">
+            <!-- Policy Number -->
+            <div class="form-group">
+                <label for="policyNumber"><i class="fas fa-hashtag label-icon"></i> Policy Number</label>
+                <input type="text" id="policyNumber" formControlName="policyNumber"
+                    class="form-control" placeholder="Enter policy number"/>
+                <div *ngIf="policyForm.get('policyNumber')?.touched && policyForm.get('policyNumber')?.invalid"
+                    class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> Policy number is required
+                </div>
+            </div>
 
-    <!-- Policy Name -->
-    <div class="mb-3">
-      <label for="name" class="form-label">Policy Name</label>
-      <input type="text" id="name" formControlName="name" 
-             class="form-control" placeholder="Enter policy name"/>
-      <div *ngIf="policyForm.get('name')?.touched && policyForm.get('name')?.invalid"
-           class="text-danger mt-1">
-        Policy name is required
-      </div>
-    </div>
+            <!-- Policy Name -->
+            <div class="form-group">
+                <label for="name"><i class="fas fa-signature label-icon"></i> Policy Name</label>
+                <input type="text" id="name" formControlName="name"
+                    class="form-control" placeholder="Enter policy name"/>
+                <div *ngIf="policyForm.get('name')?.touched && policyForm.get('name')?.invalid"
+                    class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> Policy name is required
+                </div>
+            </div>
 
-    <!-- Policy Type -->
-    <div class="mb-3">
-      <label for="policyType" class="form-label">Policy Type</label>
-      <select id="policyType" formControlName="policyType" class="form-control">
-        <option value="">Select Policy Type</option>
-        <option value="LIFE">Life Insurance</option>
-        <option value="HEALTH">Health Insurance</option>
-        <option value="VEHICLE">Vehicle Insurance</option>
-        <option value="PROPERTY">Property Insurance</option>
-      </select>
-      <div *ngIf="policyForm.get('policyType')?.touched && policyForm.get('policyType')?.invalid"
-           class="text-danger mt-1">
-        Policy type is required
-      </div>
-    </div>
+            <!-- Policy Type -->
+            <div class="form-group">
+                <label for="policyType"><i class="fas fa-shield-alt label-icon"></i> Policy Type</label>
+                <select id="policyType" formControlName="policyType" class="form-control">
+                    <option value="">Select Policy Type</option>
+                    <option value="LIFE">Life Insurance</option>
+                    <option value="HEALTH">Health Insurance</option>
+                    <option value="VEHICLE">Vehicle Insurance</option>
+                    <option value="PROPERTY">Property Insurance</option>
+                </select>
+                <div *ngIf="policyForm.get('policyType')?.touched && policyForm.get('policyType')?.invalid"
+                    class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> Policy type is required
+                </div>
+            </div>
 
-    <!-- Premium Amount -->
-    <div class="mb-3">
-      <label for="premium" class="form-label">Premium Amount</label>
-      <input type="number" id="premium" formControlName="premium" 
-             class="form-control" placeholder="Enter premium amount"/>
-      <div *ngIf="policyForm.get('premium')?.touched && policyForm.get('premium')?.invalid"
-           class="text-danger mt-1">
-        <span *ngIf="policyForm.get('premium')?.errors?.['required']">Premium amount is required</span>
-        <span *ngIf="policyForm.get('premium')?.errors?.['min']">Premium amount must be greater than 0</span>
-      </div>
-    </div>
+            <!-- Premium Amount -->
+            <div class="form-group">
+                <label for="premium"><i class="fas fa-dollar-sign label-icon"></i> Premium Amount</label>
+                <input type="number" id="premium" formControlName="premium"
+                    class="form-control" placeholder="Enter premium amount"/>
+                <div *ngIf="policyForm.get('premium')?.touched && policyForm.get('premium')?.invalid"
+                    class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span *ngIf="policyForm.get('premium')?.errors?.['required']">Premium amount is required</span>
+                    <span *ngIf="policyForm.get('premium')?.errors?.['min']">Premium amount must be greater than 0</span>
+                </div>
+            </div>
 
-    <!-- Term Months -->
-    <div class="mb-3">
-      <label for="termMonths" class="form-label">Term (Months)</label>
-      <input type="number" id="termMonths" formControlName="termMonths" 
-             class="form-control" placeholder="Enter term in months"/>
-      <div *ngIf="policyForm.get('termMonths')?.touched && policyForm.get('termMonths')?.invalid"
-           class="text-danger mt-1">
-        <span *ngIf="policyForm.get('termMonths')?.errors?.['required']">Term months is required</span>
-        <span *ngIf="policyForm.get('termMonths')?.errors?.['min']">Term months must be greater than 0</span>
-      </div>
-    </div>
+            <!-- Term Months -->
+            <div class="form-group">
+                <label for="termMonths"><i class="fas fa-calendar-alt label-icon"></i> Term (Months)</label>
+                <input type="number" id="termMonths" formControlName="termMonths"
+                    class="form-control" placeholder="Enter term in months"/>
+                <div *ngIf="policyForm.get('termMonths')?.touched && policyForm.get('termMonths')?.invalid"
+                    class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span *ngIf="policyForm.get('termMonths')?.errors?.['required']">Term months is required</span>
+                    <span *ngIf="policyForm.get('termMonths')?.errors?.['min']">Term months must be greater than 0</span>
+                </div>
+            </div>
 
-    <!-- Submit Button -->
-    <div class="d-grid gap-2">
-      <button type="submit" class="btn btn-primary" [disabled]="!policyForm.valid">Update Policy</button>
-      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+            <!-- Submit & Cancel Buttons -->
+            <div class="button-group">
+              <button type="submit" class="submit-button" [disabled]="!policyForm.valid">
+                  <i class="fas fa-check-circle"></i> Update Policy
+              </button>
+              <button type="button" class="cancel-button" (click)="cancel()">
+                  <i class="fas fa-times-circle"></i> Cancel
+              </button>
+            </div>
+        </form>
     </div>
-  </form>
 </div>
 
-<!-- Toast / Snackbar -->
-<div id="snackbarToast" class="toast align-items-center text-bg-success border-0 position-fixed bottom-0 end-0 m-3"
+<!-- Toast / Snackbar (Styled to match the theme) -->
+<div id="snackbarToast" class="themed-toast align-items-center text-bg-success border-0 position-fixed bottom-0 end-0 m-3"
      role="alert" aria-live="assertive" aria-atomic="true">
   <div class="d-flex">
     <div class="toast-body">

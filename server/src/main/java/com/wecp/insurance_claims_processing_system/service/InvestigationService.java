@@ -37,11 +37,34 @@ public class InvestigationService {
         return investigation;
     }
 
+    // public Investigation updateInvestigation(Long id, Investigation investigationDetails) {
+    //     Claim claim = claimRepository.findById(investigationDetails.getClaim().getId()).orElse(null);
+    //     return investigationRepository.findById(id).map(investigation -> {
+    //         investigation.setReport(investigationDetails.getReport());
+    //         investigation.setStatus(investigationDetails.getStatus());
+    //         investigation.setClaim(claim);
+    //         return investigationRepository.save(investigation);
+    //     }).orElseThrow(() -> new IllegalArgumentException("Investigation not found"));
+    // }
+
     public Investigation updateInvestigation(Long id, Investigation investigationDetails) {
+        Claim claim = claimRepository.findById(investigationDetails.getClaim().getId())
+                .orElseThrow(() -> new IllegalArgumentException("Claim not found"));
+
         return investigationRepository.findById(id).map(investigation -> {
             investigation.setReport(investigationDetails.getReport());
             investigation.setStatus(investigationDetails.getStatus());
-            return investigationRepository.save(investigation);
+            investigation.setClaim(claim);
+
+            Investigation savedInvestigation = investigationRepository.save(investigation);
+
+            // Update claim to link back to investigation
+            claim.setStatus(investigationDetails.getStatus());
+            claim.setInvestigation(savedInvestigation);
+            claimRepository.save(claim);
+
+            return savedInvestigation;
         }).orElseThrow(() -> new IllegalArgumentException("Investigation not found"));
     }
+
 }
