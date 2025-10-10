@@ -1,6 +1,5 @@
 /* Re-themed CSS */
 
-/* Applying general body and utility styles from the first theme */
 body {
   font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   background: linear-gradient(135deg, #f0f8ff 0%, #66b3e0 100%);
@@ -101,7 +100,7 @@ body {
 }
 
 .minimalist-card .btn-outline-primary:disabled {
-  opacity: 0.7; /* Slightly more opaque disabled state */
+  opacity: 0.7; 
   background: linear-gradient(135deg, rgba(0, 77, 122, 0.5) 0%, rgba(0, 198, 255, 0.4) 100%); /* Greyer disabled gradient (based on sea-blue-dark and aqua-accent) */
   color: rgba(255, 255, 255, 0.8);
   box-shadow: none; /* No shadow when disabled */
@@ -135,6 +134,3 @@ body {
 #snackbarToast .btn-close-white:hover {
   opacity: 1;
 }
-
-/* Make sure you have Font Awesome included in your project, e.g.: */
-/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> */

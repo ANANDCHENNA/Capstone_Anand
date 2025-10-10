@@ -46,7 +46,7 @@ export class UpdateClaimComponent implements OnInit {
     this.httpService.getClaimById?.(this.claimId).subscribe((data) => {
       console.log(data);
       if (data.date) {
-        const formattedDate = new Date(data.date).toISOString().split('T')[0]; // "YYYY-MM-DD"
+        const formattedDate = new Date(data.date).toISOString().split('T')[0];  
         data.date = formattedDate;
       }
       if(data.underwriter.id){

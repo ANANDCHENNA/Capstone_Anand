@@ -29,15 +29,15 @@ export class UpdatePolicyComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Get policy ID from route parameter
+ 
     this.route.params.subscribe(params => {
-      this.policyId = +params['id']; // Convert string to number using +
+      this.policyId = +params['id'];  
       this.loadPolicyData();
     });
   }
 
   loadPolicyData() {
-    // Fetch the policy data using the ID
+ 
     this.httpService.getAllPolicies().subscribe({
       next: (policies) => {
         const policy = policies.find((p: Policy) => p.id === this.policyId);

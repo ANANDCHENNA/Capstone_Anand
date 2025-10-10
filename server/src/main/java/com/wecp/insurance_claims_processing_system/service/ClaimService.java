@@ -28,14 +28,12 @@ public class ClaimService {
     @Autowired
     private PolicyholderRepository policyholderRepository;
 
-    // Create Claim Component
     public Claim submitClaim(Long policyholderId, Claim claim) {
         Policyholder ph = policyholderRepository.findById(policyholderId).get();
         claim.setPolicyholder(ph);
         return claimRepository.save(claim);
     }
 
-    // Dashboard Component for role: Policyholder
     public List<Claim> getClaimsByPolicyholder(Long policyholderId) {
 
         Policyholder ph = policyholderRepository.findById(policyholderId).get();
@@ -44,7 +42,6 @@ public class ClaimService {
 
     }
 
-    // Update the claim for role: Adjuster
     public Claim updateClaim(Long id, Claim claimDetails) {
         Claim c = claimRepository.findById(id).get();
         c.setDescription(claimDetails.getDescription());
@@ -58,26 +55,20 @@ public class ClaimService {
         return claimRepository.save(c);
     }
 
-    // Dashboard Component for role: Adjuster
     public List<Claim> getAllClaims() {
-
         return claimRepository.findAll();
-
     }
 
-    // Adjuster Assigning Claim
     public List<Underwriter> getAllUnderwriters() {
 
         return underwriterRepository.findAll();
     }
 
-    // Adjuster Assigning Claim
     public List<Investigator> getAllInvestigators() {
 
         return investigatorRepository.findAll();
     }
 
-    // Adjuster Assigning Claim
     public Claim assignClaimToUnderwriter(Long claimId, Long underwriterId, Long investigatorId) {
 
         Claim claim = claimRepository.findById(claimId).get();
@@ -93,7 +84,6 @@ public class ClaimService {
         }
     }
 
-    // Dashboard Component for role: Underwriter
     public List<Claim> getAllClaimsForReview(Long underwriterId) {
 
         Underwriter uw = underwriterRepository.findById(underwriterId).get();
@@ -102,7 +92,6 @@ public class ClaimService {
 
     }
 
-    // dashboard component for Investigator
     public List<Claim> getAllClaimsForReviewInvestigator(Long investigatorId) {
 
         Investigator uw = investigatorRepository.findById(investigatorId).get();
@@ -111,7 +100,6 @@ public class ClaimService {
 
     }
 
-    // Underwriter update claim
     public Claim reviewClaim(Long id, String status) {
 
         Claim c = claimRepository.findById(id).get();

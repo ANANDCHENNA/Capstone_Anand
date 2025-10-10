@@ -28,7 +28,6 @@ export class AppComponent {
       this.IsLoggin = this.authService.getLoginStatus;
       this.roleName = this.authService.getRole;
      
-      // Don't redirect to login if user is on landing page, login page, or registration page
       const publicRoutes = ['/', '/login', '/registration'];
       const currentRoute = this.router.url;
      

@@ -8,13 +8,7 @@ import java.util.List;
 
 @Entity
 public class Policyholder extends User {
-
-    // @ManyToMany
-    // @JoinTable(
-    //     name = "policyholder_policy", // intermediate table name
-    //     joinColumns = @JoinColumn(name = "policyholder_id"), // foreign key for policyholder
-    //     inverseJoinColumns = @JoinColumn(name = "policy_id") // foreign key for policy
-    // )
+    
     @OneToMany(mappedBy = "policyholder", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Policy> ownedPolicies;

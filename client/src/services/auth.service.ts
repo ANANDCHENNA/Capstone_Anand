@@ -11,11 +11,11 @@ export class AuthService {
 
   constructor() { }
 
-  // Method to save token received from login
+  
   saveToken(token: string) {
     this.token = token;
     this.isLoggedIn = true;
-    // Optionally, you can save the token to local storage or a cookie for persistence
+ 
     localStorage.setItem('token', token);
   }
 
@@ -25,7 +25,7 @@ export class AuthService {
   get getRole(): string | null {
     return localStorage.getItem('role');
   }
-  // Method to retrieve login status
+ 
   get getLoginStatus(): boolean {
     return !!localStorage.getItem('token');
   }
@@ -38,6 +38,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    localStorage.removeItem('userId');
     this.token = null;
     this.isLoggedIn = false
   }

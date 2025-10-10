@@ -47,7 +47,7 @@ export class ViewPoliciesComponent implements OnInit {
             this.httpService.deletePolicy(id).subscribe({
                 next: () => {
                     this.showToast('Policy deleted successfully!', 'success');
-                    this.loadPolicies(); // Reload the list
+                    this.loadPolicies();  
                 },
                 error: (error) => {
                     console.error('Error deleting policy:', error);
@@ -57,7 +57,7 @@ export class ViewPoliciesComponent implements OnInit {
     }
 
     buyPolicy(policy: Policy) {
-        const userId = localStorage.getItem('userId'); // adjust if you use authService for id
+        const userId = localStorage.getItem('userId');  
         if (!userId) {
             this.showToast('User not identified. Please login again.', 'error');
             return;

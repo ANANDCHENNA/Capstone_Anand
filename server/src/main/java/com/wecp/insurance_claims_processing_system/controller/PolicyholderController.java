@@ -29,12 +29,6 @@ public class PolicyholderController {
         return ResponseEntity.status(HttpStatus.OK).body(savedClaim);
     }
 
-    // @PostMapping(value = "/api/policyholder/claim", produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<Claim> submitClaim(@RequestParam Long policyholderId, @RequestBody Claim claim) {
-    //     Claim savedClaim = claimService.submitClaim(policyholderId, claim);
-    //     return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(savedClaim);
-    // }
-
     @GetMapping("/api/policyholder/claims")
     public ResponseEntity<List<Claim>> getClaims(@RequestParam Long policyholderId) {
         List<Claim> claims = claimService.getClaimsByPolicyholder(policyholderId);

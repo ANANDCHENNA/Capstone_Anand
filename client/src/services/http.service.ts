@@ -20,11 +20,10 @@ export class HttpService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('Authorization', `Bearer ${authToken}`);
-    
-    // Try both HTTP/1.1 and HTTP/2
+
     return this.http.get(this.serverName + '/api/policyholder/claims/test', {
       headers: headers,
-      observe: 'response'  // Get full response including headers
+      observe: 'response' 
     });
   }
 
@@ -88,15 +87,15 @@ export class HttpService {
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      // Client-side error
+ 
       console.error('Client-side error:', error.error.message);
     } else {
-      // Server-side error
+      
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
-    // Return an observable with a user-facing error message
+ 
     return throwError(() => new Error('Unable to fetch claims. Please try again later.'));
   }
 
@@ -111,10 +110,10 @@ export class HttpService {
       this.serverName + `/api/policyholder/claims?policyholderId=` + policyholderId,
       { 
         headers: headers,
-        withCredentials: false // Disable credentials to avoid CORS preflight
+        withCredentials: false  
       }
     ).pipe(
-      retry(3), // Retry failed requests up to 3 times
+      retry(3),  
       catchError(this.handleError)
     );
   }
@@ -255,8 +254,7 @@ export class HttpService {
     return this.http.post(this.serverName + '/api/user/register', details, { headers: headers });
   }
 
-
-  // Fetch all policies
+ 
   // getAllPolicies(): Observable<any> {
   //   const authToken = this.authService.getToken();
   //   let headers = new HttpHeaders()
@@ -265,7 +263,7 @@ export class HttpService {
   //   return this.http.get(this.serverName + `/api/policies`, { headers: headers });
   // }
 
-  // Fetch policies owned by a specific policyholder
+   
   getPoliciesByOwnedUser(policyholderId: any): Observable<any> {
     const authToken = this.authService.getToken();
     let headers = new HttpHeaders()
@@ -274,7 +272,7 @@ export class HttpService {
     return this.http.get(this.serverName + `/api/policy/policyholder/${policyholderId}`, { headers: headers });
   }
 
-  // Purchase a policy for the logged-in policyholder
+ 
   purchasePolicy(policyId: any, policyholderId: any): Observable<any> {
     const authToken = this.authService.getToken();
     let headers = new HttpHeaders()

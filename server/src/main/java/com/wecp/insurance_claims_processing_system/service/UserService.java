@@ -13,8 +13,6 @@ package com.wecp.insurance_claims_processing_system.service;
 
 import java.util.Collections;
 
- 
- 
  @Service
  public class UserService implements UserDetailsService {
      @Autowired

@@ -10,8 +10,7 @@ import { Underwriter } from "../model/Underwriter";
 export class ViewUnderwritersComponent implements OnInit {
 
   underwriters: Underwriter[] = [];
-
-  // Search + Sort
+ 
   searchText: string = '';
   sortKey: string = '';
   sortOrder: 'asc' | 'desc' = 'asc';
@@ -23,12 +22,11 @@ export class ViewUnderwritersComponent implements OnInit {
       this.underwriters = data;
     });
   }
-
-  // ---------------- Filter ----------------
+ 
   filteredUnderwriters(): Underwriter[] {
     let result = [...this.underwriters];
 
-    // Search
+  
     if (this.searchText) {
       result = result.filter(u =>
         u.id.toString().includes(this.searchText) ||

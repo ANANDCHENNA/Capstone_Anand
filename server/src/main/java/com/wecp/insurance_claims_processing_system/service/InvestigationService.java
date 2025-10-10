@@ -58,7 +58,6 @@ public class InvestigationService {
 
             Investigation savedInvestigation = investigationRepository.save(investigation);
 
-            // Update claim to link back to investigation
             claim.setStatus(investigationDetails.getStatus());
             claim.setInvestigation(savedInvestigation);
             claimRepository.save(claim);

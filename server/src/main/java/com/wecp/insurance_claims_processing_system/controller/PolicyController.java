@@ -28,7 +28,6 @@ public class PolicyController {
     @Autowired
     private UserService userService;
 
-    // List policies for current logged-in policyholder
     @GetMapping("/me")
     public ResponseEntity<?> getMyPolicies() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -44,7 +43,6 @@ public class PolicyController {
         return ResponseEntity.ok(list);
     }
 
-    // Purchase a policy
     @PostMapping("/purchase")
     public ResponseEntity<?> purchasePolicy(@RequestBody PurchaseRequest req) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -56,7 +54,7 @@ public class PolicyController {
         }
 
         Policyholder ph = (Policyholder) u;
-        // basic validation
+
         if (req.getPolicyType() == null || req.getPremium() == null || req.getTermMonths() <= 0) {
             return ResponseEntity.badRequest().body("Invalid request");
         }
@@ -66,19 +64,16 @@ public class PolicyController {
         return ResponseEntity.ok(saved);
     }
 
-    // CREATE
     @PostMapping
     public ResponseEntity<Policy> createPolicy(@RequestBody Policy policy) {
         return ResponseEntity.ok(policyService.createPolicy(policy));
     }
 
-    // READ ALL
     @GetMapping("/policies")
     public ResponseEntity<List<Policy>> getAllPolicies() {
         return ResponseEntity.ok(policyService.getAllPolicies());
     }
 
-    // READ BY ID
     @GetMapping("/{id}")
     public ResponseEntity<Policy> getPolicyById(@PathVariable Long id) {
         return policyService.getPolicyById(id)
@@ -86,26 +81,21 @@ public class PolicyController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // UPDATE
     @PutMapping("/{id}")
     public ResponseEntity<Policy> updatePolicy(@PathVariable Long id, @RequestBody Policy policy) {
         Policy updated = policyService.updatePolicy(id, policy);
         return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
-    // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePolicy(@PathVariable Long id) {
         boolean deleted = policyService.deletePolicy(id);
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
-    // Get policies for specific policyholder
     @GetMapping("/policyholder/{id}")
     public List<Policy> getPoliciesByPolicyholder(@PathVariable Long id) {
         Policyholder policyholder = policyholderRepository.findById(6L).orElse(null);
-        // if (policyholder == null)
-        //     return List.of();
         return policyService.getPoliciesForPolicyholder(policyholder);
     }
 
@@ -127,5 +117,4 @@ public class PolicyController {
     //             purchaseRequest.getTermMonths(),
     //             purchaseRequest.getStatus());
     // }
-
 }

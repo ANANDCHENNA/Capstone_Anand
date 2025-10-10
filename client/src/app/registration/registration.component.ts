@@ -21,18 +21,18 @@ export class RegistrationComponent implements OnInit {
   ) {
     this.itemForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, passwordValidator]], // Apply custom validator here
+      password: ['', [Validators.required, passwordValidator]],  
       role: [null, Validators.required],
       username: ['', Validators.required],
     });
   }
 
   ngOnInit() {
-    // Any initialization logic if needed
+ 
   }
 
   onSubmit() {
-    // Mark all fields as touched to display validation errors immediately
+    
     this.itemForm.markAllAsTouched();
 
     if (this.itemForm.valid) {
@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
         },
         error: (error) => {
           console.error('Registration error:', error);
-          if (error.status === 409) { // Assuming 409 Conflict for duplicate
+          if (error.status === 409) {  
             this.errorMessage = "Username or Email Already Exists.";
           } else {
             this.errorMessage = "An unexpected error occurred. Please try again.";
@@ -54,8 +54,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
 }
-
-// ✅ Custom Password Validator Function (No changes needed, it's good as is)
+ 
 export function passwordValidator(control: AbstractControl): ValidationErrors | null {
   const value = control.value || '';
   const errors: any = {};
@@ -72,7 +71,7 @@ export function passwordValidator(control: AbstractControl): ValidationErrors | 
   if (!/[0-9]/.test(value)) {
     errors.number = true;
   }
-  if (!/[@\-$.]/.test(value)) { // Special characters: @, -, $, .
+  if (!/[@\-$.]/.test(value)) { 
     errors.specialChar = true;
   }
 

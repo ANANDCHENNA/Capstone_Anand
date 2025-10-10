@@ -31,7 +31,7 @@ export class CreatePolicyComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Add any initialization logic if needed
+     
   }
 
   endDateValidator(control: any) {
@@ -51,8 +51,7 @@ export class CreatePolicyComponent implements OnInit {
       const payload = this.policyForm.value
 
       this.httpService.createPolicy(payload).subscribe({
-        next: () => {
-          // Show success message
+        next: () => {  
           const toast = document.getElementById('snackbarToast');
           if (toast) {
             toast.classList.remove('text-bg-danger');
@@ -66,8 +65,7 @@ export class CreatePolicyComponent implements OnInit {
             bsToast.show();
           }
           
-          // Navigate to policies list
-          this.router.navigate(['/policies']);
+           this.router.navigate(['/policies']);
         },
         error: (error) => {
           console.error('Error creating policy:', error);

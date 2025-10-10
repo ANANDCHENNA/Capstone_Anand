@@ -1,14 +1,11 @@
 <div class="dashboard-container">
 
-    <!-- --- Hero Section (Navigation/Header) ----->
-    <header class="hero-section">
+     <header class="hero-section">
         <div class="logo-area">
             <img src="../../assets/logocrop2.png" [alt]="getLogoDetails().alt" class="main-logo">
-            <!-- <h1>{{ getLogoDetails().title }}</h1> -->
-        </div>
+         </div>
         <nav class="nav-links" [class.nav-open]="isMobileNavOpen">
-            <!-- Updated (click) handlers to include scrollToSection -->
-            <a (click)="scrollToSection('insurance-grid')">Policies</a>
+             <a (click)="scrollToSection('insurance-grid')">Policies</a>
             <a (click)="scrollToSection('features')">Benefits</a>
             <a (click)="scrollToSection('testimonials')">Testimonials</a>
             <a (click)="scrollToSection('faq')">FAQ</a>
@@ -27,10 +24,9 @@
         </button>
     </header>
 
-    <!-- --- HERO SLIDER SECTION --- -->
-    <section class="hero-slider" id="heroSlider">
+     <section class="hero-slider" id="heroSlider">
         <div class="slider-wrapper">
-            <!-- Slide 1 -->
+            <!--   1 -->
             <div class="slide" [class.active]="currentSlideIndex === 0">
                 <img src="../../assets/slide1.jpg" alt="Family peace of mind" class="slide-bg">
                 <div></div> <!-- Use a class for the overlay -->

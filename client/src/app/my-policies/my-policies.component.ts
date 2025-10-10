@@ -23,9 +23,7 @@ export class MyPoliciesComponent implements OnInit {
   ) {
     this.claimForm = this.formBuilder.group({
       description: [`Reason for Claim:\n\nRemarks\n\nAdjuster:\n\nUnderwriter:`, Validators.required],
-      // For disabled fields, their values are not included in form.value by default.
-      // If you need them for submission, you'll have to get them from getRawValue()
-      // or set their initial value here and remove `disabled: true` if you want user interaction.
+
       date: [{value: this.getTodayDate(), disabled: true }, Validators.required],
       status: [{ value: 'Started', disabled: true}, Validators.required],
     });
@@ -55,16 +53,15 @@ export class MyPoliciesComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
-  // UNCOMMENT THIS METHOD
+ 
   initiateClaim(policy: Policy) {
     this.selectedPolicy = policy;
     this.showClaimForm = true;
-    // Reset the form and set default values,
-    // ensuring disabled fields also get their values correctly for the form display.
+ 
     this.claimForm.reset({
       description: `Reason for Claim:\n\nRemarks\n\nAdjuster:\n\nUnderwriter:`,
-      date: this.getTodayDate(), // This will set the value in the disabled field
-      status: 'Started'         // This will set the value in the disabled field
+      date: this.getTodayDate(), 
+      status: 'Started'  
     });
   }
 
@@ -75,27 +72,26 @@ export class MyPoliciesComponent implements OnInit {
       return;
     }
 
-    // Use getRawValue() to include disabled fields if their values are needed
-    // Otherwise, this.claimForm.value will not include 'date' and 'status'
+ 
     const formValues = this.claimForm.getRawValue();
     const description = formValues.description;
     const date = formValues.date;
     const status = formValues.status;
 
 
-    if (this.claimForm.valid && this.selectedPolicy) { // Check validity against non-disabled controls
+    if (this.claimForm.valid && this.selectedPolicy) {  
       const payload: any = {
         description: description,
-        date: new Date(date).toISOString(), // backend expects Date; ISO string is safe
+        date: new Date(date).toISOString(),  
         status: status,
         policy_id: this.selectedPolicy.id
       };
 
       this.httpService.createClaims(payload, this.userId).subscribe({
         next: (res) => {
-          this.showClaimForm = false; // Hide the form
-          this.selectedPolicy = null; // Clear selected policy
-          this.router.navigate(['/dashboard']); // Route to dashboard
+          this.showClaimForm = false; 
+          this.selectedPolicy = null; 
+          this.router.navigate(['/dashboard']);  
         },
         error: (err) => {
           console.error('Error creating claim', err);

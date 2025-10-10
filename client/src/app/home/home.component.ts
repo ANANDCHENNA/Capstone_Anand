@@ -11,35 +11,32 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   IsLoggin: any = false;
   roleName: string | null;
 
-  // Mobile Navigation
-  isMobileNavOpen: boolean = false;
+   isMobileNavOpen: boolean = false;
   isDropdownOpen: boolean = false;
 
-  // Hero Slider
-  currentSlideIndex: number = 0;
+   currentSlideIndex: number = 0;
   slidesArray: any[] = new Array(3); // To easily generate dots in *ngFor
   slideInterval: any;
   slideDuration: number = 8000; // 8 seconds per slide
 
-  // Typing Effect
-  @ViewChildren('typingText') typingTextElements!: QueryList<ElementRef>;
+   @ViewChildren('typingText') typingTextElements!: QueryList<ElementRef>;
   phrases: string[][] = [
     ["Your Peace of Mind, Our Priority.", "Swift, Simple, Secure Claims.", "Protecting What Matters Most."],
     ["Fast Approvals, No Hassle.", "Seamless Online Claim Experience.", "Get What You Deserve, Quickly."],
     ["Dedicated Support, Every Step.", "Your Trusted Insurance Partner.", "Guidance When You Need It Most."]
   ];
-  typedText: string[] = ['', '', '']; // Holds the currently displayed text for each slide
+  typedText: string[] = ['', '', ''];  
   private currentPhraseIndex: number = 0;
   private currentCharIndex: number = 0;
-  private isTypingDirection: boolean = true; // true for typing, false for erasing
+  private isTypingDirection: boolean = true; 
   private typingTimeout: any;
 
-  readonly typeSpeed: number = 70; // Typing speed in ms
-  readonly eraseSpeed: number = 40; // Erasing speed in ms
-  readonly newPhraseDelay: number = 1500; // Delay before typing new phrase
-  readonly endPhraseDelay: number = 2000; // Delay after typing a phrase
+  readonly typeSpeed: number = 70; 
+  readonly eraseSpeed: number = 40; 
+  readonly newPhraseDelay: number = 1500; 
+  readonly endPhraseDelay: number = 2000; 
 
-  // Statistics Counter
+ 
   @ViewChildren('counter') counterElements!: QueryList<ElementRef>;
   animatedCounters = {
     clients: 0,
@@ -49,7 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   };
   private observer!: IntersectionObserver;
 
-  // FAQ Accordion
+ 
   faqs = [
     { question: 'How do I file a claim?', answer: 'You can easily file a claim through our online portal by logging into your account. Alternatively, you can contact our claims department directly via phone or email, and our representatives will guide you through the process.', open: false },
     { question: 'What documents are required for a claim?', answer: 'Required documents vary by claim type. Generally, you\'ll need your policy number, incident details, and supporting evidence such as photos, police reports, or medical records. Our online portal will specify exactly what\'s needed for your particular claim.', open: false },
@@ -63,10 +60,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.roleName = authService.getRole;
 
     if (this.IsLoggin === false) {
-      // This line seems to imply a redirect to home if not logged in.
-      // If the component is already home, this might cause a loop or be unnecessary.
-      // Re-evaluate if this specific line is needed in the HomeComponent constructor.
-      // For now, I'm keeping it as per your original code.
+ 
       this.router.navigateByUrl('/home');
     }
   }
@@ -76,11 +70,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Set up Intersection Observer for counters
+ 
     const options = {
       root: null, // viewport
       rootMargin: '0px',
-      threshold: 0.5 // Trigger when 50% of item is visible
+      threshold: 0.5 // 
     };
 
     this.observer = new IntersectionObserver((entries, observer) => {

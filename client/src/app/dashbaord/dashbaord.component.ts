@@ -41,10 +41,7 @@ export class DashbaordComponent implements OnInit {
  
   // Policies
   policies: any[] = [];
- 
-  /// asign card per page
- 
- 
+  
   currentPage: { [role: string]: number } = { 'ADJUSTER': 1, 'UNDERWRITER': 1, 'INVESTIGATOR': 1, 'POLICYHOLDER': 1 };
   itemsPerPage: number = 6;
   constructor(
