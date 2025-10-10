@@ -100,10 +100,11 @@ public class ClaimService {
 
     }
 
-    public Claim reviewClaim(Long id, String status) {
+    public Claim reviewClaim(Long id, String status, Claim claim) {
 
         Claim c = claimRepository.findById(id).get();
         c.setStatus(status);
+        c.setDescription(claim.getDescription());
         return claimRepository.save(c);
     }
 

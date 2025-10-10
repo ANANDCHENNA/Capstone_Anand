@@ -22,7 +22,7 @@ export class UpdateClaimUnderwriterComponent implements OnInit {
         @Optional() private route: ActivatedRoute
     ) {
         this.itemForm = this.formBuilder.group({
-            description: [ '', Validators.required],
+            description: [null, Validators.required],
             date: [ {value : '', disabled : true}, Validators.required],
             status: ['', Validators.required]
         });
@@ -32,6 +32,7 @@ export class UpdateClaimUnderwriterComponent implements OnInit {
         this.claimId = this.route?.snapshot?.params?.['id'] ?? null;
 
         this.httpService.getClaimByIdUnderwriter?.(this.claimId).subscribe((data) => {
+            console.log(data)
             if (data.date) {
                 const formattedDate = new Date(data.date).toISOString().split('T')[0]; // "YYYY-MM-DD"
                 data.date = formattedDate;
@@ -45,7 +46,8 @@ export class UpdateClaimUnderwriterComponent implements OnInit {
     onSubmit() {
         this.userRole = this.authService.getRole;
         if (this.itemForm.valid) {
-            this.httpService.updateClaimsStatus(this.itemForm.value, this.claimId).subscribe({
+            console.log(this.itemForm.getRawValue())
+            this.httpService.updateClaimsStatus(this.itemForm.getRawValue(), this.claimId).subscribe({
                 next: () => {
                     this.router.navigate(['/dashboard']);
                 },
