@@ -1,22 +1,280 @@
-/* Gradient Navbar */
-.custom-navbar {
-  background: linear-gradient(90deg, #2b5876, #4e4376); /* Blue-Purple Gradient */
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    /* Use the animated gradient from your main theme */
+    background: linear-gradient(-45deg, #e0f2f7, #c1e4ed, #aed8ee, #8ecdea);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #333d47; /* text-dark */
+    line-height: 1.6;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
-.custom-navbar {
-  background: rgba(255, 255, 255, 0.75);
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+.main-content-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* Adjust for fixed header if present */
+  padding: 40px 20px; /* Add some padding around */
+  box-sizing: border-box;
+}
+
+.form-container-wrapper {
+  max-width: 600px;
+  width: 100%;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.75); /* glass-light-bg */
+  border-radius: 18px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35); /* shadow-dark */
+  border: 1px solid rgba(255, 255, 255, 0.4); /* glass-border */
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  // padding: 15px 40px;
+  animation: fadeInForm 0.8s ease-out; /* Fade in animation for the form */
+}
+
+@keyframes fadeInForm {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-title {
+  text-align: center;
+  color: #004d7a; /* sea-blue-dark */
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.form-icon {
+    font-size: 2.8rem;
+    color: #00c6ff; /* aqua-accent */
+    text-shadow: 0 0 15px rgba(0, 198, 255, 0.3);
+}
+
+.form-group {
+  margin-bottom: 25px;
+  position: relative; /* For label animation */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #333d47; /* text-dark */
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label-icon {
+    color: #007bb6; /* sea-blue-medium */
+    font-size: 1.2rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4); /* glass-border */
+  background: rgba(255, 255, 255, 0.5); /* Slightly less opaque for inputs */
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #333d47; /* text-dark */
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box; /* Important for consistent width */
+  appearance: none; /* Remove default styling for selects on some browsers */
+}
+
+.form-control:focus {
+  border-color: #00c6ff; /* aqua-accent */
+  background-color: #ffffff; /* white-light */
+  box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.2), 0 0 15px rgba(0, 198, 255, 0.1);
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: #333d47; /* text-dark */
+  opacity: 0.6;
+}
+
+/* Specific styling for select dropdowns to give them a consistent look */
+.form-control[id$="Id"],
+.form-control[id="status"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007bb6'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3Csvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 18px;
+    padding-right: 40px; /* Make space for the custom arrow */
+}
+
+.error-message {
+  color: #e74c3c; /* error-red */
+  font-size: 0.9em;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0; /* Start hidden */
+  transform: translateY(-5px); /* Start slightly above */
+  animation: slideInError 0.3s ease-out forwards; /* Animate in */
+}
+
+@keyframes slideInError {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.error-message i {
+    color: #e74c3c; /* error-red */
+    font-size: 1em;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 18px 25px;
+  background: linear-gradient(135deg, #007bb6 0%, #00c6ff 100%); /* sea-blue-medium to aqua-accent */
+  color: #ffffff; /* white-light */
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 30px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 30px rgba(0, 198, 255, 0.4);
+  position: relative;
+  overflow: hidden; /* For the hover effect */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.submit-button i {
+    font-size: 1.3rem;
+}
+
+.submit-button:hover {
+  background: linear-gradient(135deg, #00c6ff 0%, #007bb6 100%); /* aqua-accent to sea-blue-medium */
+  box-shadow: 0 12px 35px rgba(0, 198, 255, 0.7);
+  transform: translateY(-5px) scale(1.01);
+}
+
+.submit-button:disabled {
+  background: #cccccc;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.7;
+}
+
+.submit-button:disabled:hover {
+    background: #cccccc; /* Keep disabled state consistent on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transform: none;
+}
+
+/* Shimmer effect for buttons (modernized from your original) */
+.submit-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3); /* Lighter shimmer */
+  transform: skewX(-45deg);
+  transition: left 0.7s ease;
+  z-index: 1;
+}
+
+.submit-button:not(:disabled):hover::before {
+  left: 150%;
+}
+
+/* Responsive Adjustments for Form */
+@media (max-width: 768px) {
+  .form-container-wrapper {
+    padding: 30px 25px;
+    margin: 20px;
+  }
+
+  .form-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .form-icon {
+      font-size: 2.2rem;
+  }
+
+  .form-group label {
+    font-size: 1rem;
+  }
+
+  .form-control {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+  }
+
+  .submit-button {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+    .form-container-wrapper {
+        padding: 25px 20px;
+    }
+    .form-title {
+        font-size: 1.8rem;
+        gap: 10px;
+    }
+    .form-icon {
+        font-size: 2rem;
+    }
+    .form-group label {
+        font-size: 0.95rem;
+    }
+    .form-control {
+        font-size: 0.9rem;
+    }
+    .submit-button {
+        font-size: 1rem;
+        padding: 14px 18px;
+    }
+}
+
+
+/* New and Updated CSS for the Header */
+.custom-navbar {
+  background: rgba(255, 255, 255, 0.75); /* Apply the glass-light-bg */
+  backdrop-filter: blur(15px); /* Apply the blur */
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4); /* Apply glass-border */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // position: fixed;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Keep a subtle shadow */
+  padding: 15px 40px; /* Adjust padding for better look */
 }
 
 .logo-area {
@@ -29,50 +287,120 @@
   width: auto;
   height: 50px;
   object-fit: contain;
-  //filter: drop-shadow(0 0 8px #00c6ff);
 }
 
-
-/* Brand styling */
 .custom-navbar .navbar-brand {
-  color: #0e106d !important;
-  font-size: 1.2rem;
+  color: #004d7a !important; /* Use a theme-appropriate color */
+  font-size: 1.8rem; /* Make brand more prominent */
+  font-weight: 700;
   letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Links */
 .custom-navbar .nav-link {
-  color: #0a0a6e !important;
-  font-weight: 500;
+  color: #333d47 !important; /* Use theme text-dark */
+  font-weight: 600;
   transition: all 0.3s ease;
+  padding: 10px 15px; /* Adjust padding for links */
+  border-radius: 8px; /* Slightly rounded links */
 }
 
-/* Logout button */
-.login-btn {
-  font-weight: bold;
-  background: linear-gradient(45deg, #41b0ff, #2b2bff);
-  border-radius: 20px;
-  padding: 6px 15px;
-  color: white !important;
-  transition: transform 0.2s ease;
+.custom-navbar .nav-link:hover {
+  color: #007bb6 !important; /* sea-blue-medium on hover */
+  background-color: rgba(0, 123, 182, 0.1); /* Light background on hover */
 }
+
+/* Login button styling, adapted to theme */
+.login-btn {
+  font-weight: 700;
+  background: linear-gradient(135deg, #007bb6 0%, #00c6ff 100%); /* Same as submit button */
+  border-radius: 30px; /* Match form button */
+  padding: 10px 20px; /* Adjust padding */
+  color: white !important; /* Ensure white text */
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 30px rgba(0, 198, 255, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// a.nav-link.logout-btn :hover{
+//   color: #ffffff;
+// }
 
 .login-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 3px 8px rgba(8, 19, 53, 0.5);
+  background: linear-gradient(135deg, #00c6ff 0%, #007bb6 100%);
+  box-shadow: 0 12px 35px rgba(0, 198, 255, 0.7);
+  transform: translateY(-3px) scale(1.02);
+  color: white !important; /* Explicitly keep white on hover */
 }
 
-/* Logout button */
+/* Logout button styling, adapted to theme with icon */
 .logout-btn {
-  font-weight: bold;
-  background: linear-gradient(45deg, #ff416c, #ff4b2b);
-  border-radius: 20px;
-  padding: 6px 15px;
-  color: white !important;
-  transition: transform 0.2s ease;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 0% 100%); /* A warmer red for logout */
+  border-radius: 30px;
+  padding: 10px 20px;
+  color: white !important; /* Ensure white text */
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 30px rgba(8, 8, 8, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+}
+
+.logout-btn i {
+    font-size: 1.1rem; /* Adjust icon size */
 }
 
 .logout-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 3px 8px rgba(255, 64, 43, 0.5);
+  background: linear-gradient(135deg,  #ff1c03da 100%);
+  box-shadow: 0 12px 35px rgba(231, 76, 60, 0.7);
+  transform: translateY(-3px) scale(1.02);
+  /* Explicitly keep white on hover */
+}
+
+/* Responsive Adjustments for Navbar */
+@media (max-width: 992px) {
+  .custom-navbar {
+    padding: 10px 20px;
+  }
+  .custom-navbar .navbar-brand {
+    font-size: 1.5rem;
+  }
+  .logo-area .main-logo {
+    height: 40px;
+  }
+  .custom-navbar .nav-link {
+    padding: 8px 12px;
+  }
+  .login-btn, .logout-btn {
+    padding: 8px 15px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .logo-area {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .navbar-collapse {
+    width: 100%;
+  }
+  .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  .navbar-nav .nav-item {
+    margin-bottom: 5px;
+  }
+  .custom-navbar .nav-link {
+    width: fit-content;
+  }
 }

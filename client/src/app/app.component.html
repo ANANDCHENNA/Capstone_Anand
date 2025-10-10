@@ -1,10 +1,5 @@
 <nav *ngIf="IsLoggin" class="navbar navbar-expand-lg navbar-dark custom-navbar px-3 shadow-lg">
-  <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button> -->
   <div class="logo-area">
-    <!-- Using your getLogoDetails method -->
     <img src="../../assets/logocrop2.png" alt="ClaimSafe Logo" class="main-logo">
   </div>
 
@@ -18,9 +13,6 @@
       <li *ngIf="IsLoggin && roleName === 'POLICYHOLDER'" class="nav-item">
         <a class="nav-link" routerLink="/policies">Buy Policy</a>
       </li>
-      <!-- <li *ngIf="IsLoggin && roleName === 'POLICYHOLDER'" class="nav-item">
-        <a class="nav-link" routerLink="/create-claim">Create Claims</a>
-      </li> -->
       <li *ngIf="IsLoggin && roleName === 'POLICYHOLDER'" class="nav-item">
         <a class="nav-link" routerLink="/my-policies">My Policies</a>
       </li>
@@ -55,7 +47,9 @@
         <a class="nav-link login-btn" routerLink="/login">Login</a>
       </li>
       <li *ngIf="IsLoggin" class="nav-item">
-        <a class="nav-link logout-btn" (click)="logout()">Logout</a>
+        <a class="nav-link logout-btn" (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
       </li>
     </ul>
   </div>
