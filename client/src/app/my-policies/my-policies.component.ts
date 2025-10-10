@@ -22,7 +22,7 @@ export class MyPoliciesComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.claimForm = this.formBuilder.group({
-      description: [`Reason for Claim:\n\nRemarks\n\nAdjuster:\n\nInvestigator:\n\nUnderwriter:`, Validators.required],
+      description: [`Reason for Claim:\n\nRemarks\n\nAdjuster:\n\nUnderwriter:`, Validators.required],
       // For disabled fields, their values are not included in form.value by default.
       // If you need them for submission, you'll have to get them from getRawValue()
       // or set their initial value here and remove `disabled: true` if you want user interaction.
@@ -62,7 +62,7 @@ export class MyPoliciesComponent implements OnInit {
     // Reset the form and set default values,
     // ensuring disabled fields also get their values correctly for the form display.
     this.claimForm.reset({
-      description: `Reason for Claim:\n\nRemarks\n\nAdjuster:\n\nInvestigator:\n\nUnderwriter:`,
+      description: `Reason for Claim:\n\nRemarks\n\nAdjuster:\n\nUnderwriter:`,
       date: this.getTodayDate(), // This will set the value in the disabled field
       status: 'Started'         // This will set the value in the disabled field
     });

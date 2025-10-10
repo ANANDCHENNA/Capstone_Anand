@@ -11,6 +11,10 @@
            class="text-danger mt-1 error-message">
         Policy number is required
       </div>
+      <div *ngIf="policyForm.get('policyNumber')?.errors?.['pattern']"
+           class="text-danger mt-1 error-message">
+        Policy number should be number
+      </div>
     </div>
 
     <!-- Policy Name -->
@@ -48,7 +52,7 @@
       <div *ngIf="policyForm.get('termMonths')?.touched && policyForm.get('termMonths')?.invalid"
            class="text-danger mt-1 error-message">
         <span *ngIf="policyForm.get('termMonths')?.errors?.['required']">Term is required</span>
-        <span *ngIf="policyForm.get('termMonths')?.errors?.['min']">Term must be greater than 0</span>
+        <span *ngIf="policyForm.get('termMonths')?.errors?.['pattern']">Invalid Term Months</span>
       </div>
     </div>
 

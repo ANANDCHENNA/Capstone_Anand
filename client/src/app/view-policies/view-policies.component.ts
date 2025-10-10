@@ -44,7 +44,6 @@ export class ViewPoliciesComponent implements OnInit {
     }
 
     deletePolicy(id: number) {
-        if (confirm('Are you sure you want to delete this policy?')) {
             this.httpService.deletePolicy(id).subscribe({
                 next: () => {
                     this.showToast('Policy deleted successfully!', 'success');
@@ -54,8 +53,7 @@ export class ViewPoliciesComponent implements OnInit {
                     console.error('Error deleting policy:', error);
                     this.showToast('Error deleting policy', 'error');
                 }
-            });
-        }
+            })
     }
 
     buyPolicy(policy: Policy) {
@@ -64,10 +62,7 @@ export class ViewPoliciesComponent implements OnInit {
             this.showToast('User not identified. Please login again.', 'error');
             return;
         }
-
-        if (!confirm(`Buy policy "${policy.name}" for ${policy.premium}?`)) {
-            return;
-        }
+        
         this.httpService.purchasePolicy(policy.id, userId).subscribe({
             next: (res) => {
                 this.showToast('Policy purchased successfully!', 'success');

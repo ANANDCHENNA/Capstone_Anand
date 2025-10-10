@@ -26,7 +26,7 @@ export class UpdateClaimComponent implements OnInit {
     @Optional() private route: ActivatedRoute
   ) {
     this.itemForm = this.formBuilder.group({
-      description: [null, Validators.required],
+      description: [ , Validators.required],
       date: ['', Validators.required],
       status: ['', Validators.required],
       underwriterId: ['', Validators.required],

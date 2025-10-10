@@ -22,11 +22,11 @@ export class CreatePolicyComponent implements OnInit {
     const today = new Date();
     this.currentDate = today.toISOString().split('T')[0];
     this.policyForm = this.formBuilder.group({
-      policyNumber: ['', Validators.required],
+      policyNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{1,}$/)]],
       name: ['', Validators.required],
       policyType: ['', Validators.required],
-      premium: ['', [Validators.required]],
-      termMonths: ['', Validators.required],
+      premium: ['', [Validators.required, Validators.pattern(/^[1-9][0-9]*$/)]],
+      termMonths: ['', [Validators.required, Validators.pattern(/^[1-9][0-9]*$/)]],
     });
   }
 

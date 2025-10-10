@@ -170,6 +170,10 @@
           </p>
           <p>
             <i class="fas fa-clipboard-list me-2 text-primary"></i>
+            <strong>Report:</strong> {{ investigation.report }}
+          </p>
+          <p>
+            <i class="fas fa-clipboard-list me-2 text-primary"></i>
             <strong>Claim:</strong> {{ investigation.claim.description }}
           </p>
           <p>
@@ -220,14 +224,14 @@
         <div class="card gradient-card h-100 shadow-sm">
           <div class="card-body">
             <h5 class="card-title">
-              <i class="fas fa-clipboard-list me-2 text-primary"></i> {{ claim.description }}
+              <i class="fas fa-clipboard-list me-2 text-primary"></i> Claim ID:{{ claim.id }}
             </h5>
             <p class="card-text text-truncate">
-              <i class="fas fa-id-badge me-2 text-muted"></i> Claim ID:{{ claim.id }}
+              <i class="fas fa-id-badge me-2 text-muted"></i> Description:  {{ claim.description }}
             </p>
-            <p *ngIf="claim.investigation !== null" class="card-text text-truncate">
-              <i class="fas fa-id-badge me-2 text-muted"></i> Claim Report :{{ claim | json }}
-            </p>
+            <!-- <p *ngIf="claim.investigation !== null" class="card-text text-truncate">
+              <i class="fas fa-id-badge me-2 text-muted"></i> Claim Report :{{ claim.investigation?.report }}
+            </p> -->
             <p>
               <i class="fas fa-calendar-alt me-2 text-info"></i>
               <strong>Date:</strong> {{ claim.date | date:'dd-MM-yyyy' }}
